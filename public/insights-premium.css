@@ -1,0 +1,53 @@
+/* Budgetingwise Atelier V3 — unified premium finish, all six pages. */
+#dashboardView{--bw-ui-accent:var(--bw-brand-chart,#8e70ea);--bw-ui-accent2:var(--bw-brand-chart-alt,#c4a2f8)}
+#dashboardView .page{animation:bwPageReveal .24s ease both}
+@keyframes bwPageReveal{from{opacity:.65;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading{margin-bottom:24px}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading h2{font-weight:800;letter-spacing:-.055em;line-height:1.16}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading .eyebrow{letter-spacing:.17em;font-size:10px;font-weight:800;color:var(--bw-ui-accent2)!important}
+#dashboardView .page:not(.bw-v2-dashboard) .premium-panel{border:1px solid rgba(255,255,255,.13)!important;border-radius:20px!important;box-shadow:0 16px 45px rgba(18,17,35,.13)!important}
+#dashboardView .page:not(.bw-v2-dashboard) .premium-panel-head h3{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.025em}
+#dashboardView .page:not(.bw-v2-dashboard) .premium-panel-head h3:before{content:"";width:4px;height:21px;border-radius:10px;background:var(--bw-ui-accent);flex:none}
+#dashboardView .page:not(.bw-v2-dashboard) .insight-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.13);color:#f8f6ff;border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:9px 13px;font-weight:700}
+#dashboardView .page:not(.bw-v2-dashboard) .bw-semantic-icon{stroke-width:1.85}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading h2>.bw-semantic-icon{width:26px;height:26px;color:var(--bw-ui-accent)}
+#dashboardView .nav-btn .bw-semantic-icon{transition:transform .2s ease}
+#dashboardView .nav-btn:hover .bw-semantic-icon{transform:translateY(-1px)}
+/* Insight page — hero, score, forecast and spending breakdown. */
+#dashboardView #page-insights .bw-intelligence-banner{position:relative;isolation:isolate;overflow:hidden;border:1px solid rgba(255,255,255,.17)!important;border-radius:24px!important;padding:30px!important;box-shadow:0 20px 50px rgba(25,20,49,.18)!important;display:flex;align-items:center;gap:22px}
+#dashboardView #page-insights .bw-intelligence-banner:after{content:"";position:absolute;right:-55px;top:-95px;width:310px;height:310px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 68%);z-index:-1;pointer-events:none}
+#dashboardView #page-insights .bw-intelligence-banner img{width:66px;height:66px;object-fit:contain;filter:drop-shadow(0 7px 14px rgba(0,0,0,.25));flex:none}
+#dashboardView #page-insights .bw-intelligence-banner span{font-size:10px;letter-spacing:.17em;font-weight:800;color:#e2d9f4}
+#dashboardView #page-insights .bw-intelligence-banner h3{font-size:clamp(21px,2.8vw,30px);letter-spacing:-.045em;margin:6px 0 7px;font-weight:800;color:#fff!important}
+#dashboardView #page-insights .bw-intelligence-banner p{line-height:1.6;max-width:630px}
+#dashboardView #page-insights .bw-intelligence-grid{gap:18px;margin:20px 0}
+#dashboardView #page-insights .bw-intelligence-card{min-height:238px;position:relative;overflow:hidden;padding:25px!important;background:linear-gradient(150deg,#242335,#191c2a)!important}
+#dashboardView #page-insights .bw-intelligence-card:after{content:"";position:absolute;right:-65px;bottom:-115px;width:225px;height:225px;background:radial-gradient(circle,rgba(var(--bw-brand-rgb,120,80,230),.15),transparent 70%);pointer-events:none}
+#dashboardView #page-insights .bw-intelligence-icon{display:inline-flex;align-items:center;justify-content:center;width:45px;height:45px;background:rgba(var(--bw-brand-rgb,120,80,230),.18)!important;border:1px solid rgba(255,255,255,.16);border-radius:14px!important;color:#e4d4ff!important;margin-bottom:16px}
+#dashboardView #page-insights .bw-intelligence-icon .bw-semantic-icon{width:24px;height:24px}
+#dashboardView #page-insights .bw-intelligence-card .eyebrow{font-size:10px;letter-spacing:.15em;color:#bdb4cf!important}
+#dashboardView #page-insights .bw-intelligence-card>strong{display:block;font-size:clamp(30px,4vw,43px);line-height:1.2;font-weight:800;letter-spacing:-.055em;color:#fff!important;margin:9px 0}
+#dashboardView #page-insights .bw-intelligence-card h3{font-size:15px;font-weight:800;color:#f5f1ff!important}
+#dashboardView #page-insights .bw-intelligence-card p.muted{font-size:12px;line-height:1.7;color:#bdb8ca!important}
+#dashboardView #page-insights .bw-intelligence-track{height:8px;border-radius:20px;overflow:hidden;margin:15px 0 12px;background:#ffffff20!important}
+#dashboardView #page-insights .bw-intelligence-track i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--bw-ui-accent),var(--bw-ui-accent2));transition:width .4s ease}
+#dashboardView #page-insights .bw-insight-panel{padding:24px!important}
+#dashboardView #page-insights .bw-insight-panel .premium-panel-head{margin-bottom:18px}
+#dashboardView #page-insights .bw-insight-row{display:flex;align-items:flex-start;gap:14px;border-radius:15px!important;padding:18px!important;margin:10px 0;background:rgba(255,255,255,.045)!important;border:1px solid rgba(255,255,255,.10)!important}
+#dashboardView #page-insights .bw-insight-row>span{width:35px;height:35px;display:inline-flex;align-items:center;justify-content:center;flex:none;border-radius:11px;background:rgba(var(--bw-brand-rgb,120,80,230),.17);color:#e2d1ff}
+#dashboardView #page-insights .bw-insight-row p{margin:4px 0;line-height:1.7;font-size:14px;color:#eeeaf5!important}
+#dashboardView #page-insights .bw-disclaimer{margin-top:18px;font-size:11px;line-height:1.6;color:#bbb5c9!important}
+/* Consistent controls and premium focus feedback across pages. */
+#dashboardView .page:not(.bw-v2-dashboard) button{transition:background .2s ease,border-color .2s ease,transform .2s ease}
+#dashboardView .page:not(.bw-v2-dashboard) button:hover{transform:translateY(-1px)}
+#dashboardView .page:not(.bw-v2-dashboard) button:focus-visible{outline:2px solid var(--bw-ui-accent);outline-offset:3px}
+#dashboardView .bw-default-theme-row{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:17px 19px;margin:20px 0;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:linear-gradient(115deg,rgba(var(--bw-brand-rgb,120,80,230),.2),rgba(255,255,255,.05))}
+#dashboardView .bw-default-theme-row>div{display:grid;gap:4px}
+#dashboardView .bw-default-theme-row strong{font-size:14px;color:#fff}
+#dashboardView .bw-default-theme-row small{font-size:12px;color:#c7c2d4}
+#dashboardView .bw-default-theme-row .soft-button{padding:11px 15px!important;border-radius:11px!important;white-space:nowrap}
+#dashboardView .theme-choice .theme-swatch{border:1px solid rgba(255,255,255,.28);box-shadow:0 3px 12px rgba(0,0,0,.14)}
+#dashboardView .theme-choice[aria-pressed=true]{outline:1px solid var(--bw-ui-accent);outline-offset:2px}
+#dashboardView .gradient-style.active,#dashboardView .mode-option.active{box-shadow:inset 0 0 0 1px var(--bw-ui-accent)!important}
+@media(max-width:650px){#dashboardView #page-insights .bw-intelligence-banner{padding:22px!important;align-items:flex-start;gap:14px}#dashboardView #page-insights .bw-intelligence-banner img{width:48px;height:48px}#dashboardView #page-insights .bw-intelligence-grid{grid-template-columns:1fr!important}#dashboardView #page-insights .bw-intelligence-card{min-height:205px}}
+@media(prefers-reduced-motion:reduce){#dashboardView .page{animation:none!important}#dashboardView .page:not(.bw-v2-dashboard) button{transition:none!important}}
