@@ -1,0 +1,8 @@
+/* Functional controls added without changing the approved V13 design. */
+#dashboardView .bw-record-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+#dashboardView .bw-record-edit,#dashboardView .bw-record-delete,#dashboardView .bw-goal-edit,#dashboardView .bw-goal-delete{font:inherit;font-size:12px;font-weight:700;padding:7px 11px;border-radius:9px;border:1px solid #dfe4f3;background:#f7f8ff;color:#354476;cursor:pointer}
+#dashboardView .bw-record-delete,#dashboardView .bw-goal-delete{background:#fff5f6;color:#a92950;border-color:#f4cdd7}
+#dashboardView .bw-record-edit:hover,#dashboardView .bw-goal-edit:hover{background:var(--bw-adaptive-soft-light,#eee9ff)}
+#dashboardView .bw-record-delete:hover,#dashboardView .bw-goal-delete:hover{background:#ffe5eb}
+#dashboardView :is(.bw-record-edit,.bw-record-delete,.bw-goal-edit,.bw-goal-delete):focus-visible{outline:2px solid var(--bw-adaptive-accent,#7044e8);outline-offset:2px}
+#dashboardView .table-wrap{overflow-x:auto}
