@@ -69,7 +69,15 @@
 #dashboardView .page:not(.bw-v2-dashboard) .theme-preview-bars i{background:var(--bw-brand-chart)!important}
 #dashboardView .page:not(.bw-v2-dashboard) .theme-preview-bars i:nth-child(even){background:var(--bw-brand-chart-alt)!important}
 #dashboardView .page:not(.bw-v2-dashboard) .transaction-toolbar input,#dashboardView .page:not(.bw-v2-dashboard) .transaction-toolbar select,#dashboardView .page:not(.bw-v2-dashboard) .analytics-filterbar select{background:#fff!important;color:#282437!important}
-#dashboardView[data-display-mode=dark] .premium-shell{background:linear-gradient(140deg,#131420,var(--bw-brand-deep))!important}
+#dashboardView[data-display-mode=dark] .premium-shell{background:var(--bw-brand-page-gradient-dark,linear-gradient(140deg,#131420,var(--bw-brand-deep)))!important}
 #dashboardView[data-display-mode=dark] .premium-topbar{background:#222332!important}
 #dashboardView[data-display-mode=dark] .premium-search,#dashboardView[data-display-mode=dark] .topbar-profile{background:#343344!important;color:#fff!important}
 @media(prefers-reduced-motion:reduce){#dashboardView .premium-shell{transition:none!important}}
+
+/* Full viewport follows selected palette; soft multi-tone layers are intentional. */
+body:has(#dashboardView:not(.hidden)){background:var(--bw-brand-bg,#f3f0f8)}
+#dashboardView .premium-main{background:transparent!important}
+#dashboardView .premium-shell{background:var(--bw-brand-page-gradient)!important;background-attachment:fixed!important}
+#dashboardView .premium-topbar{background:color-mix(in srgb,var(--bw-brand-bg) 84%,white)!important}
+#dashboardView .premium-content{background:transparent!important}
+#dashboardView[data-display-mode=dark] .premium-shell{background:var(--bw-brand-page-gradient-dark)!important}
