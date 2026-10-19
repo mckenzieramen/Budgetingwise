@@ -274,3 +274,6 @@
 #dashboardView[data-display-mode=dark] .bw-insight-row{background:#2c2946;border-color:#3d375e;color:#e4dcff}
 @media(max-width:680px){.bw-intelligence-grid{grid-template-columns:1fr}.bw-intelligence-banner{padding:19px;gap:13px}.bw-intelligence-banner img{width:48px;height:48px}.bw-intelligence-banner h3{font-size:17px}.bw-intelligence-card>strong{font-size:33px}}
 @media(prefers-reduced-motion:reduce){.bw-intelligence-track i,.bw-flash{animation:none;transition:none}}
+
+/* Consistent user-selected Budgetingwise logo */
+.login-logo,.bw-intelligence-banner img{object-fit:contain;border-radius:23%;filter:drop-shadow(0 8px 18px rgba(95,52,190,.25))}
