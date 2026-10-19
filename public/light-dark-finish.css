@@ -55,3 +55,10 @@
 #dashboardView[data-display-mode=dark] .modal-card input,#dashboardView[data-display-mode=dark] .modal-card select{background:#171b35!important;color:#fff!important;border:1px solid #565a7e!important}
 #dashboardView[data-display-mode=dark] .modal-card label,#dashboardView[data-display-mode=dark] .modal-card h3{color:#f7f6ff!important}
 @media(prefers-reduced-motion:reduce){#dashboardView .bw-workspace-current{transition:none!important}}
+
+/* Dialogs sit outside #dashboardView, so target them using :has() for dark mode. */
+body:has(#dashboardView[data-display-mode=dark]:not(.hidden)) .modal-card{background:#252943!important;color:#f6f5ff!important;border:1px solid #555979!important}
+body:has(#dashboardView[data-display-mode=dark]:not(.hidden)) .modal-card h3,body:has(#dashboardView[data-display-mode=dark]:not(.hidden)) .modal-card label,body:has(#dashboardView[data-display-mode=dark]:not(.hidden)) .modal-card p{color:#f3f1ff!important}
+body:has(#dashboardView[data-display-mode=dark]:not(.hidden)) .modal-card input,body:has(#dashboardView[data-display-mode=dark]:not(.hidden)) .modal-card select{background:#171b33!important;border:1px solid #595d82!important;color:#fff!important}
+body:has(#dashboardView[data-display-mode=light]:not(.hidden)) .modal-card{background:#fff!important;color:#1c2861!important}
+body:has(#dashboardView[data-display-mode=light]:not(.hidden)) .modal-card label,body:has(#dashboardView[data-display-mode=light]:not(.hidden)) .modal-card h3{color:#1c2861!important}
