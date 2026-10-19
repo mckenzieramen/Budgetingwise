@@ -1,0 +1,19 @@
+/* Semantic icon finish: consistent proportions, restrained metallic accent. */
+#dashboardView .bw-semantic-icon{display:inline-block;vertical-align:middle;flex:none;stroke:currentColor;overflow:visible}
+#dashboardView .sidebar-nav .nav-btn>span{display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;flex:none;color:#d7c8ee}
+#dashboardView .sidebar-nav .nav-btn>span .bw-semantic-icon{width:20px;height:20px}
+#dashboardView .sidebar-nav .nav-btn.active>span{color:#fff}
+#dashboardView .bw-metric-icon,#dashboardView .bw-head-icon{display:inline-flex;align-items:center;justify-content:center}
+#dashboardView .bw-metric-icon .bw-semantic-icon{width:21px;height:21px}
+#dashboardView .bw-head-icon .bw-semantic-icon{width:20px;height:20px}
+#dashboardView .bw-action-grid button>span{display:flex;justify-content:center;align-items:center}
+#dashboardView .bw-action-grid button>span .bw-semantic-icon{width:26px;height:26px}
+#dashboardView .bw-rail-title>span .bw-semantic-icon{width:25px;height:25px}
+#dashboardView .bw-topbar-help,#dashboardView .topbar-notify,#dashboardView .topbar-avatar,#dashboardView .avatar-circle{display:inline-flex;align-items:center;justify-content:center}
+#dashboardView .bw-topbar-help .bw-semantic-icon,#dashboardView .topbar-notify .bw-semantic-icon{width:19px;height:19px}
+#dashboardView .topbar-avatar .bw-semantic-icon,#dashboardView .avatar-circle .bw-semantic-icon{width:18px;height:18px}
+#dashboardView .sidebar-logout{display:flex;align-items:center;gap:9px}
+#dashboardView .sidebar-logout .bw-semantic-icon{width:17px;height:17px}
+#dashboardView .bw-semantic-icon{transition:transform .18s ease,opacity .18s ease}
+#dashboardView .bw-action-grid button:hover .bw-semantic-icon{transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){#dashboardView .bw-semantic-icon{transition:none!important}}
