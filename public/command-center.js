@@ -1,5 +1,5 @@
 /* Budgetingwise Command Center — local UI navigation only. */
-(()=>{'use strict';const pages=[['dashboard','Dashboard','Financial overview','▦'],['transactions','Transactions','Search and review money activity','▤'],['analytics','Analytics','Income and expense insights','▥'],['savings','Goals','Savings progress and milestones','◎'],['settings','Settings','Appearance and account','⚙']];
+(()=>{'use strict';const pages=[['dashboard','Dashboard','Financial overview','▦'],['transactions','Transactions','Search and review money activity','▤'],['analytics','Analytics','Income and expense insights','▥'],['savings','Goals','Savings progress and milestones','◎'],['settings','Settings','Appearance and account','⚙'],['insights','Smart Insights','Financial health and cash-flow estimates','✧']];
 let index=0,opened=false,origin=null;
 const $=id=>document.getElementById(id);
 const palette=$('bwCommandPalette'),input=$('bwCommandInput'),results=$('bwCommandResults');
