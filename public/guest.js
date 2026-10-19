@@ -22,5 +22,5 @@ for (const id of ['addExpenseBtn', 'addExpenseBtn2', 'addGoalBtn']) {
 }
 $('logoutBtn').textContent = 'Exit guest';
 $('logoutBtn').addEventListener('click', () => { sessionStorage.removeItem('budgetingGuest'); location.reload(); });
-window.renderPremiumOverview?.([],[]);window.renderBudgetingStudio?.([],[]);
+window.renderPremiumOverview?.([],[]);window.renderBudgetingStudio?.([],[]);window.renderWealthCrownInsights?.([],[]);
 showPage((()=>{try{return sessionStorage.getItem('budgetingwise-last-page')||'dashboard'}catch(e){return 'dashboard'}})());
