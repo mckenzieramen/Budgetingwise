@@ -17,7 +17,7 @@ if (sessionStorage.getItem(guestKey) === '1') {
   import('./guest.js?v=workspaces-v4').catch(() => { sessionStorage.removeItem(guestKey); location.reload(); });
 } else {
   guestButton.addEventListener('click', enterGuest);
-  import('./app.js?v=workspaces-v4').catch(error => {
+  import('./app.js?v=functionality-v14').catch(error => {
     console.warn('Account login unavailable; guest access remains available.', error);
     const errorNode = document.getElementById('loginError');
     if (errorNode) errorNode.textContent = 'Account sign-in is temporarily unavailable. You can still continue as guest.';
