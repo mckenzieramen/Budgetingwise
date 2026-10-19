@@ -75,6 +75,27 @@ const background=theme.style==='solid'
 ?'radial-gradient(ellipse 65% 72% at 90% 0%,'+mix(secondary,'#ffffff',.72)+' 0%,transparent 75%),radial-gradient(ellipse 65% 80% at 4% 94%,'+mix(vibrant,'#ffffff',.82)+' 0%,transparent 77%),linear-gradient(140deg,'+base+','+base2+')'
 :'radial-gradient(ellipse 62% 67% at 90% 0%,'+mix(third,'#ffffff',.77)+' 0%,transparent 78%),radial-gradient(ellipse 68% 72% at 3% 90%,'+mix(secondary,'#ffffff',.82)+' 0%,transparent 76%),linear-gradient(135deg,'+base+','+base2+','+base3+')';
 const bgDark='radial-gradient(ellipse at 85% 0%,'+mix(third,'#161a28',.87)+' 0%,transparent 60%),linear-gradient(145deg,'+mix(vibrant,'#131722',.92)+','+mix(secondary,'#161925',.92)+')';
+/* Adaptive theme tokens: preserve the user's exact accent; derive accessible UI shades. */
+const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
+const readableAccent=(()=>{let c=vibrant;for(let i=0;i<16&&contrast(c,'#ffffff')<4.5;i++)c=mix(c,'#10152a',.16);return c})();
+const accentForeground=contrast(vibrant,'#ffffff')>=4.5?'#ffffff':contrast(vibrant,'#17203b')>=4.5?'#17203b':'#10152a';
+const pageLight=mix(vibrant,'#f7f9ff',.95),pageLight2=mix(secondary,'#f2f5ff',.94);
+const pageDark=mix(vibrant,'#12182e',.91),pageDark2=mix(secondary,'#1d2440',.90);
+const surfaceLight=mix(vibrant,'#ffffff',.985),surfaceDark=mix(vibrant,'#242a47',.95);
+const softLight=mix(vibrant,'#ffffff',.89),softDark=mix(vibrant,'#303651',.80);
+const activeDark=mix(vibrant,'#303353',.66);
+const rgb=toRgb(vibrant).join(',');
+dash.style.setProperty('--bw-adaptive-accent',vibrant);
+dash.style.setProperty('--bw-adaptive-action',readableAccent);
+dash.style.setProperty('--bw-adaptive-on-accent',accentForeground);
+dash.style.setProperty('--bw-adaptive-page-light','linear-gradient(125deg,'+pageLight+','+pageLight2+')');
+dash.style.setProperty('--bw-adaptive-page-dark','linear-gradient(125deg,'+pageDark+','+pageDark2+')');
+dash.style.setProperty('--bw-adaptive-card-light',surfaceLight);
+dash.style.setProperty('--bw-adaptive-card-dark',surfaceDark);
+dash.style.setProperty('--bw-adaptive-soft-light',softLight);
+dash.style.setProperty('--bw-adaptive-soft-dark',softDark);
+dash.style.setProperty('--bw-adaptive-active-dark',activeDark);
+dash.style.setProperty('--bw-adaptive-rgb',rgb);
 dash.style.setProperty('--bw-brand-deep',deep);
 dash.style.setProperty('--bw-brand-mid',mid);
 dash.style.setProperty('--bw-brand-glow',glow);
