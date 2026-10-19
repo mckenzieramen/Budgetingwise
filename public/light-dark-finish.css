@@ -1,0 +1,57 @@
+/* Budgetingwise V4 — consistent readable surfaces in every mode and every page. */
+#dashboardView{--bw-app-radius:18px;--bw-app-border:rgba(114,128,189,.16);--bw-app-shadow:0 10px 28px rgba(55,66,127,.075)}
+#dashboardView .bw-sidebar-workspace{padding:14px 12px!important}
+#dashboardView .bw-workspace-list{display:grid;gap:5px;margin:10px 0}
+#dashboardView .bw-workspace-current{display:flex;align-items:center;width:100%;min-height:39px;padding:9px 12px;border-radius:11px;border:1px solid transparent;background:transparent;color:inherit;text-align:left;font-weight:650;font-size:12px;cursor:pointer}
+#dashboardView .bw-workspace-current.active{background:rgba(var(--bw-brand-rgb,101,54,245),.12);border-color:rgba(var(--bw-brand-rgb,101,54,245),.25);color:var(--bw-brand-chart)}
+#dashboardView .bw-workspace-current:hover{background:rgba(var(--bw-brand-rgb,101,54,245),.09)}
+#dashboardView .bw-workspace-add{display:flex;align-items:center;justify-content:center;width:100%;min-height:38px;border:1px dashed rgba(var(--bw-brand-rgb,101,54,245),.48);border-radius:10px;background:transparent;color:var(--bw-brand-chart);font-size:12px;font-weight:750;cursor:pointer}
+#dashboardView #bwWorkspaceNote{display:block;line-height:1.55;margin-top:10px;font-size:10px}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading{padding-bottom:5px}
+#dashboardView .page:not(.bw-v2-dashboard) .premium-panel,#dashboardView .page:not(.bw-v2-dashboard) .goal-card,#dashboardView .page:not(.bw-v2-dashboard) .panel{border-radius:var(--bw-app-radius)!important}
+#dashboardView[data-display-mode=light] .bw-workspace-current{color:#26366c}
+#dashboardView[data-display-mode=light] .bw-workspace-current.active{color:#5532c6!important}
+#dashboardView[data-display-mode=light] .bw-workspace-add{background:#f7f4ff}
+#dashboardView[data-display-mode=light] #bwWorkspaceNote{color:#68749b!important}
+/* Dark mode: dark surfaces always receive pale text, including form labels and charts. */
+#dashboardView[data-display-mode=dark]{color-scheme:dark;--bw-app-border:rgba(205,203,249,.17);--bw-app-shadow:0 15px 38px rgba(4,5,24,.26);--bw-luxe-ink:#f5f4ff;--bw-luxe-muted:#c4c6e1}
+#dashboardView[data-display-mode=dark] .premium-shell{background:linear-gradient(135deg,#101428,#191b3b 56%,#1b2041)!important}
+#dashboardView[data-display-mode=dark] .premium-shell::before{background:radial-gradient(ellipse 70% 50% at 80% 4%,rgba(var(--bw-brand-rgb,101,54,245),.24),transparent 74%),linear-gradient(135deg,#101428,#191b3b 56%,#1b2041)!important;filter:none!important}
+#dashboardView[data-display-mode=dark] .premium-shell::after{background:radial-gradient(ellipse 70% 45% at 85% 5%,rgba(var(--bw-brand-rgb,101,54,245),.15),transparent 75%)!important}
+#dashboardView[data-display-mode=dark] .premium-sidebar{background:linear-gradient(180deg,#171b36,#14182e)!important;border-color:#46466e!important;color:#f5f4ff!important}
+#dashboardView[data-display-mode=dark] .premium-topbar{background:rgba(21,24,50,.87)!important;border-color:#444768!important;color:#f5f4ff!important}
+#dashboardView[data-display-mode=dark] .premium-search,#dashboardView[data-display-mode=dark] .topbar-profile{background:#232747!important;border:1px solid #4a4b77!important;color:#f5f4ff!important}
+#dashboardView[data-display-mode=dark] .premium-search input,#dashboardView[data-display-mode=dark] .premium-search input::placeholder{color:#e3e2f5!important}
+#dashboardView[data-display-mode=dark] .sidebar-logo strong,#dashboardView[data-display-mode=dark] .sidebar-logo small,#dashboardView[data-display-mode=dark] .sidebar-nav .nav-btn,#dashboardView[data-display-mode=dark] .sidebar-profile strong,#dashboardView[data-display-mode=dark] .sidebar-profile small,#dashboardView[data-display-mode=dark] .sidebar-logout,#dashboardView[data-display-mode=dark] .bw-sidebar-workspace,#dashboardView[data-display-mode=dark] .bw-workspace-current,#dashboardView[data-display-mode=dark] #bwWorkspaceNote{color:#e7e6fb!important}
+#dashboardView[data-display-mode=dark] .sidebar-nav .nav-btn.active{color:white!important;background:linear-gradient(110deg,var(--bw-brand-chart),var(--bw-brand-chart-alt))!important}
+#dashboardView[data-display-mode=dark] .bw-workspace-current.active{color:#fff!important;background:rgba(var(--bw-brand-rgb,101,54,245),.3)}
+#dashboardView[data-display-mode=dark] .bw-workspace-add{color:#e3d5ff!important;border-color:#8172be!important}
+#dashboardView[data-display-mode=dark] .bw-v2-hero,#dashboardView[data-display-mode=dark] .bw-ai-card,#dashboardView[data-display-mode=dark] .bw-rail-score,#dashboardView[data-display-mode=dark] .bw-rail-forecast,#dashboardView[data-display-mode=dark] .premium-metric,#dashboardView[data-display-mode=dark] .premium-panel,#dashboardView[data-display-mode=dark] .page .panel,#dashboardView[data-display-mode=dark] .page .goal-card,#dashboardView[data-display-mode=dark] .page .insight-cards>article{background:linear-gradient(145deg,#252947,#1b213d)!important;border:1px solid var(--bw-app-border)!important;box-shadow:var(--bw-app-shadow)!important;color:#f6f5ff!important}
+#dashboardView[data-display-mode=dark] .page h1,#dashboardView[data-display-mode=dark] .page h2,#dashboardView[data-display-mode=dark] .page h3,#dashboardView[data-display-mode=dark] .page h4,#dashboardView[data-display-mode=dark] .page h5,#dashboardView[data-display-mode=dark] .page strong,#dashboardView[data-display-mode=dark] .page b,#dashboardView[data-display-mode=dark] .page th,#dashboardView[data-display-mode=dark] .page td,#dashboardView[data-display-mode=dark] .page label,#dashboardView[data-display-mode=dark] .page .amount,#dashboardView[data-display-mode=dark] .page .premium-panel-head h3,#dashboardView[data-display-mode=dark] .page .bw-intelligence-card>strong{color:#f7f6ff!important}
+#dashboardView[data-display-mode=dark] .page p,#dashboardView[data-display-mode=dark] .page small,#dashboardView[data-display-mode=dark] .page .muted,#dashboardView[data-display-mode=dark] .page .eyebrow,#dashboardView[data-display-mode=dark] .page .premium-panel p,#dashboardView[data-display-mode=dark] .page .premium-panel small,#dashboardView[data-display-mode=dark] .page .bw-intelligence-card p.muted,#dashboardView[data-display-mode=dark] .page .bw-disclaimer{color:#c5c8e4!important}
+#dashboardView[data-display-mode=dark] .page .positive,#dashboardView[data-display-mode=dark] .page .bw-positive{color:#6af0bb!important}
+#dashboardView[data-display-mode=dark] .page .negative,#dashboardView[data-display-mode=dark] .page .bw-negative{color:#ff9ab9!important}
+#dashboardView[data-display-mode=dark] .page input,#dashboardView[data-display-mode=dark] .page select,#dashboardView[data-display-mode=dark] .page textarea,#dashboardView[data-display-mode=dark] .page .transaction-toolbar,#dashboardView[data-display-mode=dark] .page .analytics-filterbar{background:#242946!important;color:#f4f4ff!important;border:1px solid #4d5178!important}
+#dashboardView[data-display-mode=dark] .page input::placeholder,#dashboardView[data-display-mode=dark] .page textarea::placeholder{color:#a9afd2!important}
+#dashboardView[data-display-mode=dark] .page .premium-tx-table th{background:#292d4c!important;color:#d9dcf7!important}
+#dashboardView[data-display-mode=dark] .page .premium-tx-table td{color:#edf0ff!important;border-color:#434864!important}
+#dashboardView[data-display-mode=dark] .page .premium-tx-table tbody tr:hover{background:#343959!important}
+#dashboardView[data-display-mode=dark] .page .tx-tab,#dashboardView[data-display-mode=dark] .page .goal-tab,#dashboardView[data-display-mode=dark] .page .appearance-tab,#dashboardView[data-display-mode=dark] .page .theme-choice,#dashboardView[data-display-mode=dark] .page .gradient-style,#dashboardView[data-display-mode=dark] .page .mode-option,#dashboardView[data-display-mode=dark] .page .preset-choice,#dashboardView[data-display-mode=dark] .page .soft-button,#dashboardView[data-display-mode=dark] .page .panel-link{background:#303554!important;border:1px solid #53577d!important;color:#f2f0ff!important}
+#dashboardView[data-display-mode=dark] .page .tx-tab.active,#dashboardView[data-display-mode=dark] .page .goal-tab.active,#dashboardView[data-display-mode=dark] .page .appearance-tab.active,#dashboardView[data-display-mode=dark] .page .mode-option.active,#dashboardView[data-display-mode=dark] .page .gradient-style.active{background:linear-gradient(110deg,var(--bw-brand-chart),var(--bw-brand-chart-alt))!important;color:var(--bw-text-on-accent,#fff)!important}
+#dashboardView[data-display-mode=dark] .page .theme-choice strong,#dashboardView[data-display-mode=dark] .page .theme-choice small,#dashboardView[data-display-mode=dark] .page .preset-choice small,#dashboardView[data-display-mode=dark] .page .theme-subheading strong,#dashboardView[data-display-mode=dark] .page .theme-subheading small{color:#e7e8ff!important}
+#dashboardView[data-display-mode=dark] .bw-default-theme-row,#dashboardView[data-display-mode=dark] .bw-intelligence-banner{background:linear-gradient(110deg,#333056,#252a4a)!important;border-color:#59567d!important}
+#dashboardView[data-display-mode=dark] .bw-default-theme-row strong,#dashboardView[data-display-mode=dark] .bw-default-theme-row small,#dashboardView[data-display-mode=dark] .bw-intelligence-banner h3,#dashboardView[data-display-mode=dark] .bw-intelligence-banner p,#dashboardView[data-display-mode=dark] .bw-intelligence-banner span{color:#f0ecff!important}
+#dashboardView[data-display-mode=dark] .bw-intelligence-card{background:linear-gradient(145deg,#252947,#1b213d)!important}
+#dashboardView[data-display-mode=dark] .bw-insight-row,#dashboardView[data-display-mode=dark] .bw-quick-insight-line,#dashboardView[data-display-mode=dark] .bw-ai-question,#dashboardView[data-display-mode=dark] .bw-action-grid button{background:#303554!important;border:1px solid #4c5278!important;color:#f3f1ff!important}
+#dashboardView[data-display-mode=dark] .bw-insight-row p{color:#e4e3f5!important}
+#dashboardView[data-display-mode=dark] .bw-score-ring strong,#dashboardView[data-display-mode=dark] .bw-score-ring small{color:#fff!important}
+#dashboardView[data-display-mode=dark] .bw-premium-box{background:linear-gradient(145deg,#282448,#1e2341)!important;border:1px solid #525078!important;color:#f7f5ff!important}
+#dashboardView[data-display-mode=dark] .bw-premium-box strong,#dashboardView[data-display-mode=dark] .bw-premium-box small{color:#e7e3ff!important}
+#dashboardView[data-display-mode=dark] .theme-live-preview{background:#252a48!important}
+#dashboardView[data-display-mode=dark] .theme-preview-sidebar{background:#34335c!important;color:#f4f1ff!important}
+#dashboardView[data-display-mode=dark] .bw-metric-icon,#dashboardView[data-display-mode=dark] .bw-head-icon{color:#d7c4ff!important}
+#dashboardView[data-display-mode=dark] .bw-v2-hero .bw-hero-pills span{background:#393a66!important;color:#f8f6ff!important;border:1px solid #65618d!important}
+#dashboardView[data-display-mode=dark] .modal-card{background:#242845!important;color:#f7f6ff!important}
+#dashboardView[data-display-mode=dark] .modal-card input,#dashboardView[data-display-mode=dark] .modal-card select{background:#171b35!important;color:#fff!important;border:1px solid #565a7e!important}
+#dashboardView[data-display-mode=dark] .modal-card label,#dashboardView[data-display-mode=dark] .modal-card h3{color:#f7f6ff!important}
+@media(prefers-reduced-motion:reduce){#dashboardView .bw-workspace-current{transition:none!important}}
