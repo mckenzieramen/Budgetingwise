@@ -1,0 +1,41 @@
+/* Semantic icon system — inline SVG, no external icon CDN. */
+(()=>{'use strict';
+const paths={
+dashboard:'<rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>',
+transactions:'<rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 10h18M7 15h4"/>',
+analytics:'<path d="M4 20V12M10 20V7M16 20V4M22 20V10"/><path d="M2 20h20"/>',
+goals:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/><path d="m15 9 6-6m-4 0h4v4"/>',
+insights:'<path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3ZM19 16l.7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7L19 16Z"/>',
+settings:'<path d="M10 3h4l.7 2.4 2 1.2 2.4-.5 2 3.5-1.8 1.7v2.4l1.8 1.7-2 3.5-2.4-.5-2 1.2L14 22h-4l-.7-2.4-2-1.2-2.4.5-2-3.5 1.8-1.7v-2.4L2.9 9.6l2-3.5 2.4.5 2-1.2L10 3Z"/><circle cx="12" cy="12.5" r="3"/>',
+wallet:'<rect x="3" y="6" width="18" height="15" rx="2"/><path d="M3 10h18M3 6V4a2 2 0 0 1 2-2h13"/><path d="M16 15h3"/>',
+income:'<path d="m4 16 6-6 4 4 6-7"/><path d="M15 7h5v5"/><path d="M4 21h16"/>',
+expense:'<path d="m4 8 6 6 4-4 6 7"/><path d="M15 17h5v-5"/><path d="M4 3h16"/>',
+savings:'<rect x="4" y="9" width="16" height="12" rx="3"/><path d="M7 9a5 5 0 0 1 10 0M9 5h6M12 12v6m-2-4h4"/>',
+chart:'<path d="M3 3v18h18"/><path d="m6 16 5-5 4 3 5-7"/>',
+pie:'<path d="M12 3v9h9"/><path d="M19 15a8 8 0 1 1-10-10"/><path d="M15 3a9 9 0 0 1 6 6h-6z"/>',
+clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+add:'<circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/>',
+repeat:'<path d="M4 7h14l-3-3m3 3-3 3M20 17H6l3-3m-3 3 3 3"/>',
+customize:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+sparkles:'<path d="m12 3 2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6ZM19 17l.7 2.3L22 20l-2.3.7L19 23l-.7-2.3L16 20l2.3-.7L19 17Z"/>',
+forecast:'<path d="M3 19h18M5 15l5-5 4 3 6-8M16 5h4v4"/>',
+help:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.7 2.7 0 0 1 5 1.3c0 1.8-2.5 2.2-2.5 4M12 18h.01"/>',
+search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',
+logout:'<path d="M10 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5M14 8l4 4-4 4m-8-4h12"/>',
+user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>',
+calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/>'
+};
+const svg=(name,size=19)=>'<svg class="bw-semantic-icon" width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.dashboard)+'</svg>';
+function iconify(selector,name,mode='replace'){document.querySelectorAll(selector).forEach(el=>{if(el.dataset.semanticIcon===name)return;if(mode==='replace')el.innerHTML=svg(name);else el.insertAdjacentHTML('afterbegin',svg(name));el.dataset.semanticIcon=name})}
+function render(){
+const nav={dashboard:'dashboard',transactions:'transactions',analytics:'analytics',savings:'goals',insights:'insights',settings:'settings'};
+Object.entries(nav).forEach(([page,icon])=>iconify('.sidebar-nav .nav-btn[data-page="'+page+'"] > span',icon));
+[['.bw-metric-top .bw-metric-icon','wallet'],['.premium-metric.income .bw-metric-icon','income'],['.premium-metric.expense .bw-metric-icon','expense'],['.premium-metric.savings .bw-metric-icon','savings'],['.earnings-panel .bw-head-icon','chart'],['.categories-panel .bw-head-icon','pie'],['.recent-panel .bw-head-icon','clock'],['.goal-panel .bw-head-icon','goals'],['.bw-quick-actions .bw-head-icon','add'],['.bw-quick-insights .bw-head-icon','insights'],['.bw-rail-title > span','sparkles'],['.goals-banner-icon','goals'],['.settings-hero-icon','settings'],['.bw-intelligence-icon','chart'],['.bw-topbar-help','help'],['.topbar-notify','bell'],['.topbar-avatar','user'],['.avatar-circle','user'],['.goal-preview-icon','goals']].forEach(([selector,name])=>iconify(selector,name));
+const actions=[['#bwActionTransaction > span','add'],['.bw-action-grid button[data-page="savings"] > span','goals'],['.bw-action-grid button[data-page="insights"] > span','insights'],['.bw-action-grid button[data-page="transactions"] > span','repeat'],['.bw-action-grid button[data-page="settings"] > span','customize']];
+actions.forEach(([selector,name])=>iconify(selector,name));
+iconify('.premium-search > span','search');
+const logout=document.querySelector('.sidebar-logout');if(logout&&!logout.dataset.semanticIcon){logout.innerHTML=svg('logout')+' <span>'+logout.textContent.replace(/^[⇥\s]+/,'')+'</span>';logout.dataset.semanticIcon='logout'}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
+})();
