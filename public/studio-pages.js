@@ -65,8 +65,16 @@ const luminance=hex=>{const rgb=toRgb(hex).map(v=>{const n=v/255;return n<=.0404
 const vibrant=colors[0],secondary=colors[1]||mix(vibrant,'#ffffff',.32),third=colors[2]||secondary;
 const deep=mix(vibrant,'#20232c',.91),mid=mix(vibrant,'#333640',.89);
 const glow=mix(third,'#e8e6e2',.70),border=mix(vibrant,'#c8c6c5',.80);
-const backdrop=mix(vibrant,'#f8f7f4',.94),soft=mix(vibrant,'#f1efed',.90);
+/* Each 1-, 2- or 3-tone preset now owns a matching layered background. */
+const base=mix(vibrant,'#f5f3f0',.87),base2=mix(secondary,'#f7f5f2',.89),base3=mix(third,'#f8f7f4',.91);
+const backdrop=base,soft=mix(vibrant,'#ece8e4',.79);
 const textOnAccent=luminance(vibrant)>.34?'#171827':'#ffffff';
+const background=theme.style==='solid'
+?'radial-gradient(ellipse 70% 65% at 90% 2%,'+mix(vibrant,'#ffffff',.76)+' 0%,transparent 76%),linear-gradient(135deg,'+base+','+mix(vibrant,'#ffffff',.94)+')'
+:theme.style==='dual'
+?'radial-gradient(ellipse 65% 72% at 90% 0%,'+mix(secondary,'#ffffff',.72)+' 0%,transparent 75%),radial-gradient(ellipse 65% 80% at 4% 94%,'+mix(vibrant,'#ffffff',.82)+' 0%,transparent 77%),linear-gradient(140deg,'+base+','+base2+')'
+:'radial-gradient(ellipse 62% 67% at 90% 0%,'+mix(third,'#ffffff',.77)+' 0%,transparent 78%),radial-gradient(ellipse 68% 72% at 3% 90%,'+mix(secondary,'#ffffff',.82)+' 0%,transparent 76%),linear-gradient(135deg,'+base+','+base2+','+base3+')';
+const bgDark='radial-gradient(ellipse at 85% 0%,'+mix(third,'#161a28',.87)+' 0%,transparent 60%),linear-gradient(145deg,'+mix(vibrant,'#131722',.92)+','+mix(secondary,'#161925',.92)+')';
 dash.style.setProperty('--bw-brand-deep',deep);
 dash.style.setProperty('--bw-brand-mid',mid);
 dash.style.setProperty('--bw-brand-glow',glow);
@@ -83,7 +91,8 @@ dash.style.setProperty('--bw-brand-accent-gradient','linear-gradient(105deg,'+mi
 dash.style.setProperty('--bw-brand-card','linear-gradient(145deg,'+mix(vibrant,'#ffffff',.975)+','+mix(vibrant,'#f8f7f5',.96)+')');
 dash.style.setProperty('--bw-brand-surface',mix(vibrant,'#ffffff',.98));
 dash.style.setProperty('--bw-brand-surface-alt',mix(vibrant,'#f5f4f1',.96));
-dash.style.setProperty('--bw-brand-page-gradient','radial-gradient(ellipse at 85% -12%,'+soft+' 0%,transparent 50%),linear-gradient(135deg,'+backdrop+','+mix(third,'#f7f6f3',.96)+')');
+dash.style.setProperty('--bw-brand-page-gradient',background);
+dash.style.setProperty('--bw-brand-page-gradient-dark',bgDark);
 dash.style.setProperty('--bw-brand-ink','#242631');
 dash.style.setProperty('--bw-brand-ink-muted','#747785');
 dash.style.setProperty('--bw-brand-divider','#e8e6e6');
