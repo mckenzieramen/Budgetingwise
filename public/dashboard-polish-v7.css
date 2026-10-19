@@ -1,0 +1,44 @@
+/* V7: dashboard-specific legibility and polished empty-data visuals. */
+#dashboardView[data-display-mode=light] .bw-v2-dashboard{--bw-dash-ink:#172657;--bw-dash-sub:#56668c;--bw-dash-border:#e1e5f4}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .premium-metric,#dashboardView[data-display-mode=light] .bw-v2-dashboard .premium-panel,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-rail-score,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-rail-forecast{background:#fff!important;border:1px solid var(--bw-dash-border)!important;box-shadow:0 10px 27px rgba(32,46,106,.075)!important;color:var(--bw-dash-ink)!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-ai-card{background:linear-gradient(140deg,#f3edff,#e9edff)!important;border:1px solid #d9d8f7!important;color:#1c2a5c!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-ai-card h3,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-ai-card p,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-ai-card small{color:#24346b!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-ai-question{background:rgba(255,255,255,.75)!important;color:#334273!important;border:1px solid #d7d9f4!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-metric-top>span:last-child,#dashboardView[data-display-mode=light] .bw-v2-dashboard .premium-metric strong,#dashboardView[data-display-mode=light] .bw-v2-dashboard .premium-panel-head h3,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-goal-display h4,#dashboardView[data-display-mode=light] .bw-v2-dashboard .donut-inner strong,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-forecast-numbers strong{color:#172657!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .premium-metric small,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-goal-display p,#dashboardView[data-display-mode=light] .bw-v2-dashboard .goal-preview-footer strong,#dashboardView[data-display-mode=light] .bw-v2-dashboard .goal-preview-footer small,#dashboardView[data-display-mode=light] .bw-v2-dashboard .category-legend,#dashboardView[data-display-mode=light] .bw-v2-dashboard .chart-legend,#dashboardView[data-display-mode=light] .bw-v2-dashboard .chart-yaxis span,#dashboardView[data-display-mode=light] .bw-v2-dashboard .chart-month small,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-score-meter span,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-score-meter em,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-forecast-numbers span,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-rail-forecast>small{color:#59698f!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-rail-score h3,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-rail-forecast h3,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-rail-score-body p,#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-rail-score-body b{color:#223363!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-score-ring:before{background:#fff!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-score-ring strong{color:#1b2b61!important;font-size:27px!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-score-ring small{color:#657397!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .donut-inner{background:#fff!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .donut-inner small{color:#5c6b91!important;font-size:10px!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .donut-inner strong{color:#1b2b61!important;font-size:19px!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .expense-donut{background:conic-gradient(#8b5cf6 0 0%,#e5e9f6 0 100%)!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-score-ring{background:conic-gradient(#8059f6 0 22%,#e7eaf6 22% 100%)!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-score-meter i{background:#e9edf8!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .panel-link,#dashboardView[data-display-mode=light] .bw-v2-dashboard .panel-filter,#dashboardView[data-display-mode=light] .bw-v2-dashboard .chart-year-label select{background:#f6f4ff!important;border:1px solid #ded9f6!important;color:#4d3c9c!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .chart-plot{background:repeating-linear-gradient(to top,#e4e9f4 0 1px,transparent 1px 25%)!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .premium-recent,#dashboardView[data-display-mode=light] .bw-v2-dashboard .premium-recent .list-item,#dashboardView[data-display-mode=light] .bw-v2-dashboard .premium-recent .list-item *{color:#253363!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .premium-recent .list-item{border-color:#e3e8f6!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .goal-preview-track{background:#edeafa!important;border-color:#d8d6ee!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-action-grid button{background:#f8f7ff!important;color:#263566!important;border:1px solid #e2e0f4!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-action-grid button span{color:#6841e5!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-quick-insight-line{background:#f7f7ff!important;color:#3b4977!important;border-color:#e2e5f5!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-metric-icon{background:#f1edff!important;color:#6540dc!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-head-icon{color:#6840dc!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-goal-display .goal-preview-icon{color:#6c4aea!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-rail-score-body>div:last-child b{background:#f1edff!important;border:1px solid #d9d3f5!important;color:#5542a6!important}
+#dashboardView[data-display-mode=dark] .bw-v2-dashboard .bw-score-ring:before,#dashboardView[data-display-mode=dark] .bw-v2-dashboard .donut-inner{background:#252a49!important}
+#dashboardView[data-display-mode=dark] .bw-v2-dashboard .bw-score-ring strong,#dashboardView[data-display-mode=dark] .bw-v2-dashboard .donut-inner strong{color:#fff!important}
+#dashboardView[data-display-mode=dark] .bw-v2-dashboard .bw-score-ring small,#dashboardView[data-display-mode=dark] .bw-v2-dashboard .donut-inner small{color:#d6d9f0!important}
+#dashboardView[data-display-mode=dark] .bw-v2-dashboard .bw-rail-score-body p,#dashboardView[data-display-mode=dark] .bw-v2-dashboard .bw-ai-card small{color:#d2d3ed!important}
+#dashboardView .bw-v2-dashboard .bw-score-ring:before{inset:12px!important}
+#dashboardView .bw-v2-dashboard .donut-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#dashboardView .bw-v2-dashboard .category-content{align-items:center!important}
+#dashboardView .bw-v2-dashboard .bw-rail-score-body{align-items:center!important}
+#dashboardView .bw-v2-dashboard .bw-score-meter{grid-template-columns:minmax(88px,1fr) minmax(48px,1.4fr) 27px!important}
+#dashboardView .bw-v2-dashboard .bw-rail-score-body p{line-height:1.65!important;font-size:11px!important}
+#dashboardView .bw-v2-dashboard .bw-rail-score-body>div:last-child{min-width:0}
+@media(min-width:761px) and (max-width:1150px){#dashboardView .bw-v2-dashboard{grid-template-columns:minmax(0,1fr) minmax(255px,.54fr)!important}#dashboardView .bw-v2-dashboard .bw-v2-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}#dashboardView .bw-v2-dashboard .bw-rail-score-body{flex-direction:column;align-items:flex-start!important}#dashboardView .bw-v2-dashboard .bw-rail-score-body>div:last-child{width:100%}}
+@media(max-width:760px){#dashboardView .bw-v2-dashboard .bw-v2-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}#dashboardView .bw-v2-dashboard .bw-v2-right-rail{grid-template-columns:1fr!important}#dashboardView .bw-v2-dashboard .bw-rail-score-body{flex-direction:row!important}}
+@media(max-width:380px){#dashboardView .bw-v2-dashboard .bw-rail-score-body{flex-direction:column!important;align-items:flex-start!important}}
