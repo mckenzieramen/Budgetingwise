@@ -1,0 +1,19 @@
+/* Signature scenic atmosphere. The scene stays in place; palettes tint it. */
+#dashboardView .premium-shell{position:relative;isolation:isolate;background:transparent!important;min-height:100vh}
+#dashboardView .premium-shell::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:
+radial-gradient(ellipse 60% 48% at 76% 9%,rgba(216,169,255,.54),transparent 74%),
+radial-gradient(ellipse 70% 60% at 24% 68%,rgba(99,62,221,.37),transparent 80%),
+radial-gradient(ellipse 75% 40% at 55% 100%,rgba(182,122,255,.4),transparent 75%),
+linear-gradient(125deg,#171037 0%,#3c277e 43%,#7860c0 70%,#c6a7f5 100%)!important}
+#dashboardView .premium-shell::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.9;background:
+radial-gradient(ellipse 75% 45% at 88% 4%,rgba(var(--bw-brand-rgb,101,54,245),.36),transparent 78%),
+linear-gradient(125deg,rgba(var(--bw-brand-rgb,101,54,245),.19),transparent 52%,rgba(var(--bw-brand-rgb,101,54,245),.23));transition:background .3s ease}
+#dashboardView .premium-main,#dashboardView .premium-content{background:transparent!important}
+#dashboardView .premium-sidebar{z-index:2}
+#dashboardView .premium-topbar{background:rgba(235,225,255,.42)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+#dashboardView[data-display-mode=dark] .premium-shell{background:transparent!important}
+#dashboardView[data-display-mode=dark] .premium-shell::before{filter:brightness(.55) saturate(1.3)}
+#dashboardView[data-display-mode=dark] .premium-topbar{background:rgba(26,20,57,.72)!important}
+#dashboardView .bw-v2-hero{position:relative;overflow:hidden}
+#dashboardView .bw-v2-hero:after{content:"";position:absolute;right:-6%;top:-60%;width:48%;height:220%;border-radius:50%;background:radial-gradient(ellipse,rgba(var(--bw-brand-rgb,101,54,245),.36),transparent 72%);pointer-events:none}
+@media(prefers-reduced-motion:reduce){#dashboardView .premium-shell::after{transition:none}}
