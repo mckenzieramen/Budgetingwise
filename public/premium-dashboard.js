@@ -35,10 +35,11 @@
   if(fill)fill.style.width=pct+'%';if(percent)percent.textContent=pct+'%';
   if(target)target.textContent=goal?.goalDate?'Target: '+goal.goalDate:'Create a goal to get started';
  }
- window.renderPremiumOverview=render;
+ window.renderPremiumOverview=function(txs,goals){render(txs,goals);const income=txs.filter(t=>t.type==='income').reduce((a,t)=>a+(Number(t.amount)||0),0),expense=txs.filter(t=>t.type==='expense').reduce((a,t)=>a+(Number(t.amount)||0),0),saved=txs.filter(t=>t.type==='savings').reduce((a,t)=>a+(Number(t.amount)||0),0);const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};set('analyticsIncome',peso(income));set('analyticsExpense',peso(expense));set('analyticsSavingsRate',income?Math.round(saved/income*100)+'%':'0%');const list=document.getElementById('analyticsCategories');if(list){const cats=new Map();txs.forEach(t=>{if(t.type==='expense')cats.set(t.category||'Other',(cats.get(t.category||'Other')||0)+(Number(t.amount)||0))});list.innerHTML=cats.size?[...cats.entries()].sort((a,b)=>b[1]-a[1]).map(([name,value],i)=>'<div class="analytics-cat-row"><div class="analytics-cat-label"><strong>'+safe(name)+'</strong><span>'+peso(value)+'</span></div><div class="analytics-cat-track"><b style="width:'+Math.min(100,expense?value/expense*100:0)+'%;background:'+colors[i%colors.length]+'"></b></div></div>').join(''):'<p class="muted">No expenses recorded yet.</p>'}};
  document.addEventListener('DOMContentLoaded',()=>{
   const input=document.getElementById('dashboardSearch');if(input)input.addEventListener('input',()=>{const q=input.value.trim().toLowerCase();document.querySelectorAll('#recentList .list-item').forEach(el=>el.hidden=!!q&&!el.textContent.toLowerCase().includes(q))});
-  document.querySelectorAll('[data-page="analytics"]').forEach(el=>el.addEventListener('click',()=>drawChart('analyticsChart',[],document.getElementById('earningsYear')?.value)));
+  
+  const themes={violet:'Royal Violet',ocean:'Ocean Blue',emerald:'Emerald Green',rose:'Rose Pink',sunset:'Sunset Orange',midnight:'Midnight Navy'};const dash=document.getElementById('dashboardView');const applyTheme=key=>{const k=Object.hasOwn(themes,key)?key:'violet';dash.dataset.theme=k;document.querySelectorAll('.theme-choice').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===k)));const feedback=document.getElementById('themeFeedback');if(feedback)feedback.textContent=themes[k]+' is selected.';try{localStorage.setItem('budgetingwise-theme',k)}catch(e){}};let stored='violet';try{stored=localStorage.getItem('budgetingwise-theme')||'violet'}catch(e){}applyTheme(stored);document.querySelectorAll('.theme-choice').forEach(b=>b.addEventListener('click',()=>applyTheme(b.dataset.theme)));
   render([],[]);
  });
 })();
