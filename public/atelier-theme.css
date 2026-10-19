@@ -1,0 +1,75 @@
+
+/* Budgetingwise Atelier — a single cohesive, accessible premium theme layer. */
+#dashboardView{--bw-brand-deep:#191a29;--bw-brand-mid:#2a2a3e;--bw-brand-bg:#f2f0f6;--bw-brand-soft:#eae5f4;--bw-brand-page-gradient:linear-gradient(135deg,#f2eff9,#f8f7fa);--bw-brand-chart:#8061c9;--bw-brand-chart-alt:#b59adf;--bw-brand-chart-third:#d8c3ea;--bw-brand-border:#b8a9cb;--bw-brand-ink:#252436;--bw-brand-ink-muted:#777386;--bw-brand-surface:#fff;--bw-brand-surface-alt:#f5f3f7;--bw-brand-accent-gradient:linear-gradient(110deg,#6752a5,#9380b8);--bw-brand-gradient:linear-gradient(140deg,#191a29,#2a2a3e)}
+#dashboardView .premium-shell{background:var(--bw-brand-page-gradient)!important;transition:background .25s ease}
+#dashboardView .premium-content{background:transparent!important}
+#dashboardView .premium-sidebar{background:var(--bw-brand-gradient)!important;border-color:#ffffff1f!important;box-shadow:6px 0 22px #1614221e!important}
+#dashboardView .sidebar-nav .nav-btn{color:#d7d4e2!important}
+#dashboardView .sidebar-nav .nav-btn.active{background:var(--bw-brand-accent-gradient)!important;color:white!important;border:1px solid #ffffff3b!important;box-shadow:0 3px 12px #09081828!important}
+#dashboardView .sidebar-nav .nav-btn.active>span{color:white!important}
+#dashboardView .bw-workspace-current{background:#ffffff16!important;border-color:#ffffff2a!important;color:white!important}
+#dashboardView .bw-premium-box{background:#ffffff0b!important;border:1px solid #ffffff25!important;box-shadow:none!important}
+#dashboardView .bw-premium-box button{background:var(--bw-brand-accent-gradient)!important;color:white!important;border:1px solid #ffffff3a!important}
+#dashboardView .premium-topbar{background:color-mix(in srgb,var(--bw-brand-bg) 82%,white)!important;border-color:#20202e13!important}
+#dashboardView .premium-search,#dashboardView .topbar-profile{background:#ffffffdf!important;border:1px solid #2d26301a!important}
+#dashboardView .bw-v2-hero,#dashboardView .bw-ai-card{background:linear-gradient(120deg,var(--bw-brand-deep),var(--bw-brand-mid))!important;border:1px solid #ffffff26!important;box-shadow:0 8px 22px #19172723!important;color:#fff!important}
+#dashboardView .bw-v2-hero .bw-hero-art{opacity:.42!important}
+#dashboardView .bw-hero-pills span{background:#ffffff15!important;border-color:#ffffff35!important}
+#dashboardView .bw-v2-metrics .premium-metric,#dashboardView .bw-v2-dashboard .premium-panel{background:linear-gradient(145deg,var(--bw-brand-mid),var(--bw-brand-deep))!important;border:1px solid #ffffff20!important;box-shadow:0 6px 20px #17162624!important;color:#f8f7fc!important}
+#dashboardView .bw-v2-metrics .premium-metric:hover,#dashboardView .bw-v2-dashboard .premium-panel:hover{box-shadow:0 9px 24px #1716262d!important;border-color:var(--bw-brand-border)!important}
+#dashboardView .bw-v2-dashboard .premium-panel-head h3,#dashboardView .bw-v2-dashboard .bw-goal-display h4,#dashboardView .bw-v2-dashboard .premium-metric strong,#dashboardView .bw-v2-dashboard .bw-metric-top>span:last-child,#dashboardView .bw-v2-dashboard .donut-inner strong,#dashboardView .bw-v2-dashboard .bw-forecast-numbers strong,#dashboardView .bw-v2-dashboard .bw-score-ring strong{color:#fff!important}
+#dashboardView .bw-v2-dashboard .premium-metric small,#dashboardView .bw-v2-dashboard .bw-goal-display p,#dashboardView .bw-v2-dashboard .goal-preview-footer strong,#dashboardView .bw-v2-dashboard .goal-preview-footer small,#dashboardView .bw-v2-dashboard .category-legend,#dashboardView .bw-v2-dashboard .chart-legend,#dashboardView .bw-v2-dashboard .chart-yaxis span,#dashboardView .bw-v2-dashboard .chart-month small,#dashboardView .bw-v2-dashboard .bw-score-meter span,#dashboardView .bw-v2-dashboard .bw-score-meter em,#dashboardView .bw-v2-dashboard .bw-forecast-numbers span,#dashboardView .bw-v2-dashboard .bw-rail-forecast>small{color:#d3d1df!important}
+#dashboardView .bw-v2-dashboard .bw-metric-icon{background:#ffffff19!important;color:#e7dfff!important}
+#dashboardView .bw-v2-dashboard .bw-head-icon{background:transparent!important;color:var(--bw-brand-chart-alt)!important}
+#dashboardView .bw-v2-dashboard .panel-link,#dashboardView .bw-v2-dashboard .panel-filter,#dashboardView .bw-v2-dashboard .chart-year-label select{background:#ffffff0e!important;color:#fff!important;border:1px solid #ffffff3b!important}
+#dashboardView .bw-v2-dashboard .donut-inner,#dashboardView .bw-score-ring:before{background:var(--bw-brand-deep)!important}
+#dashboardView .bw-v2-dashboard .donut-inner small,#dashboardView .bw-score-ring small{color:#cbc6dc!important}
+#dashboardView .bw-v2-dashboard .chart-plot{background:repeating-linear-gradient(to top,#ffffff19 0 1px,transparent 1px 25%)!important}
+#dashboardView .bw-v2-dashboard .income-bar{background:linear-gradient(180deg,var(--bw-brand-chart-alt),var(--bw-brand-chart))!important}
+#dashboardView .bw-v2-dashboard .expense-bar{background:linear-gradient(180deg,var(--bw-brand-chart-third),var(--bw-brand-chart-alt))!important}
+#dashboardView .bw-v2-dashboard .premium-recent,#dashboardView .bw-v2-dashboard .premium-recent .list-item,#dashboardView .bw-v2-dashboard .premium-recent .list-item *{color:#f3f1fa!important}
+#dashboardView .bw-v2-dashboard .premium-recent .list-item{border-color:#ffffff20!important}
+#dashboardView .bw-v2-dashboard .goal-preview-track{background:#ffffff40!important;border-color:#ffffff80!important}
+#dashboardView .bw-v2-dashboard .goal-preview-track #overviewGoalFill{background:var(--bw-brand-accent-gradient)!important}
+#dashboardView .bw-v2-dashboard .bw-action-grid button{background:#ffffff0e!important;color:#fff!important;border:1px solid #ffffff2c!important}
+#dashboardView .bw-v2-dashboard .bw-action-grid button:hover{background:#ffffff1e!important;border-color:var(--bw-brand-border)!important}
+#dashboardView .bw-v2-dashboard .bw-action-grid button span{color:var(--bw-brand-chart-alt)!important}
+#dashboardView .bw-v2-dashboard .bw-quick-insight-line{background:#ffffff0c!important;border:1px solid #ffffff20!important;color:#f2f0f8!important}
+#dashboardView .bw-v2-dashboard .bw-rail-score-body>div:last-child b{background:#ffffff1a!important;border-color:#ffffff40!important;color:#fff!important}
+#dashboardView .bw-v2-dashboard .bw-rail-score-body p{color:#d5d2df!important}
+#dashboardView .bw-score-meter i{background:#ffffff27!important}
+#dashboardView .bw-score-meter i b{background:var(--bw-brand-accent-gradient)!important}
+#dashboardView .bw-score-ring{background:conic-gradient(var(--bw-brand-chart) 0 35%,var(--bw-brand-chart-alt) 35% 70%,var(--bw-brand-chart-third) 70% 84%,#5a5669 84% 100%)!important}
+#dashboardView .bw-v2-dashboard .bw-forecast-visual{background:repeating-linear-gradient(to top,#ffffff12 0 1px,transparent 1px 25%)!important}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading{background:var(--bw-brand-gradient)!important;border:1px solid #ffffff28!important;box-shadow:0 6px 20px #1716261a!important}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading h2{color:#fff!important}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading .eyebrow{color:#dcd4ed!important}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading .muted{color:#d9d6e3!important}
+#dashboardView .page:not(.bw-v2-dashboard) .premium-panel,#dashboardView .page:not(.bw-v2-dashboard) .tx-summary article,#dashboardView .page:not(.bw-v2-dashboard) .insight-cards article,#dashboardView .page:not(.bw-v2-dashboard) .goal-card,#dashboardView .page:not(.bw-v2-dashboard) .theme-panel{background:linear-gradient(145deg,var(--bw-brand-mid),var(--bw-brand-deep))!important;border:1px solid #ffffff20!important;box-shadow:0 6px 20px #17162620!important;color:#f5f3fb!important}
+#dashboardView .page:not(.bw-v2-dashboard) .premium-panel h3,#dashboardView .page:not(.bw-v2-dashboard) .premium-panel h4,#dashboardView .page:not(.bw-v2-dashboard) .tx-summary strong,#dashboardView .page:not(.bw-v2-dashboard) .insight-cards strong,#dashboardView .page:not(.bw-v2-dashboard) .goal-card h3,#dashboardView .page:not(.bw-v2-dashboard) .theme-panel strong,#dashboardView .page:not(.bw-v2-dashboard) .bw-intelligence-card>strong{color:#fff!important}
+#dashboardView .page:not(.bw-v2-dashboard) .muted,#dashboardView .page:not(.bw-v2-dashboard) .premium-panel p,#dashboardView .page:not(.bw-v2-dashboard) .tx-summary span,#dashboardView .page:not(.bw-v2-dashboard) .tx-summary small{color:#d5d1df!important}
+#dashboardView .page:not(.bw-v2-dashboard) .transaction-toolbar,#dashboardView .page:not(.bw-v2-dashboard) .analytics-filterbar{background:var(--bw-brand-gradient)!important;color:#fff!important;border:1px solid #ffffff28!important}
+#dashboardView .page:not(.bw-v2-dashboard) .premium-tx-table th{color:#c9c5d5!important}
+#dashboardView .page:not(.bw-v2-dashboard) .premium-tx-table td{color:#fff!important;border-color:#ffffff21!important}
+#dashboardView .page:not(.bw-v2-dashboard) .premium-tx-table tbody tr:hover{background:#ffffff12!important}
+#dashboardView .page:not(.bw-v2-dashboard) .tx-tab,#dashboardView .page:not(.bw-v2-dashboard) .goal-tab,#dashboardView .page:not(.bw-v2-dashboard) .appearance-tab{color:#d7d2e2!important}
+#dashboardView .page:not(.bw-v2-dashboard) .tx-tab.active,#dashboardView .page:not(.bw-v2-dashboard) .goal-tab.active,#dashboardView .page:not(.bw-v2-dashboard) .appearance-tab.active{background:var(--bw-brand-accent-gradient)!important;color:#fff!important}
+#dashboardView .page:not(.bw-v2-dashboard) .soft-button,#dashboardView .page:not(.bw-v2-dashboard) .panel-link{background:#ffffff14!important;color:#fff!important;border:1px solid #ffffff35!important}
+#dashboardView .page:not(.bw-v2-dashboard) .theme-choice,#dashboardView .page:not(.bw-v2-dashboard) .gradient-style,#dashboardView .page:not(.bw-v2-dashboard) .mode-option,#dashboardView .page:not(.bw-v2-dashboard) .preset-choice{background:#ffffff10!important;color:#fff!important;border:1px solid #ffffff32!important;box-shadow:none!important}
+#dashboardView .page:not(.bw-v2-dashboard) .theme-choice strong,#dashboardView .page:not(.bw-v2-dashboard) .theme-choice small,#dashboardView .page:not(.bw-v2-dashboard) .preset-choice small,#dashboardView .page:not(.bw-v2-dashboard) .theme-subheading strong,#dashboardView .page:not(.bw-v2-dashboard) .theme-subheading small{color:#fff!important}
+#dashboardView .page:not(.bw-v2-dashboard) .theme-choice[aria-pressed=true],#dashboardView .page:not(.bw-v2-dashboard) .gradient-style.active,#dashboardView .page:not(.bw-v2-dashboard) .mode-option.active,#dashboardView .page:not(.bw-v2-dashboard) .preset-choice.active{background:#ffffff22!important;border:1px solid var(--bw-brand-chart-alt)!important;box-shadow:0 0 0 2px #ffffff1c!important}
+#dashboardView .page:not(.bw-v2-dashboard) .theme-choice:hover,#dashboardView .page:not(.bw-v2-dashboard) .preset-choice:hover{background:#ffffff1c!important}
+#dashboardView .page:not(.bw-v2-dashboard) .bw-insight-row{background:#ffffff0e!important;border-color:#ffffff2a!important;color:#fff!important}
+#dashboardView .page:not(.bw-v2-dashboard) .bw-insight-row p{color:#f1eef9!important}
+#dashboardView .page:not(.bw-v2-dashboard) .bw-intelligence-banner{background:var(--bw-brand-gradient)!important;color:#fff!important}
+#dashboardView .page:not(.bw-v2-dashboard) .bw-intelligence-banner p{color:#d8d5e0!important}
+#dashboardView .page:not(.bw-v2-dashboard) .bw-intelligence-track{background:#ffffff30!important}
+#dashboardView .page:not(.bw-v2-dashboard) .theme-live-preview{background:var(--bw-brand-page-gradient)!important}
+#dashboardView .page:not(.bw-v2-dashboard) .theme-preview-sidebar{background:var(--bw-brand-gradient)!important}
+#dashboardView .page:not(.bw-v2-dashboard) .theme-preview-bars i{background:var(--bw-brand-chart)!important}
+#dashboardView .page:not(.bw-v2-dashboard) .theme-preview-bars i:nth-child(even){background:var(--bw-brand-chart-alt)!important}
+#dashboardView .page:not(.bw-v2-dashboard) .transaction-toolbar input,#dashboardView .page:not(.bw-v2-dashboard) .transaction-toolbar select,#dashboardView .page:not(.bw-v2-dashboard) .analytics-filterbar select{background:#fff!important;color:#282437!important}
+#dashboardView[data-display-mode=dark] .premium-shell{background:linear-gradient(140deg,#131420,var(--bw-brand-deep))!important}
+#dashboardView[data-display-mode=dark] .premium-topbar{background:#222332!important}
+#dashboardView[data-display-mode=dark] .premium-search,#dashboardView[data-display-mode=dark] .topbar-profile{background:#343344!important;color:#fff!important}
+@media(prefers-reduced-motion:reduce){#dashboardView .premium-shell{transition:none!important}}
