@@ -24,6 +24,11 @@ search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',
 logout:'<path d="M10 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5M14 8l4 4-4 4m-8-4h12"/>',
 user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
 bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>',
+shield:'<path d="M12 2 20 6v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4Z"/><path d="m9 12 2 2 4-4"/>',
+filter:'<path d="M4 5h16M7 12h10M10 19h4"/>',
+info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>',
+palette:'<path d="M12 3a9 9 0 0 0 0 18h2a2 2 0 0 0 1.7-3c-.7-1.2.2-2.3 1.5-2.3H19A3 3 0 0 0 22 12a9 9 0 0 0-10-9Z"/><path d="M7.5 10h.01M11 7h.01M16 8h.01M7 15h.01"/>',
+download:'<path d="M12 3v12m-4-4 4 4 4-4M4 17v4h16v-4"/>',
 calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/>'
 };
 const svg=(name,size=19)=>'<svg class="bw-semantic-icon" width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(paths[name]||paths.dashboard)+'</svg>';
@@ -31,10 +36,16 @@ function iconify(selector,name,mode='replace'){document.querySelectorAll(selecto
 function render(){
 const nav={dashboard:'dashboard',transactions:'transactions',analytics:'analytics',savings:'goals',insights:'insights',settings:'settings'};
 Object.entries(nav).forEach(([page,icon])=>iconify('.sidebar-nav .nav-btn[data-page="'+page+'"] > span',icon));
-[['.bw-metric-top .bw-metric-icon','wallet'],['.premium-metric.income .bw-metric-icon','income'],['.premium-metric.expense .bw-metric-icon','expense'],['.premium-metric.savings .bw-metric-icon','savings'],['.earnings-panel .bw-head-icon','chart'],['.categories-panel .bw-head-icon','pie'],['.recent-panel .bw-head-icon','clock'],['.goal-panel .bw-head-icon','goals'],['.bw-quick-actions .bw-head-icon','add'],['.bw-quick-insights .bw-head-icon','insights'],['.bw-rail-title > span','sparkles'],['.goals-banner-icon','goals'],['.settings-hero-icon','settings'],['.bw-intelligence-icon','chart'],['.bw-topbar-help','help'],['.topbar-notify','bell'],['.topbar-avatar','user'],['.avatar-circle','user'],['.goal-preview-icon','goals']].forEach(([selector,name])=>iconify(selector,name));
+[['.bw-metric-top .bw-metric-icon','wallet'],['.premium-metric.income .bw-metric-icon','income'],['.premium-metric.expense .bw-metric-icon','expense'],['.premium-metric.savings .bw-metric-icon','savings'],['.earnings-panel .bw-head-icon','chart'],['.categories-panel .bw-head-icon','pie'],['.recent-panel .bw-head-icon','clock'],['.goal-panel .bw-head-icon','goals'],['.bw-quick-actions .bw-head-icon','add'],['.bw-quick-insights .bw-head-icon','insights'],['.bw-rail-title > span','sparkles'],['.goals-banner-icon','goals'],['.settings-hero-icon','settings'],['.bw-intelligence-icon','chart'],['.bw-topbar-help','help'],['.topbar-notify','bell'],['.topbar-avatar','user'],['.avatar-circle','user'],['.goal-preview-icon','goals'],['.bw-rail-info','info'],['.bw-command-search-icon','search'],['.insight-pill','sparkles']].forEach(([selector,name])=>iconify(selector,name));
 const actions=[['#bwActionTransaction > span','add'],['.bw-action-grid button[data-page="savings"] > span','goals'],['.bw-action-grid button[data-page="insights"] > span','insights'],['.bw-action-grid button[data-page="transactions"] > span','repeat'],['.bw-action-grid button[data-page="settings"] > span','customize']];
 actions.forEach(([selector,name])=>iconify(selector,name));
 iconify('.premium-search > span','search');
+document.querySelectorAll('.bw-intelligence-icon').forEach((el,i)=>{el.innerHTML=svg(i===0?'shield':i===1?'forecast':i===2?'pie':'insights');el.dataset.semanticIcon='insight-'+i});
+document.querySelectorAll('.section-heading').forEach(el=>{const h=el.querySelector('h2');if(!h)return;const title=h.textContent.toLowerCase();const name=title.includes('transaction')?'transactions':title.includes('analytic')?'analytics':title.includes('goal')?'goals':title.includes('setting')||title.includes('appearance')?'settings':title.includes('insight')?'insights':'dashboard';if(!h.querySelector('.bw-semantic-icon'))h.insertAdjacentHTML('afterbegin',svg(name)+' ');});
+document.querySelectorAll('#dashboardView .panel-link').forEach(el=>{if(!el.querySelector('.bw-semantic-icon'))el.insertAdjacentHTML('afterbegin',svg('chart',15)+' ')});
+document.querySelectorAll('#dashboardView .tx-tabs button').forEach(el=>{if(el.querySelector('.bw-semantic-icon'))return;const t=el.textContent.toLowerCase();el.insertAdjacentHTML('afterbegin',svg(t.includes('income')?'income':t.includes('expense')?'expense':t.includes('saving')?'savings':'transactions',16)+' ')});
+document.querySelectorAll('#dashboardView .appearance-tab').forEach(el=>{if(el.querySelector('.bw-semantic-icon'))return;el.insertAdjacentHTML('afterbegin',svg('palette',16)+' ')});
+
 const logout=document.querySelector('.sidebar-logout');if(logout&&!logout.dataset.semanticIcon){logout.innerHTML=svg('logout')+' <span>'+logout.textContent.replace(/^[⇥\s]+/,'')+'</span>';logout.dataset.semanticIcon='logout'}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
