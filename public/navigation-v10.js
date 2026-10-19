@@ -35,6 +35,13 @@ root.addEventListener('click',event=>{
  event.preventDefault();
  event.stopImmediatePropagation();
  show(link.dataset.page);
+ if(root.classList.contains('bw-mobile-nav-open')){
+  root.classList.remove('bw-mobile-nav-open');
+  const toggle=root.querySelector('.mobile-nav-toggle');
+  toggle?.setAttribute('aria-expanded','false');
+  toggle?.setAttribute('aria-label','Open navigation menu');
+  document.body.style.removeProperty('overflow');
+ }
 },true);
 function restore(){if(!visible())return;const desired=pageFromHash()||current||(()=>{try{return sessionStorage.getItem('budgetingwise-last-page')}catch(e){return null}})()||'dashboard';show(valid.has(desired)?desired:'dashboard',{historyMode:pageFromHash()?'none':'replace'})}
 window.addEventListener('popstate',restore);
