@@ -40,6 +40,8 @@ Object.entries(nav).forEach(([page,icon])=>iconify('.sidebar-nav .nav-btn[data-p
 const actions=[['#bwActionTransaction > span','add'],['.bw-action-grid button[data-page="savings"] > span','goals'],['.bw-action-grid button[data-page="insights"] > span','insights'],['.bw-action-grid button[data-page="transactions"] > span','repeat'],['.bw-action-grid button[data-page="settings"] > span','customize']];
 actions.forEach(([selector,name])=>iconify(selector,name));
 document.querySelectorAll('.insight-pill').forEach(el=>{if(!el.querySelector('.bw-semantic-icon'))el.insertAdjacentHTML('afterbegin',svg('sparkles',15)+' ')});
+iconify('#page-insights .bw-insight-row:first-of-type > span','pie');
+iconify('#page-insights .bw-insight-row:nth-of-type(2) > span','savings');
 iconify('.premium-search > span','search');
 document.querySelectorAll('.bw-intelligence-icon').forEach((el,i)=>{el.innerHTML=svg(i===0?'shield':i===1?'forecast':i===2?'pie':'insights');el.dataset.semanticIcon='insight-'+i});
 document.querySelectorAll('.section-heading').forEach(el=>{const h=el.querySelector('h2');if(!h)return;const title=h.textContent.toLowerCase();const name=title.includes('transaction')?'transactions':title.includes('analytic')?'analytics':title.includes('goal')?'goals':title.includes('setting')||title.includes('appearance')?'settings':title.includes('insight')?'insights':'dashboard';if(!h.querySelector('.bw-semantic-icon'))h.insertAdjacentHTML('afterbegin',svg(name)+' ');});
