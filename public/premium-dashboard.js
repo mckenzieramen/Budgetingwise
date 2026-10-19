@@ -39,7 +39,6 @@
  document.addEventListener('DOMContentLoaded',()=>{
   const input=document.getElementById('dashboardSearch');if(input)input.addEventListener('input',()=>{const q=input.value.trim().toLowerCase();document.querySelectorAll('#recentList .list-item').forEach(el=>el.hidden=!!q&&!el.textContent.toLowerCase().includes(q))});
   
-  const themes={violet:'Royal Violet',ocean:'Ocean Blue',emerald:'Emerald Green',rose:'Rose Pink',sunset:'Sunset Orange',midnight:'Midnight Navy'};const dash=document.getElementById('dashboardView');const applyTheme=key=>{const k=Object.hasOwn(themes,key)?key:'violet';dash.dataset.theme=k;document.querySelectorAll('.theme-choice').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===k)));const feedback=document.getElementById('themeFeedback');if(feedback)feedback.textContent=themes[k]+' is selected.';try{localStorage.setItem('budgetingwise-theme',k)}catch(e){}};let stored='violet';try{stored=localStorage.getItem('budgetingwise-theme')||'violet'}catch(e){}applyTheme(stored);document.querySelectorAll('.theme-choice').forEach(b=>b.addEventListener('click',()=>applyTheme(b.dataset.theme)));
   render([],[]);
  });
 })();
