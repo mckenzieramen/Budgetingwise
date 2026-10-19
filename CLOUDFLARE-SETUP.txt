@@ -1,0 +1,22 @@
+BUDGETING WEB - CLEAN RESTART
+
+Cloudflare Pages: Connect to Git > select the repository
+Production branch: main
+Framework preset: None
+Build command: leave empty
+Build output directory: public
+Root directory: leave empty (repository root)
+
+public/index.html: Customer Login + Continue as Guest
+public/admin.html: Admin Login
+Guest mode is read-only and requires no Firebase.
+Customer/Admin authentication requires your REAL Firebase Web App config:
+replace placeholders in public/firebase-config.js.
+
+Firestore rules and Firebase functions are preserved from original project.
+Do not modify or deploy Firebase Rules without reviewing them.
+
+If using Cloudflare Direct Upload instead, upload the CONTENTS of public,
+with index.html at the site root.
+
+Verify production URL after deploying.
