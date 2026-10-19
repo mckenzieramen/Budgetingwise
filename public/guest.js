@@ -23,4 +23,5 @@ for (const id of ['addExpenseBtn', 'addExpenseBtn2', 'addGoalBtn']) {
 }
 $('logoutBtn').textContent = 'Exit guest';
 $('logoutBtn').addEventListener('click', () => { sessionStorage.removeItem('budgetingGuest'); location.reload(); });
+window.renderPremiumOverview?.([],[]);
 showPage('dashboard');
