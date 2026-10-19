@@ -17,3 +17,17 @@
 #dashboardView .bw-semantic-icon{transition:transform .18s ease,opacity .18s ease}
 #dashboardView .bw-action-grid button:hover .bw-semantic-icon{transform:translateY(-2px)}
 @media(prefers-reduced-motion:reduce){#dashboardView .bw-semantic-icon{transition:none!important}}
+
+/* Atelier icon language: purposeful, measured, consistent in every page. */
+#dashboardView .section-heading h2{display:flex;align-items:center;gap:10px}
+#dashboardView .section-heading h2>.bw-semantic-icon{width:23px;height:23px;color:var(--bw-brand-chart-alt);flex:none}
+#dashboardView .bw-intelligence-icon .bw-semantic-icon,#dashboardView .goals-banner-icon .bw-semantic-icon,#dashboardView .settings-hero-icon .bw-semantic-icon{width:24px;height:24px}
+#dashboardView .bw-rail-info .bw-semantic-icon{width:16px;height:16px}
+#dashboardView .bw-command-search-icon .bw-semantic-icon{width:18px;height:18px}
+#dashboardView .insight-pill .bw-semantic-icon{width:16px;height:16px;margin-right:5px}
+#dashboardView .panel-link .bw-semantic-icon{width:14px;height:14px;margin-right:5px;opacity:.75}
+#dashboardView .tx-tabs button .bw-semantic-icon,#dashboardView .appearance-tab .bw-semantic-icon{width:16px;height:16px;margin-right:6px}
+#dashboardView .premium-panel-head .bw-semantic-icon,#dashboardView .section-heading .bw-semantic-icon{stroke-width:1.8}
+#dashboardView .bw-intelligence-icon,#dashboardView .bw-head-icon,#dashboardView .bw-metric-icon{border-radius:11px}
+#dashboardView .bw-semantic-icon{vector-effect:non-scaling-stroke}
+@media(max-width:520px){#dashboardView .section-heading h2>.bw-semantic-icon{width:20px;height:20px}}
