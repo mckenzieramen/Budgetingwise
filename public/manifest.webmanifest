@@ -1,13 +1,19 @@
 {
-  "name": "Budgeting | Personal Finance",
-  "short_name": "Budgeting",
-  "description": "Your personal budgeting dashboard",
+  "name": "Budgetingwise — Wealth Crown",
+  "short_name": "Budgetingwise",
+  "description": "Premium personal finance with goals, insights and forecasts",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#17152a",
+  "theme_color": "#25105e",
   "icons": [
+    {
+      "src": "icons/wealth-crown.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
