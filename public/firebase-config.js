@@ -1,9 +1,10 @@
-// Replace these placeholders with your Firebase Web App configuration.
+// Firebase Web App configuration for Budgetingwise (client-side identifiers, not admin secrets).
+// Project: budgetingwise-78b3a
 export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.firebasestorage.app",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyD9FNrKoUoooJDHufn_acRAKFchUq_Xb6I",
+  authDomain: "budgetingwise-78b3a.firebaseapp.com",
+  projectId: "budgetingwise-78b3a",
+  storageBucket: "budgetingwise-78b3a.firebasestorage.app",
+  messagingSenderId: "113871749594",
+  appId: "1:113871749594:web:3206ded3c56abaafe3c0e3"
 };
