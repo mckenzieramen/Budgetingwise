@@ -1,0 +1,45 @@
+/* V11 contrast and surface repair. Explicit color pairing prevents dark-on-dark and white-on-white. */
+#dashboardView{--bw-fix-ink:#182653;--bw-fix-muted:#53648b;--bw-fix-surface:#fff;--bw-fix-border:#dfe4f2}
+#dashboardView[data-display-mode=dark]{--bw-fix-ink:#f5f6ff;--bw-fix-muted:#cbd0e9;--bw-fix-surface:var(--bw-adaptive-card-dark,#252a48);--bw-fix-border:#4b5276}
+#dashboardView .page{color:var(--bw-fix-ink)!important}
+#dashboardView .page .section-heading,#dashboardView .page .premium-panel,#dashboardView .page .panel,#dashboardView .page .goal-card,#dashboardView .page .tx-summary-card,#dashboardView .page .tx-stat,#dashboardView .page .tx-stat-card,#dashboardView .page .insight-cards article{color:var(--bw-fix-ink)!important}
+#dashboardView[data-display-mode=light] .page:not(.bw-v2-dashboard) .section-heading{background:linear-gradient(105deg,#fff 0%,var(--bw-adaptive-soft-light,#f2edff) 100%)!important;border:1px solid #e0e3f3!important}
+#dashboardView[data-display-mode=dark] .page:not(.bw-v2-dashboard) .section-heading{background:linear-gradient(105deg,#292f50,var(--bw-adaptive-active-dark,#353153))!important;border:1px solid #4e5579!important}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading h1,#dashboardView .page:not(.bw-v2-dashboard) .section-heading h2,#dashboardView .page:not(.bw-v2-dashboard) .section-heading h3,#dashboardView .page:not(.bw-v2-dashboard) .section-heading strong{color:var(--bw-fix-ink)!important;text-shadow:none!important;opacity:1!important}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading p,#dashboardView .page:not(.bw-v2-dashboard) .section-heading .muted,#dashboardView .page:not(.bw-v2-dashboard) .section-heading small{color:var(--bw-fix-muted)!important;text-shadow:none!important;opacity:1!important}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading .eyebrow{color:var(--bw-adaptive-action,#5937c4)!important;opacity:1!important}
+#dashboardView[data-display-mode=dark] .page:not(.bw-v2-dashboard) .section-heading .eyebrow{color:#d8caff!important}
+#dashboardView[data-display-mode=light] #page-savings .goals-banner,#dashboardView[data-display-mode=light] #page-insights .bw-intelligence-banner{background:linear-gradient(110deg,#fff,var(--bw-adaptive-soft-light,#eee9ff))!important;color:#192754!important;border:1px solid #dedff1!important}
+#dashboardView[data-display-mode=dark] #page-savings .goals-banner,#dashboardView[data-display-mode=dark] #page-insights .bw-intelligence-banner{background:linear-gradient(110deg,#292e50,var(--bw-adaptive-active-dark,#373356))!important;color:#f6f6ff!important;border:1px solid #505577!important}
+#dashboardView[data-display-mode=light] #page-savings .goals-banner :is(h1,h2,h3,h4,p,strong,small,span),#dashboardView[data-display-mode=light] #page-insights .bw-intelligence-banner :is(h1,h2,h3,h4,p,strong,small,span){color:#192754!important;text-shadow:none!important;opacity:1!important}
+#dashboardView[data-display-mode=dark] #page-savings .goals-banner :is(h1,h2,h3,h4,p,strong,small,span),#dashboardView[data-display-mode=dark] #page-insights .bw-intelligence-banner :is(h1,h2,h3,h4,p,strong,small,span){color:#f6f6ff!important;text-shadow:none!important;opacity:1!important}
+#dashboardView[data-display-mode=light] .page:not(.bw-v2-dashboard) :is(.premium-panel,.panel,.goal-card,.tx-summary-card,.tx-stat,.tx-stat-card,.insight-cards article){background:var(--bw-adaptive-card-light,#fff)!important;border-color:#e0e5f2!important}
+#dashboardView[data-display-mode=dark] .page:not(.bw-v2-dashboard) :is(.premium-panel,.panel,.goal-card,.tx-summary-card,.tx-stat,.tx-stat-card,.insight-cards article){background:var(--bw-fix-surface)!important;border-color:var(--bw-fix-border)!important}
+#dashboardView .page:not(.bw-v2-dashboard) :is(.premium-panel,.panel,.goal-card,.tx-summary-card,.tx-stat,.tx-stat-card,.insight-cards article) :is(h1,h2,h3,h4,h5,strong,th,td,label){color:var(--bw-fix-ink)!important;opacity:1!important}
+#dashboardView .page:not(.bw-v2-dashboard) :is(.premium-panel,.panel,.goal-card,.tx-summary-card,.tx-stat,.tx-stat-card,.insight-cards article) :is(p,small,.muted,.empty-state){color:var(--bw-fix-muted)!important;opacity:1!important}
+#dashboardView .page:not(.bw-v2-dashboard) :is(.premium-panel,.panel,.goal-card,.tx-summary-card,.tx-stat,.tx-stat-card,.insight-cards article) :is(.positive,.negative){opacity:1!important}
+#dashboardView[data-display-mode=light] .page:not(.bw-v2-dashboard) .positive{color:#087d59!important}
+#dashboardView[data-display-mode=light] .page:not(.bw-v2-dashboard) .negative{color:#b32d56!important}
+#dashboardView[data-display-mode=dark] .page:not(.bw-v2-dashboard) .positive{color:#79e6b9!important}
+#dashboardView[data-display-mode=dark] .page:not(.bw-v2-dashboard) .negative{color:#ffa2b9!important}
+#dashboardView .page:not(.bw-v2-dashboard) :is(input,select,textarea){color:var(--bw-fix-ink)!important;background:var(--bw-fix-surface)!important;border-color:var(--bw-fix-border)!important}
+#dashboardView[data-display-mode=light] .page:not(.bw-v2-dashboard) :is(input,textarea)::placeholder{color:#667493!important;opacity:1!important}
+#dashboardView[data-display-mode=dark] .page:not(.bw-v2-dashboard) :is(input,textarea)::placeholder{color:#bec6df!important;opacity:1!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-ai-card{background:linear-gradient(135deg,var(--bw-adaptive-soft-light,#f1eaff),#f9fbff)!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-v2-hero{background:linear-gradient(110deg,#fff,var(--bw-adaptive-soft-light,#eee8ff))!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-ai-card :is(h1,h2,h3,h4,p,small,strong),#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-v2-hero :is(h1,h2,h3,h4,p,small,strong){color:#1b2a5c!important;opacity:1!important;text-shadow:none!important}
+#dashboardView[data-display-mode=dark] .bw-v2-dashboard .bw-ai-card :is(h1,h2,h3,h4,p,small,strong),#dashboardView[data-display-mode=dark] .bw-v2-dashboard .bw-v2-hero :is(h1,h2,h3,h4,p,small,strong){color:#f4f3ff!important;opacity:1!important;text-shadow:none!important}
+#dashboardView .bw-v2-dashboard .bw-ai-card :is(button,.bw-ai-prompt) *{color:inherit!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-ai-prompt{background:var(--bw-adaptive-action,#6337d6)!important;color:#fff!important}
+#dashboardView[data-display-mode=dark] .bw-v2-dashboard .bw-ai-prompt{background:var(--bw-adaptive-action,#6337d6)!important;color:#fff!important}
+#dashboardView .bw-v2-dashboard .bw-ai-prompt *{color:#fff!important}
+#dashboardView .bw-v2-dashboard :is(.premium-metric,.premium-panel,.bw-rail-score,.bw-rail-forecast){color:var(--bw-fix-ink)!important}
+#dashboardView .bw-v2-dashboard :is(.premium-metric,.premium-panel,.bw-rail-score,.bw-rail-forecast) :is(h1,h2,h3,h4,strong){color:var(--bw-fix-ink)!important;text-shadow:none!important;opacity:1!important}
+#dashboardView .bw-v2-dashboard :is(.premium-metric,.premium-panel,.bw-rail-score,.bw-rail-forecast) :is(p,small,.muted){color:var(--bw-fix-muted)!important;opacity:1!important}
+#dashboardView[data-display-mode=light] .bw-v2-dashboard :is(.donut-inner,.bw-score-ring:before){background:#fff!important}
+#dashboardView[data-display-mode=dark] .bw-v2-dashboard .donut-inner{background:var(--bw-fix-surface)!important}
+#dashboardView .bw-v2-dashboard .donut-inner :is(strong,small),#dashboardView .bw-v2-dashboard .bw-score-ring :is(strong,small){color:var(--bw-fix-ink)!important}
+#dashboardView .page:not(.bw-v2-dashboard) .section-heading .insight-pill{background:var(--bw-fix-surface)!important;color:var(--bw-fix-ink)!important;border:1px solid var(--bw-fix-border)!important}
+#dashboardView[data-display-mode=dark] .page:not(.bw-v2-dashboard) .section-heading .insight-pill{background:#353b5d!important;color:#f7f5ff!important}
+#dashboardView .page :is(button.primary,.primary,.tx-tab.active,.goal-tab.active){background:var(--bw-adaptive-action,#6239db)!important;color:#fff!important}
+#dashboardView .page :is(button.primary,.primary,.tx-tab.active,.goal-tab.active) *{color:#fff!important}
