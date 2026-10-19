@@ -102,7 +102,7 @@ document.querySelectorAll('.theme-choice').forEach(b=>b.setAttribute('aria-press
 document.querySelectorAll('.gradient-style').forEach(b=>b.classList.toggle('active',b.dataset.gradientStyle===theme.style));
 document.querySelectorAll('.mode-option').forEach(b=>b.classList.toggle('active',b.dataset.displayMode===theme.mode));
 document.querySelectorAll('.preset-choice').forEach((b,i)=>b.classList.toggle('active',i===theme.preset));
-document.querySelectorAll('#dashboardView .page').forEach(el=>el.style.setProperty('color-scheme','dark'));
+document.querySelectorAll('#dashboardView .page').forEach(el=>el.style.setProperty('color-scheme',dash.dataset.displayMode));
 setText('themeFeedback',(theme.style==='solid'?palettes[theme.palette][0]:presets[theme.style][theme.preset][0])+' · '+(theme.style==='solid'?'1 Tone':theme.style==='dual'?'2 Tone':'3 Tone')+' · '+theme.mode+' mode');
 safeStore('budgetingwise-studio-theme',JSON.stringify(theme));
 }
@@ -119,6 +119,7 @@ const grid=document.querySelector('.theme-grid');if(grid){[['crimson','Red Crims
 document.querySelectorAll('.theme-choice').forEach(b=>b.addEventListener('click',()=>{theme.palette=b.dataset.theme;theme.style='solid';theme.preset=0;renderPresets()}));
 document.querySelectorAll('.gradient-style').forEach(b=>b.addEventListener('click',()=>{theme.style=b.dataset.gradientStyle;theme.preset=0;renderPresets()}));
 document.querySelectorAll('.mode-option').forEach(b=>b.addEventListener('click',()=>{theme.mode=b.dataset.displayMode;applyTheme()}));
+$('bwResetTheme')?.addEventListener('click',()=>{theme={palette:'violet',style:'solid',preset:0,mode:'light'};renderPresets();applyTheme();});
 document.querySelectorAll('.appearance-tab').forEach(b=>b.addEventListener('click',()=>setAppearanceTab(b.dataset.settingsTab)));
 setAppearanceTab('appearance');renderPresets();
 document.querySelectorAll('.tx-tab').forEach(b=>b.addEventListener('click',()=>{activeType=b.dataset.txTab;page=1;applyTxFilter()}));
