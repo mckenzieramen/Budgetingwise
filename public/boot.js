@@ -5,7 +5,7 @@ async function enterGuest() {
   guestButton.disabled = true;
   try {
     sessionStorage.setItem(guestKey, '1');
-    await import('./guest.js?v=guest-cloudflare-3');
+    await import('./guest.js?v=workspaces-v4');
   } catch (error) {
     sessionStorage.removeItem(guestKey);
     guestButton.disabled = false;
@@ -17,7 +17,7 @@ if (sessionStorage.getItem(guestKey) === '1') {
   import('./guest.js?v=guest-cloudflare-3').catch(() => { sessionStorage.removeItem(guestKey); location.reload(); });
 } else {
   guestButton.addEventListener('click', enterGuest);
-  import('./app.js?v=finance-features-v1').catch(error => {
+  import('./app.js?v=workspaces-v4').catch(error => {
     console.warn('Account login unavailable; guest access remains available.', error);
     const errorNode = document.getElementById('loginError');
     if (errorNode) errorNode.textContent = 'Account sign-in is temporarily unavailable. You can still continue as guest.';
