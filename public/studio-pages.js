@@ -124,7 +124,7 @@ dash.style.setProperty('--bw-brand-ink','#242631');
 dash.style.setProperty('--bw-brand-ink-muted','#747785');
 dash.style.setProperty('--bw-brand-divider','#e8e6e6');
 dash.style.setProperty('--bw-brand-muted',mix(vibrant,'#ffffff',.68));
-dash.dataset.displayMode=theme.mode==='system'?(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):theme.mode;
+theme.mode='light';dash.dataset.displayMode='light';
 document.querySelectorAll('.theme-choice').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===theme.palette)));
 document.querySelectorAll('.gradient-style').forEach(b=>b.classList.toggle('active',b.dataset.gradientStyle===theme.style));
 document.querySelectorAll('.mode-option').forEach(b=>b.classList.toggle('active',b.dataset.displayMode===theme.mode));
@@ -141,7 +141,7 @@ root.querySelectorAll('.preset-choice').forEach(b=>b.addEventListener('click',()
 }
 window.renderBudgetingStudio=function(nextTxs,nextGoals){txs=Array.isArray(nextTxs)?nextTxs:[];goals=Array.isArray(nextGoals)?nextGoals:[];renderTransactions();applyGoalFilter();renderAnalyticsYear()};
 document.addEventListener('DOMContentLoaded',()=>{
-const stored=safeRead('budgetingwise-studio-theme');if(stored){try{const v=JSON.parse(stored);if(v&&palettes[v.palette]&&['solid','dual','triple'].includes(v.style)&&['light','dark','system'].includes(v.mode)){theme={...theme,...v};theme.preset=Math.min(Math.max(0,Number(theme.preset)||0),7)}}catch(e){}}
+const stored=safeRead('budgetingwise-studio-theme');if(stored){try{const v=JSON.parse(stored);if(v&&palettes[v.palette]&&['solid','dual','triple'].includes(v.style)){theme={...theme,...v,mode:'light'};theme.preset=Math.min(Math.max(0,Number(theme.preset)||0),7)}}catch(e){}}
 const grid=document.querySelector('.theme-grid');if(grid){[['crimson','Red Crimson','#e64263','#fff0f3'],['teal','Teal Cyan','#00a8b6','#e8fbfd']].forEach(([id,name,color,light])=>{if(grid.querySelector('[data-theme="'+id+'"]'))return;const b=document.createElement('button');b.className='theme-choice';b.dataset.theme=id;b.setAttribute('aria-pressed','false');b.innerHTML='<span class="theme-swatch" style="--swatch:'+color+';--swatch-light:'+light+'"></span><strong>'+name+'</strong><small>Signature color</small>';grid.append(b)})}
 document.querySelectorAll('.theme-choice').forEach(b=>b.addEventListener('click',()=>{theme.palette=b.dataset.theme;theme.style='solid';theme.preset=0;renderPresets()}));
 document.querySelectorAll('.gradient-style').forEach(b=>b.addEventListener('click',()=>{theme.style=b.dataset.gradientStyle;theme.preset=0;renderPresets()}));
