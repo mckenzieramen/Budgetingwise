@@ -18,3 +18,43 @@
 #loginView .auth-card .primary{width:100%}
 #loginView .auth-card .eyebrow{margin-bottom:12px}
 @media(max-width:520px){.login-logo{width:96px;height:96px}}
+
+/* Premium customer overview — visual-only enhancement, existing data bindings preserved */
+#page-dashboard{animation:overviewEnter .35s ease both}
+@keyframes overviewEnter{from{opacity:.6;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.overview-hero{position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:center;gap:28px;padding:36px 38px;margin-bottom:24px;border-radius:26px;background:linear-gradient(115deg,#24204b 0%,#4d3caa 62%,#7661dc 100%);color:#fff;box-shadow:0 20px 48px rgba(67,48,151,.18)}
+.overview-hero:after{content:'';position:absolute;width:330px;height:330px;border:1px solid rgba(255,255,255,.13);border-radius:50%;right:-115px;top:-155px;box-shadow:0 0 0 55px rgba(255,255,255,.045),0 0 0 115px rgba(255,255,255,.025);pointer-events:none}
+.overview-hero-copy,.overview-hero-action{position:relative;z-index:1}
+.overview-kicker{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;font-weight:800;color:#ded8ff;margin-bottom:14px}
+.overview-kicker-dot{width:7px;height:7px;background:#b6ffdc;border-radius:50%;box-shadow:0 0 0 4px rgba(182,255,220,.13)}
+.overview-hero h2{font-size:clamp(29px,3.5vw,42px);letter-spacing:-.035em;margin:0 0 10px;color:#fff}
+.overview-hero p{max-width:500px;color:#e6e1ff;line-height:1.6;font-size:14px;margin:0}
+.overview-hero-meta{display:flex;gap:18px;flex-wrap:wrap;color:#d5ccff;font-size:11px;margin-top:24px}
+.overview-hero-action{display:flex;flex-direction:column;align-items:center;gap:24px;flex-shrink:0}
+.overview-hero-emblem{display:grid;place-items:center;width:90px;height:90px;border-radius:28px;font-size:44px;font-weight:800;color:#fff;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);transform:rotate(-8deg)}
+.overview-hero .primary{background:#fff;color:#4c3ab4;padding:13px 22px;box-shadow:0 8px 24px rgba(20,15,55,.15)}
+.overview-hero .primary:hover{background:#f0edff}
+.overview-cards{gap:18px;margin-bottom:24px}
+.overview-cards article{min-height:160px;padding:22px;border-radius:21px;position:relative;transition:transform .2s ease,box-shadow .2s ease}
+.overview-cards article:hover{transform:translateY(-3px);box-shadow:0 16px 35px rgba(43,35,98,.1)}
+.overview-cards .metric-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;font-size:23px;font-weight:700;margin-bottom:16px}
+.overview-cards article span{font-size:12px;color:#75758b;font-weight:650}
+.overview-cards article strong{font-size:clamp(20px,2.2vw,29px);letter-spacing:-.035em;margin-top:8px;overflow-wrap:anywhere}
+.metric-income .metric-icon{color:#138a5b;background:#e5f8ef}
+.metric-spend .metric-icon{color:#c45b64;background:#fff0f0}
+.metric-remaining{background:linear-gradient(145deg,#fff,#f1eeff)!important;border-color:#ddd6ff!important}
+.metric-remaining .metric-icon{color:#6546dc;background:#e8e1ff}
+.metric-savings .metric-icon{color:#bc852c;background:#fff4dd}
+#page-dashboard .grid-2{gap:22px}
+#page-dashboard .panel{border-radius:22px;padding:26px;min-height:285px}
+#page-dashboard .panel-head{gap:12px;margin-bottom:24px}
+#page-dashboard .panel-head h3{font-size:17px;letter-spacing:-.015em;margin:0}
+.overview-panel-tag{font-size:11px;color:#7565bc;background:#f2efff;padding:7px 10px;border-radius:999px;margin-left:auto}
+#page-dashboard .bars{gap:24px}
+#page-dashboard .bars>div{grid-template-columns:65px minmax(0,1fr) 105px}
+#page-dashboard .bars b{height:11px;background:linear-gradient(90deg,#6351d9,#a38cff)}
+#page-dashboard .list-item{padding:15px 0}
+#page-dashboard .list-item strong{font-size:13px}
+#page-dashboard .list-item small{font-size:11px}
+@media(max-width:850px){.overview-hero{padding:28px}.overview-hero-emblem{width:68px;height:68px;font-size:32px}.overview-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.overview-hero{padding:26px 22px;align-items:flex-start;flex-direction:column;border-radius:22px}.overview-hero-action{align-items:flex-start;width:100%}.overview-hero-emblem{display:none}.overview-hero .primary{width:100%}.overview-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.overview-cards article{min-height:148px;padding:16px}.overview-cards article strong{font-size:20px}.overview-cards .metric-icon{margin-bottom:12px}#page-dashboard .panel{padding:20px}#page-dashboard .bars>div{grid-template-columns:55px minmax(0,1fr) 88px;font-size:11px}}
