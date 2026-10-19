@@ -8,6 +8,8 @@ function showPage(name) {
 $('loginView').classList.add('hidden');
 $('dashboardView').classList.remove('hidden');
 $('userLabel').textContent = 'Guest Preview';
+if($('topbarUserName'))$('topbarUserName').textContent='Guest User';
+if($('topbarUserMode'))$('topbarUserMode').textContent='Preview Mode';
 $('welcomeName').textContent = 'Welcome, Guest';
 $('settingsBid').textContent = 'Guest (no account)';
 $('settingsName').textContent = 'Guest';
