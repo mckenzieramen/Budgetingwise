@@ -6,7 +6,7 @@ initializeApp();
 const db=getFirestore();
 function adminOnly(request){if(!request.auth||request.auth.token.admin!==true)throw new HttpsError('permission-denied','Admin authorization required.');}
 function cleanBudgetId(v){return String(v||'').trim().toUpperCase();}
-exports.createBudgetUser=onCall(async request=>{
+exports.createBudgetUser=onCall({cors:['https://budgetingwise.pages.dev']},async request=>{
   adminOnly(request);
   const {firstName,lastName,email,budgetId,tempPassword}=request.data||{};
   const bid=cleanBudgetId(budgetId);
@@ -22,4 +22,4 @@ exports.createBudgetUser=onCall(async request=>{
     return {uid:u.uid,budgetId:bid};
   }catch(e){throw new HttpsError('internal',e.message||'Unable to create client account.');}
 });
-exports.setUserStatus=onCall(async request=>{adminOnly(request);const {uid,status}=request.data||{};if(!uid||!['active','suspended'].includes(status))throw new HttpsError('invalid-argument','Invalid user status.');await db.collection('users').doc(uid).update({status});if(status==='suspended')await getAuth().updateUser(uid,{disabled:true});else await getAuth().updateUser(uid,{disabled:false});return {ok:true};});
+exports.setUserStatus=onCall({cors:['https://budgetingwise.pages.dev']},async request=>{adminOnly(request);const {uid,status}=request.data||{};if(!uid||!['active','suspended'].includes(status))throw new HttpsError('invalid-argument','Invalid user status.');await db.collection('users').doc(uid).update({status});if(status==='suspended')await getAuth().updateUser(uid,{disabled:true});else await getAuth().updateUser(uid,{disabled:false});return {ok:true};});
