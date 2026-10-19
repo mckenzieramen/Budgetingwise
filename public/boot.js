@@ -14,7 +14,7 @@ async function enterGuest() {
   }
 }
 if (sessionStorage.getItem(guestKey) === '1') {
-  import('./guest.js?v=guest-cloudflare-3').catch(() => { sessionStorage.removeItem(guestKey); location.reload(); });
+  import('./guest.js?v=workspaces-v4').catch(() => { sessionStorage.removeItem(guestKey); location.reload(); });
 } else {
   guestButton.addEventListener('click', enterGuest);
   import('./app.js?v=workspaces-v4').catch(error => {
