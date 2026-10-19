@@ -57,12 +57,21 @@ function applyTheme(){
 const dash=$('dashboardView');if(!dash)return;
 const colors=getColors(),accent=colors[0],dark=colors[1]||colors[0],light=palettes[theme.palette][3];
 dash.dataset.theme='studio';dash.style.setProperty('--theme-accent',accent);dash.style.setProperty('--theme-dark',dark);dash.style.setProperty('--theme-light',light);
-dash.style.setProperty('--theme-gradient',theme.style==='solid'?accent:'linear-gradient(155deg,'+colors.join(',')+')');
+dash.style.setProperty('--theme-gradient',theme.style==='solid'?'linear-gradient(160deg,'+accent+','+dark+')':'linear-gradient(155deg,'+colors.join(',')+')');
+const toRgb=hex=>{const h=hex.replace('#','');return [0,2,4].map(i=>parseInt(h.slice(i,i+2),16))};
+const mix=(a,b,t)=>{const x=toRgb(a),y=toRgb(b);return '#'+x.map((n,i)=>Math.round(n*(1-t)+y[i]*t).toString(16).padStart(2,'0')).join('')};
+const deep=mix(accent,'#0b0920',.74),mid=mix(dark,'#130d2d',.53),glow=mix(colors[colors.length-1]||accent,'#f2d9ff',.24);
+const backdrop=mix(accent,'#f5f1ff',.82);
+dash.style.setProperty('--bw-brand-deep',deep);dash.style.setProperty('--bw-brand-mid',mid);dash.style.setProperty('--bw-brand-glow',glow);dash.style.setProperty('--bw-brand-border',mix(glow,'#ffffff',.18));dash.style.setProperty('--bw-brand-bg',backdrop);
+dash.style.setProperty('--bw-brand-rgb',toRgb(accent).join(','));dash.style.setProperty('--bw-brand-gradient',theme.style==='solid'?'linear-gradient(120deg,'+deep+','+mid+')':'linear-gradient(120deg,'+deep+','+mid+','+mix(colors[colors.length-1],'#1b103e',.50)+')');
+dash.style.setProperty('--bw-brand-soft',mix(accent,'#ffffff',.78));
+dash.style.setProperty('--bw-brand-chart',colors[0]);dash.style.setProperty('--bw-brand-chart-alt',colors[1]||mix(accent,'#f8a2df',.48));
 dash.dataset.displayMode=theme.mode==='system'?(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):theme.mode;
 document.querySelectorAll('.theme-choice').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===theme.palette)));
 document.querySelectorAll('.gradient-style').forEach(b=>b.classList.toggle('active',b.dataset.gradientStyle===theme.style));
 document.querySelectorAll('.mode-option').forEach(b=>b.classList.toggle('active',b.dataset.displayMode===theme.mode));
 document.querySelectorAll('.preset-choice').forEach((b,i)=>b.classList.toggle('active',i===theme.preset));
+document.querySelectorAll('#dashboardView .page').forEach(el=>el.style.setProperty('color-scheme','dark'));
 setText('themeFeedback',(theme.style==='solid'?palettes[theme.palette][0]:presets[theme.style][theme.preset][0])+' · '+(theme.style==='solid'?'1 Tone':theme.style==='dual'?'2 Tone':'3 Tone')+' · '+theme.mode+' mode');
 safeStore('budgetingwise-studio-theme',JSON.stringify(theme));
 }
