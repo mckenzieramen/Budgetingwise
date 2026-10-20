@@ -1,5 +1,7 @@
 // Restore the complete page structure before auth, guest mode, or navigation initializes.
 await import('./page-recovery-v28.js?v=page-recovery-v31');
+// Load the approved Budgetingwise icon system first so every UI module can reuse one source.
+await import('./budgetingwise-icons-v35.js?v=icons-v35');
 // Rebuild the Dashboard itself to the approved visual reference before data renderers initialize.
 await import('./dashboard-reference-v31.js?v=dashboard-reference-v31');
 
@@ -17,7 +19,7 @@ try{
  const dashboardStyle=document.createElement('link');dashboardStyle.rel='stylesheet';dashboardStyle.href='./dashboard-reference-v31.css?v=dashboard-reference-v31';document.head.appendChild(dashboardStyle);
  const readabilityStyle=document.createElement('style');readabilityStyle.textContent=`#dashboardView{--bw-safe-text:var(--bw-premium-text,#111936);--bw-safe-muted:var(--bw-premium-muted,#68718d)}#dashboardView :is(.premium-content,.page,.premium-panel,.premium-metric,.bw-settings-card,.bw-ai-card){color:var(--bw-safe-text)}#dashboardView :is(h1,h2,h3,h4,h5,strong,.metric-value,.amount,.balance-value,.goal-title,.premium-panel-head){color:var(--bw-safe-text)!important;opacity:1!important}#dashboardView :is(p,small,.muted,.subtitle,.helper-text,.bw-setting-copy small,.bw-settings-title p,.section-heading p){color:var(--bw-safe-muted)!important;opacity:1!important}#dashboardView :is(input,textarea)::placeholder{color:var(--bw-safe-muted)!important;opacity:.78!important}#dashboardView .sidebar-logo strong{color:var(--bw-safe-text)!important;opacity:1!important}#dashboardView .sidebar-logo small{color:var(--bw-safe-muted)!important;opacity:1!important}#page-settings .bw-settings-tab.active,#dashboardView .sidebar-nav .nav-btn.active{color:#fff!important}`;document.head.appendChild(readabilityStyle);
  const navigationStyle=document.createElement('style');navigationStyle.textContent=`#dashboardView .page:not(.hidden){animation:bwPageEnter .22s ease-out both}#dashboardView .sidebar-nav .nav-btn{transition:background .18s ease,color .18s ease,transform .18s ease}#dashboardView .sidebar-nav .nav-btn:hover{transform:translateX(2px)}@keyframes bwPageEnter{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}#dashboardView[data-reduce-motion="on"] .page:not(.hidden){animation:none!important}@media(prefers-reduced-motion:reduce){#dashboardView[data-reduce-motion="system"] .page:not(.hidden){animation:none!important}}`;document.head.appendChild(navigationStyle);
- import('./premium-tabs-v29.js?v=premium-tabs-v31').catch(error=>console.warn('Premium tab enhancements unavailable:',error));
- import('./premium-icon-fix-v23.js?v=premium-icons-v31').catch(error=>console.warn('Premium icons unavailable:',error));
+ import('./premium-tabs-v29.js?v=premium-tabs-v35').catch(error=>console.warn('Premium tab enhancements unavailable:',error));
+ import('./premium-icon-fix-v23.js?v=premium-icons-v35').catch(error=>console.warn('Premium icons unavailable:',error));
  import('./settings-v15.js?v=settings-v31').then(()=>Promise.all([import('./tone-colors-v20.js?v=tone-colors-v31'),import('./contrast-control-v21.js?v=contrast-v31')])).catch(error=>console.warn('Visual settings unavailable:',error));
 }catch(error){console.warn('Optional visual setup skipped:',error)}
