@@ -1,6 +1,6 @@
-/* Budgetingwise V42 — exact reference-image icon atlas. No redrawn SVG icons. */
+/* Budgetingwise V44 — exact reference-image icon atlas. No redrawn SVG icons. */
 (()=>{'use strict';
-const PARTS=['./icons/exact-atlas-01.txt?v=42','./icons/exact-atlas-02.txt?v=42'];
+const PARTS=['./icons/exact-atlas-01.txt?v=44','./icons/exact-atlas-02.txt?v=44'];
 const aliases={salary:'wallet',notification:'bell',profile:'user',account:'user',down:'income',up:'expense',pig:'savings',target:'goals',spark:'insights',bars:'analytics',reports:'analytics',categories:'others',customGoal:'analytics',alert:'alert',appearance:'appearance',preferences:'preferences',privacy:'privacy',download:'import',backup:'backup',system:'system',dark:'dark',light:'light',edit:'edit',delete:'delete',more:'others'};
 const names=['dashboard','transactions','analytics','goals','insights','settings','logout','search','bell','help','user','food','transport','shopping','bills','entertainment','health','education','others','wallet','income','expense','savings','home','laptop','travel','positive','suggestion','progress','alert','edit','delete','appearance','preferences','privacy','import','backup','dark','light','system'];
 const index=Object.fromEntries(names.map((n,i)=>[n,i]));let atlas='';
