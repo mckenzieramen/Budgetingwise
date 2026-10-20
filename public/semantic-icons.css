@@ -1,39 +1,62 @@
-/* Semantic icon finish: clean, consistent, theme-aware icon language. */
-#dashboardView .bw-semantic-icon{display:inline-block;vertical-align:middle;flex:none;stroke:currentColor;overflow:visible;vector-effect:non-scaling-stroke;transition:transform .2s cubic-bezier(.2,.8,.2,1),opacity .18s ease}
+/* Budgetingwise icon system — clean, premium, consistent and theme-aware. */
+#dashboardView .bw-semantic-icon{display:block;vertical-align:middle;flex:none;stroke:currentColor;overflow:visible;vector-effect:non-scaling-stroke;transition:transform .2s cubic-bezier(.2,.8,.2,1),opacity .18s ease}
 
-/* Sidebar navigation: refined icon containers instead of faint floating glyphs. */
-#dashboardView .sidebar-nav .nav-btn>span{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;flex:none;border-radius:10px;color:color-mix(in srgb,var(--bw-user-accent,#6536f5) 72%,var(--bw-user-text,#17224a));background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 7%,var(--bw-user-surface,#fff));border:1px solid color-mix(in srgb,var(--bw-user-accent,#6536f5) 14%,var(--bw-user-border,#e4e6ef));box-shadow:0 3px 10px color-mix(in srgb,var(--bw-user-accent,#6536f5) 5%,transparent);transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
-#dashboardView .sidebar-nav .nav-btn>span .bw-semantic-icon{width:18px;height:18px;stroke-width:1.85}
-#dashboardView .sidebar-nav .nav-btn:hover>span{transform:translateX(1px) scale(1.04);color:var(--bw-user-accent,#6536f5);background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 12%,var(--bw-user-surface,#fff));border-color:color-mix(in srgb,var(--bw-user-accent,#6536f5) 25%,var(--bw-user-border,#e4e6ef))}
-#dashboardView .sidebar-nav .nav-btn.active>span{color:#fff;background:color-mix(in srgb,#fff 16%,transparent);border-color:color-mix(in srgb,#fff 34%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 28%,transparent),0 4px 12px color-mix(in srgb,var(--bw-user-accent,#6536f5) 18%,transparent)}
-#dashboardView .sidebar-nav .nav-btn.active>span .bw-semantic-icon{filter:drop-shadow(0 1px 2px color-mix(in srgb,#000 15%,transparent))}
+/* Sidebar: no bulky icon tiles. Crisp line icons aligned to one visual grid. */
+#dashboardView .sidebar-nav .nav-btn>span{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:26px!important;height:26px!important;min-width:26px!important;flex:none!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:color-mix(in srgb,var(--bw-user-accent,#6536f5) 68%,var(--bw-user-text,#17224a))!important;transition:color .2s ease,transform .2s ease!important}
+#dashboardView .sidebar-nav .nav-btn>span .bw-semantic-icon{width:19px!important;height:19px!important;stroke-width:1.8!important}
+#dashboardView .sidebar-nav .nav-btn:hover>span{transform:translateX(2px)!important;color:var(--bw-user-accent,#6536f5)!important}
+#dashboardView .sidebar-nav .nav-btn.active>span{color:#fff!important;transform:none!important}
+#dashboardView .sidebar-nav .nav-btn.active>span .bw-semantic-icon{filter:none!important;stroke-width:2!important}
 
-/* Shared card/action icons. */
-#dashboardView .bw-metric-icon,#dashboardView .bw-head-icon{display:inline-flex;align-items:center;justify-content:center}
+/* Shared functional icons use the same proportions. */
+#dashboardView .bw-metric-icon,#dashboardView .bw-head-icon,#dashboardView .bw-intelligence-icon,#dashboardView .goals-banner-icon,#dashboardView .settings-hero-icon{display:inline-flex!important;align-items:center!important;justify-content:center!important}
 #dashboardView .bw-metric-icon .bw-semantic-icon{width:20px;height:20px}
 #dashboardView .bw-head-icon .bw-semantic-icon{width:19px;height:19px}
 #dashboardView .bw-action-grid button>span{display:flex;justify-content:center;align-items:center}
-#dashboardView .bw-action-grid button>span .bw-semantic-icon{width:23px;height:23px}
-#dashboardView .bw-rail-title>span .bw-semantic-icon{width:22px;height:22px}
+#dashboardView .bw-action-grid button>span .bw-semantic-icon{width:22px;height:22px;stroke-width:1.85}
+#dashboardView .bw-rail-title>span .bw-semantic-icon{width:21px;height:21px}
 #dashboardView .bw-topbar-help,#dashboardView .topbar-notify,#dashboardView .topbar-avatar,#dashboardView .avatar-circle{display:inline-flex;align-items:center;justify-content:center}
 #dashboardView .bw-topbar-help .bw-semantic-icon,#dashboardView .topbar-notify .bw-semantic-icon{width:18px;height:18px}
 #dashboardView .topbar-avatar .bw-semantic-icon,#dashboardView .avatar-circle .bw-semantic-icon{width:17px;height:17px}
 #dashboardView .sidebar-logout{display:flex;align-items:center;gap:9px}
 #dashboardView .sidebar-logout .bw-semantic-icon{width:17px;height:17px}
-#dashboardView .bw-action-grid button:hover .bw-semantic-icon{transform:translateY(-2px) scale(1.03)}
+#dashboardView .bw-action-grid button:hover .bw-semantic-icon{transform:translateY(-1px) scale(1.04)}
 
-/* Settings studio: replace text-symbol feel with consistent restrained controls. */
-#page-settings .bw-settings-tab span,#page-settings .bw-mode-btn b,#page-settings .bw-gradient-row button b,#page-settings .bw-reset-theme span{font-family:Arial,sans-serif!important;font-style:normal!important;text-decoration:none!important;line-height:1!important}
-#page-settings .bw-settings-tab span{min-width:22px;height:22px;border-radius:7px;background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 8%,transparent);color:var(--bw-user-accent,#6536f5);font-size:12px!important;font-weight:900!important}
-#page-settings .bw-settings-tab.active span{background:color-mix(in srgb,#fff 18%,transparent);color:#fff!important}
-#page-settings .bw-mode-btn b{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 9%,transparent);font-size:15px!important;font-weight:900!important}
-#page-settings .bw-gradient-row button b{display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 8%,transparent);font-size:13px!important}
-#page-settings .bw-reset-theme span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:6px;background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 8%,transparent);margin-right:4px}
+/* Settings: hide the old Unicode pseudo-icons. They looked inconsistent across browsers. */
+#page-settings .bw-settings-tab>span,#page-settings .bw-mode-btn>b,#page-settings .bw-gradient-row button>b,#page-settings .bw-reset-theme>span{font-size:0!important;line-height:0!important;overflow:hidden!important;position:relative!important;display:inline-grid!important;place-items:center!important;background:transparent!important;border:0!important;box-shadow:none!important;color:currentColor!important}
+#page-settings .bw-settings-tab>span{width:18px!important;height:18px!important;min-width:18px!important;margin-right:7px!important}
+#page-settings .bw-mode-btn>b{width:25px!important;height:25px!important}
+#page-settings .bw-gradient-row button>b{width:22px!important;height:22px!important}
+#page-settings .bw-reset-theme>span{width:17px!important;height:17px!important;margin-right:5px!important}
 
-/* Atelier icon language: purposeful and measured across pages. */
+/* Draw stable CSS icons instead of font glyphs. */
+#page-settings .bw-settings-tab>span:before,#page-settings .bw-mode-btn>b:before,#page-settings .bw-gradient-row button>b:before,#page-settings .bw-reset-theme>span:before{content:"";display:block;box-sizing:border-box;color:currentColor}
+/* Appearance: four-point sparkle */
+#page-settings .bw-settings-tab[data-v15tab="appearance"]>span:before{width:14px;height:14px;background:currentColor;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%)}
+/* Preferences: three clean horizontal controls */
+#page-settings .bw-settings-tab[data-v15tab="preferences"]>span:before{width:14px;height:10px;background:linear-gradient(currentColor,currentColor) 0 0/14px 1.5px no-repeat,linear-gradient(currentColor,currentColor) 0 4px/14px 1.5px no-repeat,linear-gradient(currentColor,currentColor) 0 8px/14px 1.5px no-repeat}
+/* Notifications: bell silhouette */
+#page-settings .bw-settings-tab[data-v15tab="notifications"]>span:before{width:12px;height:13px;border:1.7px solid currentColor;border-radius:7px 7px 4px 4px;clip-path:polygon(0 0,100% 0,100% 85%,62% 85%,58% 100%,42% 100%,38% 85%,0 85%)}
+/* Privacy: shield */
+#page-settings .bw-settings-tab[data-v15tab="privacy"]>span:before{width:13px;height:15px;border:1.7px solid currentColor;border-radius:7px 7px 9px 9px;clip-path:polygon(50% 0,100% 18%,92% 72%,50% 100%,8% 72%,0 18%)}
+/* Account: user */
+#page-settings .bw-settings-tab[data-v15tab="account"]>span:before{width:14px;height:14px;border:1.7px solid currentColor;border-radius:50%;box-shadow:0 7px 0 -4px currentColor}
+/* Mode icons */
+#page-settings .bw-mode-btn[data-mode="light"]>b:before{width:13px;height:13px;border:2px solid currentColor;border-radius:50%;box-shadow:0 -7px 0 -5px currentColor,0 7px 0 -5px currentColor,7px 0 0 -5px currentColor,-7px 0 0 -5px currentColor}
+#page-settings .bw-mode-btn[data-mode="system"]>b:before{width:15px;height:11px;border:1.8px solid currentColor;border-radius:2px;box-shadow:0 5px 0 -4px currentColor}
+#page-settings .bw-mode-btn[data-mode="dark"]>b:before{width:13px;height:13px;border-radius:50%;background:currentColor;box-shadow:4px -2px 0 0 var(--bw-user-surface,#fff)}
+/* Tone icons */
+#page-settings .bw-gradient-row button[data-style="solid"]>b:before{width:12px;height:12px;border-radius:50%;background:currentColor}
+#page-settings .bw-gradient-row button[data-style="dual"]>b:before{width:14px;height:14px;border-radius:50%;background:linear-gradient(90deg,currentColor 0 50%,transparent 50%);border:1.7px solid currentColor}
+#page-settings .bw-gradient-row button[data-style="triple"]>b:before{width:15px;height:13px;background:currentColor;clip-path:polygon(50% 0,100% 100%,0 100%)}
+/* Reset: circular arrow */
+#page-settings .bw-reset-theme>span:before{width:13px;height:13px;border:1.7px solid currentColor;border-right-color:transparent;border-radius:50%;transform:rotate(-25deg)}
+#page-settings .bw-reset-theme>span:after{content:"";position:absolute;width:5px;height:5px;border-left:1.7px solid currentColor;border-top:1.7px solid currentColor;left:1px;top:2px;transform:rotate(-18deg)}
+
+/* Headings and small semantic marks. */
 #dashboardView .section-heading h2{display:flex;align-items:center;gap:10px}
-#dashboardView .section-heading h2>.bw-semantic-icon{width:22px;height:22px;color:var(--bw-user-accent,var(--bw-brand-chart-alt));flex:none}
-#dashboardView .bw-intelligence-icon .bw-semantic-icon,#dashboardView .goals-banner-icon .bw-semantic-icon,#dashboardView .settings-hero-icon .bw-semantic-icon{width:22px;height:22px}
+#dashboardView .section-heading h2>.bw-semantic-icon{width:21px;height:21px;color:var(--bw-user-accent,var(--bw-brand-chart-alt));flex:none;stroke-width:1.85}
+#dashboardView .bw-intelligence-icon .bw-semantic-icon,#dashboardView .goals-banner-icon .bw-semantic-icon,#dashboardView .settings-hero-icon .bw-semantic-icon{width:21px;height:21px}
 #dashboardView .bw-rail-info .bw-semantic-icon{width:15px;height:15px}
 #dashboardView .bw-command-search-icon .bw-semantic-icon{width:17px;height:17px}
 #dashboardView .insight-pill .bw-semantic-icon{width:15px;height:15px;margin-right:5px}
@@ -42,4 +65,4 @@
 #dashboardView .premium-panel-head .bw-semantic-icon,#dashboardView .section-heading .bw-semantic-icon{stroke-width:1.85}
 #dashboardView .bw-intelligence-icon,#dashboardView .bw-head-icon,#dashboardView .bw-metric-icon{border-radius:10px}
 @media(prefers-reduced-motion:reduce){#dashboardView .bw-semantic-icon,#dashboardView .sidebar-nav .nav-btn>span{transition:none!important}}
-@media(max-width:520px){#dashboardView .section-heading h2>.bw-semantic-icon{width:20px;height:20px}}
+@media(max-width:520px){#dashboardView .section-heading h2>.bw-semantic-icon{width:19px;height:19px}}
