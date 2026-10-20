@@ -1,0 +1,21 @@
+/* Budgetingwise V20 — tone count controls the number of editable theme colors. */
+(function(){
+'use strict';
+const KEY='budgetingwise-tone-colors-v20';
+const defaults={one:['#6536f5'],two:['#6536f5','#a989ff'],three:['#6536f5','#a989ff','#d8c8ff']};
+let colors={...defaults};try{colors={...colors,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){}
+const $=s=>document.querySelector(s);
+const mix=(a,b,t)=>{const x=a.replace('#',''),y=b.replace('#','');return '#'+[0,2,4].map(i=>Math.round(parseInt(x.slice(i,i+2),16)*(1-t)+parseInt(y.slice(i,i+2),16)*t).toString(16).padStart(2,'0')).join('')};
+function currentStyle(){return $('#dashboardView')?.dataset.themeStyle||'solid'}
+function keyForStyle(s){return s==='dual'?'two':s==='triple'?'three':'one'}
+function applyToneColors(){const dash=$('#dashboardView');if(!dash)return;const style=currentStyle(),arr=colors[keyForStyle(style)]||defaults[keyForStyle(style)],a=arr[0],b=arr[1]||a,c=arr[2]||b;const gradient=style==='solid'?`linear-gradient(115deg,${a},${a})`:style==='dual'?`linear-gradient(115deg,${a} 0%,${b} 100%)`:`linear-gradient(115deg,${a} 0%,${b} 52%,${c} 100%)`;dash.style.setProperty('--bw-user-accent',a);dash.style.setProperty('--bw-user-accent-2',b);dash.style.setProperty('--bw-user-accent-3',c);dash.style.setProperty('--bw-user-gradient',gradient);dash.style.setProperty('--bw-adaptive-accent',a);dash.style.setProperty('--bw-adaptive-action',a);dash.style.setProperty('--bw-adaptive-secondary',b);dash.style.setProperty('--bw-adaptive-third',c);dash.style.setProperty('--bw-adaptive-gradient',gradient);dash.style.setProperty('--theme-accent',a);dash.style.setProperty('--theme-dark',b);dash.style.setProperty('--theme-gradient',gradient);dash.style.setProperty('--bw-brand-chart',a);dash.style.setProperty('--bw-brand-chart-alt',b);dash.style.setProperty('--bw-brand-chart-third',c);dash.style.setProperty('--sv-accent',a);const preview=$('#bwPreview');if(preview){preview.style.setProperty('--sv-accent',a);preview.style.setProperty('--preview-gradient',gradient);preview.style.setProperty('--preview-surface-2',mix(b,'#ffffff',.86))}render()}
+function render(){const row=$('.bw-gradient-row');if(!row)return;let panel=$('#bwToneColorOptions');if(!panel){panel=document.createElement('div');panel.id='bwToneColorOptions';panel.className='bw-tone-color-options';row.after(panel)}const style=currentStyle(),key=keyForStyle(style),arr=colors[key]||defaults[key];const labels=style==='solid'?['Main color']:style==='dual'?['Primary color','Secondary color']:['Primary color','Secondary color','Highlight color'];panel.innerHTML=`<div class="bw-tone-options-head"><strong>${style==='solid'?'1 Tone':style==='dual'?'2 Tone':'3 Tone'} colors</strong><small>${labels.length} editable color option${labels.length>1?'s':''}</small></div><div class="bw-tone-pickers">${labels.map((label,i)=>`<label><span>${label}</span><div><i style="background:${arr[i]}"></i><input class="bw-tone-hex" data-tone-index="${i}" value="${arr[i]}" maxlength="7"><input class="bw-tone-picker" data-tone-index="${i}" type="color" value="${arr[i]}" aria-label="${label}"></div></label>`).join('')}</div>`}
+}
+function setColor(index,value){if(!/^#[0-9a-f]{6}$/i.test(value))return;const key=keyForStyle(currentStyle()),arr=[...(colors[key]||defaults[key])];arr[index]=value;colors[key]=arr;try{localStorage.setItem(KEY,JSON.stringify(colors))}catch(e){}applyToneColors()}
+document.addEventListener('click',e=>{if(e.target.closest('.bw-gradient-row [data-style]'))setTimeout(applyToneColors,0)});
+document.addEventListener('input',e=>{if(e.target.matches('.bw-tone-picker'))setColor(Number(e.target.dataset.toneIndex),e.target.value)});
+document.addEventListener('change',e=>{if(e.target.matches('.bw-tone-hex'))setColor(Number(e.target.dataset.toneIndex),e.target.value)});
+window.addEventListener('budgetingwise:theme-change',()=>setTimeout(applyToneColors,0));
+const observer=new MutationObserver(()=>{if($('.bw-gradient-row')&&!$('#bwToneColorOptions')){render();applyToneColors()}});observer.observe(document.documentElement,{childList:true,subtree:true});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{render();applyToneColors()});else{render();applyToneColors()}
+})();
