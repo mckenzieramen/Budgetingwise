@@ -1,0 +1,25 @@
+/* Budgetingwise V27 — premium simple visual system. Purple/accent is the only user-changeable visual color. */
+#dashboardView{--bw-premium-accent:var(--bw-user-accent,#6536f5);--bw-premium-accent-2:color-mix(in srgb,var(--bw-premium-accent) 72%,#fff);--bw-premium-soft:color-mix(in srgb,var(--bw-premium-accent) 9%,#fff);--bw-premium-line:#e7eaf3;--bw-premium-text:#111936;--bw-premium-muted:#68718d;--bw-premium-page:#f7f8fc;--bw-premium-card:#fff;background:var(--bw-premium-page)!important;color:var(--bw-premium-text)!important}
+#dashboardView[data-display-mode="dark"]{--bw-premium-page:#101321;--bw-premium-card:#171b2d;--bw-premium-line:#2b3148;--bw-premium-text:#f5f7ff;--bw-premium-muted:#aab2cc;--bw-premium-soft:color-mix(in srgb,var(--bw-premium-accent) 18%,#171b2d)}
+#dashboardView .premium-sidebar,#dashboardView .premium-topbar,#dashboardView .premium-content{background:var(--bw-premium-card)!important;color:var(--bw-premium-text)!important}
+#dashboardView .premium-content{background:var(--bw-premium-page)!important}
+#dashboardView :is(.premium-panel,.premium-metric,.bw-settings-card,.bw-ai-card,.goal-card,.transaction-card){background:var(--bw-premium-card)!important;border:1px solid var(--bw-premium-line)!important;border-radius:16px!important;box-shadow:0 8px 28px rgba(26,32,62,.055)!important;color:var(--bw-premium-text)!important}
+#dashboardView :is(h1,h2,h3,h4,strong,.metric-value,.amount,.balance-value,.goal-title){color:var(--bw-premium-text)!important}
+#dashboardView :is(p,small,.muted,.subtitle,.helper-text){color:var(--bw-premium-muted)!important}
+#dashboardView .sidebar-nav .nav-btn{border-radius:10px!important;color:var(--bw-premium-text)!important;font-weight:650!important}
+#dashboardView .sidebar-nav .nav-btn.active,#dashboardView :is(.primary,.btn-primary,[data-action="add"]){background:var(--bw-premium-accent)!important;color:#fff!important;box-shadow:0 7px 18px color-mix(in srgb,var(--bw-premium-accent) 22%,transparent)!important}
+#dashboardView .sidebar-nav .nav-btn:not(.active)>span,#dashboardView .bw-semantic-icon{color:var(--bw-premium-accent)}
+#dashboardView .premium-search,#dashboardView :is(input:not([type=color]),select,textarea){background:var(--bw-premium-card)!important;border-color:var(--bw-premium-line)!important;color:var(--bw-premium-text)!important}
+#dashboardView .bw-v2-hero{background:linear-gradient(120deg,var(--bw-premium-soft),var(--bw-premium-card))!important;border:1px solid var(--bw-premium-line)!important;border-radius:18px!important;box-shadow:none!important}
+#dashboardView .premium-metric{overflow:hidden;position:relative}
+#dashboardView .premium-metric:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--bw-premium-accent);opacity:.9}
+#dashboardView :is(.bw-metric-icon,.bw-head-icon,.settings-hero-icon,.goals-banner-icon,.bw-intelligence-icon){color:var(--bw-premium-accent)!important}
+#dashboardView :is(.panel-link,a:not(.nav-btn)){color:var(--bw-premium-accent)}
+#dashboardView .bw-settings-tab.active,#dashboardView .bw-gradient-row button.active,#dashboardView .bw-mode-btn.active{background:var(--bw-premium-accent)!important;color:#fff!important;border-color:var(--bw-premium-accent)!important}
+#dashboardView .bw-settings-tab:not(.active),#dashboardView .bw-gradient-row button:not(.active),#dashboardView .bw-mode-btn:not(.active){background:var(--bw-premium-card)!important;color:var(--bw-premium-text)!important;border-color:var(--bw-premium-line)!important}
+#dashboardView .bw-preview-shell{border-color:var(--bw-premium-line)!important;background:var(--bw-premium-page)!important}
+#dashboardView .bw-preview-side .active,#dashboardView .bw-preview-chart,#dashboardView .bw-preview-actions:before{background:var(--bw-premium-accent)!important}
+#dashboardView .earnings-chart :is(.income,.bar-income),#dashboardView .legend-income{color:var(--bw-premium-accent)!important}
+#dashboardView button:focus-visible,#dashboardView input:focus-visible,#dashboardView select:focus-visible{outline:3px solid color-mix(in srgb,var(--bw-premium-accent) 24%,transparent)!important;outline-offset:2px}
+#dashboardView .bw-settings-card{box-shadow:none!important}
+@media(max-width:760px){#dashboardView :is(.premium-panel,.premium-metric,.bw-settings-card){border-radius:14px!important}}
