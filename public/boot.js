@@ -5,11 +5,11 @@ const guestButton = document.getElementById('guestBtn');
 // Visual settings remain independent of Firebase/auth.
 const settingsStyle=document.createElement('link');
 settingsStyle.rel='stylesheet';
-settingsStyle.href='./settings-v15.css?v=settings-v24';
+settingsStyle.href='./settings-v15.css?v=settings-v25';
 document.head.appendChild(settingsStyle);
 const toneStyle=document.createElement('link');
 toneStyle.rel='stylesheet';
-toneStyle.href='./tone-colors-v20.css?v=tone-colors-v24';
+toneStyle.href='./tone-colors-v20.css?v=tone-colors-v25';
 document.head.appendChild(toneStyle);
 
 // Readability guard: keep useful text visible across every user-selected theme.
@@ -29,6 +29,10 @@ readabilityStyle.textContent=`
 #page-settings .bw-settings-tab.active,#dashboardView .sidebar-nav .nav-btn.active{color:#fff!important}
 #dashboardView .bw-setting-row{border-color:var(--bw-user-border)!important}
 #bwPreview{color:var(--preview-text,var(--bw-safe-text))!important}
+/* Settings tab icons: stronger visual weight only; no layout or click behavior changes. */
+#page-settings .bw-settings-tab>span{font-weight:900!important;color:currentColor!important;opacity:1!important;text-shadow:0 0 .45px currentColor}
+#page-settings .bw-settings-tab>span:before,#page-settings .bw-settings-tab>span:after{font-weight:900!important;border-width:2.25px!important;opacity:1!important}
+#page-settings .bw-settings-tab.active>span{color:#fff!important;filter:drop-shadow(0 1px 1px rgba(0,0,0,.16))}
 `;
 document.head.appendChild(readabilityStyle);
 
@@ -46,7 +50,7 @@ document.head.appendChild(navigationStyle);
 
 import('./premium-icon-fix-v23.js?v=premium-icons-v24').catch(error=>console.warn('Premium icon cleanup unavailable:',error));
 import('./settings-v15.js?v=settings-v24')
-  .then(()=>Promise.all([import('./tone-colors-v20.js?v=tone-colors-v24'),import('./contrast-control-v21.js?v=contrast-art-v22')]))
+  .then(()=>Promise.all([import('./tone-colors-v20.js?v=tone-colors-v25'),import('./contrast-control-v21.js?v=contrast-art-v22')]))
   .catch(error=>console.warn('Visual settings unavailable:',error));
 
 async function enterGuest() {
