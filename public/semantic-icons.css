@@ -1,68 +1,28 @@
 /* Budgetingwise icon system — clean, premium, consistent and theme-aware. */
 #dashboardView .bw-semantic-icon{display:block;vertical-align:middle;flex:none;stroke:currentColor;overflow:visible;vector-effect:non-scaling-stroke;transition:transform .2s cubic-bezier(.2,.8,.2,1),opacity .18s ease}
-
-/* Sidebar: no bulky icon tiles. Crisp line icons aligned to one visual grid. */
 #dashboardView .sidebar-nav .nav-btn>span{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:26px!important;height:26px!important;min-width:26px!important;flex:none!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:color-mix(in srgb,var(--bw-user-accent,#6536f5) 68%,var(--bw-user-text,#17224a))!important;transition:color .2s ease,transform .2s ease!important}
 #dashboardView .sidebar-nav .nav-btn>span .bw-semantic-icon{width:19px!important;height:19px!important;stroke-width:1.8!important}
 #dashboardView .sidebar-nav .nav-btn:hover>span{transform:translateX(2px)!important;color:var(--bw-user-accent,#6536f5)!important}
 #dashboardView .sidebar-nav .nav-btn.active>span{color:#fff!important;transform:none!important}
 #dashboardView .sidebar-nav .nav-btn.active>span .bw-semantic-icon{filter:none!important;stroke-width:2!important}
-
-/* Shared functional icons use the same proportions. */
 #dashboardView .bw-metric-icon,#dashboardView .bw-head-icon,#dashboardView .bw-intelligence-icon,#dashboardView .goals-banner-icon,#dashboardView .settings-hero-icon{display:inline-flex!important;align-items:center!important;justify-content:center!important}
-#dashboardView .bw-metric-icon .bw-semantic-icon{width:20px;height:20px}
-#dashboardView .bw-head-icon .bw-semantic-icon{width:19px;height:19px}
-#dashboardView .bw-action-grid button>span{display:flex;justify-content:center;align-items:center}
-#dashboardView .bw-action-grid button>span .bw-semantic-icon{width:22px;height:22px;stroke-width:1.85}
-#dashboardView .bw-rail-title>span .bw-semantic-icon{width:21px;height:21px}
-#dashboardView .bw-topbar-help,#dashboardView .topbar-notify,#dashboardView .topbar-avatar,#dashboardView .avatar-circle{display:inline-flex;align-items:center;justify-content:center}
-#dashboardView .bw-topbar-help .bw-semantic-icon,#dashboardView .topbar-notify .bw-semantic-icon{width:18px;height:18px}
-#dashboardView .topbar-avatar .bw-semantic-icon,#dashboardView .avatar-circle .bw-semantic-icon{width:17px;height:17px}
-#dashboardView .sidebar-logout{display:flex;align-items:center;gap:9px}
-#dashboardView .sidebar-logout .bw-semantic-icon{width:17px;height:17px}
-#dashboardView .bw-action-grid button:hover .bw-semantic-icon{transform:translateY(-1px) scale(1.04)}
-
-/* Settings: hide the old Unicode pseudo-icons. They looked inconsistent across browsers. */
-#page-settings .bw-settings-tab>span,#page-settings .bw-mode-btn>b,#page-settings .bw-gradient-row button>b,#page-settings .bw-reset-theme>span{font-size:0!important;line-height:0!important;overflow:hidden!important;position:relative!important;display:inline-grid!important;place-items:center!important;background:transparent!important;border:0!important;box-shadow:none!important;color:currentColor!important}
-#page-settings .bw-settings-tab>span{width:18px!important;height:18px!important;min-width:18px!important;margin-right:7px!important}
-#page-settings .bw-mode-btn>b{width:25px!important;height:25px!important}
-#page-settings .bw-gradient-row button>b{width:22px!important;height:22px!important}
-#page-settings .bw-reset-theme>span{width:17px!important;height:17px!important;margin-right:5px!important}
-
-/* Draw stable CSS icons instead of font glyphs. */
+#dashboardView .bw-metric-icon .bw-semantic-icon{width:20px;height:20px}#dashboardView .bw-head-icon .bw-semantic-icon{width:19px;height:19px}#dashboardView .bw-action-grid button>span{display:flex;justify-content:center;align-items:center}#dashboardView .bw-action-grid button>span .bw-semantic-icon{width:22px;height:22px;stroke-width:1.85}#dashboardView .bw-rail-title>span .bw-semantic-icon{width:21px;height:21px}#dashboardView .bw-topbar-help,#dashboardView .topbar-notify,#dashboardView .topbar-avatar,#dashboardView .avatar-circle{display:inline-flex;align-items:center;justify-content:center}#dashboardView .bw-topbar-help .bw-semantic-icon,#dashboardView .topbar-notify .bw-semantic-icon{width:18px;height:18px}#dashboardView .topbar-avatar .bw-semantic-icon,#dashboardView .avatar-circle .bw-semantic-icon{width:17px;height:17px}#dashboardView .sidebar-logout{display:flex;align-items:center;gap:9px}#dashboardView .sidebar-logout .bw-semantic-icon{width:17px;height:17px}#dashboardView .bw-action-grid button:hover .bw-semantic-icon{transform:translateY(-1px) scale(1.04)}
+/* Settings icons: deliberately heavier, larger silhouettes for clear visual weight. */
+#page-settings .bw-settings-tab>span,#page-settings .bw-mode-btn>b,#page-settings .bw-gradient-row button>b,#page-settings .bw-reset-theme>span{font-size:0!important;line-height:0!important;overflow:visible!important;position:relative!important;display:inline-grid!important;place-items:center!important;background:transparent!important;border:0!important;box-shadow:none!important;color:currentColor!important}
+#page-settings .bw-settings-tab>span{width:20px!important;height:20px!important;min-width:20px!important;margin-right:8px!important}
+#page-settings .bw-mode-btn>b{width:25px!important;height:25px!important}#page-settings .bw-gradient-row button>b{width:22px!important;height:22px!important}#page-settings .bw-reset-theme>span{width:17px!important;height:17px!important;margin-right:5px!important}
 #page-settings .bw-settings-tab>span:before,#page-settings .bw-mode-btn>b:before,#page-settings .bw-gradient-row button>b:before,#page-settings .bw-reset-theme>span:before{content:"";display:block;box-sizing:border-box;color:currentColor}
-/* Appearance: four-point sparkle */
-#page-settings .bw-settings-tab[data-v15tab="appearance"]>span:before{width:14px;height:14px;background:currentColor;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%)}
-/* Preferences: three clean horizontal controls */
-#page-settings .bw-settings-tab[data-v15tab="preferences"]>span:before{width:14px;height:10px;background:linear-gradient(currentColor,currentColor) 0 0/14px 1.5px no-repeat,linear-gradient(currentColor,currentColor) 0 4px/14px 1.5px no-repeat,linear-gradient(currentColor,currentColor) 0 8px/14px 1.5px no-repeat}
-/* Notifications: bell silhouette */
-#page-settings .bw-settings-tab[data-v15tab="notifications"]>span:before{width:12px;height:13px;border:1.7px solid currentColor;border-radius:7px 7px 4px 4px;clip-path:polygon(0 0,100% 0,100% 85%,62% 85%,58% 100%,42% 100%,38% 85%,0 85%)}
-/* Privacy: shield */
-#page-settings .bw-settings-tab[data-v15tab="privacy"]>span:before{width:13px;height:15px;border:1.7px solid currentColor;border-radius:7px 7px 9px 9px;clip-path:polygon(50% 0,100% 18%,92% 72%,50% 100%,8% 72%,0 18%)}
-/* Account: user */
-#page-settings .bw-settings-tab[data-v15tab="account"]>span:before{width:14px;height:14px;border:1.7px solid currentColor;border-radius:50%;box-shadow:0 7px 0 -4px currentColor}
-/* Mode icons */
-#page-settings .bw-mode-btn[data-mode="light"]>b:before{width:13px;height:13px;border:2px solid currentColor;border-radius:50%;box-shadow:0 -7px 0 -5px currentColor,0 7px 0 -5px currentColor,7px 0 0 -5px currentColor,-7px 0 0 -5px currentColor}
-#page-settings .bw-mode-btn[data-mode="system"]>b:before{width:15px;height:11px;border:1.8px solid currentColor;border-radius:2px;box-shadow:0 5px 0 -4px currentColor}
-#page-settings .bw-mode-btn[data-mode="dark"]>b:before{width:13px;height:13px;border-radius:50%;background:currentColor;box-shadow:4px -2px 0 0 var(--bw-user-surface,#fff)}
-/* Tone icons */
-#page-settings .bw-gradient-row button[data-style="solid"]>b:before{width:12px;height:12px;border-radius:50%;background:currentColor}
-#page-settings .bw-gradient-row button[data-style="dual"]>b:before{width:14px;height:14px;border-radius:50%;background:linear-gradient(90deg,currentColor 0 50%,transparent 50%);border:1.7px solid currentColor}
-#page-settings .bw-gradient-row button[data-style="triple"]>b:before{width:15px;height:13px;background:currentColor;clip-path:polygon(50% 0,100% 100%,0 100%)}
-/* Reset: circular arrow */
-#page-settings .bw-reset-theme>span:before{width:13px;height:13px;border:1.7px solid currentColor;border-right-color:transparent;border-radius:50%;transform:rotate(-25deg)}
-#page-settings .bw-reset-theme>span:after{content:"";position:absolute;width:5px;height:5px;border-left:1.7px solid currentColor;border-top:1.7px solid currentColor;left:1px;top:2px;transform:rotate(-18deg)}
-
-/* Headings and small semantic marks. */
-#dashboardView .section-heading h2{display:flex;align-items:center;gap:10px}
-#dashboardView .section-heading h2>.bw-semantic-icon{width:21px;height:21px;color:var(--bw-user-accent,var(--bw-brand-chart-alt));flex:none;stroke-width:1.85}
-#dashboardView .bw-intelligence-icon .bw-semantic-icon,#dashboardView .goals-banner-icon .bw-semantic-icon,#dashboardView .settings-hero-icon .bw-semantic-icon{width:21px;height:21px}
-#dashboardView .bw-rail-info .bw-semantic-icon{width:15px;height:15px}
-#dashboardView .bw-command-search-icon .bw-semantic-icon{width:17px;height:17px}
-#dashboardView .insight-pill .bw-semantic-icon{width:15px;height:15px;margin-right:5px}
-#dashboardView .panel-link .bw-semantic-icon{width:14px;height:14px;margin-right:5px;opacity:.8}
-#dashboardView .tx-tabs button .bw-semantic-icon,#dashboardView .appearance-tab .bw-semantic-icon{width:15px;height:15px;margin-right:6px}
-#dashboardView .premium-panel-head .bw-semantic-icon,#dashboardView .section-heading .bw-semantic-icon{stroke-width:1.85}
-#dashboardView .bw-intelligence-icon,#dashboardView .bw-head-icon,#dashboardView .bw-metric-icon{border-radius:10px}
-@media(prefers-reduced-motion:reduce){#dashboardView .bw-semantic-icon,#dashboardView .sidebar-nav .nav-btn>span{transition:none!important}}
-@media(max-width:520px){#dashboardView .section-heading h2>.bw-semantic-icon{width:19px;height:19px}}
+/* Appearance: thicker sparkle */
+#page-settings .bw-settings-tab[data-v15tab="appearance"]>span:before{width:17px;height:17px;background:currentColor;clip-path:polygon(50% 0,64% 36%,100% 50%,64% 64%,50% 100%,36% 64%,0 50%,36% 36%)}
+/* Preferences: thick menu bars */
+#page-settings .bw-settings-tab[data-v15tab="preferences"]>span:before{width:17px;height:13px;background:linear-gradient(currentColor,currentColor) 0 0/17px 2.7px no-repeat,linear-gradient(currentColor,currentColor) 0 5px/17px 2.7px no-repeat,linear-gradient(currentColor,currentColor) 0 10px/17px 2.7px no-repeat;border-radius:2px}
+/* Notifications: heavier bell */
+#page-settings .bw-settings-tab[data-v15tab="notifications"]>span:before{width:15px;height:16px;border:2.6px solid currentColor;border-radius:8px 8px 5px 5px;clip-path:polygon(0 0,100% 0,100% 84%,65% 84%,61% 100%,39% 100%,35% 84%,0 84%)}
+/* Privacy: heavier shield */
+#page-settings .bw-settings-tab[data-v15tab="privacy"]>span:before{width:16px;height:18px;border:2.6px solid currentColor;border-radius:8px 8px 10px 10px;clip-path:polygon(50% 0,100% 18%,92% 72%,50% 100%,8% 72%,0 18%)}
+/* Account: bold user mark */
+#page-settings .bw-settings-tab[data-v15tab="account"]>span:before{width:15px;height:15px;border:2.6px solid currentColor;border-radius:50%;box-shadow:0 8px 0 -3px currentColor}
+#page-settings .bw-settings-tab.active>span:before{filter:drop-shadow(0 1px .35px rgba(0,0,0,.2))}
+#page-settings .bw-mode-btn[data-mode="light"]>b:before{width:13px;height:13px;border:2px solid currentColor;border-radius:50%;box-shadow:0 -7px 0 -5px currentColor,0 7px 0 -5px currentColor,7px 0 0 -5px currentColor,-7px 0 0 -5px currentColor}#page-settings .bw-mode-btn[data-mode="system"]>b:before{width:15px;height:11px;border:1.8px solid currentColor;border-radius:2px;box-shadow:0 5px 0 -4px currentColor}#page-settings .bw-mode-btn[data-mode="dark"]>b:before{width:13px;height:13px;border-radius:50%;background:currentColor;box-shadow:4px -2px 0 0 var(--bw-user-surface,#fff)}
+#page-settings .bw-gradient-row button[data-style="solid"]>b:before{width:12px;height:12px;border-radius:50%;background:currentColor}#page-settings .bw-gradient-row button[data-style="dual"]>b:before{width:14px;height:14px;border-radius:50%;background:linear-gradient(90deg,currentColor 0 50%,transparent 50%);border:1.7px solid currentColor}#page-settings .bw-gradient-row button[data-style="triple"]>b:before{width:15px;height:13px;background:currentColor;clip-path:polygon(50% 0,100% 100%,0 100%)}#page-settings .bw-reset-theme>span:before{width:13px;height:13px;border:1.7px solid currentColor;border-right-color:transparent;border-radius:50%;transform:rotate(-25deg)}#page-settings .bw-reset-theme>span:after{content:"";position:absolute;width:5px;height:5px;border-left:1.7px solid currentColor;border-top:1.7px solid currentColor;left:1px;top:2px;transform:rotate(-18deg)}
+#dashboardView .section-heading h2{display:flex;align-items:center;gap:10px}#dashboardView .section-heading h2>.bw-semantic-icon{width:21px;height:21px;color:var(--bw-user-accent,var(--bw-brand-chart-alt));flex:none;stroke-width:1.85}#dashboardView .bw-intelligence-icon .bw-semantic-icon,#dashboardView .goals-banner-icon .bw-semantic-icon,#dashboardView .settings-hero-icon .bw-semantic-icon{width:21px;height:21px}#dashboardView .bw-rail-info .bw-semantic-icon{width:15px;height:15px}#dashboardView .bw-command-search-icon .bw-semantic-icon{width:17px;height:17px}#dashboardView .insight-pill .bw-semantic-icon{width:15px;height:15px;margin-right:5px}#dashboardView .panel-link .bw-semantic-icon{width:14px;height:14px;margin-right:5px;opacity:.8}#dashboardView .tx-tabs button .bw-semantic-icon,#dashboardView .appearance-tab .bw-semantic-icon{width:15px;height:15px;margin-right:6px}#dashboardView .premium-panel-head .bw-semantic-icon,#dashboardView .section-heading .bw-semantic-icon{stroke-width:1.85}#dashboardView .bw-intelligence-icon,#dashboardView .bw-head-icon,#dashboardView .bw-metric-icon{border-radius:10px}@media(prefers-reduced-motion:reduce){#dashboardView .bw-semantic-icon,#dashboardView .sidebar-nav .nav-btn>span{transition:none!important}}@media(max-width:520px){#dashboardView .section-heading h2>.bw-semantic-icon{width:19px;height:19px}}
