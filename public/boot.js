@@ -15,6 +15,15 @@ import('./settings-v15.js?v=settings-v20')
   .then(()=>import('./tone-colors-v20.js?v=tone-colors-v20'))
   .catch(error=>console.warn('Visual settings unavailable:',error));
 
+// Dashboard customization is presentation-only: it reorders/hides/resizes existing
+// dashboard containers and never changes transaction, savings, analytics, or formula data.
+const dashboardCustomizeStyle=document.createElement('link');
+dashboardCustomizeStyle.rel='stylesheet';
+dashboardCustomizeStyle.href='./dashboard-customize-v21.css?v=dashboard-customize-v21';
+document.head.appendChild(dashboardCustomizeStyle);
+import('./dashboard-customize-v21.js?v=dashboard-customize-v21')
+  .catch(error=>console.warn('Dashboard customization unavailable:',error));
+
 async function enterGuest() {
   guestButton.disabled = true;
   try {
