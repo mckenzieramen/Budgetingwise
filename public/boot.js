@@ -19,7 +19,6 @@ async function enterGuest() {
     sessionStorage.removeItem(guestKey);
     guestButton.disabled = false;
     console.error('Guest preview could not load:', error);
-    alert('Guest preview could not load. Please try again.');
   }
 }
 if (sessionStorage.getItem(guestKey) === '1') {
