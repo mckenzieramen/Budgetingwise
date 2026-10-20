@@ -9,7 +9,7 @@ settingsStyle.href='./settings-v15.css?v=settings-v21';
 document.head.appendChild(settingsStyle);
 const toneStyle=document.createElement('link');
 toneStyle.rel='stylesheet';
-toneStyle.href='./tone-colors-v20.css?v=tone-colors-v20';
+toneStyle.href='./tone-colors-v20.css?v=tone-colors-v22';
 document.head.appendChild(toneStyle);
 const contrastStyle=document.createElement('style');
 contrastStyle.textContent=`
@@ -18,7 +18,7 @@ contrastStyle.textContent=`
 `;
 document.head.appendChild(contrastStyle);
 import('./settings-v15.js?v=settings-v21')
-  .then(()=>Promise.all([import('./tone-colors-v20.js?v=tone-colors-v20'),import('./contrast-control-v21.js?v=contrast-v21')]))
+  .then(()=>Promise.all([import('./tone-colors-v20.js?v=tone-colors-v22'),import('./contrast-control-v21.js?v=contrast-v21')]))
   .catch(error=>console.warn('Visual settings unavailable:',error));
 
 async function enterGuest() {
