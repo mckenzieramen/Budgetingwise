@@ -1,33 +1,45 @@
-/* Semantic icon finish: consistent proportions, restrained metallic accent. */
-#dashboardView .bw-semantic-icon{display:inline-block;vertical-align:middle;flex:none;stroke:currentColor;overflow:visible}
-#dashboardView .sidebar-nav .nav-btn>span{display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;flex:none;color:#d7c8ee}
-#dashboardView .sidebar-nav .nav-btn>span .bw-semantic-icon{width:20px;height:20px}
-#dashboardView .sidebar-nav .nav-btn.active>span{color:#fff}
+/* Semantic icon finish: clean, consistent, theme-aware icon language. */
+#dashboardView .bw-semantic-icon{display:inline-block;vertical-align:middle;flex:none;stroke:currentColor;overflow:visible;vector-effect:non-scaling-stroke;transition:transform .2s cubic-bezier(.2,.8,.2,1),opacity .18s ease}
+
+/* Sidebar navigation: refined icon containers instead of faint floating glyphs. */
+#dashboardView .sidebar-nav .nav-btn>span{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;flex:none;border-radius:10px;color:color-mix(in srgb,var(--bw-user-accent,#6536f5) 72%,var(--bw-user-text,#17224a));background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 7%,var(--bw-user-surface,#fff));border:1px solid color-mix(in srgb,var(--bw-user-accent,#6536f5) 14%,var(--bw-user-border,#e4e6ef));box-shadow:0 3px 10px color-mix(in srgb,var(--bw-user-accent,#6536f5) 5%,transparent);transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+#dashboardView .sidebar-nav .nav-btn>span .bw-semantic-icon{width:18px;height:18px;stroke-width:1.85}
+#dashboardView .sidebar-nav .nav-btn:hover>span{transform:translateX(1px) scale(1.04);color:var(--bw-user-accent,#6536f5);background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 12%,var(--bw-user-surface,#fff));border-color:color-mix(in srgb,var(--bw-user-accent,#6536f5) 25%,var(--bw-user-border,#e4e6ef))}
+#dashboardView .sidebar-nav .nav-btn.active>span{color:#fff;background:color-mix(in srgb,#fff 16%,transparent);border-color:color-mix(in srgb,#fff 34%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 28%,transparent),0 4px 12px color-mix(in srgb,var(--bw-user-accent,#6536f5) 18%,transparent)}
+#dashboardView .sidebar-nav .nav-btn.active>span .bw-semantic-icon{filter:drop-shadow(0 1px 2px color-mix(in srgb,#000 15%,transparent))}
+
+/* Shared card/action icons. */
 #dashboardView .bw-metric-icon,#dashboardView .bw-head-icon{display:inline-flex;align-items:center;justify-content:center}
-#dashboardView .bw-metric-icon .bw-semantic-icon{width:21px;height:21px}
-#dashboardView .bw-head-icon .bw-semantic-icon{width:20px;height:20px}
+#dashboardView .bw-metric-icon .bw-semantic-icon{width:20px;height:20px}
+#dashboardView .bw-head-icon .bw-semantic-icon{width:19px;height:19px}
 #dashboardView .bw-action-grid button>span{display:flex;justify-content:center;align-items:center}
-#dashboardView .bw-action-grid button>span .bw-semantic-icon{width:26px;height:26px}
-#dashboardView .bw-rail-title>span .bw-semantic-icon{width:25px;height:25px}
+#dashboardView .bw-action-grid button>span .bw-semantic-icon{width:23px;height:23px}
+#dashboardView .bw-rail-title>span .bw-semantic-icon{width:22px;height:22px}
 #dashboardView .bw-topbar-help,#dashboardView .topbar-notify,#dashboardView .topbar-avatar,#dashboardView .avatar-circle{display:inline-flex;align-items:center;justify-content:center}
-#dashboardView .bw-topbar-help .bw-semantic-icon,#dashboardView .topbar-notify .bw-semantic-icon{width:19px;height:19px}
-#dashboardView .topbar-avatar .bw-semantic-icon,#dashboardView .avatar-circle .bw-semantic-icon{width:18px;height:18px}
+#dashboardView .bw-topbar-help .bw-semantic-icon,#dashboardView .topbar-notify .bw-semantic-icon{width:18px;height:18px}
+#dashboardView .topbar-avatar .bw-semantic-icon,#dashboardView .avatar-circle .bw-semantic-icon{width:17px;height:17px}
 #dashboardView .sidebar-logout{display:flex;align-items:center;gap:9px}
 #dashboardView .sidebar-logout .bw-semantic-icon{width:17px;height:17px}
-#dashboardView .bw-semantic-icon{transition:transform .18s ease,opacity .18s ease}
-#dashboardView .bw-action-grid button:hover .bw-semantic-icon{transform:translateY(-2px)}
-@media(prefers-reduced-motion:reduce){#dashboardView .bw-semantic-icon{transition:none!important}}
+#dashboardView .bw-action-grid button:hover .bw-semantic-icon{transform:translateY(-2px) scale(1.03)}
 
-/* Atelier icon language: purposeful, measured, consistent in every page. */
+/* Settings studio: replace text-symbol feel with consistent restrained controls. */
+#page-settings .bw-settings-tab span,#page-settings .bw-mode-btn b,#page-settings .bw-gradient-row button b,#page-settings .bw-reset-theme span{font-family:Arial,sans-serif!important;font-style:normal!important;text-decoration:none!important;line-height:1!important}
+#page-settings .bw-settings-tab span{min-width:22px;height:22px;border-radius:7px;background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 8%,transparent);color:var(--bw-user-accent,#6536f5);font-size:12px!important;font-weight:900!important}
+#page-settings .bw-settings-tab.active span{background:color-mix(in srgb,#fff 18%,transparent);color:#fff!important}
+#page-settings .bw-mode-btn b{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 9%,transparent);font-size:15px!important;font-weight:900!important}
+#page-settings .bw-gradient-row button b{display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 8%,transparent);font-size:13px!important}
+#page-settings .bw-reset-theme span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:6px;background:color-mix(in srgb,var(--bw-user-accent,#6536f5) 8%,transparent);margin-right:4px}
+
+/* Atelier icon language: purposeful and measured across pages. */
 #dashboardView .section-heading h2{display:flex;align-items:center;gap:10px}
-#dashboardView .section-heading h2>.bw-semantic-icon{width:23px;height:23px;color:var(--bw-brand-chart-alt);flex:none}
-#dashboardView .bw-intelligence-icon .bw-semantic-icon,#dashboardView .goals-banner-icon .bw-semantic-icon,#dashboardView .settings-hero-icon .bw-semantic-icon{width:24px;height:24px}
-#dashboardView .bw-rail-info .bw-semantic-icon{width:16px;height:16px}
-#dashboardView .bw-command-search-icon .bw-semantic-icon{width:18px;height:18px}
-#dashboardView .insight-pill .bw-semantic-icon{width:16px;height:16px;margin-right:5px}
-#dashboardView .panel-link .bw-semantic-icon{width:14px;height:14px;margin-right:5px;opacity:.75}
-#dashboardView .tx-tabs button .bw-semantic-icon,#dashboardView .appearance-tab .bw-semantic-icon{width:16px;height:16px;margin-right:6px}
-#dashboardView .premium-panel-head .bw-semantic-icon,#dashboardView .section-heading .bw-semantic-icon{stroke-width:1.8}
-#dashboardView .bw-intelligence-icon,#dashboardView .bw-head-icon,#dashboardView .bw-metric-icon{border-radius:11px}
-#dashboardView .bw-semantic-icon{vector-effect:non-scaling-stroke}
+#dashboardView .section-heading h2>.bw-semantic-icon{width:22px;height:22px;color:var(--bw-user-accent,var(--bw-brand-chart-alt));flex:none}
+#dashboardView .bw-intelligence-icon .bw-semantic-icon,#dashboardView .goals-banner-icon .bw-semantic-icon,#dashboardView .settings-hero-icon .bw-semantic-icon{width:22px;height:22px}
+#dashboardView .bw-rail-info .bw-semantic-icon{width:15px;height:15px}
+#dashboardView .bw-command-search-icon .bw-semantic-icon{width:17px;height:17px}
+#dashboardView .insight-pill .bw-semantic-icon{width:15px;height:15px;margin-right:5px}
+#dashboardView .panel-link .bw-semantic-icon{width:14px;height:14px;margin-right:5px;opacity:.8}
+#dashboardView .tx-tabs button .bw-semantic-icon,#dashboardView .appearance-tab .bw-semantic-icon{width:15px;height:15px;margin-right:6px}
+#dashboardView .premium-panel-head .bw-semantic-icon,#dashboardView .section-heading .bw-semantic-icon{stroke-width:1.85}
+#dashboardView .bw-intelligence-icon,#dashboardView .bw-head-icon,#dashboardView .bw-metric-icon{border-radius:10px}
+@media(prefers-reduced-motion:reduce){#dashboardView .bw-semantic-icon,#dashboardView .sidebar-nav .nav-btn>span{transition:none!important}}
 @media(max-width:520px){#dashboardView .section-heading h2>.bw-semantic-icon{width:20px;height:20px}}
