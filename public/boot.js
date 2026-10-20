@@ -2,13 +2,18 @@
 const guestKey = 'budgetingGuest';
 const guestButton = document.getElementById('guestBtn');
 
-// V15 visual settings studio is intentionally independent of Firebase/auth.
-// Load its stylesheet and behavior for both account and guest experiences.
+// Visual settings studio is intentionally independent of Firebase/auth.
 const settingsStyle=document.createElement('link');
 settingsStyle.rel='stylesheet';
-settingsStyle.href='./settings-v15.css?v=settings-v15';
+settingsStyle.href='./settings-v15.css?v=settings-v20';
 document.head.appendChild(settingsStyle);
-import('./settings-v15.js?v=settings-v15').catch(error=>console.warn('Visual settings unavailable:',error));
+const toneStyle=document.createElement('link');
+toneStyle.rel='stylesheet';
+toneStyle.href='./tone-colors-v20.css?v=tone-colors-v20';
+document.head.appendChild(toneStyle);
+import('./settings-v15.js?v=settings-v20')
+  .then(()=>import('./tone-colors-v20.js?v=tone-colors-v20'))
+  .catch(error=>console.warn('Visual settings unavailable:',error));
 
 async function enterGuest() {
   guestButton.disabled = true;
