@@ -37,6 +37,7 @@ navigationStyle.textContent=`
 `;
 document.head.appendChild(navigationStyle);
 
+import('./premium-icon-fix-v23.js?v=premium-icons-v23').catch(error=>console.warn('Premium icon cleanup unavailable:',error));
 import('./settings-v15.js?v=settings-v21')
   .then(()=>Promise.all([import('./tone-colors-v20.js?v=tone-colors-v22'),import('./contrast-control-v21.js?v=contrast-v21')]))
   .catch(error=>console.warn('Visual settings unavailable:',error));
