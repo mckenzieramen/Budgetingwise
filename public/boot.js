@@ -3,7 +3,7 @@ await import('./page-recovery-v28.js?v=page-recovery-v31');
 // Load the approved Budgetingwise icon system first so every UI module can reuse one source.
 await import('./budgetingwise-icons-v35.js?v=icons-v37');
 // Rebuild the Dashboard itself to the approved visual reference before data renderers initialize.
-await import('./dashboard-reference-v31.js?v=dashboard-reference-v31');
+await import('./dashboard-reference-v31.js?v=dashboard-reference-v38');
 
 const guestKey='budgetingGuest';
 const guestButton=document.getElementById('guestBtn');
