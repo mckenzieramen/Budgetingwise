@@ -5,14 +5,20 @@ const guestButton = document.getElementById('guestBtn');
 // Visual settings studio is intentionally independent of Firebase/auth.
 const settingsStyle=document.createElement('link');
 settingsStyle.rel='stylesheet';
-settingsStyle.href='./settings-v15.css?v=settings-v20';
+settingsStyle.href='./settings-v15.css?v=settings-v21';
 document.head.appendChild(settingsStyle);
 const toneStyle=document.createElement('link');
 toneStyle.rel='stylesheet';
 toneStyle.href='./tone-colors-v20.css?v=tone-colors-v20';
 document.head.appendChild(toneStyle);
-import('./settings-v15.js?v=settings-v20')
-  .then(()=>import('./tone-colors-v20.js?v=tone-colors-v20'))
+const contrastStyle=document.createElement('style');
+contrastStyle.textContent=`
+#dashboardView .premium-sidebar,#dashboardView .premium-topbar,#dashboardView .premium-content{filter:contrast(var(--bw-contrast-filter,1));transition:filter .16s ease}
+#bwPreview{filter:contrast(var(--bw-contrast-filter,1));transition:filter .16s ease}
+`;
+document.head.appendChild(contrastStyle);
+import('./settings-v15.js?v=settings-v21')
+  .then(()=>Promise.all([import('./tone-colors-v20.js?v=tone-colors-v20'),import('./contrast-control-v21.js?v=contrast-v21')]))
   .catch(error=>console.warn('Visual settings unavailable:',error));
 
 async function enterGuest() {
