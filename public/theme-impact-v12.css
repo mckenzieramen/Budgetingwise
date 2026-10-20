@@ -1,4 +1,4 @@
-/* V20: selected theme is the single color authority. No legacy violet fallbacks once user theme is active. */
+/* V21: selected theme is the single color authority, including forecast artwork. */
 #dashboardView{--bw-tone:var(--bw-user-accent,var(--bw-adaptive-accent,#6536f5));--bw-tone-action:var(--bw-user-accent,var(--bw-adaptive-action,#5630cc));--bw-tone-soft:var(--bw-user-soft,var(--bw-adaptive-soft-light,#e8dcff));--bw-tone-gradient:var(--bw-user-gradient,var(--bw-adaptive-gradient,linear-gradient(115deg,#6536f5,#a989ff)));--bw-tone-hero:linear-gradient(110deg,var(--bw-user-surface,#fff),color-mix(in srgb,var(--bw-tone) 18%,var(--bw-user-surface,#fff)))}
 #dashboardView[data-display-mode=light] .premium-shell{background:var(--bw-user-bg,var(--bw-adaptive-page-light))!important}
 #dashboardView[data-display-mode=dark] .premium-shell{background:var(--bw-user-bg,var(--bw-adaptive-page-dark))!important}
@@ -14,6 +14,11 @@
 #dashboardView .bw-v2-dashboard .goal-preview-track,#dashboardView .bw-v2-dashboard .bw-score-meter i{background:var(--bw-user-surface-2,#eef1f8)!important;border-color:var(--bw-user-border,#dfe4ee)!important}
 #dashboardView .bw-v2-dashboard .goal-preview-track>div,#dashboardView .bw-v2-dashboard .bw-score-meter i b{background:var(--bw-tone-gradient)!important}
 #dashboardView .bw-v2-dashboard .premium-panel-head h3:before{background:var(--bw-tone-gradient)!important}
+/* Cash Flow Forecast SVG follows the active theme instead of its legacy purple artwork. */
+#dashboardView .bw-v2-dashboard .bw-rail-forecast .bw-forecast-visual svg path:last-of-type{stroke:var(--bw-user-accent,var(--bw-tone))!important}
+#dashboardView .bw-v2-dashboard .bw-rail-forecast .bw-forecast-visual svg circle{fill:var(--bw-user-accent-2,var(--bw-user-accent,var(--bw-tone)))!important;stroke:var(--bw-user-surface,#fff)!important}
+#dashboardView .bw-v2-dashboard .bw-rail-forecast .bw-forecast-visual svg stop:first-child{stop-color:var(--bw-user-accent,var(--bw-tone))!important;stop-opacity:.42!important}
+#dashboardView .bw-v2-dashboard .bw-rail-forecast .bw-forecast-visual svg stop:last-child{stop-color:var(--bw-user-accent,var(--bw-tone))!important;stop-opacity:0!important}
 #dashboardView .page .theme-choice[aria-pressed=true],#dashboardView .page .preset-choice.active{outline:2px solid var(--bw-tone)!important;outline-offset:2px!important}
 #dashboardView .page :is(input,select,textarea):focus-visible{outline-color:var(--bw-tone)!important}
 #dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-v2-hero :is(h1,h2,h3,p,strong,small),#dashboardView[data-display-mode=light] .bw-v2-dashboard .bw-ai-card :is(h1,h2,h3,p,strong,small),#dashboardView[data-display-mode=light] .page:not(.bw-v2-dashboard) .section-heading :is(h1,h2,h3,p,strong,small){color:var(--bw-user-text,#1a2858)!important}
