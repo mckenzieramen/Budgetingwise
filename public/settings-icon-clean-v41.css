@@ -1,79 +1,34 @@
-/* Settings V41 — one exact picture icon per control, centered. */
-#page-settings .bw-settings-tabs .bw-settings-tab{
-  position:relative!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  min-height:58px!important;
-  padding:10px!important;
-  gap:0!important;
-  overflow:hidden!important;
-  font-size:0!important;
-  line-height:0!important;
-}
-#page-settings .bw-settings-tabs .bw-settings-tab::before,
-#page-settings .bw-settings-tabs .bw-settings-tab::after,
-#page-settings .bw-settings-tabs .bw-settings-tab>svg,
-#page-settings .bw-settings-tabs .bw-settings-tab>i{
-  content:none!important;
-  display:none!important;
-}
+/* Settings V42 — one exact picture icon per control, centered; clean purpose-built tone selectors. */
+#page-settings .bw-settings-tabs .bw-settings-tab{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;min-height:58px!important;padding:10px!important;gap:0!important;overflow:hidden!important;font-size:0!important;line-height:0!important}
+#page-settings .bw-settings-tabs .bw-settings-tab::before,#page-settings .bw-settings-tabs .bw-settings-tab::after,#page-settings .bw-settings-tabs .bw-settings-tab>svg,#page-settings .bw-settings-tabs .bw-settings-tab>i{content:none!important;display:none!important}
 #page-settings .bw-settings-tabs .bw-settings-tab>span:not(.bw-tab-icon){display:none!important}
-#page-settings .bw-settings-tabs .bw-tab-icon{
-  margin:0!important;
-  padding:0!important;
-  width:36px!important;
-  height:36px!important;
-  flex:0 0 36px!important;
-  display:grid!important;
-  place-items:center!important;
-  background:transparent!important;
-  border:0!important;
-  outline:0!important;
-  box-shadow:none!important;
-  overflow:hidden!important;
-}
-#page-settings .bw-settings-tabs .bw-tab-icon::before,
-#page-settings .bw-settings-tabs .bw-tab-icon::after{content:none!important;display:none!important}
-#page-settings .bw-settings-tabs .bw-tab-icon>.bw-atlas-icon{
-  display:block!important;
-  width:36px!important;
-  height:36px!important;
-  min-width:36px!important;
-  min-height:36px!important;
-  margin:0!important;
-  padding:0!important;
-  border:0!important;
-  outline:0!important;
-  box-shadow:none!important;
-  border-radius:10px!important;
-}
-#page-settings .bw-mode-btn{
-  position:relative!important;
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:5px!important;
-}
+#page-settings .bw-settings-tabs .bw-tab-icon{margin:0!important;padding:0!important;width:36px!important;height:36px!important;flex:0 0 36px!important;display:grid!important;place-items:center!important;background:transparent!important;border:0!important;outline:0!important;box-shadow:none!important;overflow:hidden!important}
+#page-settings .bw-settings-tabs .bw-tab-icon::before,#page-settings .bw-settings-tabs .bw-tab-icon::after{content:none!important;display:none!important}
+#page-settings .bw-settings-tabs .bw-tab-icon>.bw-atlas-icon{display:block!important;width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;margin:0!important;padding:0!important;border:0!important;outline:0!important;box-shadow:none!important;border-radius:10px!important}
+#page-settings .bw-mode-btn{position:relative!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:5px!important}
 #page-settings .bw-mode-btn::before,#page-settings .bw-mode-btn::after{content:none!important;display:none!important}
-#page-settings .bw-mode-btn>b{
-  display:grid!important;
-  place-items:center!important;
-  width:34px!important;
-  height:34px!important;
-  margin:0!important;
-  padding:0!important;
-  font-size:0!important;
-  line-height:0!important;
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-  overflow:hidden!important;
-}
+#page-settings .bw-mode-btn>b{display:grid!important;place-items:center!important;width:34px!important;height:34px!important;margin:0!important;padding:0!important;font-size:0!important;line-height:0!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:hidden!important}
 #page-settings .bw-mode-btn>b::before,#page-settings .bw-mode-btn>b::after{content:none!important;display:none!important}
 #page-settings .bw-mode-btn>b>.bw-atlas-icon{width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important;margin:0!important;padding:0!important;border:0!important;outline:0!important;box-shadow:none!important}
 #page-settings .bw-reset-theme>span{display:grid!important;place-items:center!important;width:20px!important;height:20px!important;margin:0 5px 0 0!important;overflow:hidden!important}
 #page-settings .bw-reset-theme>span>.bw-atlas-icon{width:20px!important;height:20px!important;min-width:20px!important;min-height:20px!important;border:0!important;box-shadow:none!important}
-#page-settings .bw-gradient-row button>b{display:grid!important;place-items:center!important;width:30px!important;height:30px!important;overflow:hidden!important;font-size:0!important}
-#page-settings .bw-gradient-row button>b>.bw-atlas-icon{width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important;border:0!important;box-shadow:none!important}
+/* Tone selector: never reuse unrelated account/insight icons. */
+#page-settings .bw-gradient-row{gap:12px!important}
+#page-settings .bw-gradient-row button{min-height:64px!important;display:grid!important;grid-template-columns:42px auto!important;grid-template-rows:auto auto!important;justify-content:center!important;align-content:center!important;align-items:center!important;column-gap:10px!important;row-gap:1px!important;padding:9px 14px!important;overflow:hidden!important}
+#page-settings .bw-gradient-row button>b,#page-settings .bw-gradient-row button>.bw-atlas-icon{display:none!important}
+#page-settings .bw-gradient-row button>span:not(.bw-tone-mark){grid-column:2;grid-row:1;font-size:12px!important;line-height:1.2!important;font-weight:850!important;align-self:end!important}
+#page-settings .bw-gradient-row button>small{grid-column:2;grid-row:2;font-size:8px!important;line-height:1.25!important;align-self:start!important;opacity:.82!important}
+#page-settings .bw-tone-mark{grid-column:1;grid-row:1/3;width:40px;height:40px;display:flex!important;align-items:flex-end!important;justify-content:center!important;gap:3px!important;margin:0!important;padding:8px!important;border-radius:12px!important;background:color-mix(in srgb,var(--bw-user-accent) 10%,var(--bw-user-surface,#fff))!important;border:1px solid color-mix(in srgb,var(--bw-user-accent) 16%,var(--bw-user-border,#e5e7f2))!important;box-sizing:border-box!important}
+#page-settings .bw-tone-mark i{display:block!important;width:6px!important;border-radius:4px!important;background:var(--bw-user-accent)!important;box-shadow:none!important;margin:0!important;padding:0!important}
+#page-settings .bw-tone-mark i:nth-child(1){height:13px!important}
+#page-settings .bw-tone-mark i:nth-child(2){height:19px!important}
+#page-settings .bw-tone-mark i:nth-child(3){height:25px!important}
+#page-settings .bw-tone-mark-1 i:nth-child(n+2){display:none!important}
+#page-settings .bw-tone-mark-2 i:nth-child(2){background:var(--bw-user-accent-2,#a989ff)!important}
+#page-settings .bw-tone-mark-2 i:nth-child(3){display:none!important}
+#page-settings .bw-tone-mark-3 i:nth-child(2){background:var(--bw-user-accent-2,#a989ff)!important}
+#page-settings .bw-tone-mark-3 i:nth-child(3){background:var(--bw-user-accent-3,#d4c4ff)!important}
+#page-settings .bw-gradient-row button.active .bw-tone-mark{background:rgba(255,255,255,.16)!important;border-color:rgba(255,255,255,.28)!important}
+#page-settings .bw-gradient-row button.active .bw-tone-mark i{background:#fff!important}
+#page-settings .bw-gradient-row button.active .bw-tone-mark-2 i:nth-child(2){opacity:.76!important}
+#page-settings .bw-gradient-row button.active .bw-tone-mark-3 i:nth-child(2){opacity:.78!important}#page-settings .bw-gradient-row button.active .bw-tone-mark-3 i:nth-child(3){opacity:.56!important}
