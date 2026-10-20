@@ -1,0 +1,79 @@
+/* Settings V41 — one exact picture icon per control, centered. */
+#page-settings .bw-settings-tabs .bw-settings-tab{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:58px!important;
+  padding:10px!important;
+  gap:0!important;
+  overflow:hidden!important;
+  font-size:0!important;
+  line-height:0!important;
+}
+#page-settings .bw-settings-tabs .bw-settings-tab::before,
+#page-settings .bw-settings-tabs .bw-settings-tab::after,
+#page-settings .bw-settings-tabs .bw-settings-tab>svg,
+#page-settings .bw-settings-tabs .bw-settings-tab>i{
+  content:none!important;
+  display:none!important;
+}
+#page-settings .bw-settings-tabs .bw-settings-tab>span:not(.bw-tab-icon){display:none!important}
+#page-settings .bw-settings-tabs .bw-tab-icon{
+  margin:0!important;
+  padding:0!important;
+  width:36px!important;
+  height:36px!important;
+  flex:0 0 36px!important;
+  display:grid!important;
+  place-items:center!important;
+  background:transparent!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+#page-settings .bw-settings-tabs .bw-tab-icon::before,
+#page-settings .bw-settings-tabs .bw-tab-icon::after{content:none!important;display:none!important}
+#page-settings .bw-settings-tabs .bw-tab-icon>.bw-atlas-icon{
+  display:block!important;
+  width:36px!important;
+  height:36px!important;
+  min-width:36px!important;
+  min-height:36px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  border-radius:10px!important;
+}
+#page-settings .bw-mode-btn{
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+}
+#page-settings .bw-mode-btn::before,#page-settings .bw-mode-btn::after{content:none!important;display:none!important}
+#page-settings .bw-mode-btn>b{
+  display:grid!important;
+  place-items:center!important;
+  width:34px!important;
+  height:34px!important;
+  margin:0!important;
+  padding:0!important;
+  font-size:0!important;
+  line-height:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+#page-settings .bw-mode-btn>b::before,#page-settings .bw-mode-btn>b::after{content:none!important;display:none!important}
+#page-settings .bw-mode-btn>b>.bw-atlas-icon{width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important;margin:0!important;padding:0!important;border:0!important;outline:0!important;box-shadow:none!important}
+#page-settings .bw-reset-theme>span{display:grid!important;place-items:center!important;width:20px!important;height:20px!important;margin:0 5px 0 0!important;overflow:hidden!important}
+#page-settings .bw-reset-theme>span>.bw-atlas-icon{width:20px!important;height:20px!important;min-width:20px!important;min-height:20px!important;border:0!important;box-shadow:none!important}
+#page-settings .bw-gradient-row button>b{display:grid!important;place-items:center!important;width:30px!important;height:30px!important;overflow:hidden!important;font-size:0!important}
+#page-settings .bw-gradient-row button>b>.bw-atlas-icon{width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important;border:0!important;box-shadow:none!important}
