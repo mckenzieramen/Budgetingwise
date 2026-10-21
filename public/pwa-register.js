@@ -6,5 +6,5 @@ if ('serviceWorker' in navigator) {
 }
 // Admin-only support inbox. Load the current tab implementation explicitly.
 if(document.getElementById('adminApp')){
-  import('./admin-support-v1.js?v=admin-support-v5').catch(err=>console.warn('Admin support inbox unavailable:',err));
+  import('./admin-support-v1.js?v=admin-support-v6').catch(err=>console.warn('Admin support inbox unavailable:',err));
 }
