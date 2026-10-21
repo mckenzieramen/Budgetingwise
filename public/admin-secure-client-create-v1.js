@@ -34,7 +34,7 @@ function prepareSecureCreateUi(){
   const hint=panel?.querySelector(':scope > .hint');
   if(hint)hint.textContent='A Budget ID is assigned automatically. The customer receives the branded Budgetingwise welcome email.';
   const info=panel?.querySelector('.info-box');
-  if(info)info.textContent='ⓘ The welcome email contains the customer name, registered email, Budget ID and Budgetingwise login button. A temporary first-login password is shown to the administrator after creation and must be shared securely with the customer.';
+  if(info)info.textContent='ⓘ For security, the welcome email does not contain a password. After account creation, securely provide the temporary first-login password shown below to the customer. They must create a new password after signing in.';
   $('createdPasswordBox')?.classList.add('hidden');
 }
 prepareSecureCreateUi();
@@ -59,8 +59,6 @@ $('createUserForm')?.addEventListener('submit',async e=>{
     await setPersistence(clientAuth,inMemoryPersistence);
     const cred=await createUserWithEmailAndPassword(clientAuth,email,oneTimeBootstrap);
 
-    // Save the customer profile through the already verified ADMIN session.
-    // The temporary customer's auth session is used only to create the Firebase Auth account.
     await setDoc(doc(adminDb,'users',cred.user.uid),{
       budgetId,firstName,lastName,email,authEmail:email,status:'active',mustChangePassword:true,
       createdAt:serverTimestamp(),lastLoginAt:null,createdBy:adminUser.uid
@@ -69,10 +67,10 @@ $('createUserForm')?.addEventListener('submit',async e=>{
     let welcomeRequested=true;
     try{await requestWelcomeEmail({firstName,lastName,email,budgetId})}catch(welcomeErr){welcomeRequested=false;console.warn('Welcome email request failed:',welcomeErr);}
     await signOut(clientAuth);
-    message.textContent=welcomeRequested?'Client account created. Budgetingwise welcome email requested successfully.':'Client account created, but the welcome email request could not be sent.';
+    message.textContent=welcomeRequested?'Client account created. Welcome email requested. Share the temporary first-login password below securely with the customer.':'Client account created, but the welcome email request could not be sent. Share the temporary first-login password below securely with the customer.';
     message.className=welcomeRequested?'success':'error';
     const createdBox=$('createdPasswordBox'),createdText=$('createdAccountText');
-    if(createdText)createdText.textContent=`Budget ID: ${budgetId} • Temporary password: ${oneTimeBootstrap}`;
+    if(createdText)createdText.textContent=`Budget ID: ${budgetId} • Temporary first-login password: ${oneTimeBootstrap}`;
     createdBox?.classList.remove('hidden');
     form.reset();setTimeout(()=>$('adminRefresh')?.click(),150);
   }catch(err){console.error('Secure client creation failed:',err);message.textContent=friendlyError(err);message.className='error';}
