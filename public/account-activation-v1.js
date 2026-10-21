@@ -8,23 +8,21 @@ const params=new URLSearchParams(location.search);
 if(params.get('activate')==='1')mountActivation();
 
 function mountActivation(){
-  const login=document.getElementById('loginView');
-  const dashboard=document.getElementById('dashboardView');
+  const login=document.getElementById('loginView'),dashboard=document.getElementById('dashboardView');
   if(dashboard)dashboard.classList.add('hidden');
   if(!login)return;
   login.classList.remove('hidden');
-  login.innerHTML=`<div class="auth-card"><div class="login-logo-wrap"><img class="login-logo" src="icons/budgetingwise-b-logo.svg" alt="Budgetingwise logo" width="112" height="112"></div><p class="eyebrow">ACCOUNT ACTIVATION</p><h1>Activate your account</h1><p class="muted">Enter the details from your Budgetingwise welcome email. Your activation key is valid for 7 days.</p><form id="activationForm"><label>Registered email<input id="activationEmail" type="email" autocomplete="email" required></label><label>Budget ID<input id="activationBudgetId" type="text" autocomplete="off" required></label><label>Activation key<input id="activationKey" type="text" maxlength="8" autocomplete="one-time-code" required></label><button class="primary" type="submit">Verify activation key</button><p id="activationError" class="error"></p></form><form id="activationPasswordForm" class="hidden"><h2>Create your password</h2><p class="muted">Activation verified. Create the password you will use for future sign-ins.</p><label>New password<input id="activationNewPassword" type="password" minlength="6" autocomplete="new-password" required></label><label>Confirm password<input id="activationConfirmPassword" type="password" minlength="6" autocomplete="new-password" required></label><button class="primary" type="submit">Activate account</button><p id="activationPasswordError" class="error"></p></form><p class="guest-hint"><a href="./">Back to sign in</a></p></div>`;
-  document.getElementById('activationForm').addEventListener('submit',verify);
-  document.getElementById('activationPasswordForm').addEventListener('submit',finish);
+  login.innerHTML=`<div class="auth-card bw-activation-card"><div class="login-logo-wrap"><img class="login-logo" src="icons/budgetingwise-b-logo.svg" alt="Budgetingwise logo" width="112" height="112"></div><p class="eyebrow">ACCOUNT ACTIVATION</p><h1>Activate your account</h1><p class="muted">Enter the details from your Budgetingwise welcome email. Your activation key is valid for 7 days.</p><form id="activationForm"><label>Registered email<input id="activationEmail" type="email" autocomplete="email" required></label><label>Budget ID<input id="activationBudgetId" type="text" autocomplete="off" required></label><label>Activation key<div class="bw-key-field"><span class="bw-key-icon" aria-hidden="true">✦</span><input id="activationKey" type="text" maxlength="8" autocomplete="one-time-code" required></div></label><button class="primary bw-verify-btn" type="submit"><img src="icons/budgetingwise-b-logo.svg" alt="" aria-hidden="true">Verify activation key</button><p id="activationError" class="error"></p></form><form id="activationPasswordForm" class="hidden"><div class="bw-verified-mark">✓</div><h2>Create your password</h2><p class="muted">Activation verified. Create the password you will use for future sign-ins.</p><label>New password<input id="activationNewPassword" type="password" minlength="6" autocomplete="new-password" required></label><label>Confirm password<input id="activationConfirmPassword" type="password" minlength="6" autocomplete="new-password" required></label><button class="primary" type="submit">Activate account</button><p id="activationPasswordError" class="error"></p></form><p class="guest-hint"><a href="./">← Back to sign in</a></p></div>`;
+  const style=document.createElement('style');style.textContent=`.bw-activation-card{box-shadow:0 24px 70px rgba(41,31,98,.13);border:1px solid rgba(91,66,236,.09)}.bw-key-field{position:relative}.bw-key-field input{padding-left:44px!important;letter-spacing:.12em;font-weight:800;text-transform:uppercase}.bw-key-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,#6c4cff,#482ee8);color:#fff;font-size:11px;box-shadow:0 5px 14px rgba(82,54,231,.25);z-index:2}.bw-verify-btn{display:flex!important;align-items:center;justify-content:center;gap:9px}.bw-verify-btn img{width:23px;height:23px;border-radius:7px;filter:drop-shadow(0 2px 5px rgba(0,0,0,.15))}.bw-verified-mark{width:48px;height:48px;margin:4px auto 14px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#6c4cff,#482ee8);color:#fff;font-size:25px;font-weight:900;box-shadow:0 10px 25px rgba(82,54,231,.25)}.bw-activation-card .guest-hint a{font-weight:700;color:#5338e8;text-decoration:none}.bw-activation-card .guest-hint a:hover{text-decoration:underline}`;document.head.appendChild(style);
+  document.getElementById('activationForm')?.addEventListener('submit',verify);
+  document.getElementById('activationPasswordForm')?.addEventListener('submit',finish);
 }
 
 async function verify(e){
   e.preventDefault();
-  const error=document.getElementById('activationError'),button=e.currentTarget.querySelector('button');
-  error.textContent='';button.disabled=true;
-  const email=document.getElementById('activationEmail').value.trim().toLowerCase();
-  const budgetId=document.getElementById('activationBudgetId').value.trim().toUpperCase();
-  const key=document.getElementById('activationKey').value.trim().toUpperCase();
+  const form=e.currentTarget,error=document.getElementById('activationError'),button=form.querySelector('button[type="submit"]');
+  if(error)error.textContent='';if(button)button.disabled=true;
+  const email=document.getElementById('activationEmail')?.value.trim().toLowerCase()||'',budgetId=document.getElementById('activationBudgetId')?.value.trim().toUpperCase()||'',key=document.getElementById('activationKey')?.value.trim().toUpperCase()||'';
   try{
     const cred=await signInWithEmailAndPassword(auth,email,key);
     const ref=doc(db,'users',cred.user.uid),snap=await getDoc(ref);
@@ -34,26 +32,23 @@ async function verify(e){
     if(String(data.budgetId||'').toUpperCase()!==budgetId){await signOut(auth);throw new Error('The Budget ID does not match this account.');}
     const expires=data.activationExpiresAt?.toMillis?.()||0;
     if(!expires||Date.now()>expires){await signOut(auth);throw new Error('This activation key has expired. Please request a new activation key from your administrator.');}
-    e.currentTarget.classList.add('hidden');
-    document.getElementById('activationPasswordForm').classList.remove('hidden');
-  }catch(err){error.textContent=err?.message?.includes('Firebase')?'Invalid email, Budget ID, or activation key.':(err?.message||'Unable to verify activation key.');}
-  finally{button.disabled=false;}
+    form.classList.add('hidden');
+    const passwordForm=document.getElementById('activationPasswordForm');
+    if(!passwordForm)throw new Error('Password setup form could not be loaded. Please refresh and try again.');
+    passwordForm.classList.remove('hidden');
+  }catch(err){if(error)error.textContent=String(err?.message||'Unable to verify activation key.').includes('Firebase')?'Invalid email, Budget ID, or activation key.':String(err?.message||'Unable to verify activation key.');}
+  finally{if(button)button.disabled=false;}
 }
 
 async function finish(e){
   e.preventDefault();
-  const error=document.getElementById('activationPasswordError'),button=e.currentTarget.querySelector('button');
-  error.textContent='';
-  const password=document.getElementById('activationNewPassword').value;
-  const confirm=document.getElementById('activationConfirmPassword').value;
-  if(password.length<6){error.textContent='Password must be at least 6 characters.';return;}
-  if(password!==confirm){error.textContent='Passwords do not match.';return;}
-  if(!auth.currentUser){error.textContent='Activation session expired. Please verify your activation key again.';return;}
-  button.disabled=true;
-  try{
-    await updatePassword(auth.currentUser,password);
-    await updateDoc(doc(db,'users',auth.currentUser.uid),{accountActivated:true,mustChangePassword:false,activatedAt:serverTimestamp(),passwordChangedAt:serverTimestamp()});
-    await signOut(auth);
-    location.href='./?activated=1';
-  }catch(err){error.textContent=err?.message||'Unable to activate account.';button.disabled=false;}
+  const error=document.getElementById('activationPasswordError'),button=e.currentTarget.querySelector('button[type="submit"]');
+  if(error)error.textContent='';
+  const password=document.getElementById('activationNewPassword')?.value||'',confirm=document.getElementById('activationConfirmPassword')?.value||'';
+  if(password.length<6){if(error)error.textContent='Password must be at least 6 characters.';return;}
+  if(password!==confirm){if(error)error.textContent='Passwords do not match.';return;}
+  if(!auth.currentUser){if(error)error.textContent='Activation session expired. Please verify your activation key again.';return;}
+  if(button)button.disabled=true;
+  try{await updatePassword(auth.currentUser,password);await updateDoc(doc(db,'users',auth.currentUser.uid),{accountActivated:true,mustChangePassword:false,activatedAt:serverTimestamp(),passwordChangedAt:serverTimestamp()});await signOut(auth);location.href='./?activated=1';}
+  catch(err){if(error)error.textContent=err?.message||'Unable to activate account.';if(button)button.disabled=false;}
 }
