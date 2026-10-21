@@ -6,7 +6,6 @@ import{firebaseConfig}from'./firebase-config.js';
 const $=id=>document.getElementById(id);
 const mainApp=getApp();
 const auth=getAuth(mainApp);
-const db=getFirestore(mainApp);
 
 function secureRandomPassword(){
   const bytes=new Uint8Array(18);
@@ -42,7 +41,8 @@ prepareSecureCreateUi();
 $('createUserForm')?.addEventListener('submit',async e=>{
   e.preventDefault();
   e.stopImmediatePropagation();
-  const btn=e.submitter||e.currentTarget.querySelector('button[type="submit"]');
+  const form=e.currentTarget;
+  const btn=e.submitter||form.querySelector('button[type="submit"]');
   if(btn)btn.disabled=true;
   const message=$('createMessage');
   message.textContent='Creating client account and sending secure setup email…';
@@ -50,7 +50,7 @@ $('createUserForm')?.addEventListener('submit',async e=>{
   let secondaryApp;
   try{
     const adminUser=auth.currentUser;
-    if(!adminUser||!(await getIdTokenResult(adminUser)).claims.admin)throw new Error('Admin session expired. Please sign in again.');
+    if(!adminUser||!(await getIdTokenResult(adminUser,true)).claims.admin)throw new Error('Admin session expired. Please sign in again.');
     const firstName=$('newFirstName').value.trim();
     const lastName=$('newLastName').value.trim();
     const email=$('newEmail').value.trim().toLowerCase();
@@ -60,10 +60,11 @@ $('createUserForm')?.addEventListener('submit',async e=>{
     const oneTimeBootstrap=secureRandomPassword();
     secondaryApp=initializeApp(firebaseConfig,`secure-client-${Date.now()}`);
     const clientAuth=getAuth(secondaryApp);
+    const clientDb=getFirestore(secondaryApp);
     await setPersistence(clientAuth,inMemoryPersistence);
     const cred=await createUserWithEmailAndPassword(clientAuth,email,oneTimeBootstrap);
 
-    await setDoc(doc(db,'users',cred.user.uid),{
+    await setDoc(doc(clientDb,'users',cred.user.uid),{
       budgetId,firstName,lastName,email,authEmail:email,status:'active',mustChangePassword:true,
       createdAt:serverTimestamp(),lastLoginAt:null,createdBy:adminUser.uid
     });
@@ -74,9 +75,10 @@ $('createUserForm')?.addEventListener('submit',async e=>{
     message.textContent='Client account created. A secure password setup email was sent to the customer.';
     message.className='success';
     $('createdPasswordBox')?.classList.add('hidden');
-    e.currentTarget.reset();
+    form.reset();
     setTimeout(()=>$('adminRefresh')?.click(),150);
   }catch(err){
+    console.error('Secure client creation failed:',err);
     message.textContent=friendlyError(err);
     message.className='error';
   }finally{
