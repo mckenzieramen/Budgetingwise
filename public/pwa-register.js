@@ -4,7 +4,7 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js').catch(err => console.warn('PWA registration failed:', err));
   });
 }
-// Admin-only support inbox. Kept here so the existing admin module remains isolated.
+// Admin-only support inbox. Load the current tab implementation explicitly.
 if(document.getElementById('adminApp')){
-  import('./admin-support-v1.js?v=admin-support-v1').catch(err=>console.warn('Admin support inbox unavailable:',err));
+  import('./admin-support-v1.js?v=admin-support-v4').catch(err=>console.warn('Admin support inbox unavailable:',err));
 }
