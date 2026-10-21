@@ -1,5 +1,5 @@
 import{initializeApp,deleteApp,getApp}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js';
-import{getAuth,createUserWithEmailAndPassword,sendPasswordResetEmail,signOut,getIdTokenResult,setPersistence,inMemoryPersistence}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js';
+import{getAuth,createUserWithEmailAndPassword,signOut,getIdTokenResult,setPersistence,inMemoryPersistence}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js';
 import{getFirestore,doc,setDoc,serverTimestamp}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js';
 import{firebaseConfig}from'./firebase-config.js';
 
@@ -46,11 +46,10 @@ function prepareSecureCreateUi(){
   if(passwordInput){passwordInput.required=false;passwordInput.value='';}
   const panel=$('createClientPanel');
   const hint=panel?.querySelector(':scope > .hint');
-  if(hint)hint.textContent='A Budget ID is assigned automatically. The customer receives a Budgetingwise welcome email plus a separate secure password setup email.';
+  if(hint)hint.textContent='A Budget ID is assigned automatically. The customer receives the branded Budgetingwise welcome email.';
   const info=panel?.querySelector('.info-box');
-  if(info)info.textContent='ⓘ The welcome email contains the customer name, registered email, Budget ID and login button. Password setup is sent separately through Firebase.';
-  const created=$('createdPasswordBox');
-  if(created)created.classList.add('hidden');
+  if(info)info.textContent='ⓘ The welcome email contains the customer name, registered email, Budget ID and Budgetingwise login button. A temporary first-login password is shown to the administrator after creation and must be shared securely with the customer.';
+  $('createdPasswordBox')?.classList.add('hidden');
 }
 
 prepareSecureCreateUi();
@@ -62,7 +61,7 @@ $('createUserForm')?.addEventListener('submit',async e=>{
   const btn=e.submitter||form.querySelector('button[type="submit"]');
   if(btn)btn.disabled=true;
   const message=$('createMessage');
-  message.textContent='Creating client account and sending account emails…';
+  message.textContent='Creating client account and requesting the Budgetingwise welcome email…';
   message.className='hint';
   let secondaryApp;
   try{
@@ -86,7 +85,6 @@ $('createUserForm')?.addEventListener('submit',async e=>{
       createdAt:serverTimestamp(),lastLoginAt:null,createdBy:adminUser.uid
     });
 
-    await sendPasswordResetEmail(clientAuth,email);
     let welcomeRequested=true;
     try{await requestWelcomeEmail({firstName,lastName,email,budgetId})}catch(welcomeErr){
       welcomeRequested=false;
@@ -95,10 +93,15 @@ $('createUserForm')?.addEventListener('submit',async e=>{
     await signOut(clientAuth);
 
     message.textContent=welcomeRequested
-      ?'Client account created. Welcome email and secure password setup email were sent.'
-      :'Client account created and secure password setup email sent, but the welcome email request failed.';
+      ?'Client account created. Budgetingwise welcome email requested successfully.'
+      :'Client account created, but the welcome email request could not be sent.';
     message.className=welcomeRequested?'success':'error';
-    $('createdPasswordBox')?.classList.add('hidden');
+
+    const createdBox=$('createdPasswordBox');
+    const createdText=$('createdAccountText');
+    if(createdText)createdText.textContent=`Budget ID: ${budgetId} • Temporary password: ${oneTimeBootstrap}`;
+    createdBox?.classList.remove('hidden');
+
     form.reset();
     setTimeout(()=>$('adminRefresh')?.click(),150);
   }catch(err){
