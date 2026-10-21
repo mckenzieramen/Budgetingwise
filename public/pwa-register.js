@@ -4,7 +4,8 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js').catch(err => console.warn('PWA registration failed:', err));
   });
 }
-// Admin-only support inbox. Load the current tab implementation explicitly.
+// Admin-only enhancements.
 if(document.getElementById('adminApp')){
   import('./admin-support-v1.js?v=admin-support-v7').catch(err=>console.warn('Admin support inbox unavailable:',err));
+  import('./admin-drawer-resize-v1.js?v=admin-drawer-resize-v1').catch(err=>console.warn('Client details resize unavailable:',err));
 }
