@@ -1,0 +1,14 @@
+/* Desktop admin workspace: no page-level scroll at 100% browser zoom. Only the client list may scroll when it grows. */
+@media (min-width:1051px){
+  html,body{height:100%;margin:0;overflow:hidden!important}
+  #adminApp,#adminDashboard,.admin-layout,.admin-main{height:100vh!important;max-height:100vh!important;min-height:0!important;overflow:hidden!important}
+  .admin-main{min-width:0!important}
+  .admin-content{height:100%!important;min-height:0!important;max-height:100%!important;overflow:hidden!important;box-sizing:border-box!important}
+  .admin-grid{min-height:0!important;overflow:hidden!important}
+  #createClientPanel{overflow:hidden!important}
+  #clientsPanel{min-width:0!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important}
+  #clientsPanel .table-head{flex:0 0 auto!important}
+  #clientsPanel .table-wrap{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-gutter:stable}
+  #clientsPanel .admin-table{width:100%!important;table-layout:fixed!important;white-space:normal!important}
+  #clientsPanel .admin-table th,#clientsPanel .admin-table td{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+}
