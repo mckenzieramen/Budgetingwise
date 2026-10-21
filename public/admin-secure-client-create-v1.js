@@ -10,9 +10,9 @@ const adminDb=getFirestore(mainApp);
 const ACCOUNT_SERVICES_URL='https://script.google.com/macros/s/AKfycbz4wg4sG9c8fluO1F5233W3OgS-Qce06Wtzq1c_C-K18I9EuWd_Hzo_AEBmlppQi1jm/exec';
 
 function secureRandomPassword(){
-  const bytes=new Uint8Array(18);
+  const bytes=new Uint8Array(8);
   crypto.getRandomValues(bytes);
-  const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%';
+  const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   return Array.from(bytes,b=>alphabet[b%alphabet.length]).join('');
 }
 function friendlyError(e){
@@ -34,7 +34,7 @@ function prepareSecureCreateUi(){
   const hint=panel?.querySelector(':scope > .hint');
   if(hint)hint.textContent='A Budget ID is assigned automatically. The customer receives the branded Budgetingwise welcome email.';
   const info=panel?.querySelector('.info-box');
-  if(info)info.textContent='ⓘ For security, the welcome email does not contain a password. After account creation, securely provide the temporary first-login password shown below to the customer. They must create a new password after signing in.';
+  if(info)info.textContent='ⓘ An easy-to-type 8-character temporary first-login password is generated automatically. Share it securely with the customer. They must create a new password after signing in.';
   $('createdPasswordBox')?.classList.add('hidden');
 }
 prepareSecureCreateUi();
