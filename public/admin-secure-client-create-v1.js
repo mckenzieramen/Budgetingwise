@@ -6,6 +6,7 @@ import{firebaseConfig}from'./firebase-config.js';
 const $=id=>document.getElementById(id);
 const mainApp=getApp();
 const auth=getAuth(mainApp);
+const ACCOUNT_SERVICES_URL='https://script.google.com/macros/s/AKfycbz4wg4sG9c8fluO1F5233W3OgS-Qce06Wtzq1c_C-K18I9EuWd_Hzo_AEBmlppQi1jm/exec';
 
 function secureRandomPassword(){
   const bytes=new Uint8Array(18);
@@ -22,6 +23,22 @@ function friendlyError(e){
   return String(e?.message||'Unable to create this client account.').replace(/^Firebase:\s*/,'');
 }
 
+async function requestWelcomeEmail({firstName,lastName,email,budgetId}){
+  await fetch(ACCOUNT_SERVICES_URL,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify({
+      action:'welcome',
+      firstName,
+      lastName,
+      email,
+      budgetId,
+      loginUrl:'https://budgetingwise.pages.dev/'
+    })
+  });
+}
+
 function prepareSecureCreateUi(){
   const passwordInput=$('newTempPassword');
   const passwordLabel=passwordInput?.closest('label');
@@ -29,9 +46,9 @@ function prepareSecureCreateUi(){
   if(passwordInput){passwordInput.required=false;passwordInput.value='';}
   const panel=$('createClientPanel');
   const hint=panel?.querySelector(':scope > .hint');
-  if(hint)hint.textContent='A Budget ID is assigned automatically. The customer receives a secure password setup email after the account is created.';
+  if(hint)hint.textContent='A Budget ID is assigned automatically. The customer receives a Budgetingwise welcome email plus a separate secure password setup email.';
   const info=panel?.querySelector('.info-box');
-  if(info)info.textContent='ⓘ No password is emailed or displayed. The customer sets a private password using the secure link sent to their registered email, then completes the first-login security step.';
+  if(info)info.textContent='ⓘ The welcome email contains the customer name, registered email, Budget ID and login button. Password setup is sent separately through Firebase.';
   const created=$('createdPasswordBox');
   if(created)created.classList.add('hidden');
 }
@@ -45,7 +62,7 @@ $('createUserForm')?.addEventListener('submit',async e=>{
   const btn=e.submitter||form.querySelector('button[type="submit"]');
   if(btn)btn.disabled=true;
   const message=$('createMessage');
-  message.textContent='Creating client account and sending secure setup email…';
+  message.textContent='Creating client account and sending account emails…';
   message.className='hint';
   let secondaryApp;
   try{
@@ -70,10 +87,17 @@ $('createUserForm')?.addEventListener('submit',async e=>{
     });
 
     await sendPasswordResetEmail(clientAuth,email);
+    let welcomeRequested=true;
+    try{await requestWelcomeEmail({firstName,lastName,email,budgetId})}catch(welcomeErr){
+      welcomeRequested=false;
+      console.warn('Welcome email request failed:',welcomeErr);
+    }
     await signOut(clientAuth);
 
-    message.textContent='Client account created. A secure password setup email was sent to the customer.';
-    message.className='success';
+    message.textContent=welcomeRequested
+      ?'Client account created. Welcome email and secure password setup email were sent.'
+      :'Client account created and secure password setup email sent, but the welcome email request failed.';
+    message.className=welcomeRequested?'success':'error';
     $('createdPasswordBox')?.classList.add('hidden');
     form.reset();
     setTimeout(()=>$('adminRefresh')?.click(),150);
