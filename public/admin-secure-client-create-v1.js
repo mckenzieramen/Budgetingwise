@@ -34,8 +34,9 @@ function prepareSecureCreateUi(){
   const hint=panel?.querySelector(':scope > .hint');
   if(hint)hint.textContent='A Budget ID is assigned automatically. The customer receives the branded Budgetingwise welcome email.';
   const info=panel?.querySelector('.info-box');
-  if(info)info.textContent='ⓘ An easy-to-type 8-character temporary first-login password is generated automatically. Share it securely with the customer. They must create a new password after signing in.';
-  $('createdPasswordBox')?.classList.add('hidden');
+  if(info)info.textContent='ⓘ First-login access is generated automatically. The customer will be required to create a new password after the first successful sign-in.';
+  const createdBox=$('createdPasswordBox');
+  if(createdBox){createdBox.classList.add('hidden');createdBox.style.display='none';}
 }
 prepareSecureCreateUi();
 
@@ -67,11 +68,11 @@ $('createUserForm')?.addEventListener('submit',async e=>{
     let welcomeRequested=true;
     try{await requestWelcomeEmail({firstName,lastName,email,budgetId})}catch(welcomeErr){welcomeRequested=false;console.warn('Welcome email request failed:',welcomeErr);}
     await signOut(clientAuth);
-    message.textContent=welcomeRequested?'Client account created. Welcome email requested. Share the temporary first-login password below securely with the customer.':'Client account created, but the welcome email request could not be sent. Share the temporary first-login password below securely with the customer.';
+    message.textContent=welcomeRequested?'Client account created successfully. Welcome email requested.':'Client account created, but the welcome email request could not be sent.';
     message.className=welcomeRequested?'success':'error';
     const createdBox=$('createdPasswordBox'),createdText=$('createdAccountText');
-    if(createdText)createdText.textContent=`Budget ID: ${budgetId} • Temporary first-login password: ${oneTimeBootstrap}`;
-    createdBox?.classList.remove('hidden');
+    if(createdText)createdText.textContent='';
+    if(createdBox){createdBox.classList.add('hidden');createdBox.style.display='none';}
     form.reset();setTimeout(()=>$('adminRefresh')?.click(),150);
   }catch(err){console.error('Secure client creation failed:',err);message.textContent=friendlyError(err);message.className='error';}
   finally{if(secondaryApp)try{await deleteApp(secondaryApp)}catch{}if(btn)btn.disabled=false;}
