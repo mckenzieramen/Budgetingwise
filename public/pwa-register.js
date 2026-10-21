@@ -10,4 +10,5 @@ if(document.getElementById('adminApp')){
   import('./admin-support-v1.js?v=admin-support-v7').catch(err=>console.warn('Admin support inbox unavailable:',err));
   import('./admin-drawer-resize-v1.js?v=admin-drawer-resize-v1').catch(err=>console.warn('Client details resize unavailable:',err));
   import('./admin-form-guard-v1.js?v=admin-form-guard-v1').catch(err=>console.warn('Admin customer form guard unavailable:',err));
+  import('./admin-secure-client-create-v1.js?v=secure-create-v1').catch(err=>console.warn('Secure client creation unavailable:',err));
 }
