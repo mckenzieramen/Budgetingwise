@@ -12,9 +12,21 @@ if(document.getElementById('adminApp')){
   import('./admin-form-guard-v1.js?v=admin-form-guard-v1').catch(err=>console.warn('Admin customer form guard unavailable:',err));
   import('./admin-secure-client-create-v1.js?v=secure-create-v5').catch(err=>console.warn('Secure client creation unavailable:',err));
 
-  // Load the support navigation module as part of the Admin shell so every
-  // sidebar tab has a working destination immediately after admin sign-in.
-  // The module itself starts its Firestore listener only for an authenticated
-  // admin session.
-  import('./admin-support-v1.js?v=admin-support-v11').catch(err=>console.warn('Admin support inbox unavailable:',err));
+  // Chat Support is intentionally lazy-loaded. Loading its Firestore listener
+  // during the Admin sign-in screen can compete with the login/bootstrap work
+  // and make the page appear frozen. The module is loaded only when the admin
+  // explicitly opens Chat Support.
+  let supportLoaded=false;
+  const loadSupport=()=>{
+    if(supportLoaded)return;
+    supportLoaded=true;
+    import('./admin-support-v1.js?v=admin-support-v11').catch(err=>{
+      supportLoaded=false;
+      console.warn('Admin support inbox unavailable:',err);
+    });
+  };
+  document.addEventListener('click',event=>{
+    const target=event.target.closest('#adminSupportNav');
+    if(target)loadSupport();
+  },true);
 }
