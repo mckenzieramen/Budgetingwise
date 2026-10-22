@@ -1,26 +1,15 @@
 import 'https://cdn.jsdelivr.net/gh/mckenzieramen/Budgetingwise@ee7afdb702bdcb67e0796295090c3a412f859a80/public/chat-support-customer-v2.js';
 
-// Extend the customer concern picker without disturbing the stable chat flow.
-const enhanceCustomerConcerns=()=>{
-  document.querySelectorAll('.bw-support-quick-actions').forEach(box=>{
-    if(box.dataset.extendedConcerns==='1')return;
-    box.dataset.extendedConcerns='1';
-    const add=(type,label,message)=>{
-      if(box.querySelector(`[data-extra-concern="${type}"]`))return;
-      const b=document.createElement('button');
-      b.type='button';b.dataset.extraConcern=type;b.textContent=label;
-      b.onclick=async()=>{
-        const input=document.getElementById('bwSupportInput');
-        if(!input)return;
-        input.value=message;
-        input.focus();
-        input.dispatchEvent(new Event('input',{bubbles:true}));
-      };
-      box.appendChild(b);
-    };
-    add('report-error','Report an error','I would like to report an error. Here are the details: ');
-    add('suggestion','Share a suggestion','I have a suggestion for Budgetingwise: ');
-  });
-};
-setInterval(enhanceCustomerConcerns,700);
-enhanceCustomerConcerns();
+// Additive customer workflow layer. Stable chat behavior remains in the pinned module above.
+const q=(s,p=document)=>p.querySelector(s),qa=(s,p=document)=>[...p.querySelectorAll(s)];
+function setDraft(text){const i=q('#bwSupportInput');if(!i)return;i.value=text;i.dispatchEvent(new Event('input',{bubbles:true}));i.focus()}
+function mainPicker(){return `<div class="bw-support-message agent bw-workflow-picker"><div><p>Hi! 👋 What can we help you with today?</p><div class="bw-support-quick-actions"><button type="button" data-flow="activation">Activation key request</button><button type="button" data-flow="account">Account / login concern</button><button type="button" data-flow="budgeting">Budgeting feature concern</button><button type="button" data-flow="general">General question</button><button type="button" data-flow="error">Report an error</button><button type="button" data-flow="suggestion">Share a suggestion</button></div><time>Budgetingwise Support</time></div></div>`}
+function showFreshPicker(){const m=q('#bwSupportMessages');if(!m)return;m.innerHTML='<div class="bw-support-day">New support ticket</div>'+mainPicker();bindFlows(m)}
+function bindFlows(scope=document){qa('[data-flow]',scope).forEach(b=>{if(b.dataset.workflowBound)return;b.dataset.workflowBound='1';b.onclick=()=>route(b.dataset.flow)})}
+function route(type){if(type==='account')return showAccountMenu();const map={activation:'Activation Key Request — Please send or resend my Budgetingwise activation key.',budgeting:'Budgeting Feature Concern — I need help with a Budgetingwise budgeting feature.',general:'General Question — I have a general question about Budgetingwise.',error:'Report an Error — I would like to report an error. Here are the details: ',suggestion:'Suggestion — I have a suggestion for Budgetingwise: '};setDraft(map[type]||map.general)}
+function showAccountMenu(){const m=q('#bwSupportMessages');if(!m)return;q('.bw-account-workflow',m)?.remove();const box=document.createElement('div');box.className='bw-support-message agent bw-account-workflow';box.innerHTML=`<div><p><strong>Account & Login</strong><br>Choose your concern so we can route your ticket correctly.</p><div class="bw-support-quick-actions"><button type="button" data-account-flow="forgot">Forgot password</button><button type="button" data-account-flow="signin">Can't sign in</button><button type="button" data-account-flow="activation">Account activation</button><button type="button" data-account-flow="change">Change password</button><button type="button" data-account-flow="other">Other account concern</button></div><time>Budgetingwise Support</time></div>`;m.appendChild(box);m.scrollTop=m.scrollHeight;qa('[data-account-flow]',box).forEach(b=>b.onclick=()=>accountRoute(b.dataset.accountFlow))}
+function accountRoute(type){if(type==='forgot')return forgotFlow();const map={signin:"Account / Login Concern — I can't sign in to my Budgetingwise account.",activation:'Account Activation Concern — I need help activating my Budgetingwise account.',change:'Change Password Concern — I need help changing my Budgetingwise password.',other:'Account / Login Concern — I need help with my Budgetingwise account.'};setDraft(map[type]||map.other)}
+function forgotFlow(){const m=q('#bwSupportMessages');if(!m)return;q('.bw-forgot-workflow',m)?.remove();const box=document.createElement('div');box.className='bw-support-message agent bw-forgot-workflow';box.innerHTML=`<div><p><strong>Forgot Password</strong><br>For your security, never send your password in chat. Enter only your registered email and Budget ID below so Support can identify the recovery request.</p><div style="display:grid;gap:7px;margin-top:9px"><input data-f-email type="email" placeholder="Registered email" style="padding:10px;border:1px solid #ddd8ff;border-radius:9px"><input data-f-bid placeholder="Budget ID (BID#)" style="padding:10px;border:1px solid #ddd8ff;border-radius:9px"><button type="button" data-f-continue style="padding:10px;border:0;border-radius:9px;background:#6544ef;color:#fff;font-weight:800;cursor:pointer">Continue recovery</button><small data-f-msg></small></div><time>Budgetingwise Support</time></div>`;m.appendChild(box);m.scrollTop=m.scrollHeight;q('[data-f-continue]',box).onclick=()=>{const email=q('[data-f-email]',box).value.trim(),bid=q('[data-f-bid]',box).value.trim().toUpperCase(),msg=q('[data-f-msg]',box);if(!email||!bid){msg.textContent='Please enter both your registered email and Budget ID.';return}msg.textContent='Recovery request ready. Send it to Support to continue verification.';setDraft(`Forgot Password — Registered email: ${email} | Budget ID: ${bid}. Please assist with secure account verification and password recovery.`)}}
+function enhanceClosed(){const rating=q('#bwSupportRating');if(rating&&!q('[data-survey-submit]',rating)){const b=document.createElement('button');b.type='button';b.dataset.surveySubmit='1';b.textContent='Send survey';b.style.cssText='margin-top:9px;width:100%;padding:10px;border:0;border-radius:10px;background:#6544ef;color:#fff;font-weight:800;cursor:pointer';b.onclick=()=>{const t=q('#bwSupportThanks');if(t)t.textContent=t.textContent||'Please select your star rating first.'};rating.appendChild(b)}const n=q('#bwNewTicket');if(n&&!n.dataset.freshWorkflow){n.dataset.freshWorkflow='1';n.addEventListener('click',()=>setTimeout(showFreshPicker,350))}}
+function isolateTicket(){const m=q('#bwSupportMessages');if(!m)return;const rows=qa('.bw-support-message',m);let marker=-1;rows.forEach((r,i)=>{if((r.textContent||'').includes('A new support conversation has been started.'))marker=i});if(marker>=0){rows.forEach((r,i)=>r.style.display=i<=marker?'none':'');if(!rows.slice(marker+1).some(r=>r.style.display!=='none')&&!q('.bw-workflow-picker',m)){m.insertAdjacentHTML('beforeend',mainPicker());bindFlows(m)}}else bindFlows(m)}
+const enhance=()=>{enhanceClosed();isolateTicket();bindFlows()};new MutationObserver(()=>enhance()).observe(document.documentElement,{childList:true,subtree:true});setInterval(enhance,700);enhance();

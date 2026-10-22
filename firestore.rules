@@ -15,10 +15,7 @@ service cloud.firestore {
       allow delete: if isAdmin();
       allow update: if isAdmin() || (own(uid)
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
-          'mustChangePassword',
-          'accountActivated',
-          'activatedAt',
-          'passwordChangedAt'
+          'mustChangePassword','accountActivated','activatedAt','passwordChangedAt'
         ]));
       match /transactions/{id} { allow read, write: if own(uid) || isAdmin(); }
       match /goals/{id} { allow read, write: if own(uid) || isAdmin(); }
@@ -26,17 +23,16 @@ service cloud.firestore {
 
     match /supportThreads/{uid} {
       allow read: if own(uid) || isAdmin();
-      allow create: if own(uid)
+      allow create: if isAdmin() || (own(uid)
         && request.resource.data.uid == request.auth.uid
-        && request.resource.data.customerUnread == 0
-        && request.resource.data.status == 'open'
-        || isAdmin();
+        && request.resource.data.status == 'open');
       allow update: if isAdmin() || (own(uid)
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
           'uid','customerEmail','customerName','budgetId','guest','customerUnread',
-          'status','createdAt','updatedAt','lastSender','adminUnread',
-          'requestType','activationKeyRequested','rating'
+          'status','customerCanReply','createdAt','updatedAt','lastSender','adminUnread',
+          'requestType','concernLabel','activationKeyRequested','rating','closedAt',
+          'ticketNumber','currentTicketId','archivedCurrentTicket','ticketStartedAt'
         ]));
       allow delete: if isAdmin();
 
@@ -49,6 +45,12 @@ service cloud.firestore {
           && request.resource.data.text.size() <= 800)
           || (isAdmin() && request.resource.data.sender == 'admin');
         allow update, delete: if isAdmin();
+      }
+
+      match /ticketHistory/{ticketId} {
+        allow read: if own(uid) || isAdmin();
+        allow create, update: if isAdmin() || own(uid);
+        allow delete: if isAdmin();
       }
     }
   }
