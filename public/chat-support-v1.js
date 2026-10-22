@@ -5,22 +5,22 @@ import{firebaseConfig}from'./firebase-config.js';
 if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.pathname)){
   console.info('Customer Chat Support disabled on Admin Portal.');
 }else{
-  // The stable customer support module expects Firebase's [DEFAULT] app.
-  // Guest-only pages can otherwise reach it before a default app exists.
   if(!getApps().some(app=>app.name==='[DEFAULT]')){
     try{initializeApp(firebaseConfig)}catch(err){
       if(!/already exists|duplicate-app/i.test(String(err?.message||err)))throw err;
     }
   }
 
-  // Additive visual polish only. Existing Chat Support behavior stays untouched.
   const polishChatControls=()=>{
     if(!document.getElementById('bwChatControlPolish')){
       const style=document.createElement('style');
       style.id='bwChatControlPolish';
       style.textContent=`
 #bwSupportPanel{--bw-chat-accent:#6246e5;--bw-chat-ink:#28233f;--bw-chat-muted:#77718e;--bw-chat-line:#ebe8f6}
-#bwSupportSend{width:42px!important;min-width:42px!important;height:42px!important;padding:0!important;border:0!important;border-radius:13px!important;display:inline-grid!important;place-items:center!important;background:linear-gradient(135deg,#6f52f5,#5435dc)!important;color:#fff!important;box-shadow:0 7px 18px rgba(84,53,220,.24)!important;cursor:pointer!important;transition:transform .16s ease,box-shadow .16s ease,opacity .16s ease!important;font-size:0!important;line-height:0!important}
+.bw-support-compose{min-width:0!important;box-sizing:border-box!important;gap:8px!important}
+.bw-support-compose:not(.hidden){display:flex!important;align-items:flex-end!important}
+#bwSupportInput{flex:1 1 auto!important;min-width:0!important;width:auto!important;max-width:100%!important;box-sizing:border-box!important;pointer-events:auto!important;position:relative!important;z-index:1!important}
+#bwSupportSend{width:42px!important;min-width:42px!important;max-width:42px!important;height:42px!important;min-height:42px!important;padding:0!important;border:0!important;border-radius:13px!important;display:inline-grid!important;place-items:center!important;flex:0 0 42px!important;position:relative!important;inset:auto!important;background:linear-gradient(135deg,#6f52f5,#5435dc)!important;color:#fff!important;box-shadow:0 7px 18px rgba(84,53,220,.24)!important;cursor:pointer!important;transition:transform .16s ease,box-shadow .16s ease,opacity .16s ease!important;font-size:0!important;line-height:0!important;overflow:hidden!important}
 #bwSupportSend:hover{transform:translateY(-1px)!important;box-shadow:0 10px 22px rgba(84,53,220,.30)!important}
 #bwSupportSend:active{transform:scale(.96)!important}
 #bwSupportSend:disabled{opacity:.48!important;cursor:not-allowed!important;transform:none!important}
@@ -42,16 +42,23 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
 .bw-support-day{font-weight:800!important;letter-spacing:.02em!important;color:#8b84a1!important}
 .bw-flow-title{letter-spacing:-.01em!important;color:var(--bw-chat-ink)!important}
 .bw-flow-sub{color:var(--bw-chat-muted)!important}
-@media(max-width:380px){.bw-support-quick-actions button{min-height:42px!important}.bw-premium-nav-icon{width:26px;height:26px;min-width:26px}}
+@media(max-width:380px){.bw-support-quick-actions button{min-height:42px!important}.bw-premium-nav-icon{width:26px;height:26px;min-width:26px}.bw-support-compose{gap:7px!important}#bwSupportSend{width:40px!important;min-width:40px!important;max-width:40px!important;height:40px!important;min-height:40px!important;flex-basis:40px!important}}
 `;
       document.head.appendChild(style);
     }
-    const send=document.getElementById('bwSupportSend');
-    if(send && !send.querySelector('.bw-send-icon')){
-      send.innerHTML='<svg class="bw-send-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13"></path><path d="m22 2-7 20-4-9-9-4Z"></path></svg>';
+
+    // Stable module creates a plain submit button without an ID. Normalize it every render.
+    const send=document.getElementById('bwSupportSend')||document.querySelector('#bwSupportForm button[type="submit"],.bw-support-compose button[type="submit"]');
+    if(send){
+      if(send.id!=='bwSupportSend')send.id='bwSupportSend';
+      const hasOnlyIcon=send.children.length===1&&send.firstElementChild?.classList.contains('bw-send-icon')&&!(send.textContent||'').trim();
+      if(!hasOnlyIcon)send.innerHTML='<svg class="bw-send-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13"></path><path d="m22 2-7 20-4-9-9-4Z"></path></svg>';
       send.setAttribute('aria-label','Send message');
       send.setAttribute('title','Send message');
     }
+
+    const input=document.getElementById('bwSupportInput');
+    if(input&&!input.disabled){input.readOnly=false;input.style.pointerEvents='auto'}
 
     const icons={
       activation:'<svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"></circle><path d="m11 12 9-9M17 6l2 2M14 9l2 2"></path></svg>',
@@ -69,12 +76,10 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
     document.querySelectorAll('.bw-support-quick-actions button').forEach(button=>{
       if(button.dataset.premiumIcon)return;
       const key=button.dataset.flow||button.dataset.accountFlow||'';
-      const icon=icons[key];
-      if(!icon)return;
+      const svg=icons[key];if(!svg)return;
       const label=(button.textContent||'').replace(/^[^A-Za-z0-9]+\s*/,'').trim();
-      button.innerHTML='<span class="bw-premium-nav-icon" aria-hidden="true">'+icon+'</span><span class="bw-premium-nav-label"></span>';
-      const labelNode=button.querySelector('.bw-premium-nav-label');
-      if(labelNode)labelNode.textContent=label;
+      button.innerHTML='<span class="bw-premium-nav-icon" aria-hidden="true">'+svg+'</span><span class="bw-premium-nav-label"></span>';
+      const labelNode=button.querySelector('.bw-premium-nav-label');if(labelNode)labelNode.textContent=label;
       button.dataset.premiumIcon='1';
     });
   };
@@ -86,13 +91,9 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
     polishChatControls();
     import('./chat-ticket-history-v3.js?v=ticket-history-v6').catch(err=>console.warn('Ticket history unavailable:',err));
     document.addEventListener('click',event=>{
-      const star=event.target.closest('.bw-support-stars [data-rate]');
-      if(!star)return;
+      const star=event.target.closest('.bw-support-stars [data-rate]');if(!star)return;
       const rating=Number(star.dataset.rate||0);
-      document.querySelectorAll('.bw-support-stars [data-rate]').forEach(button=>{
-        button.classList.toggle('selected',Number(button.dataset.rate)<=rating);
-        button.setAttribute('aria-pressed',Number(button.dataset.rate)===rating?'true':'false');
-      });
+      document.querySelectorAll('.bw-support-stars [data-rate]').forEach(button=>{button.classList.toggle('selected',Number(button.dataset.rate)<=rating);button.setAttribute('aria-pressed',Number(button.dataset.rate)===rating?'true':'false')});
     },true);
   }).catch(err=>console.warn('Customer support unavailable:',err));
 }
