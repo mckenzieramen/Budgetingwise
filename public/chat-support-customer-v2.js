@@ -276,7 +276,7 @@ function forgotFlow(){
         otp
       });
 
-      recoveryToken=result.recoveryToken||result.token||result.resetToken||'';
+      recoveryToken=result.recoveryToken||result.verificationToken||result.token||result.resetToken||'';
       if(!recoveryToken)throw new Error('Recovery token was not returned.');
 
       q('[data-otp]',box).value='';
