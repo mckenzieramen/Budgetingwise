@@ -11,8 +11,6 @@ const addOpenStatus=()=>{
   open.innerHTML='<span class="asp-state-dot open"></span>Open';
   menu.prepend(open);
   open.addEventListener('click',async()=>{
-    // Reuse the support UI by updating the selected label, then persist through
-    // the same Firestore document used by the active ticket.
     const label=document.getElementById('aspStateLabel');
     if(label)label.textContent='Open';
     menu.classList.add('hidden');
@@ -25,3 +23,6 @@ const addOpenStatus=()=>{
 };
 setTimeout(addOpenStatus,0);
 document.addEventListener('click',()=>setTimeout(addOpenStatus,0));
+
+// Additive customer-information history panel. Existing support features remain untouched.
+import('./chat-ticket-history-v2.js?v=ticket-history-v2').catch(err=>console.warn('Support ticket history unavailable:',err));
