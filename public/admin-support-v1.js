@@ -1,7 +1,5 @@
 import 'https://cdn.jsdelivr.net/gh/mckenzieramen/Budgetingwise@ec1c19c5a87dc239619152546f9b56f506fa6525/public/admin-support-v1.js';
 
-// Small UI patch: include Open in the compose status menu without touching the
-// stable support implementation above.
 const addOpenStatus=()=>{
   const menu=document.getElementById('aspStateMenu');
   if(!menu||menu.querySelector('[data-compose-status="open"]'))return;
@@ -24,5 +22,5 @@ const addOpenStatus=()=>{
 setTimeout(addOpenStatus,0);
 document.addEventListener('click',()=>setTimeout(addOpenStatus,0));
 
-// Additive customer-information history panel. Existing support features remain untouched.
-import('./chat-ticket-history-v2.js?v=ticket-history-v2').catch(err=>console.warn('Support ticket history unavailable:',err));
+// Closed-ticket history + unique ticket tabs.
+import('./chat-ticket-history-v3.js?v=ticket-history-v3').catch(err=>console.warn('Support ticket history unavailable:',err));
