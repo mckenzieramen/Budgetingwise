@@ -29,9 +29,9 @@ async function postAccountService(payload){
 async function requestWelcomeEmail({firstName,lastName,email,budgetId,activationKey,activationExpiresAt}){
   await postAccountService({action:'welcome',firstName,lastName,email,budgetId,activationKey,activationExpiresAt,loginUrl:'https://budgetingwise.pages.dev/?activate=1'});
 }
-async function syncRecoveryIdentity({uid,email,budgetId,firstName,adminIdToken}){
+async function syncRecoveryIdentity({uid,email,budgetId,firstName,lastName,status,accountActivated,adminIdToken}){
   if(!uid||!email||!budgetId||!adminIdToken)return;
-  await postAccountService({action:'syncRecoveryIdentity',uid,email:String(email).trim().toLowerCase(),budgetId:String(budgetId).trim().toUpperCase(),firstName:firstName||'Customer',adminIdToken});
+  await postAccountService({action:'syncRecoveryIdentity',uid,email:String(email).trim().toLowerCase(),budgetId:String(budgetId).trim().toUpperCase(),firstName:firstName||'Customer',lastName:lastName||'',status:status||'active',accountActivated:accountActivated===true,adminIdToken});
 }
 async function syncAllRecoveryIdentities(user){
   if(!user)return;
@@ -42,7 +42,7 @@ async function syncAllRecoveryIdentities(user){
   snap.forEach(d=>{
     const u=d.data()||{};
     if(u.role==='admin'||!u.email||!u.budgetId)return;
-    jobs.push(syncRecoveryIdentity({uid:d.id,email:u.email,budgetId:u.budgetId,firstName:u.firstName||'Customer',adminIdToken:token.token}));
+    jobs.push(syncRecoveryIdentity({uid:d.id,email:u.email,budgetId:u.budgetId,firstName:u.firstName||'Customer',lastName:u.lastName||'',status:u.status||'active',accountActivated:u.accountActivated===true,adminIdToken:token.token}));
   });
   await Promise.allSettled(jobs);
 }
@@ -92,7 +92,7 @@ $('createUserForm')?.addEventListener('submit',async e=>{
       activationExpiresAt:Timestamp.fromMillis(activationExpiresAtMs),createdAt:serverTimestamp(),lastLoginAt:null,createdBy:adminUser.uid
     });
 
-    await syncRecoveryIdentity({uid:cred.user.uid,email,budgetId,firstName,adminIdToken:token.token});
+    await syncRecoveryIdentity({uid:cred.user.uid,email,budgetId,firstName,lastName,status:'active',accountActivated:false,adminIdToken:token.token});
 
     let welcomeRequested=true;
     try{await requestWelcomeEmail({firstName,lastName,email,budgetId,activationKey,activationExpiresAt:new Date(activationExpiresAtMs).toISOString()})}catch(welcomeErr){welcomeRequested=false;console.warn('Activation email request failed:',welcomeErr);}
