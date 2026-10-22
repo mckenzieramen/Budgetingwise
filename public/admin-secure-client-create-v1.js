@@ -1,6 +1,6 @@
 import{initializeApp,deleteApp,getApp}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js';
-import{getAuth,createUserWithEmailAndPassword,signOut,getIdTokenResult,setPersistence,inMemoryPersistence}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js';
-import{getFirestore,doc,setDoc,serverTimestamp,Timestamp}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js';
+import{getAuth,createUserWithEmailAndPassword,signOut,getIdTokenResult,setPersistence,inMemoryPersistence,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js';
+import{getFirestore,doc,setDoc,serverTimestamp,Timestamp,collection,getDocs}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js';
 import{firebaseConfig}from'./firebase-config.js';
 
 const $=id=>document.getElementById(id);
@@ -23,8 +23,28 @@ function friendlyError(e){
   if(code.includes('permission-denied'))return'Your admin session does not currently have permission to save this customer profile. Please sign out and sign in again.';
   return String(e?.message||'Unable to create this client account.').replace(/^Firebase:\s*/,'');
 }
+async function postAccountService(payload){
+  await fetch(ACCOUNT_SERVICES_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+}
 async function requestWelcomeEmail({firstName,lastName,email,budgetId,activationKey,activationExpiresAt}){
-  await fetch(ACCOUNT_SERVICES_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'welcome',firstName,lastName,email,budgetId,activationKey,activationExpiresAt,loginUrl:'https://budgetingwise.pages.dev/?activate=1'})});
+  await postAccountService({action:'welcome',firstName,lastName,email,budgetId,activationKey,activationExpiresAt,loginUrl:'https://budgetingwise.pages.dev/?activate=1'});
+}
+async function syncRecoveryIdentity({uid,email,budgetId,firstName,adminIdToken}){
+  if(!uid||!email||!budgetId||!adminIdToken)return;
+  await postAccountService({action:'syncRecoveryIdentity',uid,email:String(email).trim().toLowerCase(),budgetId:String(budgetId).trim().toUpperCase(),firstName:firstName||'Customer',adminIdToken});
+}
+async function syncAllRecoveryIdentities(user){
+  if(!user)return;
+  const token=await getIdTokenResult(user,true);
+  if(token.claims.admin!==true)return;
+  const snap=await getDocs(collection(adminDb,'users'));
+  const jobs=[];
+  snap.forEach(d=>{
+    const u=d.data()||{};
+    if(u.role==='admin'||!u.email||!u.budgetId)return;
+    jobs.push(syncRecoveryIdentity({uid:d.id,email:u.email,budgetId:u.budgetId,firstName:u.firstName||'Customer',adminIdToken:token.token}));
+  });
+  await Promise.allSettled(jobs);
 }
 function prepareSecureCreateUi(){
   const passwordInput=$('newTempPassword');
@@ -40,6 +60,11 @@ function prepareSecureCreateUi(){
   if(createdBox){createdBox.classList.add('hidden');createdBox.style.display='none';}
 }
 prepareSecureCreateUi();
+
+onAuthStateChanged(auth,user=>{
+  if(!user)return;
+  syncAllRecoveryIdentities(user).catch(err=>console.warn('Recovery identity sync skipped:',err));
+});
 
 $('createUserForm')?.addEventListener('submit',async e=>{
   e.preventDefault();e.stopImmediatePropagation();
@@ -66,6 +91,8 @@ $('createUserForm')?.addEventListener('submit',async e=>{
       budgetId,firstName,lastName,email,authEmail:email,status:'active',accountActivated:false,mustChangePassword:true,
       activationExpiresAt:Timestamp.fromMillis(activationExpiresAtMs),createdAt:serverTimestamp(),lastLoginAt:null,createdBy:adminUser.uid
     });
+
+    await syncRecoveryIdentity({uid:cred.user.uid,email,budgetId,firstName,adminIdToken:token.token});
 
     let welcomeRequested=true;
     try{await requestWelcomeEmail({firstName,lastName,email,budgetId,activationKey,activationExpiresAt:new Date(activationExpiresAtMs).toISOString()})}catch(welcomeErr){welcomeRequested=false;console.warn('Activation email request failed:',welcomeErr);}

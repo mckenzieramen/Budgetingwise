@@ -17,7 +17,7 @@ if(document.getElementById('adminApp')){
     .catch(err=>console.warn('Premium admin dialogs unavailable:',err));
   import('./admin-drawer-resize-v1.js?v=admin-drawer-resize-v1').catch(err=>console.warn('Client details resize unavailable:',err));
   import('./admin-form-guard-v1.js?v=admin-form-guard-v1').catch(err=>console.warn('Admin customer form guard unavailable:',err));
-  import('./admin-secure-client-create-v1.js?v=secure-create-v5').catch(err=>console.warn('Secure client creation unavailable:',err));
+  import('./admin-secure-client-create-v1.js?v=secure-create-v6').catch(err=>console.warn('Secure client creation unavailable:',err));
 
   // Load Chat Support after the normal Admin page is idle. There is no click
   // interception or synthetic re-click here: admin-support-v1 owns the tab's
