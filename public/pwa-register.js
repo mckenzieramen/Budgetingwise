@@ -19,31 +19,13 @@ if(document.getElementById('adminApp')){
   import('./admin-form-guard-v1.js?v=admin-form-guard-v1').catch(err=>console.warn('Admin customer form guard unavailable:',err));
   import('./admin-secure-client-create-v1.js?v=secure-create-v5').catch(err=>console.warn('Secure client creation unavailable:',err));
 
-  // Keep the Chat Support navigation visible at all times, but lazy-load the
-  // heavier support inbox only after the admin clicks it. This avoids doing
-  // Firestore support work on the sign-in screen while preserving navigation.
-  const chatIcon='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.4a7.4 7.4 0 0 1-7.7 7.1 8.8 8.8 0 0 1-3.2-.6L4 20l1.5-4.1A6.8 6.8 0 0 1 4 11.4a7.4 7.4 0 0 1 7.9-7.1A7.4 7.4 0 0 1 20 11.4Z"/><path d="M8.2 10.8h7.6M8.2 13.8h4.8"/></svg>';
-  const ensureSupportNav=()=>{
-    const nav=document.querySelector('.admin-nav');
-    if(!nav)return null;
-    let button=document.getElementById('adminSupportNav');
-    if(!button){
-      button=document.createElement('button');
-      button.id='adminSupportNav';
-      button.type='button';
-      nav.appendChild(button);
-    }
-    if(!button.dataset.ready){
-      button.innerHTML=`<span style="display:inline-grid;place-items:center;vertical-align:middle">${chatIcon}</span>&nbsp; Chat Support <b id="aspUnread"></b>`;
-      button.dataset.ready='1';
-    }
-    return button;
-  };
-
+  // Chat Support button already exists in admin.html. Keep the support module
+  // lazy-loaded so it cannot slow the Admin sign-in/bootstrap. The first click
+  // loads the module; after it mounts, its own click handler opens the inbox.
   let supportPromise=null;
   const loadSupport=()=>{
     if(!supportPromise){
-      supportPromise=import('./admin-support-v1.js?v=admin-support-v12').catch(err=>{
+      supportPromise=import('./admin-support-v1.js?v=admin-support-v13').catch(err=>{
         supportPromise=null;
         console.warn('Admin support inbox unavailable:',err);
         throw err;
@@ -52,22 +34,25 @@ if(document.getElementById('adminApp')){
     return supportPromise;
   };
 
-  ensureSupportNav();
-  const observer=new MutationObserver(()=>ensureSupportNav());
-  observer.observe(document.getElementById('adminApp'),{childList:true,subtree:true});
-
-  document.addEventListener('click',event=>{
+  document.addEventListener('click',async event=>{
     const target=event.target.closest('#adminSupportNav');
-    if(!target)return;
+    if(!target || target.dataset.supportReady==='1')return;
+
+    // Stop only this initial click. Never programmatically click the button:
+    // doing so can recursively re-enter this capture listener and freeze Chrome.
     event.preventDefault();
-    loadSupport().then(()=>{
-      // admin-support-v1 attaches its handler when loaded. Re-trigger once so
-      // the first click opens the inbox instead of requiring a second click.
-      if(!target.dataset.supportRetried){
-        target.dataset.supportRetried='1';
-        target.click();
-        setTimeout(()=>delete target.dataset.supportRetried,0);
-      }
-    }).catch(()=>{});
+    event.stopImmediatePropagation();
+    target.disabled=true;
+
+    try{
+      await loadSupport();
+      target.dataset.supportReady='1';
+      target.disabled=false;
+      // admin-support-v1 has mounted by now. Dispatch a non-recursive bubbling
+      // event that skips this capture branch because supportReady is set.
+      target.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}));
+    }catch{
+      target.disabled=false;
+    }
   },true);
 }
