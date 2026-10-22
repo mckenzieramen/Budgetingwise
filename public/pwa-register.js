@@ -19,40 +19,15 @@ if(document.getElementById('adminApp')){
   import('./admin-form-guard-v1.js?v=admin-form-guard-v1').catch(err=>console.warn('Admin customer form guard unavailable:',err));
   import('./admin-secure-client-create-v1.js?v=secure-create-v5').catch(err=>console.warn('Secure client creation unavailable:',err));
 
-  // Chat Support button already exists in admin.html. Keep the support module
-  // lazy-loaded so it cannot slow the Admin sign-in/bootstrap. The first click
-  // loads the module; after it mounts, its own click handler opens the inbox.
-  let supportPromise=null;
-  const loadSupport=()=>{
-    if(!supportPromise){
-      supportPromise=import('./admin-support-v1.js?v=admin-support-v13').catch(err=>{
-        supportPromise=null;
-        console.warn('Admin support inbox unavailable:',err);
-        throw err;
-      });
-    }
-    return supportPromise;
+  // Load Chat Support after the normal Admin page is idle. There is no click
+  // interception or synthetic re-click here: admin-support-v1 owns the tab's
+  // click handler directly. This keeps navigation simple and prevents loops.
+  const loadAdminSupport=()=>{
+    import('./admin-support-v1.js?v=admin-support-v14').catch(err=>console.warn('Admin support inbox unavailable:',err));
   };
-
-  document.addEventListener('click',async event=>{
-    const target=event.target.closest('#adminSupportNav');
-    if(!target || target.dataset.supportReady==='1')return;
-
-    // Stop only this initial click. Never programmatically click the button:
-    // doing so can recursively re-enter this capture listener and freeze Chrome.
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    target.disabled=true;
-
-    try{
-      await loadSupport();
-      target.dataset.supportReady='1';
-      target.disabled=false;
-      // admin-support-v1 has mounted by now. Dispatch a non-recursive bubbling
-      // event that skips this capture branch because supportReady is set.
-      target.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}));
-    }catch{
-      target.disabled=false;
-    }
-  },true);
+  if('requestIdleCallback' in window){
+    requestIdleCallback(loadAdminSupport,{timeout:2500});
+  }else{
+    setTimeout(loadAdminSupport,1200);
+  }
 }
