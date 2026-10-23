@@ -41,5 +41,6 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
   setTimeout(()=>{
     import('./support-ticket-customer-v1.js?v=one-concern-history-v1').catch(error=>console.warn('Customer ticket lifecycle unavailable:',error));
     import('./support-ticket-newticket-fix-v1.js?v=new-ticket-handoff-v1').catch(error=>console.warn('New ticket handoff unavailable:',error));
+    import('./customer-force-signout-v1.js?v=force-signout-v1').catch(error=>console.warn('Customer force sign-out unavailable:',error));
   },0);
 }

@@ -22,5 +22,6 @@ const addOpenStatus=()=>{
 setTimeout(addOpenStatus,0);
 document.addEventListener('click',()=>setTimeout(addOpenStatus,0));
 
-// Closed-ticket history + unique ticket tabs.
 import('./chat-ticket-history-v3.js?v=ticket-history-v3').catch(err=>console.warn('Support ticket history unavailable:',err));
+import('./admin-ticket-history-sort-v1.js?v=history-sort-v1').catch(err=>console.warn('Ticket history sort unavailable:',err));
+import('./admin-support-suite-v1.js?v=support-suite-v1').catch(err=>console.warn('Enhanced Admin Support unavailable:',err));
