@@ -28,71 +28,30 @@ import('./admin-ticket-history-sort-v1.js?v=history-sort-v1').catch(err=>console
 const suite=import('./admin-support-suite-v1.js?v=suite-v3-navigation');
 suite.then(()=>{
   const cleanSavedReplyButton=()=>document.getElementById('bwsSavedReplies')?.remove();
-  cleanSavedReplyButton();
-  setTimeout(cleanSavedReplyButton,250);
-
-  setTimeout(()=>{
-    const active=document.querySelector('#aspThreads [data-thread].active');
-    if(active)active.click();
-  },320);
-
-  const syncPriority=()=>{
-    const select=document.querySelector('#bwsTicketControls [data-priority]');
-    if(!select)return;
-    const value=(select.value||'Normal').toLowerCase();
-    select.dataset.priority=value;
-    const controls=document.getElementById('bwsTicketControls');
-    if(controls)controls.dataset.priority=value;
-  };
-  document.addEventListener('change',e=>{
-    if(e.target.matches('#bwsTicketControls [data-priority]'))syncPriority();
-  });
-  setTimeout(syncPriority,360);
-
-  document.addEventListener('pointerdown',e=>{
-    const tab=e.target.closest('#bwsSupportTabs [data-tab]');
-    if(!tab)return;
-    document.querySelectorAll('#bwsSupportTabs [data-tab]').forEach(b=>b.classList.toggle('active',b===tab));
-  },true);
-
-  // Foldable support rails. Collapsed rails preview on hover and can be pinned open.
-  const setupRails=()=>{
-    const layout=document.querySelector('#adminSupportPanel .asp-layout');
-    const left=document.querySelector('#adminSupportPanel .asp-inbox');
-    const right=document.querySelector('#adminSupportPanel .asp-profile');
-    if(!layout||!left||!right||layout.dataset.foldReady)return;
-    layout.dataset.foldReady='1';
-    const make=(panel,side)=>{
-      panel.classList.add('bws-fold-panel',`bws-fold-${side}`);
-      const btn=document.createElement('button');
-      btn.type='button';btn.className='bws-fold-toggle';btn.dataset.side=side;
-      btn.setAttribute('aria-label',`Toggle ${side} support panel`);
-      btn.title=`Fold / pin ${side} panel`;
-      btn.innerHTML=side==='left'?'‹':'›';
-      panel.prepend(btn);
-      let pinned=true;
-      const apply=()=>{
-        layout.classList.toggle(`bws-${side}-collapsed`,!pinned);
-        panel.classList.toggle('bws-collapsed',!pinned);
-        btn.classList.toggle('is-collapsed',!pinned);
-        btn.innerHTML=side==='left'?(pinned?'‹':'›'):(pinned?'›':'‹');
-        btn.setAttribute('aria-expanded',String(pinned));
-      };
-      btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();pinned=!pinned;apply()});
-      panel.addEventListener('mouseenter',()=>{if(!pinned)layout.classList.add(`bws-${side}-peek`)});
-      panel.addEventListener('mouseleave',()=>layout.classList.remove(`bws-${side}-peek`));
-      apply();
-    };
-    make(left,'left');make(right,'right');
-  };
-  setupRails();
-  setTimeout(setupRails,450);
+  cleanSavedReplyButton();setTimeout(cleanSavedReplyButton,250);
+  setTimeout(()=>{const active=document.querySelector('#aspThreads [data-thread].active');if(active)active.click()},320);
+  const syncPriority=()=>{const select=document.querySelector('#bwsTicketControls [data-priority]');if(!select)return;const value=(select.value||'Normal').toLowerCase();select.dataset.priority=value;const controls=document.getElementById('bwsTicketControls');if(controls)controls.dataset.priority=value};
+  document.addEventListener('change',e=>{if(e.target.matches('#bwsTicketControls [data-priority]'))syncPriority()});setTimeout(syncPriority,360);
+  document.addEventListener('pointerdown',e=>{const tab=e.target.closest('#bwsSupportTabs [data-tab]');if(!tab)return;document.querySelectorAll('#bwsSupportTabs [data-tab]').forEach(b=>b.classList.toggle('active',b===tab))},true);
 }).catch(err=>console.warn('Enhanced Admin Support unavailable:',err));
 
+// Main black Admin navigation: fold to an icon rail, hover to preview-open, click to pin.
+const setupAdminSidebar=()=>{
+  const layout=document.querySelector('#adminDashboard .admin-layout'),side=document.querySelector('#adminDashboard .admin-sidebar');
+  if(!layout||!side||side.dataset.foldReady)return;
+  side.dataset.foldReady='1';
+  const btn=document.createElement('button');btn.type='button';btn.id='bwsAdminSidebarToggle';btn.title='Fold / pin admin menu';btn.setAttribute('aria-label','Fold or pin admin navigation');btn.innerHTML='‹';side.appendChild(btn);
+  let pinned=true;
+  const apply=()=>{layout.classList.toggle('bws-admin-nav-collapsed',!pinned);side.classList.toggle('bws-admin-nav-collapsed',!pinned);btn.innerHTML=pinned?'‹':'›';btn.setAttribute('aria-expanded',String(pinned))};
+  btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();pinned=!pinned;apply()});
+  side.addEventListener('mouseenter',()=>{if(!pinned)layout.classList.add('bws-admin-nav-peek')});
+  side.addEventListener('mouseleave',()=>layout.classList.remove('bws-admin-nav-peek'));
+  apply();
+};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setupAdminSidebar,{once:true});else setupAdminSidebar();setTimeout(setupAdminSidebar,350);
+
 if(!document.getElementById('bwsSupportStatePatch')){
-  const style=document.createElement('style');
-  style.id='bwsSupportStatePatch';
-  style.textContent=`
+  const style=document.createElement('style');style.id='bwsSupportStatePatch';style.textContent=`
     #bwsSavedReplies{display:none!important}
     #bwsSupportTabs{position:relative;z-index:8;pointer-events:auto!important}
     #bwsSupportTabs [data-tab]{position:relative;z-index:9;pointer-events:auto!important;user-select:none}
@@ -104,33 +63,28 @@ if(!document.getElementById('bwsSupportStatePatch')){
     #bwsSupportTabs [data-tab]:hover{background:#f7f5ff!important;color:#5e46e6!important}
     #bwsSupportTabs [data-tab].active{background:#faf9ff!important;color:#5e46e6!important}
 
-    #adminSupportPanel .asp-layout{transition:grid-template-columns .28s cubic-bezier(.2,.8,.2,1)!important}
-    #adminSupportPanel .bws-fold-panel{position:relative;transition:width .28s ease,min-width .28s ease,padding .28s ease,box-shadow .2s ease;overflow:hidden}
-    #adminSupportPanel .bws-fold-toggle{position:absolute;top:10px;z-index:40;width:26px;height:26px;border:1px solid #ddd7f8;border-radius:8px;background:#fff;color:#5e46e6;font-size:18px;font-weight:900;line-height:22px;cursor:pointer;box-shadow:0 4px 12px #33287b1c;transition:transform .18s ease,background .18s ease}
-    #adminSupportPanel .bws-fold-toggle:hover{background:#f3f0ff;transform:scale(1.06)}
-    #adminSupportPanel .bws-fold-left .bws-fold-toggle{right:8px}
-    #adminSupportPanel .bws-fold-right .bws-fold-toggle{left:8px}
-    #adminSupportPanel .asp-chat,#adminSupportPanel .asp-messages,#bwsSupportTabs,#bwsTabPanel{transition:width .28s ease,padding .28s ease}
+    /* Restore Chat Support's own three-column workspace: no folding inside the ticket area. */
+    #adminSupportPanel .bws-fold-toggle{display:none!important}
+    #adminSupportPanel .asp-layout{transition:none!important}
 
-    #adminSupportPanel .asp-layout.bws-left-collapsed{grid-template-columns:48px minmax(620px,1fr) minmax(300px,22%)!important}
-    #adminSupportPanel .asp-layout.bws-right-collapsed{grid-template-columns:minmax(250px,20%) minmax(620px,1fr) 48px!important}
-    #adminSupportPanel .asp-layout.bws-left-collapsed.bws-right-collapsed{grid-template-columns:48px minmax(620px,1fr) 48px!important}
-    #adminSupportPanel .bws-fold-panel.bws-collapsed{min-width:48px!important;width:48px!important;padding-left:0!important;padding-right:0!important}
-    #adminSupportPanel .bws-fold-panel.bws-collapsed>*:not(.bws-fold-toggle){opacity:0;pointer-events:none;transition:opacity .12s ease}
-
-    #adminSupportPanel .asp-layout.bws-left-collapsed.bws-left-peek{grid-template-columns:minmax(250px,20%) minmax(620px,1fr) minmax(300px,22%)!important}
-    #adminSupportPanel .asp-layout.bws-right-collapsed.bws-right-peek{grid-template-columns:minmax(250px,20%) minmax(620px,1fr) minmax(300px,22%)!important}
-    #adminSupportPanel .asp-layout.bws-left-collapsed.bws-right-collapsed.bws-left-peek{grid-template-columns:minmax(250px,20%) minmax(620px,1fr) 48px!important}
-    #adminSupportPanel .asp-layout.bws-left-collapsed.bws-right-collapsed.bws-right-peek{grid-template-columns:48px minmax(620px,1fr) minmax(300px,22%)!important}
-    #adminSupportPanel .bws-fold-left.bws-collapsed:hover,#adminSupportPanel .bws-fold-right.bws-collapsed:hover{width:auto!important;min-width:0!important}
-    #adminSupportPanel .bws-fold-panel.bws-collapsed:hover>*:not(.bws-fold-toggle){opacity:1;pointer-events:auto;transition:opacity .18s ease .08s}
-
-    @media(max-width:1250px){
-      #adminSupportPanel .asp-layout.bws-left-collapsed{grid-template-columns:48px minmax(500px,1fr) 260px!important}
-      #adminSupportPanel .asp-layout.bws-right-collapsed{grid-template-columns:230px minmax(500px,1fr) 48px!important}
-      #adminSupportPanel .asp-layout.bws-left-collapsed.bws-right-collapsed{grid-template-columns:48px minmax(500px,1fr) 48px!important}
-    }
-    @media(max-width:980px){#adminSupportPanel .bws-fold-right .bws-fold-toggle{display:none}}
-  `;
-  document.head.appendChild(style);
+    #adminDashboard .admin-layout{transition:grid-template-columns .28s cubic-bezier(.2,.8,.2,1)!important}
+    #adminDashboard .admin-sidebar{transition:width .28s cubic-bezier(.2,.8,.2,1),padding .28s ease,box-shadow .2s ease!important;overflow:hidden;z-index:30}
+    #adminDashboard .admin-main{min-width:0;transition:width .28s ease}
+    #bwsAdminSidebarToggle{position:absolute;right:8px;bottom:70px;width:30px;height:30px;border:1px solid #ffffff24;border-radius:9px;background:#ffffff12;color:#fff;font-size:20px;font-weight:900;cursor:pointer;z-index:35;transition:background .18s ease,transform .18s ease}
+    #bwsAdminSidebarToggle:hover{background:#5b43ea;transform:scale(1.05)}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed{grid-template-columns:64px minmax(0,1fr)!important}
+    #adminDashboard .admin-sidebar.bws-admin-nav-collapsed{width:64px!important;padding-left:9px!important;padding-right:9px!important}
+    #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .admin-side-logo>div,#adminDashboard .admin-sidebar.bws-admin-nav-collapsed .admin-note{opacity:0;pointer-events:none}
+    #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .admin-side-logo{justify-content:center;padding-left:0;padding-right:0}
+    #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .admin-nav button{width:46px;overflow:hidden;white-space:nowrap;padding-left:13px;padding-right:0;font-size:0}
+    #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .admin-nav button::first-letter{font-size:16px}
+    #adminDashboard .admin-sidebar.bws-admin-nav-collapsed #adminLogout{font-size:0;width:46px;min-height:36px}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek{grid-template-columns:230px minmax(0,1fr)!important}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek .admin-sidebar{width:230px!important;padding:18px 14px!important;box-shadow:14px 0 35px #17142f28}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek .admin-sidebar .admin-side-logo>div,#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek .admin-sidebar .admin-note{opacity:1;pointer-events:auto;transition:opacity .16s ease .08s}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek .admin-sidebar .admin-side-logo{justify-content:flex-start}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek .admin-sidebar .admin-nav button{width:auto;padding:12px 13px;font-size:inherit}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek .admin-sidebar #adminLogout{font-size:inherit;width:auto}
+    @media(max-width:1050px){#bwsAdminSidebarToggle{display:none!important}}
+  `;document.head.appendChild(style);
 }
