@@ -18,7 +18,7 @@ if(document.getElementById('adminApp')){
   const iconSvg={
     dashboard:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
     clients:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-    support:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 18.5 4 20l1.1-3.7A8 8 0 1 1 8 18.2"/><path d="M8.2 10.2h7.6M8.2 13.5h5.2"/></svg>'
+    support:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.7 7.7 0 0 1-8 7.5 8.9 8.9 0 0 1-3.45-.68L4 20l1.35-3.6A7.45 7.45 0 0 1 4 12a8 8 0 0 1 16-.5Z"/><path d="M8.5 10.25h7M8.5 13.5h4.75"/></svg>'
   };
   const prepareNavigation=()=>{
     const defs=[[dashboardNav,'Dashboard',iconSvg.dashboard],[clientsNav,'Clients',iconSvg.clients],[supportNav,'Chat Support',iconSvg.support]];
@@ -45,12 +45,12 @@ if(document.getElementById('adminApp')){
     #adminDashboard .admin-nav button.active,#adminDashboard .admin-nav button.bws-glass-active{color:#fff!important;background:linear-gradient(135deg,rgba(111,76,255,.86),rgba(91,56,245,.66))!important;border-color:rgba(176,157,255,.58)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 8px 22px rgba(91,56,245,.24)!important;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
     #adminDashboard .admin-nav button.active:before,#adminDashboard .admin-nav button.bws-glass-active:before{content:'';position:absolute;left:-1px;top:10px;bottom:10px;width:3px;border-radius:0 4px 4px 0;background:#c1b2ff;box-shadow:0 0 9px rgba(180,158,255,.9)}
     #adminDashboard .admin-nav>.bws-active-glass{display:none!important}
-    #adminDashboard .bws-shell-icon{width:22px;height:22px;display:grid;place-items:center;flex:0 0 22px;border-radius:7px;transition:background .18s ease,box-shadow .18s ease}
+    #adminDashboard .bws-shell-icon{width:22px;height:22px;display:grid;place-items:center;flex:0 0 22px;border-radius:7px}
     #adminDashboard .bws-shell-icon svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    #adminDashboard #adminSupportNav .bws-shell-icon{background:rgba(255,255,255,.07)}
-    #adminDashboard #adminSupportNav .bws-shell-icon svg{width:17px;height:17px;stroke-width:1.9}
-    #adminDashboard #adminSupportNav.active .bws-shell-icon,#adminDashboard #adminSupportNav.bws-glass-active .bws-shell-icon{background:rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}
+    #adminDashboard #adminSupportNav .bws-shell-icon{width:20px;height:20px;flex-basis:20px;border-radius:0;background:transparent!important;box-shadow:none!important}
+    #adminDashboard #adminSupportNav .bws-shell-icon svg{width:19px;height:19px;stroke-width:1.75}
     #adminDashboard #adminSupportNav .bws-nav-label{font-weight:700;letter-spacing:-.01em}
+    #adminDashboard #adminSupportNav.active .bws-shell-icon,#adminDashboard #adminSupportNav.bws-glass-active .bws-shell-icon{color:#fff}
     .support-unread-badge{display:none!important}.support-unread-badge.has-unread{display:grid!important;min-width:19px;height:19px;padding:0 5px;place-items:center;border-radius:99px;background:#ff5d70;color:#fff;font-size:8px;font-weight:900;margin-left:auto;box-shadow:0 0 0 3px rgba(255,93,112,.14)}
     #adminDashboard .admin-sidebar{position:relative!important;overflow:visible!important}
     #adminDashboard #bwsAdminSidebarToggle{display:grid!important;place-items:center!important;position:absolute!important;top:50%!important;right:-13px!important;transform:translateY(-50%)!important;width:26px!important;height:48px!important;padding:0!important;border:1px solid #ffffff26!important;border-radius:0 12px 12px 0!important;background:#17142f!important;color:#fff!important;z-index:1000!important;cursor:pointer!important;font-size:18px!important}
