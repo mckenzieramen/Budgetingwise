@@ -9,6 +9,14 @@ export const firebaseConfig = {
   appId: "1:113871749594:web:3206ded3c56abaafe3c0e3"
 };
 
+if(!document.getElementById('bwSupportPremiumCss')){
+  const premium=document.createElement('link');
+  premium.id='bwSupportPremiumCss';
+  premium.rel='stylesheet';
+  premium.href='/support-ticket-premium-v1.css?v=support-premium-v1';
+  document.head.appendChild(premium);
+}
+
 if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.pathname)){
   if(!document.getElementById('newTempPassword')){
     const compat=document.createElement('div');
@@ -24,5 +32,6 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
 }else{
   setTimeout(()=>{
     import('./support-ticket-customer-v1.js?v=one-concern-history-v1').catch(error=>console.warn('Customer ticket lifecycle unavailable:',error));
+    import('./support-ticket-newticket-fix-v1.js?v=new-ticket-handoff-v1').catch(error=>console.warn('New ticket handoff unavailable:',error));
   },0);
 }

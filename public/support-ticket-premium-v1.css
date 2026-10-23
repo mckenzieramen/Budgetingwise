@@ -1,0 +1,472 @@
+/* Budgetingwise Support — premium ticket UI layer
+   Visual-only overrides. No ticket/auth/business logic lives here. */
+
+#bwSupportPanel,
+#adminSupportPanel{
+  --bw-purple:#6246e5;
+  --bw-purple-2:#7659f6;
+  --bw-purple-soft:#f4f1ff;
+  --bw-purple-line:#e3ddff;
+  --bw-ink:#27233a;
+  --bw-muted:#7b758e;
+  --bw-green:#16885f;
+  --bw-green-soft:#edf9f4;
+  --bw-red:#b64252;
+  --bw-red-soft:#fff1f3;
+  --bw-amber:#a76b12;
+  --bw-amber-soft:#fff7e8;
+  --bw-shadow:0 14px 36px rgba(60,43,130,.12);
+}
+
+/* Customer workflow cards */
+#bwSupportPanel .bw-workflow-picker>div,
+#bwSupportPanel .bw-recovery-followup,
+#bwSupportPanel .bw-recovery-success-card{
+  border-radius:16px!important;
+}
+
+#bwSupportPanel .bw-workflow-picker>div{
+  border:1px solid var(--bw-purple-line)!important;
+  background:linear-gradient(180deg,#fff 0%,#fcfbff 100%)!important;
+  box-shadow:0 10px 28px rgba(68,48,150,.08)!important;
+}
+
+#bwSupportPanel .bw-flow-title{
+  font-weight:850!important;
+  letter-spacing:-.015em!important;
+}
+
+#bwSupportPanel .bw-flow-sub{
+  display:block!important;
+  margin-top:4px!important;
+  color:var(--bw-muted)!important;
+  line-height:1.55!important;
+}
+
+#bwSupportPanel .bw-support-quick-actions{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:8px!important;
+  margin-top:12px!important;
+}
+
+#bwSupportPanel .bw-support-quick-actions button{
+  min-height:50px!important;
+  padding:10px 11px!important;
+  border:1px solid #e7e2f8!important;
+  border-radius:13px!important;
+  background:linear-gradient(180deg,#fff,#faf8ff)!important;
+  color:#43387a!important;
+  box-shadow:0 5px 14px rgba(48,37,106,.055)!important;
+  font-weight:780!important;
+  text-align:left!important;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease!important;
+}
+
+#bwSupportPanel .bw-support-quick-actions button:hover{
+  transform:translateY(-2px)!important;
+  border-color:#c8bef9!important;
+  background:#fff!important;
+  box-shadow:0 10px 22px rgba(74,54,160,.12)!important;
+}
+
+#bwSupportPanel .bw-support-quick-actions button:active{
+  transform:translateY(0) scale(.985)!important;
+}
+
+/* Automated resolution buttons */
+#bwSupportPanel .bw-recovery-followup{
+  padding:14px!important;
+  border:1px solid var(--bw-purple-line)!important;
+  background:linear-gradient(180deg,#fff,#fbfaff)!important;
+  box-shadow:0 9px 24px rgba(70,50,150,.08)!important;
+}
+
+#bwSupportPanel .bw-recovery-followup-actions{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:9px!important;
+  margin-top:12px!important;
+}
+
+#bwSupportPanel .bw-recovery-followup-actions button{
+  min-height:46px!important;
+  border-radius:13px!important;
+  font-weight:820!important;
+  letter-spacing:.005em!important;
+  transition:transform .16s ease,box-shadow .16s ease,opacity .16s ease!important;
+}
+
+#bwSupportPanel .bw-recovery-followup-actions button[data-recovery-more="yes"]{
+  border:0!important;
+  color:#fff!important;
+  background:linear-gradient(135deg,var(--bw-purple-2),#5435dc)!important;
+  box-shadow:0 9px 20px rgba(84,53,220,.23)!important;
+}
+
+#bwSupportPanel .bw-recovery-followup-actions button[data-recovery-more="yes"]::before{
+  content:'＋';
+  margin-right:5px;
+  font-weight:900;
+}
+
+#bwSupportPanel .bw-recovery-followup-actions button[data-recovery-more="no"]{
+  border:1px solid #ded8f7!important;
+  color:#5b5470!important;
+  background:#fff!important;
+  box-shadow:0 5px 13px rgba(53,45,90,.06)!important;
+}
+
+#bwSupportPanel .bw-recovery-followup-actions button[data-recovery-more="no"]::before{
+  content:'✓';
+  margin-right:5px;
+  color:var(--bw-green);
+  font-weight:900;
+}
+
+#bwSupportPanel .bw-recovery-followup-actions button:hover{
+  transform:translateY(-1px)!important;
+}
+
+#bwSupportPanel .bw-recovery-followup-actions button:disabled{
+  opacity:.6!important;
+  cursor:wait!important;
+  transform:none!important;
+}
+
+/* Closed state + survey */
+#bwSolvedBox{
+  border:1px solid #d9eee5!important;
+  background:linear-gradient(180deg,#f8fffb,#f0faf6)!important;
+  border-radius:16px!important;
+  box-shadow:0 8px 20px rgba(35,120,82,.07)!important;
+}
+
+#bwSolvedBox .bw-support-closed-icon{
+  box-shadow:0 0 0 6px rgba(22,136,95,.08)!important;
+}
+
+#bwSupportRating{
+  margin-top:10px!important;
+  padding:13px!important;
+  border:1px solid #eeeaf8!important;
+  border-radius:15px!important;
+  background:#fff!important;
+}
+
+#bwSupportRating .bw-support-stars button{
+  transition:transform .14s ease,filter .14s ease!important;
+}
+
+#bwSupportRating .bw-support-stars button:hover{
+  transform:translateY(-2px) scale(1.08)!important;
+  filter:drop-shadow(0 4px 7px rgba(98,70,229,.18));
+}
+
+/* Customer history toolbar */
+#bwCustomerHistoryBar{
+  min-height:40px!important;
+  padding:7px 11px!important;
+  border-bottom:1px solid #efecf8!important;
+  background:rgba(255,255,255,.9)!important;
+  backdrop-filter:blur(12px)!important;
+}
+
+#bwCustomerHistoryButton{
+  min-height:30px!important;
+  padding:6px 10px!important;
+  border:1px solid #ded8fa!important;
+  border-radius:10px!important;
+  background:linear-gradient(180deg,#fff,#fbfaff)!important;
+  color:#5139cc!important;
+  font-weight:820!important;
+  box-shadow:0 4px 12px rgba(64,48,130,.07)!important;
+  transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease!important;
+}
+
+#bwCustomerHistoryButton::before{
+  content:'◷';
+  margin-right:6px;
+  font-size:12px;
+}
+
+#bwCustomerHistoryButton:hover{
+  transform:translateY(-1px)!important;
+  border-color:#c7bcf7!important;
+  box-shadow:0 8px 18px rgba(68,50,145,.11)!important;
+}
+
+#bwCustomerHistoryButton span{
+  min-width:18px!important;
+  height:18px!important;
+  margin-left:6px!important;
+  padding:0 5px!important;
+  border-radius:99px!important;
+  background:#ede9ff!important;
+  color:#5138c8!important;
+  font-size:8px!important;
+  font-weight:900!important;
+}
+
+/* Customer chat history modal */
+.bw-history-modal{
+  background:rgba(24,20,45,.54)!important;
+  backdrop-filter:blur(8px)!important;
+  animation:bwHistoryFade .15s ease-out!important;
+}
+
+.bw-history-card{
+  width:min(580px,96vw)!important;
+  max-height:84vh!important;
+  padding:20px!important;
+  border:1px solid rgba(229,224,248,.95)!important;
+  border-radius:20px!important;
+  background:linear-gradient(180deg,#fff,#fcfbff)!important;
+  box-shadow:0 28px 90px rgba(23,17,60,.26)!important;
+  animation:bwHistoryPop .18s ease-out!important;
+}
+
+.bw-history-head{
+  padding-bottom:13px!important;
+  border-bottom:1px solid #efecf8!important;
+}
+
+.bw-history-head strong{
+  font-size:16px!important;
+  letter-spacing:-.02em!important;
+  color:var(--bw-ink)!important;
+}
+
+.bw-history-head small{
+  margin-top:5px!important;
+  color:var(--bw-muted)!important;
+  line-height:1.45!important;
+}
+
+.bw-history-close{
+  width:32px!important;
+  height:32px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:10px!important;
+  color:#786f91!important;
+  transition:background .14s ease,transform .14s ease!important;
+}
+
+.bw-history-close:hover{
+  background:#f3f0fb!important;
+  transform:rotate(4deg)!important;
+}
+
+.bw-history-list{
+  gap:9px!important;
+  margin-top:14px!important;
+}
+
+.bw-history-ticket{
+  position:relative!important;
+  padding:13px 42px 13px 13px!important;
+  border:1px solid #e8e3f8!important;
+  border-radius:14px!important;
+  background:linear-gradient(180deg,#fff,#fdfcff)!important;
+  box-shadow:0 5px 15px rgba(60,47,115,.045)!important;
+  transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease!important;
+}
+
+.bw-history-ticket::after{
+  content:'›';
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  width:24px;
+  height:24px;
+  display:grid;
+  place-items:center;
+  border-radius:8px;
+  background:#f1edff;
+  color:#6047dc;
+  font-size:18px;
+  font-weight:800;
+}
+
+.bw-history-ticket:hover{
+  transform:translateY(-1px)!important;
+  border-color:#cfc5fb!important;
+  box-shadow:0 10px 22px rgba(69,51,148,.09)!important;
+}
+
+.bw-history-ticket b{
+  display:inline-block!important;
+  padding:3px 6px!important;
+  border-radius:6px!important;
+  background:#f1edff!important;
+  color:#563fd0!important;
+  font-size:8px!important;
+  letter-spacing:.035em!important;
+}
+
+.bw-history-ticket strong{
+  margin-top:7px!important;
+  font-size:11px!important;
+  color:var(--bw-ink)!important;
+}
+
+.bw-history-ticket small{
+  margin-top:5px!important;
+  color:#8a8499!important;
+}
+
+.bw-history-back{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  min-height:30px!important;
+  margin-bottom:8px!important;
+  padding:5px 8px!important;
+  border-radius:9px!important;
+  color:#5940d0!important;
+}
+
+.bw-history-back:hover{
+  background:#f2efff!important;
+}
+
+.bw-history-msg{
+  padding:10px 12px!important;
+  border:1px solid #efedf5!important;
+  border-radius:12px!important;
+  background:#f8f7fb!important;
+  line-height:1.5!important;
+}
+
+.bw-history-msg.admin{
+  border-color:#e1dcff!important;
+  background:#f1eeff!important;
+}
+
+.bw-history-msg strong{
+  color:#625985!important;
+  text-transform:uppercase!important;
+  letter-spacing:.04em!important;
+}
+
+/* Admin account tools */
+#adminSupportPanel .bw-admin-account-actions{
+  margin-top:14px!important;
+  padding:13px!important;
+  border:1px solid #e8e3f7!important;
+  border-radius:14px!important;
+  background:linear-gradient(180deg,#fff,#fbfaff)!important;
+  box-shadow:0 7px 18px rgba(56,43,115,.055)!important;
+}
+
+#adminSupportPanel .bw-admin-account-actions>strong{
+  display:flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  margin-bottom:9px!important;
+  color:#302a49!important;
+  font-size:11px!important;
+}
+
+#adminSupportPanel .bw-admin-account-actions>strong::before{
+  content:'⚙';
+  width:24px;
+  height:24px;
+  display:grid;
+  place-items:center;
+  border-radius:8px;
+  background:#f0ecff;
+  color:#6246e5;
+  font-size:11px;
+}
+
+#adminSupportPanel .bw-admin-action-grid{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:7px!important;
+}
+
+#adminSupportPanel .bw-admin-action-grid button{
+  position:relative!important;
+  min-height:42px!important;
+  padding:8px 9px!important;
+  border:1px solid #e2ddf5!important;
+  border-radius:11px!important;
+  background:#fff!important;
+  color:#50427d!important;
+  font-weight:780!important;
+  box-shadow:0 4px 12px rgba(57,44,114,.045)!important;
+  transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease!important;
+}
+
+#adminSupportPanel .bw-admin-action-grid button:hover{
+  transform:translateY(-1px)!important;
+  border-color:#cbbff7!important;
+  box-shadow:0 8px 17px rgba(72,52,151,.09)!important;
+}
+
+#adminSupportPanel .bw-admin-action-grid button[data-aa="key"]::before{content:'🔑 ';}
+#adminSupportPanel .bw-admin-action-grid button[data-aa="info"]::before{content:'✉ ';}
+#adminSupportPanel .bw-admin-action-grid button[data-aa="email"]::before{content:'✎ ';}
+#adminSupportPanel .bw-admin-action-grid button[data-aa="suspend"]::before{content:'◉ ';}
+
+#adminSupportPanel .bw-admin-action-status{
+  margin-top:8px!important;
+  padding:0 2px!important;
+  line-height:1.4!important;
+}
+
+#adminSupportPanel .bw-admin-action-status.ok{
+  color:var(--bw-green)!important;
+}
+
+#adminSupportPanel .bw-admin-action-status.error{
+  color:var(--bw-red)!important;
+}
+
+/* Existing admin ticket history component */
+#aspProfile [data-ticket-v6],
+#aspProfile [data-ticket-v5]{
+  margin-top:14px!important;
+  padding-top:13px!important;
+  border-top:1px solid #ebe7f7!important;
+}
+
+#aspProfile [data-tabs] button{
+  min-width:38px!important;
+  border-radius:9px!important;
+  box-shadow:0 3px 9px rgba(62,46,130,.05)!important;
+  transition:transform .14s ease,box-shadow .14s ease!important;
+}
+
+#aspProfile [data-tabs] button:hover{
+  transform:translateY(-1px)!important;
+  box-shadow:0 7px 14px rgba(68,49,146,.11)!important;
+}
+
+#aspProfile [data-summary] [data-open]{
+  border-radius:12px!important;
+  box-shadow:0 5px 13px rgba(62,47,120,.05)!important;
+  transition:transform .14s ease,border-color .14s ease!important;
+}
+
+#aspProfile [data-summary] [data-open]:hover{
+  transform:translateY(-1px)!important;
+  border-color:#cec4fb!important;
+}
+
+@keyframes bwHistoryFade{from{opacity:0}to{opacity:1}}
+@keyframes bwHistoryPop{from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:none}}
+
+@media(max-width:520px){
+  #bwSupportPanel .bw-support-quick-actions{grid-template-columns:1fr!important}
+  #bwSupportPanel .bw-recovery-followup-actions{grid-template-columns:1fr!important}
+  .bw-history-card{width:100%!important;max-height:88vh!important;border-radius:17px!important;padding:15px!important}
+  #adminSupportPanel .bw-admin-action-grid{grid-template-columns:1fr!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .bw-history-modal,.bw-history-card,#bwSupportPanel button,#adminSupportPanel button{animation:none!important;transition:none!important}
+}
