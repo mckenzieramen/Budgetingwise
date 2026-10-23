@@ -30,6 +30,13 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
     import('./support-ticket-lifecycle-v1.js?v=admin-actions-only-v1').catch(error=>console.warn('Admin account actions unavailable:',error));
   },0);
 }else{
+  if(!document.getElementById('bwCustomerNoHistoryCss')){
+    const customerHistory=document.createElement('link');
+    customerHistory.id='bwCustomerNoHistoryCss';
+    customerHistory.rel='stylesheet';
+    customerHistory.href='/support-customer-nohistory-v1.css?v=customer-nohistory-v1';
+    document.head.appendChild(customerHistory);
+  }
   setTimeout(()=>{
     import('./support-ticket-customer-v1.js?v=one-concern-history-v1').catch(error=>console.warn('Customer ticket lifecycle unavailable:',error));
     import('./support-ticket-newticket-fix-v1.js?v=new-ticket-handoff-v1').catch(error=>console.warn('New ticket handoff unavailable:',error));

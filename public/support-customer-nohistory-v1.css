@@ -1,0 +1,6 @@
+/* Customer support history is intentionally hidden.
+   Closed ticket archives remain stored for Admin records only. */
+#bwCustomerHistoryBar,
+.bw-history-modal{
+  display:none!important;
+}
