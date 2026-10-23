@@ -1,6 +1,6 @@
 import{initializeApp,getApps}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js';
 import{getAuth,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js';
-import{getFirestore,doc,getDoc,setDoc}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js';
+import{getFirestore,doc,getDoc,setDoc,serverTimestamp}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js';
 import{firebaseConfig}from'./firebase-config.js';
 
 // Customer/guest Chat Support must never run inside the Admin Portal.
@@ -109,6 +109,144 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
     }
   };
 
+  const activeSupportServices=()=>{
+    for(const app of getApps()){
+      try{
+        const user=getAuth(app).currentUser;
+        if(user)return{user,db:getFirestore(app)};
+      }catch{}
+    }
+    return null;
+  };
+
+  const updateSupportConcern=async(requestType,concernLabel)=>{
+    const svc=activeSupportServices();
+    if(!svc)return false;
+    await setDoc(doc(svc.db,'supportThreads',svc.user.uid),{
+      requestType,
+      concernLabel,
+      status:'open',
+      customerCanReply:true,
+      customerUnread:false,
+      lastSender:'customer',
+      adminUnread:true,
+      updatedAt:serverTimestamp()
+    },{merge:true});
+    return true;
+  };
+
+  const closeRecoveryTicket=async()=>{
+    const svc=activeSupportServices();
+    if(!svc)throw new Error('Support session is unavailable.');
+    await setDoc(doc(svc.db,'supportThreads',svc.user.uid),{
+      requestType:'password-recovery',
+      concernLabel:'Password Recovery',
+      status:'closed',
+      customerCanReply:false,
+      customerUnread:false,
+      adminUnread:false,
+      closedAt:serverTimestamp(),
+      updatedAt:serverTimestamp()
+    },{merge:true});
+  };
+
+  const unlockComposer=()=>{
+    const input=document.getElementById('bwSupportInput');
+    const send=document.getElementById('bwSupportSend')||document.querySelector('#bwSupportForm button[type="submit"]');
+    if(input){input.disabled=false;input.readOnly=false;input.placeholder='Type your message…';input.style.pointerEvents='auto'}
+    if(send)send.disabled=false;
+  };
+
+  const lockComposer=()=>{
+    const input=document.getElementById('bwSupportInput');
+    const send=document.getElementById('bwSupportSend')||document.querySelector('#bwSupportForm button[type="submit"]');
+    if(input){input.disabled=true;input.placeholder='Choose Yes or No above…'}
+    if(send)send.disabled=true;
+  };
+
+  const helpAgainMarkup=()=>`<div class="bw-support-message agent bw-workflow-picker"><div><p><strong class="bw-flow-title">Hi! 👋 How can we help?</strong><span class="bw-flow-sub">Tap a concern below and we’ll guide you again.</span></p><div class="bw-support-quick-actions"><button type="button" data-flow="activation">🔑 Activation key</button><button type="button" data-flow="account">👤 Account / login</button><button type="button" data-flow="budgeting">📊 Budgeting feature</button><button type="button" data-flow="general">💬 General question</button><button type="button" data-flow="error">⚠️ Report an error</button><button type="button" data-flow="suggestion">✨ Share a suggestion</button></div><time>Budgetingwise Support Bot</time></div></div>`;
+
+  const showHelpAgain=flow=>{
+    const messages=document.getElementById('bwSupportMessages');
+    if(!messages)return;
+    flow?.remove();
+    messages.querySelector('.bw-workflow-picker')?.remove();
+    messages.insertAdjacentHTML('beforeend',helpAgainMarkup());
+    unlockComposer();
+    messages.scrollTop=messages.scrollHeight;
+  };
+
+  const enhanceRecoveryFlow=()=>{
+    const flow=document.querySelector('.bw-forgot-workflow');
+    if(!flow)return;
+
+    if(!flow.dataset.recoveryConcernTagged){
+      flow.dataset.recoveryConcernTagged='pending';
+      updateSupportConcern('password-recovery','Password Recovery').then(ok=>{
+        if(ok)flow.dataset.recoveryConcernTagged='1';
+        else delete flow.dataset.recoveryConcernTagged;
+      }).catch(err=>{
+        delete flow.dataset.recoveryConcernTagged;
+        console.warn('Unable to tag password recovery ticket:',err);
+      });
+    }
+
+    if(flow.dataset.recoveryFollowupReady)return;
+    if(!/Password successfully changed/i.test(flow.textContent||''))return;
+
+    flow.dataset.recoveryFollowupReady='1';
+    flow.innerHTML=`<div>
+      <div class="bw-recovery-success-card">
+        <div class="bw-recovery-success-icon">✓</div>
+        <strong class="bw-flow-title">Congratulations! Your password has been changed.</strong>
+        <span class="bw-flow-sub">You can now log in to Budgetingwise using your new password.</span>
+      </div>
+      <div class="bw-recovery-followup">
+        <strong class="bw-flow-title">Anything else we can help you with?</strong>
+        <span class="bw-flow-sub">Choose Yes to continue with another concern, or No to close this support ticket.</span>
+        <div class="bw-recovery-followup-actions">
+          <button type="button" data-recovery-more="yes">Yes, I need more help</button>
+          <button type="button" data-recovery-more="no">No, I'm all set</button>
+        </div>
+        <small data-recovery-followup-msg></small>
+      </div>
+      <time>Budgetingwise Support Bot</time>
+    </div>`;
+    lockComposer();
+
+    flow.querySelector('[data-recovery-more="yes"]')?.addEventListener('click',()=>showHelpAgain(flow));
+    flow.querySelector('[data-recovery-more="no"]')?.addEventListener('click',async event=>{
+      const button=event.currentTarget;
+      const msg=flow.querySelector('[data-recovery-followup-msg]');
+      button.disabled=true;
+      button.textContent='Closing…';
+      if(msg)msg.textContent='';
+      try{
+        await closeRecoveryTicket();
+      }catch(err){
+        button.disabled=false;
+        button.textContent="No, I'm all set";
+        if(msg){msg.textContent='Unable to close the ticket. Please try again.';msg.style.color='#c04444'}
+      }
+    });
+  };
+
+  const concernFromControl=control=>{
+    const flow=control?.dataset?.flow;
+    const account=control?.dataset?.accountFlow;
+    if(flow==='activation')return['activation-key','Activation Key Request'];
+    if(flow==='budgeting')return['budgeting','Budgeting Feature Concern'];
+    if(flow==='general')return['general','General Question'];
+    if(flow==='error')return['error','Report an Error'];
+    if(flow==='suggestion')return['suggestion','Suggestion'];
+    if(account==='forgot')return['password-recovery','Password Recovery'];
+    if(account==='signin')return['account-access','Account / Login Concern'];
+    if(account==='activation')return['account-activation','Account Activation Concern'];
+    if(account==='change')return['change-password','Change Password Concern'];
+    if(account==='other')return['account-access','Account / Login Concern'];
+    return null;
+  };
+
   const polishChatControls=()=>{
     if(!document.getElementById('bwChatControlPolish')){
       const style=document.createElement('style');
@@ -140,7 +278,14 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
 .bw-support-day{font-weight:800!important;letter-spacing:.02em!important;color:#8b84a1!important}
 .bw-flow-title{letter-spacing:-.01em!important;color:var(--bw-chat-ink)!important}
 .bw-flow-sub{color:var(--bw-chat-muted)!important}
-@media(max-width:380px){.bw-support-quick-actions button{min-height:42px!important}.bw-premium-nav-icon{width:26px;height:26px;min-width:26px}.bw-support-compose{gap:7px!important}#bwSupportSend{width:40px!important;min-width:40px!important;max-width:40px!important;height:40px!important;min-height:40px!important;flex-basis:40px!important}}
+.bw-recovery-success-card{padding:14px;border-radius:14px;background:#eefbf5;text-align:center}
+.bw-recovery-success-icon{width:36px;height:36px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;background:#d9f6e9;color:#16865b;font-size:19px;font-weight:900}
+.bw-recovery-followup{margin-top:10px;padding:12px;border:1px solid #e8e4f7;border-radius:13px;background:#fff}
+.bw-recovery-followup-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.bw-recovery-followup-actions button{min-height:42px;padding:9px 10px;border:1px solid #ded8fa;border-radius:11px;background:linear-gradient(180deg,#fff,#f8f6ff);color:#4f34d2;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(54,43,112,.06)}
+.bw-recovery-followup-actions button:hover{border-color:#bfb3ff;transform:translateY(-1px)}
+.bw-recovery-followup-actions button:disabled{opacity:.6;cursor:wait;transform:none}
+@media(max-width:380px){.bw-support-quick-actions button{min-height:42px!important}.bw-premium-nav-icon{width:26px;height:26px;min-width:26px}.bw-support-compose{gap:7px!important}#bwSupportSend{width:40px!important;min-width:40px!important;max-width:40px!important;height:40px!important;min-height:40px!important;flex-basis:40px!important}.bw-recovery-followup-actions{grid-template-columns:1fr}}
 `;
       document.head.appendChild(style);
     }
@@ -180,6 +325,8 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
       const labelNode=button.querySelector('.bw-premium-nav-label');if(labelNode)labelNode.textContent=label;
       button.dataset.premiumIcon='1';
     });
+
+    enhanceRecoveryFlow();
   };
 
   polishChatControls();
@@ -197,6 +344,10 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
     syncAuthenticatedSupportIdentity().catch(err=>console.warn('Support identity guard skipped:',err));
     import('./chat-ticket-history-v3.js?v=ticket-history-v6').catch(err=>console.warn('Ticket history unavailable:',err));
     document.addEventListener('click',event=>{
+      const concernControl=event.target.closest('[data-flow],[data-account-flow]');
+      const concern=concernFromControl(concernControl);
+      if(concern)updateSupportConcern(concern[0],concern[1]).catch(err=>console.warn('Unable to update support concern:',err));
+
       const star=event.target.closest('.bw-support-stars [data-rate]');if(!star)return;
       const rating=Number(star.dataset.rate||0);
       document.querySelectorAll('.bw-support-stars [data-rate]').forEach(button=>{button.classList.toggle('selected',Number(button.dataset.rate)<=rating);button.setAttribute('aria-pressed',Number(button.dataset.rate)===rating?'true':'false')});
