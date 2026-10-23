@@ -35,13 +35,13 @@ const applyApprovedSupportDesign=()=>{
 #adminSupportPanel .asp-profile{padding:0 12px 16px!important;background:#fff!important;border-left:1px solid #e7eaf2!important;scrollbar-width:thin;scrollbar-color:#b8bbc7 transparent}
 #adminSupportPanel .asp-profile-card{text-align:center!important}
 #adminSupportPanel .asp-profile-avatar{width:44px!important;height:44px!important;margin:14px auto 7px!important;font-size:14px!important;background:linear-gradient(135deg,#efeaff,#e8e1ff)!important;color:#5d3fee!important;border:1px solid #e1d8ff!important}
-#adminSupportPanel .asp-profile-card>strong{font-size:10px!important;letter-spacing:.01em!important;color:#1f2540!important}
+#adminSupportPanel .asp-profile-card h3{font-size:10px!important;letter-spacing:.01em!important;color:#1f2540!important;margin:0 0 4px!important}
 #adminSupportPanel .asp-profile-card>.asp-status{margin-top:4px!important}
 #adminSupportPanel .asp-profile-info{margin-top:11px!important;border-top:1px solid #eceef3!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:0 10px!important;text-align:left!important}
 #adminSupportPanel .asp-profile-info label{min-width:0!important;padding:9px 2px!important;border-bottom:1px solid #f0f1f5!important;font-size:7px!important;color:#818aa0!important}
 #adminSupportPanel .asp-profile-info strong{font-size:8px!important;margin-top:3px!important;color:#222841!important;font-weight:800!important;line-height:1.35!important}
 #adminSupportPanel #bwsProfileExtras{margin-top:0!important;text-align:left!important}
-#adminSupportPanel .bws-ticket-details,#adminSupportPanel .bws-quick-actions-v2,#adminSupportPanel .bws-email-history-v2,#adminSupportPanel .bws-account-actions{padding:11px 0!important;border-top:1px solid #eceef3!important}
+#adminSupportPanel .bws-ticket-details,#adminSupportPanel .bws-quick-actions-v2,#adminSupportPanel .bws-email-history-v2,#adminSupportPanel .bws-account-actions{padding:11px 0!important;border-top:1px solid #eceef3!important;scroll-margin-top:48px}
 #adminSupportPanel .bws-section-title{margin-bottom:8px!important;align-items:center!important}.bws-section-title strong{font-size:10px!important;color:#242a43!important;font-weight:850!important}.bws-section-title small{font-size:7px!important;color:#9097a9!important}
 #adminSupportPanel .bws-detail-grid{grid-template-columns:1fr 1fr!important;gap:6px!important}.bws-detail-grid span{padding:7px 8px!important;border-radius:8px!important;background:#fbfcff!important;border:1px solid #e7e9f2!important;font-size:7px!important;color:#8890a4!important}.bws-detail-grid strong{font-size:8px!important;margin-top:2px!important;color:#2d334b!important}
 #adminSupportPanel .bws-tags{margin-top:7px!important}.bws-tags>small{font-size:7px!important;color:#7e879a!important}.bws-tags div{gap:5px!important;margin-top:5px!important}.bws-tags button{padding:4px 7px!important;font-size:7px!important;background:#faf8ff!important}
@@ -52,10 +52,34 @@ const applyApprovedSupportDesign=()=>{
 #adminSupportPanel .bws-actions-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}.bws-actions-grid button{min-height:31px!important;padding:6px!important;border-radius:8px!important;font-size:7px!important;font-weight:850!important;background:#fff!important;color:#5038ca!important;border-color:#ddd6ff!important}.bws-actions-grid button.danger{color:#c33f50!important;border-color:#ffcdd2!important;background:#fffafa!important}.bws-actions-grid button.good{color:#16885f!important;border-color:#cbeada!important;background:#fbfffd!important}
 #adminSupportPanel .bws-view-profile{height:31px!important;margin:0 0 10px!important;border-radius:8px!important;font-size:7px!important}
 #adminSupportPanel .bws-email-log{display:none!important}
+#adminSupportPanel .bws-profile-nav{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:0 -2px 10px;padding:8px 2px;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #eceef4}
+#adminSupportPanel .bws-profile-nav button{height:28px;border:1px solid #e4e1f7;border-radius:8px;background:#fff;color:#727b91;font-size:6.5px;font-weight:850;cursor:pointer;transition:.15s ease;padding:0 4px}
+#adminSupportPanel .bws-profile-nav button:hover,#adminSupportPanel .bws-profile-nav button.active{background:#f1edff;color:#583fe0;border-color:#d5ceff}
+#adminSupportPanel .bws-profile-info-icon{display:inline-grid;place-items:center;width:16px;height:16px;margin-right:5px;border-radius:5px;background:#f2efff;color:#6046df;font-size:9px;vertical-align:middle}
+#adminSupportPanel .bws-profile-summary-title{display:flex;align-items:center;justify-content:space-between;margin:10px 0 2px;text-align:left}
+#adminSupportPanel .bws-profile-summary-title strong{font-size:9px;color:#232942}.bws-profile-summary-title small{font-size:7px;color:#9298aa}
 @media(min-width:1380px){#adminSupportPanel .asp-layout{grid-template-columns:minmax(250px,19%) minmax(610px,1fr) minmax(395px,29%)!important}#adminSupportPanel .bws-actions-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media(max-width:1180px){#adminSupportPanel .asp-layout{grid-template-columns:230px minmax(520px,1fr) 330px!important}#adminSupportPanel .asp-profile-info{grid-template-columns:1fr!important}#adminSupportPanel .bws-actions-grid{grid-template-columns:1fr 1fr!important}}
 `;
     document.head.appendChild(style);
+  }
+  const profile=document.querySelector('#adminSupportPanel #aspProfile');
+  const card=profile?.querySelector('.asp-profile-card');
+  if(card){
+    let nav=card.querySelector('.bws-profile-nav');
+    if(!nav){
+      nav=document.createElement('nav');nav.className='bws-profile-nav';nav.setAttribute('aria-label','Customer detail sections');
+      nav.innerHTML='<button type="button" data-go="overview" class="active">Overview</button><button type="button" data-go="ticket">Ticket</button><button type="button" data-go="email">Email</button><button type="button" data-go="account">Account</button>';
+      card.prepend(nav);
+      nav.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(!b)return;nav.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));const target={overview:card.querySelector('.asp-profile-avatar'),ticket:document.querySelector('#bwsProfileExtras .bws-ticket-details'),email:document.querySelector('#bwsProfileExtras .bws-email-history-v2'),account:document.querySelector('#bwsProfileExtras .bws-account-actions')}[b.dataset.go];target?.scrollIntoView({behavior:'smooth',block:'start'})});
+    }
+    const info=card.querySelector('.asp-profile-info');
+    if(info&&!info.dataset.detailed){
+      info.dataset.detailed='1';
+      const icons=['⌂','◈','✉','♙','☆'];
+      [...info.querySelectorAll('label')].forEach((label,i)=>{const text=[...label.childNodes].find(n=>n.nodeType===Node.TEXT_NODE);if(text&&text.textContent.trim()){const span=document.createElement('span');span.className='bws-profile-info-icon';span.textContent=icons[i]||'•';label.insertBefore(span,label.firstChild)}});
+      const title=document.createElement('div');title.className='bws-profile-summary-title';title.innerHTML='<strong>Customer Information</strong><small>Account overview</small>';info.before(title);
+    }
   }
   const extras=document.querySelector('#bwsProfileExtras');
   if(extras){
@@ -67,7 +91,7 @@ const applyApprovedSupportDesign=()=>{
   const tab=document.querySelector('#bwsSupportTabs [data-tab="timeline"]');if(tab)tab.textContent='Email History';
 };
 
-import('./admin-customer-panel-v2.js?v=customer-panel-v3-approved').then(()=>{
+import('./admin-customer-panel-v2.js?v=customer-panel-v4-detailed').then(()=>{
   const run=()=>{applyApprovedSupportDesign();setTimeout(applyApprovedSupportDesign,60)};
   run();const root=document.getElementById('adminSupportPanel');if(root)new MutationObserver(run).observe(root,{childList:true,subtree:true});
 }).catch(err=>console.warn('Customer details workspace unavailable:',err));
