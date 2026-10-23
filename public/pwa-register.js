@@ -18,28 +18,32 @@ if(document.getElementById('adminApp')){
 
   if(supportNav){supportNav.classList.remove('admin-support-premium-nav');supportNav.innerHTML='<span>◌</span> Chat Support<span id="aspUnread" class="support-unread-badge" aria-label="Unread support messages"></span>';if(!document.getElementById('adminSupportPremiumNavStyle')){const style=document.createElement('style');style.id='adminSupportPremiumNavStyle';style.textContent='.support-unread-badge{display:none!important;min-width:19px;height:19px;padding:0 5px;place-items:center;border-radius:99px;background:#ff5d70;color:#fff!important;font-size:8px!important;font-weight:900}.support-unread-badge.has-unread{display:grid!important}';document.head.appendChild(style)}}
 
-  // Sidebar folding is global to the Admin Portal, not owned by Chat Support.
-  // This keeps the same fold/expand bar available on Dashboard, Clients and Chat Support.
+  // The sidebar belongs to the Admin shell. Support modules must never recreate its toggle.
   const setupFoldableSidebar=()=>{
     const layout=document.querySelector('#adminDashboard .admin-layout'),side=document.querySelector('#adminDashboard .admin-sidebar');
-    if(!layout||!side||side.dataset.globalFoldReady)return;
+    if(!layout||!side)return;
+    // admin-support-v1 checks this flag. Marking it here prevents Chat Support from
+    // deleting/replacing the global toggle and breaking its click handler.
+    side.dataset.foldReady='1';
+    if(side.dataset.globalFoldReady)return;
     side.dataset.globalFoldReady='1';
     let btn=document.getElementById('bwsAdminSidebarToggle');
     if(!btn){btn=document.createElement('button');btn.type='button';btn.id='bwsAdminSidebarToggle';side.appendChild(btn)}
-    let collapsed=false;
+    let collapsed=localStorage.getItem('bwsAdminSidebarCollapsed')==='1';
     const apply=()=>{
       layout.classList.toggle('bws-admin-nav-collapsed',collapsed);side.classList.toggle('bws-admin-nav-collapsed',collapsed);
-      if(!collapsed)layout.classList.remove('bws-admin-nav-peek');
-      btn.textContent=collapsed?'›':'‹';btn.title=collapsed?'Expand sidebar':'Collapse sidebar';btn.setAttribute('aria-label',btn.title);
+      layout.classList.remove('bws-admin-nav-peek');
+      btn.textContent=collapsed?'›':'‹';btn.title=collapsed?'Expand sidebar':'Collapse sidebar';btn.setAttribute('aria-label',btn.title);btn.setAttribute('aria-expanded',String(!collapsed));
+      localStorage.setItem('bwsAdminSidebarCollapsed',collapsed?'1':'0');
     };
-    btn.onclick=e=>{e.preventDefault();e.stopPropagation();collapsed=!collapsed;apply()};
+    btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();collapsed=!collapsed;apply()});
     side.addEventListener('mouseenter',()=>{if(collapsed)layout.classList.add('bws-admin-nav-peek')});
     side.addEventListener('mouseleave',()=>{if(collapsed)layout.classList.remove('bws-admin-nav-peek')});
     apply();
     if(!document.getElementById('bwsGlobalFoldStyle')){const s=document.createElement('style');s.id='bwsGlobalFoldStyle';s.textContent=`
       #adminDashboard .admin-layout{transition:grid-template-columns .2s cubic-bezier(.2,.8,.2,1)!important}
-      #adminDashboard .admin-sidebar{overflow:visible!important;transition:width .2s cubic-bezier(.2,.8,.2,1),padding .2s ease!important}
-      #adminDashboard #bwsAdminSidebarToggle{position:absolute!important;top:50%!important;right:-13px!important;transform:translateY(-50%)!important;width:26px!important;height:48px!important;border:1px solid #ffffff26!important;border-radius:0 12px 12px 0!important;background:#17142f!important;color:#fff!important;z-index:100!important;cursor:pointer!important;font-size:18px!important;box-shadow:5px 0 16px #11102725!important}
+      #adminDashboard .admin-sidebar{position:relative!important;overflow:visible!important;transition:width .2s cubic-bezier(.2,.8,.2,1),padding .2s ease!important}
+      #adminDashboard #bwsAdminSidebarToggle{display:grid!important;place-items:center!important;position:absolute!important;top:50%!important;right:-13px!important;transform:translateY(-50%)!important;width:26px!important;height:48px!important;padding:0!important;border:1px solid #ffffff26!important;border-radius:0 12px 12px 0!important;background:#17142f!important;color:#fff!important;z-index:1000!important;cursor:pointer!important;font-size:18px!important;line-height:1!important;box-shadow:5px 0 16px #11102725!important}
       #adminDashboard .admin-layout.bws-admin-nav-collapsed{grid-template-columns:64px minmax(0,1fr)!important}
       #adminDashboard .admin-sidebar.bws-admin-nav-collapsed{width:64px!important;padding-left:8px!important;padding-right:8px!important}
       #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .admin-side-logo{justify-content:center!important;padding-left:0!important;padding-right:0!important}
@@ -64,7 +68,7 @@ if(document.getElementById('adminApp')){
   const showClients=()=>{hideSupport();closeDrawer();setActiveNav(clientsNav);showEl(dashboardHead,true);setHead('Client accounts','Create and manage the people who can use your budgeting page.',true);showEl(stats,false);showEl(grid,true);showEl(createPanel,true);showEl(clientsPanel,true);try{history.replaceState(null,'',location.pathname+location.search+'#clients')}catch{}requestAnimationFrame(()=>window.scrollTo({top:0,behavior:'smooth'}))};
 
   let supportPromise=null;
-  const loadAdminSupport=()=>{if(supportPromise)return supportPromise;supportPromise=import('./admin-support-v1.js?v=admin-support-separated-v2').then(()=>true).catch(err=>{console.warn('Admin support inbox unavailable:',err);supportPromise=null;return false});return supportPromise};
+  const loadAdminSupport=()=>{if(supportPromise)return supportPromise;supportPromise=import('./admin-support-v1.js?v=admin-support-separated-v3').then(()=>true).catch(err=>{console.warn('Admin support inbox unavailable:',err);supportPromise=null;return false});return supportPromise};
   const waitForSupportPanel=async()=>{for(let i=0;i<120;i++){const panel=document.getElementById('adminSupportPanel');if(panel)return panel;await new Promise(r=>setTimeout(r,50))}return null};
   const showSupport=async()=>{const loaded=await loadAdminSupport();if(!loaded)return false;const panel=await waitForSupportPanel();if(!panel)return false;closeDrawer();setActiveNav(supportNav);showEl(dashboardHead,false);showEl(stats,false);showEl(grid,false);showEl(createPanel,false);showEl(clientsPanel,false);panel.classList.remove('hidden');panel.hidden=false;try{history.replaceState(null,'',location.pathname+location.search+'#support')}catch{}requestAnimationFrame(()=>window.scrollTo({top:0,behavior:'smooth'}));return true};
 
