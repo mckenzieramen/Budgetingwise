@@ -42,7 +42,9 @@ if(document.getElementById('adminApp')){
   const moveGlass=target=>{
     const nav=document.querySelector('#adminDashboard .admin-nav'),glass=nav?.querySelector('.bws-active-glass');if(!nav||!glass||!target)return;
     const nr=nav.getBoundingClientRect(),tr=target.getBoundingClientRect();
-    glass.style.width=`${tr.width}px`;glass.style.height=`${tr.height}px`;glass.style.transform=`translate3d(${tr.left-nr.left}px,${tr.top-nr.top}px,0)`;glass.classList.add('is-ready');
+    glass.style.height=`${tr.height}px`;
+    glass.style.transform=`translate3d(0,${tr.top-nr.top}px,0)`;
+    glass.classList.add('is-ready');
   };
   const setActiveNav=target=>{document.querySelectorAll('#adminDashboard .admin-nav button').forEach(b=>{const on=b===target;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false')});requestAnimationFrame(()=>moveGlass(target))};
 
@@ -63,46 +65,48 @@ if(document.getElementById('adminApp')){
       btn.setAttribute('aria-label',btn.title);
       btn.setAttribute('aria-expanded',String(!collapsed));
       localStorage.setItem('bwsAdminSidebarCollapsed',collapsed?'1':'0');
-      setTimeout(()=>moveGlass(active()),230);
+      requestAnimationFrame(()=>moveGlass(active()));
     };
     if(!btn.dataset.bound){btn.dataset.bound='1';btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();collapsed=!collapsed;apply()})}
     apply();
   };
 
   addCss('bwsAdminShellNavStyle',`
-    #adminDashboard .admin-sidebar{position:relative!important;overflow:visible!important;width:230px!important;transition:width .22s cubic-bezier(.2,.8,.2,1),padding .22s ease!important}
-    #adminDashboard .admin-layout{transition:grid-template-columns .22s cubic-bezier(.2,.8,.2,1)!important}
-    #adminDashboard .admin-nav{position:relative;display:grid;gap:8px;isolation:isolate}
-    #adminDashboard .admin-nav button,#adminDashboard #adminLogout{position:relative;z-index:2;display:flex!important;align-items:center!important;gap:11px!important;overflow:hidden!important;white-space:nowrap!important}
-    #adminDashboard .admin-nav button{height:44px;padding:0 12px!important;border-radius:11px!important;background:transparent!important;color:#c8c5dc!important;border:1px solid transparent!important;box-shadow:none!important;transition:color .18s ease}
+    #adminDashboard .admin-layout{grid-template-columns:230px minmax(0,1fr)!important;transition:grid-template-columns .36s cubic-bezier(.22,.75,.18,1)!important;will-change:grid-template-columns}
+    #adminDashboard .admin-sidebar{position:relative!important;overflow:visible!important;width:100%!important;min-width:0!important;max-width:none!important;padding-left:14px!important;padding-right:14px!important;transition:padding .36s cubic-bezier(.22,.75,.18,1)!important;will-change:padding}
+    #adminDashboard .admin-nav{position:relative;display:grid;gap:8px;isolation:isolate;width:100%!important;min-width:0!important;max-width:none!important;overflow:hidden!important}
+    #adminDashboard .admin-nav button,#adminDashboard #adminLogout{position:relative;z-index:2;display:flex!important;width:100%!important;min-width:0!important;max-width:none!important;align-items:center!important;justify-content:flex-start!important;gap:11px!important;padding-left:12px!important;padding-right:12px!important;overflow:hidden!important;white-space:nowrap!important;transition:padding .36s cubic-bezier(.22,.75,.18,1),gap .3s ease,color .18s ease!important}
+    #adminDashboard .admin-nav button{height:44px;border-radius:11px!important;background:transparent!important;color:#c8c5dc!important;border:1px solid transparent!important;box-shadow:none!important}
     #adminDashboard .admin-nav button:hover{color:#fff!important}
     #adminDashboard .admin-nav button.active{color:#fff!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
-    #adminDashboard .bws-nav-label{display:block!important;max-width:150px!important;opacity:1!important;overflow:hidden!important;transform:translateX(0)!important;transition:max-width .2s ease,opacity .14s ease,transform .2s ease!important}
-    #adminDashboard .admin-side-logo>div{max-width:150px!important;opacity:1!important;overflow:hidden!important;transition:max-width .2s ease,opacity .14s ease!important}
-    #adminDashboard .admin-nav .bws-active-glass{position:absolute;z-index:1;left:0;top:0;display:block!important;border-radius:11px;background:linear-gradient(135deg,rgba(119,83,255,.88),rgba(88,53,224,.68));border:1px solid rgba(184,166,255,.58);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 9px 24px rgba(91,56,245,.25);backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px);opacity:0;pointer-events:none;transition:transform .28s cubic-bezier(.22,.8,.24,1),width .22s ease,height .22s ease,opacity .15s ease}
+    #adminDashboard .bws-nav-label{display:block!important;width:auto!important;max-width:150px!important;opacity:1!important;overflow:hidden!important;transform:translateX(0)!important;transition:max-width .3s cubic-bezier(.22,.75,.18,1),opacity .18s ease,transform .3s ease!important}
+    #adminDashboard .admin-side-logo{overflow:hidden!important;transition:padding .36s cubic-bezier(.22,.75,.18,1)!important}
+    #adminDashboard .admin-side-logo>div{display:block!important;width:auto!important;max-width:150px!important;opacity:1!important;overflow:hidden!important;transform:translateX(0)!important;transition:max-width .3s cubic-bezier(.22,.75,.18,1),opacity .18s ease,transform .3s ease!important}
+    #adminDashboard .admin-nav .bws-active-glass{position:absolute;z-index:1;left:0;top:0;display:block!important;width:100%!important;border-radius:11px;background:linear-gradient(135deg,rgba(119,83,255,.88),rgba(88,53,224,.68));border:1px solid rgba(184,166,255,.58);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 9px 24px rgba(91,56,245,.25);backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px);opacity:0;pointer-events:none;transition:transform .28s cubic-bezier(.22,.8,.24,1),opacity .15s ease!important}
     #adminDashboard .admin-nav .bws-active-glass.is-ready{opacity:1}
     #adminDashboard .admin-nav .bws-active-glass:before{content:'';position:absolute;left:-1px;top:10px;bottom:10px;width:3px;border-radius:0 4px 4px 0;background:#c6b8ff;box-shadow:0 0 10px rgba(183,161,255,.9)}
     #adminDashboard .bws-shell-icon,#adminDashboard .bws-nav-icon{width:20px!important;height:20px!important;display:grid!important;place-items:center!important;flex:0 0 20px!important;margin:0!important;color:inherit!important}
     #adminDashboard .bws-shell-icon svg,#adminDashboard .bws-nav-icon svg{width:18px!important;height:18px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important}
     #adminDashboard #adminSupportNav .bws-nav-label{font-weight:700;letter-spacing:-.01em}
     .support-unread-badge{display:none!important}.support-unread-badge.has-unread{display:grid!important;min-width:19px;height:19px;padding:0 5px;place-items:center;border-radius:99px;background:#ff5d70;color:#fff;font-size:8px;font-weight:900;margin-left:auto;box-shadow:0 0 0 3px rgba(255,93,112,.14)}
-    #adminDashboard #bwsAdminSidebarToggle{display:grid!important;place-items:center!important;position:absolute!important;top:50%!important;right:-13px!important;transform:translateY(-50%)!important;width:26px!important;height:48px!important;padding:0!important;border:1px solid #ffffff26!important;border-radius:0 12px 12px 0!important;background:#17142f!important;color:#fff!important;z-index:1000!important;cursor:pointer!important;font-size:18px!important}
+    #adminDashboard #bwsAdminSidebarToggle{display:grid!important;place-items:center!important;position:absolute!important;top:50%!important;right:-13px!important;transform:translateY(-50%)!important;width:26px!important;height:48px!important;padding:0!important;border:1px solid #ffffff26!important;border-radius:0 12px 12px 0!important;background:#17142f!important;color:#fff!important;z-index:1000!important;cursor:pointer!important;font-size:18px!important;transition:background .18s ease,border-color .18s ease,box-shadow .18s ease!important}
+    #adminDashboard #bwsAdminSidebarToggle:hover{background:#211b43!important;border-color:#ffffff40!important;box-shadow:0 8px 22px rgba(0,0,0,.2)!important}
 
     #adminDashboard .admin-layout.bws-admin-nav-collapsed{grid-template-columns:64px minmax(0,1fr)!important}
     #adminDashboard .admin-sidebar.bws-admin-nav-collapsed,
-    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar{width:64px!important;min-width:64px!important;max-width:64px!important;padding-left:8px!important;padding-right:8px!important;overflow:visible!important;box-sizing:border-box!important}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar{width:100%!important;min-width:0!important;max-width:none!important;padding-left:8px!important;padding-right:8px!important;overflow:visible!important;box-sizing:border-box!important}
     #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .admin-side-logo,
-    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar .admin-side-logo{justify-content:center!important;padding-left:0!important;padding-right:0!important;overflow:hidden!important}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar .admin-side-logo{justify-content:flex-start!important;padding-left:4px!important;padding-right:4px!important;overflow:hidden!important}
     #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .admin-side-logo>div,
-    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar .admin-side-logo>div{display:block!important;max-width:0!important;width:0!important;opacity:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar .admin-side-logo>div{display:block!important;width:auto!important;max-width:0!important;opacity:0!important;margin:0!important;padding:0!important;overflow:hidden!important;transform:translateX(-6px)!important}
     #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .admin-nav,
-    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar .admin-nav{width:46px!important;min-width:46px!important;max-width:46px!important;margin-left:auto!important;margin-right:auto!important;overflow:hidden!important}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar .admin-nav{width:100%!important;min-width:0!important;max-width:none!important;margin-left:auto!important;margin-right:auto!important;overflow:hidden!important}
     #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .admin-nav button,
     #adminDashboard .admin-sidebar.bws-admin-nav-collapsed #adminLogout,
     #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar .admin-nav button,
-    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar #adminLogout{display:flex!important;width:46px!important;min-width:46px!important;max-width:46px!important;height:44px!important;min-height:44px!important;align-items:center!important;justify-content:center!important;gap:0!important;padding:0!important;margin-left:auto!important;margin-right:auto!important;overflow:hidden!important;font-size:0!important;text-indent:0!important;white-space:nowrap!important}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar #adminLogout{display:flex!important;width:100%!important;min-width:0!important;max-width:none!important;height:44px!important;min-height:44px!important;align-items:center!important;justify-content:flex-start!important;gap:0!important;padding-left:13px!important;padding-right:13px!important;margin-left:0!important;margin-right:0!important;overflow:hidden!important;white-space:nowrap!important}
     #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .bws-nav-label,
-    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar .bws-nav-label{display:block!important;max-width:0!important;width:0!important;opacity:0!important;overflow:hidden!important;transform:translateX(-8px)!important;margin:0!important;padding:0!important;pointer-events:none!important;font-size:0!important;line-height:0!important}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar .bws-nav-label{display:block!important;width:auto!important;max-width:0!important;opacity:0!important;overflow:hidden!important;transform:translateX(-6px)!important;margin:0!important;padding:0!important;pointer-events:none!important}
     #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .bws-shell-icon,
     #adminDashboard .admin-sidebar.bws-admin-nav-collapsed .bws-nav-icon,
     #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar .bws-shell-icon,
@@ -114,9 +118,17 @@ if(document.getElementById('adminApp')){
     #adminDashboard .admin-sidebar.bws-admin-nav-collapsed #bwsAdminSidebarToggle,
     #adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar #bwsAdminSidebarToggle{right:-13px!important;font-size:18px!important;color:#fff!important}
     #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek{grid-template-columns:64px minmax(0,1fr)!important}
-    #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar{width:64px!important;min-width:64px!important;max-width:64px!important;padding-left:8px!important;padding-right:8px!important}
-    #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .bws-nav-label{max-width:0!important;width:0!important;opacity:0!important;font-size:0!important}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar{width:100%!important;min-width:0!important;max-width:none!important;padding-left:8px!important;padding-right:8px!important}
+    #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .bws-nav-label{max-width:0!important;opacity:0!important}
     #adminDashboard .admin-content:has(#adminSupportPanel:not(.hidden)){padding-top:16px!important}
+
+    @media(max-width:1050px){
+      #adminDashboard .admin-layout,#adminDashboard .admin-layout.bws-admin-nav-collapsed{grid-template-columns:1fr!important}
+      #adminDashboard .admin-sidebar{display:none!important}
+    }
+    @media(prefers-reduced-motion:reduce){
+      #adminDashboard .admin-layout,#adminDashboard .admin-sidebar,#adminDashboard .admin-nav button,#adminDashboard #adminLogout,#adminDashboard .bws-nav-label,#adminDashboard .admin-side-logo>div,#adminDashboard .admin-nav .bws-active-glass{transition:none!important}
+    }
   `);
   setupFoldableSidebar();
 
