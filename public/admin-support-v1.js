@@ -1,4 +1,5 @@
-import 'https://cdn.jsdelivr.net/gh/mckenzieramen/Budgetingwise@ec1c19c5a87dc239619152546f9b56f506fa6525/public/admin-support-v1.js';
+// Local Admin Support wrapper. The core inbox is stored in this repository so navigation never depends on an external CDN.
+import './admin-support-core-v1.js?v=local-core-v1';
 
 const addOpenStatus=()=>{
   const menu=document.getElementById('aspStateMenu');
