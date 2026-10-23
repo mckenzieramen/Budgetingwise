@@ -20,6 +20,20 @@ if(document.getElementById('adminApp')){
   import('./admin-secure-client-create-v1.js?v=secure-create-v6').catch(err=>console.warn('Secure client creation unavailable:',err));
 
   const supportNav=document.getElementById('adminSupportNav');
+  const adminNavButtons=[...document.querySelectorAll('.admin-nav button')];
+  const syncSidebarActive=target=>{
+    if(!target)return;
+    adminNavButtons.forEach(btn=>{
+      const on=btn===target;
+      btn.classList.toggle('active',on);
+      btn.classList.toggle('bws-glass-active',on);
+    });
+    const nav=target.closest('.admin-nav'),glass=nav?.querySelector('.bws-active-glass'),index=adminNavButtons.indexOf(target);
+    if(glass&&index>=0)glass.style.setProperty('--bws-nav-index',index);
+  };
+  // Keep the violet/glass selector tied to the actual tab, including Dashboard
+  // and Clients which share the normal admin workspace.
+  adminNavButtons.forEach(btn=>btn.addEventListener('click',()=>syncSidebarActive(btn),true));
 
   // Premium Chat Support navigation treatment.
   if(supportNav){
@@ -44,13 +58,12 @@ if(document.getElementById('adminApp')){
         .admin-support-premium-nav{position:relative!important;display:grid!important;grid-template-columns:38px minmax(0,1fr) auto!important;align-items:center!important;gap:10px!important;min-height:54px!important;padding:7px 10px!important;overflow:hidden!important;isolation:isolate!important;cursor:pointer!important;pointer-events:auto!important}
         .admin-support-premium-nav:before{content:'';position:absolute;inset:0;z-index:-1;border-radius:10px;background:linear-gradient(110deg,rgba(111,82,245,.12),rgba(86,62,217,.02));opacity:0;transition:opacity .18s ease}
         .admin-support-premium-nav:hover:before,.admin-support-premium-nav.active:before{opacity:1}
-        .support-premium-mark{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(145deg,#7659f6,#5436d7);color:#fff;box-shadow:0 8px 20px rgba(85,54,215,.34),inset 0 1px 0 rgba(255,255,255,.24);transition:transform .18s ease,box-shadow .18s ease}
-        .admin-support-premium-nav:hover .support-premium-mark{transform:translateY(-1px) scale(1.03);box-shadow:0 11px 24px rgba(85,54,215,.4),inset 0 1px 0 rgba(255,255,255,.28)}
+        .support-premium-mark{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:transparent;color:inherit;box-shadow:none;transition:transform .18s ease}
+        .admin-support-premium-nav:hover .support-premium-mark{transform:translateY(-1px)}
         .support-premium-mark svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
         .support-nav-copy{min-width:0;display:block!important;text-align:left;line-height:1.15}
         .support-nav-copy strong{display:block;color:inherit;font-size:11px;font-weight:850;white-space:nowrap}
-        .support-nav-copy small{display:block!important;margin-top:3px;color:#938eae!important;font-size:8px!important;font-weight:650;letter-spacing:.01em;white-space:nowrap}
-        .admin-support-premium-nav.active .support-nav-copy small{color:#d8d2ff!important}
+        .support-nav-copy small{display:none!important}
         .support-unread-badge{display:none!important;min-width:19px;height:19px;padding:0 5px;place-items:center;border-radius:99px;background:#ff5d70;color:#fff!important;font-size:8px!important;font-weight:900;box-shadow:0 4px 10px rgba(255,93,112,.32)}
         .support-unread-badge.has-unread{display:grid!important}
         .admin-support-premium-nav.is-loading .support-premium-mark svg{animation:bwsSupportPulse .8s ease-in-out infinite alternate}
@@ -64,7 +77,7 @@ if(document.getElementById('adminApp')){
   const loadAdminSupport=()=>{
     if(supportPromise)return supportPromise;
     supportNav?.classList.add('is-loading');
-    supportPromise=import('./admin-support-v1.js?v=admin-support-direct-nav-v2')
+    supportPromise=import('./admin-support-v1.js?v=admin-support-sliding-glass-v3')
       .then(()=>true)
       .catch(err=>{
         console.warn('Admin support inbox unavailable:',err);
@@ -90,14 +103,11 @@ if(document.getElementById('adminApp')){
     const panel=await waitForSupportPanel();
     if(!panel)return false;
 
-    // Close client details so it cannot sit above the support workspace.
     document.getElementById('adminDashboard')?.classList.remove('client-details-open');
     document.getElementById('clientDrawer')?.classList.remove('is-open');
     document.getElementById('drawerBackdrop')?.classList.add('hidden');
 
-    // Hard-switch the Admin shell to Chat Support. This does not depend on the
-    // support module's own click listener, so the sidebar always navigates.
-    document.querySelectorAll('.admin-nav button').forEach(btn=>btn.classList.toggle('active',btn===supportNav));
+    syncSidebarActive(supportNav);
     document.querySelectorAll('#adminDashboard .admin-content>div').forEach(el=>el.classList.add('asp-dashboard-hidden'));
     panel.classList.remove('hidden');
     panel.removeAttribute('hidden');
@@ -111,6 +121,7 @@ if(document.getElementById('adminApp')){
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation();
+      syncSidebarActive(supportNav);
       supportNav.classList.add('is-loading');
       const opened=await openSupportDirectly();
       supportNav.classList.remove('is-loading');
@@ -121,10 +132,8 @@ if(document.getElementById('adminApp')){
     },true);
   }
 
-  // Preload, but navigation no longer depends on this finishing first.
   loadAdminSupport();
 
-  // Support deep-link / refresh while on #support.
   if(location.hash==='#support'){
     window.addEventListener('load',()=>openSupportDirectly());
   }
