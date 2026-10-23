@@ -2,6 +2,22 @@
   Cache-Control: no-cache, no-store, must-revalidate
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate
+/admin.html
+  Cache-Control: no-cache, no-store, must-revalidate
+/admin.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/pwa-register.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/admin-support-v1.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/admin-support-core-v1.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/admin-support-suite-v1.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/admin-support-v1.css
+  Cache-Control: no-cache, no-store, must-revalidate
+/admin-support-suite-v1.css
+  Cache-Control: no-cache, no-store, must-revalidate
 /boot.js
   Cache-Control: no-cache, no-store, must-revalidate
 /service-worker.js
