@@ -1,4 +1,6 @@
 import{initializeApp,getApps}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js';
+import{getAuth,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js';
+import{getFirestore,doc,getDoc,setDoc}from'https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js';
 import{firebaseConfig}from'./firebase-config.js';
 
 // Customer/guest Chat Support must never run inside the Admin Portal.
@@ -10,6 +12,102 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
       if(!/already exists|duplicate-app/i.test(String(err?.message||err)))throw err;
     }
   }
+
+  const defaultApp=()=>getApps().find(app=>app.name==='[DEFAULT]')||null;
+  const escapeSupportHtml=value=>String(value||'')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+  let supportIdentitySyncing=false;
+  let lastSupportIdentityUid='';
+
+  const syncAuthenticatedSupportIdentity=async()=>{
+    const app=defaultApp();
+    if(!app||supportIdentitySyncing)return false;
+
+    let auth,user,db;
+    try{
+      auth=getAuth(app);
+      user=auth.currentUser;
+      if(!user||user.isAnonymous)return false;
+      db=getFirestore(app);
+    }catch{return false}
+
+    const messages=document.getElementById('bwSupportMessages');
+    const guestGate=messages?.querySelector('#bwGuestName');
+    if(!guestGate&&lastSupportIdentityUid===user.uid)return true;
+
+    supportIdentitySyncing=true;
+    try{
+      let profile={};
+      try{
+        const snap=await getDoc(doc(db,'users',user.uid));
+        if(snap.exists())profile=snap.data()||{};
+      }catch(err){
+        console.warn('Logged-in support profile lookup unavailable:',err);
+      }
+
+      const firstName=String(profile.firstName||'').trim();
+      const lastName=String(profile.lastName||'').trim();
+      const customerName=([firstName,lastName].filter(Boolean).join(' ')||user.displayName||user.email||'Customer').trim();
+      const customerEmail=String(profile.authEmail||profile.email||user.email||'').trim().toLowerCase();
+      const budgetId=String(profile.budgetId||'').trim().toUpperCase();
+
+      try{
+        const identity={
+          uid:user.uid,
+          customerName,
+          customerEmail,
+          guest:false
+        };
+        if(budgetId)identity.budgetId=budgetId;
+        await setDoc(doc(db,'supportThreads',user.uid),identity,{merge:true});
+      }catch(err){
+        console.warn('Logged-in support identity sync unavailable:',err);
+      }
+
+      lastSupportIdentityUid=user.uid;
+
+      // The stable chat module can briefly render the guest gate while Firebase restores
+      // an existing authenticated session. Logged-in customers must never be asked for
+      // their name again; replace that gate with the normal customer workflow immediately.
+      if(messages?.querySelector('#bwGuestName')){
+        const greeting=escapeSupportHtml(firstName||customerName.split(/\s+/)[0]||'there');
+        messages.innerHTML=`<div class="bw-support-day">New support ticket</div><div class="bw-support-message agent bw-workflow-picker"><div><p><strong class="bw-flow-title">Hi ${greeting}! 👋 How can we help?</strong><span class="bw-flow-sub">Your signed-in Budgetingwise account is connected automatically. Tap a concern below.</span></p><div class="bw-support-quick-actions"><button type="button" data-flow="activation">🔑 Activation key</button><button type="button" data-flow="account">👤 Account / login</button><button type="button" data-flow="budgeting">📊 Budgeting feature</button><button type="button" data-flow="general">💬 General question</button><button type="button" data-flow="error">⚠️ Report an error</button><button type="button" data-flow="suggestion">✨ Share a suggestion</button></div><time>Budgetingwise Support Bot</time></div></div>`;
+      }
+
+      return true;
+    }finally{
+      supportIdentitySyncing=false;
+    }
+  };
+
+  const installAuthenticatedSupportGuard=()=>{
+    const app=defaultApp();
+    if(!app)return;
+    const auth=getAuth(app);
+    if(!auth.__bwSupportIdentityGuard){
+      auth.__bwSupportIdentityGuard=true;
+      onAuthStateChanged(auth,user=>{
+        if(user&&!user.isAnonymous){
+          lastSupportIdentityUid='';
+          setTimeout(()=>syncAuthenticatedSupportIdentity().catch(err=>console.warn('Support identity guard skipped:',err)),0);
+        }else{
+          lastSupportIdentityUid='';
+        }
+      });
+    }
+
+    const launcher=document.getElementById('bwSupportLauncher');
+    if(launcher&&!launcher.dataset.authIdentityGuard){
+      launcher.dataset.authIdentityGuard='1';
+      launcher.addEventListener('click',()=>{
+        setTimeout(()=>syncAuthenticatedSupportIdentity().catch(err=>console.warn('Support identity guard skipped:',err)),0);
+      },true);
+    }
+  };
 
   const polishChatControls=()=>{
     if(!document.getElementById('bwChatControlPolish')){
@@ -85,10 +183,18 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
   };
 
   polishChatControls();
-  new MutationObserver(polishChatControls).observe(document.documentElement,{childList:true,subtree:true});
-
-  import('./chat-support-customer-v2.js?v=customer-support-v6').then(()=>{
+  new MutationObserver(()=>{
     polishChatControls();
+    installAuthenticatedSupportGuard();
+    if(document.getElementById('bwGuestName')){
+      syncAuthenticatedSupportIdentity().catch(err=>console.warn('Support identity guard skipped:',err));
+    }
+  }).observe(document.documentElement,{childList:true,subtree:true});
+
+  import('./chat-support-customer-v2.js?v=customer-support-v7').then(()=>{
+    polishChatControls();
+    installAuthenticatedSupportGuard();
+    syncAuthenticatedSupportIdentity().catch(err=>console.warn('Support identity guard skipped:',err));
     import('./chat-ticket-history-v3.js?v=ticket-history-v6').catch(err=>console.warn('Ticket history unavailable:',err));
     document.addEventListener('click',event=>{
       const star=event.target.closest('.bw-support-stars [data-rate]');if(!star)return;
