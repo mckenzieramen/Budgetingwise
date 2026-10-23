@@ -28,6 +28,7 @@ if(document.getElementById('adminApp') || /^\/admin(?:\/|$)/i.test(location.path
   setTimeout(()=>{
     import('./admin-secure-client-create-v1.js?v=recovery-registry-v3').catch(error=>console.warn('Secure admin recovery sync unavailable:',error));
     import('./support-ticket-lifecycle-v1.js?v=admin-actions-only-v1').catch(error=>console.warn('Admin account actions unavailable:',error));
+    import('./admin-ticket-history-sort-v1.js?v=ticket-history-sort-v1').catch(error=>console.warn('Ticket history sorting unavailable:',error));
   },0);
 }else{
   if(!document.getElementById('bwCustomerNoHistoryCss')){
