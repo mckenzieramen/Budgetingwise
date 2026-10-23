@@ -18,57 +18,18 @@ if(document.getElementById('adminApp')){
   import('./admin-drawer-resize-v1.js?v=admin-drawer-resize-v1').catch(err=>console.warn('Client details resize unavailable:',err));
   import('./admin-form-guard-v1.js?v=admin-form-guard-v1').catch(err=>console.warn('Admin customer form guard unavailable:',err));
   import('./admin-secure-client-create-v1.js?v=secure-create-v6').catch(err=>console.warn('Secure client creation unavailable:',err));
+  import('./admin-support-ux-fix-v1.js?v=ticket-chat-sidebar-v1').catch(err=>console.warn('Admin support UX patch unavailable:',err));
 
   const supportNav=document.getElementById('adminSupportNav');
-  const adminNavButtons=[...document.querySelectorAll('.admin-nav button')];
-  const syncSidebarActive=target=>{
-    if(!target)return;
-    adminNavButtons.forEach(btn=>{
-      const on=btn===target;
-      btn.classList.toggle('active',on);
-      btn.classList.toggle('bws-glass-active',on);
-    });
-    const nav=target.closest('.admin-nav'),glass=nav?.querySelector('.bws-active-glass'),index=adminNavButtons.indexOf(target);
-    if(glass&&index>=0)glass.style.setProperty('--bws-nav-index',index);
-  };
-  // Keep the violet/glass selector tied to the actual tab, including Dashboard
-  // and Clients which share the normal admin workspace.
-  adminNavButtons.forEach(btn=>btn.addEventListener('click',()=>syncSidebarActive(btn),true));
 
-  // Premium Chat Support navigation treatment.
+  // Keep Chat Support visually identical to the other primary navigation rows.
   if(supportNav){
-    supportNav.classList.add('admin-support-premium-nav');
-    supportNav.innerHTML=`
-      <span class="support-premium-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" role="img">
-          <path d="M5 13v-1a7 7 0 0 1 14 0v1"/>
-          <path d="M5 13H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v-6Z"/>
-          <path d="M19 13h1a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2v-6Z"/>
-          <path d="M18 19c0 1.1-.9 2-2 2h-3"/>
-          <path d="M9 9.5c.7-.6 1.7-1 3-1s2.3.4 3 1"/>
-        </svg>
-      </span>
-      <span class="support-nav-copy"><strong>Chat Support</strong><small>Inbox & tickets</small></span>
-      <span id="aspUnread" class="support-unread-badge" aria-label="Unread support messages"></span>`;
-
+    supportNav.classList.remove('admin-support-premium-nav');
+    supportNav.innerHTML='<span>◌</span> Chat Support<span id="aspUnread" class="support-unread-badge" aria-label="Unread support messages"></span>';
     if(!document.getElementById('adminSupportPremiumNavStyle')){
       const style=document.createElement('style');
       style.id='adminSupportPremiumNavStyle';
-      style.textContent=`
-        .admin-support-premium-nav{position:relative!important;display:grid!important;grid-template-columns:38px minmax(0,1fr) auto!important;align-items:center!important;gap:10px!important;min-height:54px!important;padding:7px 10px!important;overflow:hidden!important;isolation:isolate!important;cursor:pointer!important;pointer-events:auto!important}
-        .admin-support-premium-nav:before{content:'';position:absolute;inset:0;z-index:-1;border-radius:10px;background:linear-gradient(110deg,rgba(111,82,245,.12),rgba(86,62,217,.02));opacity:0;transition:opacity .18s ease}
-        .admin-support-premium-nav:hover:before,.admin-support-premium-nav.active:before{opacity:1}
-        .support-premium-mark{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:transparent;color:inherit;box-shadow:none;transition:transform .18s ease}
-        .admin-support-premium-nav:hover .support-premium-mark{transform:translateY(-1px)}
-        .support-premium-mark svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-        .support-nav-copy{min-width:0;display:block!important;text-align:left;line-height:1.15}
-        .support-nav-copy strong{display:block;color:inherit;font-size:11px;font-weight:850;white-space:nowrap}
-        .support-nav-copy small{display:none!important}
-        .support-unread-badge{display:none!important;min-width:19px;height:19px;padding:0 5px;place-items:center;border-radius:99px;background:#ff5d70;color:#fff!important;font-size:8px!important;font-weight:900;box-shadow:0 4px 10px rgba(255,93,112,.32)}
-        .support-unread-badge.has-unread{display:grid!important}
-        .admin-support-premium-nav.is-loading .support-premium-mark svg{animation:bwsSupportPulse .8s ease-in-out infinite alternate}
-        @keyframes bwsSupportPulse{from{opacity:.48;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
-      `;
+      style.textContent=`.support-unread-badge{display:none!important;min-width:19px;height:19px;padding:0 5px;place-items:center;border-radius:99px;background:#ff5d70;color:#fff!important;font-size:8px!important;font-weight:900}.support-unread-badge.has-unread{display:grid!important}`;
       document.head.appendChild(style);
     }
   }
@@ -77,7 +38,7 @@ if(document.getElementById('adminApp')){
   const loadAdminSupport=()=>{
     if(supportPromise)return supportPromise;
     supportNav?.classList.add('is-loading');
-    supportPromise=import('./admin-support-v1.js?v=admin-support-sliding-glass-v3')
+    supportPromise=import('./admin-support-v1.js?v=admin-support-direct-nav-v4')
       .then(()=>true)
       .catch(err=>{
         console.warn('Admin support inbox unavailable:',err);
@@ -107,7 +68,7 @@ if(document.getElementById('adminApp')){
     document.getElementById('clientDrawer')?.classList.remove('is-open');
     document.getElementById('drawerBackdrop')?.classList.add('hidden');
 
-    syncSidebarActive(supportNav);
+    document.querySelectorAll('.admin-nav button').forEach(btn=>btn.classList.toggle('active',btn===supportNav));
     document.querySelectorAll('#adminDashboard .admin-content>div').forEach(el=>el.classList.add('asp-dashboard-hidden'));
     panel.classList.remove('hidden');
     panel.removeAttribute('hidden');
@@ -121,7 +82,6 @@ if(document.getElementById('adminApp')){
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation();
-      syncSidebarActive(supportNav);
       supportNav.classList.add('is-loading');
       const opened=await openSupportDirectly();
       supportNav.classList.remove('is-loading');
