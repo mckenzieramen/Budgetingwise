@@ -20,17 +20,12 @@ if(document.getElementById('adminApp')){
     const nav=document.querySelector('#adminDashboard .admin-nav');if(!nav)return;
     const defs=[[dashboardNav,'Dashboard',icons.dashboard],[clientsNav,'Clients',icons.clients],[supportNav,'Chat Support',icons.support]];
     defs.forEach(([b,label,icon])=>{if(!b)return;b.dataset.label=label;b.innerHTML=`<span class="bws-shell-icon">${icon}</span><span class="bws-nav-label">${label}</span>${b===supportNav?'<span id="aspUnread" class="support-unread-badge" aria-label="Unread support messages"></span>':''}`;b.title=label});
-    if(!nav.querySelector('.bws-active-glass')){const glass=document.createElement('span');glass.className='bws-active-glass';nav.prepend(glass)}
   };
   prepareNavigation();
 
-  const moveGlass=target=>{
-    const nav=document.querySelector('#adminDashboard .admin-nav'),glass=nav?.querySelector('.bws-active-glass');if(!nav||!glass||!target)return;
-    const buttons=[...nav.querySelectorAll('button')],i=buttons.indexOf(target);if(i<0)return;
-    glass.style.setProperty('--bws-nav-index',String(i));
-    buttons.forEach(b=>{const on=b===target;b.classList.toggle('active',on);b.classList.toggle('bws-glass-active',on);b.setAttribute('aria-current',on?'page':'false')});
+  const setActiveNav=target=>{
+    document.querySelectorAll('#adminDashboard .admin-nav button').forEach(b=>{const on=b===target;b.classList.toggle('active',on);b.classList.toggle('bws-glass-active',on);b.setAttribute('aria-current',on?'page':'false')});
   };
-  const setActiveNav=target=>requestAnimationFrame(()=>moveGlass(target));
 
   const setupFoldableSidebar=()=>{
     const layout=document.querySelector('#adminDashboard .admin-layout'),side=document.querySelector('#adminDashboard .admin-sidebar');if(!layout||!side)return;
@@ -43,11 +38,11 @@ if(document.getElementById('adminApp')){
   };
 
   addCss('bwsAdminShellNavStyle',`
-    #adminDashboard .admin-nav{position:relative;isolation:isolate;gap:8px}
-    #adminDashboard .admin-nav button{position:relative;z-index:2;height:42px;display:flex;align-items:center;gap:10px;background:transparent!important;color:#c8c5dc!important;transition:color .18s ease,transform .18s ease}
-    #adminDashboard .admin-nav button.active,#adminDashboard .admin-nav button.bws-glass-active{color:#fff!important}
+    #adminDashboard .admin-nav{position:relative;display:grid;gap:8px}
+    #adminDashboard .admin-nav button{position:relative;height:42px;display:flex;align-items:center;gap:10px;background:transparent!important;color:#c8c5dc!important;border:1px solid transparent!important;box-shadow:none!important;transition:background .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease}
+    #adminDashboard .admin-nav button.active,#adminDashboard .admin-nav button.bws-glass-active{color:#fff!important;background:linear-gradient(90deg,#755cf43d,#ffffff0c)!important;border-color:#ffffff18!important;box-shadow:inset 0 1px 0 #ffffff18,0 7px 18px #08061926!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+    #adminDashboard .admin-nav>.bws-active-glass{display:none!important}
     #adminDashboard .bws-shell-icon{width:20px;display:grid;place-items:center;flex:0 0 20px}
-    #adminDashboard .bws-active-glass{position:absolute;z-index:1;left:0;right:0;top:0;height:42px;border:1px solid #ffffff18;border-radius:11px;background:linear-gradient(90deg,#755cf43d,#ffffff0c);box-shadow:inset 0 1px 0 #ffffff18,0 7px 18px #08061926;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transform:translateY(calc(var(--bws-nav-index,0) * 50px));transition:transform .22s cubic-bezier(.2,.8,.2,1)}
     .support-unread-badge{display:none!important}.support-unread-badge.has-unread{display:grid!important;min-width:19px;height:19px;padding:0 5px;place-items:center;border-radius:99px;background:#ff5d70;color:#fff;font-size:8px;font-weight:900;margin-left:auto}
     #adminDashboard .admin-sidebar{position:relative!important;overflow:visible!important}
     #adminDashboard #bwsAdminSidebarToggle{display:grid!important;place-items:center!important;position:absolute!important;top:50%!important;right:-13px!important;transform:translateY(-50%)!important;width:26px!important;height:48px!important;padding:0!important;border:1px solid #ffffff26!important;border-radius:0 12px 12px 0!important;background:#17142f!important;color:#fff!important;z-index:1000!important;cursor:pointer!important;font-size:18px!important}
@@ -62,6 +57,7 @@ if(document.getElementById('adminApp')){
     #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek .admin-sidebar .admin-side-logo{justify-content:flex-start!important}
     #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek .admin-sidebar .admin-side-logo>div,#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek .admin-sidebar .bws-nav-label{display:block!important}
     #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek .admin-sidebar .admin-nav button,#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek .admin-sidebar #adminLogout{justify-content:flex-start!important;padding-left:10px!important;padding-right:10px!important}
+    #adminDashboard .admin-content:has(#adminSupportPanel:not(.hidden)){padding-top:16px!important}
   `);
   setupFoldableSidebar();
 
