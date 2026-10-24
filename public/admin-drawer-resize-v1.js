@@ -1,16 +1,23 @@
 (()=>{'use strict';const MIN=300,MAX=620,KEY='bwAdminClientDrawerWidth';function init(){const dashboard=document.getElementById('adminDashboard'),drawer=document.getElementById('clientDrawer');if(!dashboard||!drawer||drawer.dataset.resizeReady)return;drawer.dataset.resizeReady='1';const handle=document.createElement('div');handle.className='client-drawer-resizer';handle.setAttribute('role','separator');handle.setAttribute('aria-label','Resize client details');handle.setAttribute('aria-orientation','vertical');handle.tabIndex=0;drawer.prepend(handle);const clamp=n=>Math.max(MIN,Math.min(Math.min(MAX,window.innerWidth*.55),n));const apply=n=>{const w=Math.round(clamp(n));dashboard.style.setProperty('--client-drawer-width',w+'px');handle.setAttribute('aria-valuenow',String(w));try{localStorage.setItem(KEY,String(w))}catch{}};try{const saved=Number(localStorage.getItem(KEY));if(saved)apply(saved)}catch{}let dragging=false;const move=e=>{if(!dragging)return;apply(window.innerWidth-e.clientX)};const stop=()=>{if(!dragging)return;dragging=false;document.body.classList.remove('client-drawer-resizing');window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',stop);window.removeEventListener('pointercancel',stop)};handle.addEventListener('pointerdown',e=>{if(e.button!==0)return;dragging=true;handle.setPointerCapture?.(e.pointerId);document.body.classList.add('client-drawer-resizing');window.addEventListener('pointermove',move);window.addEventListener('pointerup',stop);window.addEventListener('pointercancel',stop);e.preventDefault()});handle.addEventListener('keydown',e=>{const current=parseFloat(getComputedStyle(dashboard).getPropertyValue('--client-drawer-width'))||395;if(e.key==='ArrowLeft'){apply(current+20);e.preventDefault()}else if(e.key==='ArrowRight'){apply(current-20);e.preventDefault()}else if(e.key==='Home'){apply(MIN);e.preventDefault()}else if(e.key==='End'){apply(MAX);e.preventDefault()}});window.addEventListener('resize',()=>{const current=parseFloat(getComputedStyle(dashboard).getPropertyValue('--client-drawer-width'))||395;apply(current)})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init()})();
 
-(()=>{'use strict';const apply=()=>{if(document.getElementById('bwsMotionPolishV1'))return;const s=document.createElement('style');s.id='bwsMotionPolishV1';s.textContent=`
-#adminDashboard .admin-layout{transition:grid-template-columns .32s cubic-bezier(.2,.75,.2,1)!important}
-#adminDashboard .admin-sidebar{transition:width .32s cubic-bezier(.2,.75,.2,1),padding .32s cubic-bezier(.2,.75,.2,1),box-shadow .24s ease!important;will-change:width,padding}
+(()=>{'use strict';const apply=()=>{if(document.getElementById('bwsMotionPolishV2'))return;document.getElementById('bwsMotionPolishV1')?.remove();const s=document.createElement('style');s.id='bwsMotionPolishV2';s.textContent=`
+#adminDashboard .admin-layout{transition:grid-template-columns .26s cubic-bezier(.2,.75,.2,1)!important}
+#adminDashboard .admin-sidebar{transition:padding .26s cubic-bezier(.2,.75,.2,1)!important;will-change:auto!important}
+#adminDashboard .admin-layout.bws-admin-nav-collapsed,
 #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek{grid-template-columns:64px minmax(0,1fr)!important}
-#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar{width:230px!important;z-index:60!important;box-shadow:16px 0 34px rgba(14,12,38,.18)!important}
-#adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar{width:64px!important}
-#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar{width:230px!important}
-#adminDashboard .admin-main{min-width:0!important;transform:translateZ(0)}
-#adminSupportPanel .asp-layout{transition:grid-template-columns .3s cubic-bezier(.2,.72,.2,1)!important;will-change:grid-template-columns}
-#adminSupportPanel .asp-profile{transition:transform .3s cubic-bezier(.2,.72,.2,1),opacity .22s ease!important;will-change:transform,opacity;scrollbar-gutter:stable}
-#adminSupportPanel .bws-persistent-drawer{backface-visibility:hidden;transform:translateZ(0)}
+#adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar,
+#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar{width:100%!important;min-width:0!important;padding-left:8px!important;padding-right:8px!important;box-shadow:none!important}
+#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .admin-side-logo{justify-content:center!important;padding-left:0!important;padding-right:0!important}
+#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .admin-side-logo>div,
+#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .bws-nav-label{width:0!important;max-width:0!important;opacity:0!important;margin:0!important;padding:0!important;transform:translateX(-8px)!important;pointer-events:none!important}
+#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .admin-nav button,
+#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar #adminLogout{justify-content:center!important;gap:0!important;padding-left:0!important;padding-right:0!important}
+#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .admin-note{max-height:0!important;opacity:0!important;padding-top:0!important;padding-bottom:0!important;border-color:transparent!important;pointer-events:none!important}
+#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .support-unread-badge{position:absolute!important;top:3px!important;right:3px!important;margin:0!important;min-width:14px!important;height:14px!important;padding:0 3px!important;font-size:7px!important}
+#adminDashboard .admin-main{min-width:0!important;transform:none!important}
+#adminSupportPanel .asp-layout{transition:grid-template-columns .26s cubic-bezier(.2,.72,.2,1)!important}
+#adminSupportPanel .asp-profile{transition:transform .26s cubic-bezier(.2,.72,.2,1),opacity .18s ease!important;scrollbar-gutter:stable}
+#adminSupportPanel .bws-persistent-drawer{backface-visibility:hidden}
 @media(prefers-reduced-motion:reduce){#adminDashboard .admin-layout,#adminDashboard .admin-sidebar,#adminSupportPanel .asp-layout,#adminSupportPanel .asp-profile{transition:none!important}}
 `;document.head.appendChild(s)};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply()})();
 
