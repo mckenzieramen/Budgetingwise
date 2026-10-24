@@ -39,6 +39,13 @@ function apply(){
 #adminSupportPanel .bws-email-list-v3{max-width:100%!important;overflow-x:hidden!important}
 #adminSupportPanel .bws-compose-v3 input,#adminSupportPanel .bws-compose-v3 textarea{min-width:0!important;max-width:100%!important}
 #adminSupportPanel .bws-stable-closed-actions{flex-wrap:wrap!important}
+
+/* Conversation chooser: search on first row, filters on second row */
+#adminSupportPanel #bwsInboxTools,#adminSupportPanel .bws-inbox-tools{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:8px!important;width:100%!important;min-width:0!important;align-items:stretch!important}
+#adminSupportPanel #bwsInboxTools>input,#adminSupportPanel .bws-inbox-tools>input{grid-column:1/-1!important;width:100%!important;min-width:0!important;height:36px!important;box-sizing:border-box!important}
+#adminSupportPanel #bwsInboxTools>div,#adminSupportPanel .bws-inbox-tools>div{grid-column:1/-1!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:8px!important;width:100%!important;min-width:0!important}
+#adminSupportPanel #bwsInboxTools select,#adminSupportPanel .bws-inbox-tools select{width:100%!important;min-width:0!important;height:34px!important;box-sizing:border-box!important}
+
 @media(min-width:1550px){#adminSupportPanel .asp-layout{grid-template-columns:235px minmax(0,1fr) 355px!important}#adminSupportPanel .bws-actions-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media(max-width:1250px){#adminSupportPanel .asp-layout{grid-template-columns:205px minmax(0,1fr) 300px!important}#adminSupportPanel .asp-summary{order:3;width:100%;justify-content:flex-end}#adminSupportPanel .asp-summary button{min-width:58px!important}}
 @media(max-width:1080px){#adminSupportPanel .asp-layout{grid-template-columns:210px minmax(0,1fr)!important}#adminSupportPanel .asp-profile{display:none!important}}
