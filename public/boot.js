@@ -2,6 +2,7 @@
 await import('./page-recovery-v28.js?v=page-recovery-v32');
 await import('./budgetingwise-icons-v35.js?v=icons-v46');
 await import('./dashboard-reference-v31.js?v=dashboard-reference-v41');
+await import('./dashboard-financial-chart-v1.js?v=dashboard-chart-v1');
 await import('./password-gate-v1.js?v=password-gate-v1');
 const activationMode=new URLSearchParams(location.search).get('activate')==='1';
 if(activationMode){
