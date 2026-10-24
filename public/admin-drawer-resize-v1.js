@@ -3,30 +3,28 @@
 (()=>{'use strict';const apply=()=>{if(document.getElementById('bwsMotionPolishV2'))return;document.getElementById('bwsMotionPolishV1')?.remove();const s=document.createElement('style');s.id='bwsMotionPolishV2';s.textContent=`
 #adminDashboard .admin-layout{transition:grid-template-columns .26s cubic-bezier(.2,.75,.2,1)!important}
 #adminDashboard .admin-sidebar{transition:padding .26s cubic-bezier(.2,.75,.2,1)!important;will-change:auto!important}
-#adminDashboard .admin-layout.bws-admin-nav-collapsed,
-#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek{grid-template-columns:64px minmax(0,1fr)!important}
-#adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar,
-#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar{width:100%!important;min-width:0!important;padding-left:8px!important;padding-right:8px!important;box-shadow:none!important}
+#adminDashboard .admin-layout.bws-admin-nav-collapsed,#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek{grid-template-columns:64px minmax(0,1fr)!important}
+#adminDashboard .admin-layout.bws-admin-nav-collapsed>.admin-sidebar,#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar{width:100%!important;min-width:0!important;padding-left:8px!important;padding-right:8px!important;box-shadow:none!important}
 #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .admin-side-logo{justify-content:center!important;padding-left:0!important;padding-right:0!important}
-#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .admin-side-logo>div,
-#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .bws-nav-label{width:0!important;max-width:0!important;opacity:0!important;margin:0!important;padding:0!important;transform:translateX(-8px)!important;pointer-events:none!important}
-#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .admin-nav button,
-#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar #adminLogout{justify-content:center!important;gap:0!important;padding-left:0!important;padding-right:0!important}
+#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .admin-side-logo>div,#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .bws-nav-label{width:0!important;max-width:0!important;opacity:0!important;margin:0!important;padding:0!important;transform:translateX(-8px)!important;pointer-events:none!important}
+#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .admin-nav button,#adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar #adminLogout{justify-content:center!important;gap:0!important;padding-left:0!important;padding-right:0!important}
 #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .admin-note{max-height:0!important;opacity:0!important;padding-top:0!important;padding-bottom:0!important;border-color:transparent!important;pointer-events:none!important}
 #adminDashboard .admin-layout.bws-admin-nav-collapsed.bws-admin-nav-peek>.admin-sidebar .support-unread-badge{position:absolute!important;top:3px!important;right:3px!important;margin:0!important;min-width:14px!important;height:14px!important;padding:0 3px!important;font-size:7px!important}
 #adminDashboard .admin-main{min-width:0!important;transform:none!important}
-#adminSupportPanel .asp-layout{transition:grid-template-columns .26s cubic-bezier(.2,.72,.2,1)!important}
-#adminSupportPanel .asp-profile{transition:transform .26s cubic-bezier(.2,.72,.2,1),opacity .18s ease!important;scrollbar-gutter:stable}
-#adminSupportPanel .bws-persistent-drawer{backface-visibility:hidden}
+#adminSupportPanel .asp-layout{transition:grid-template-columns .22s cubic-bezier(.2,.72,.2,1)!important}
+#adminSupportPanel .asp-profile{transition:opacity .16s ease!important;scrollbar-gutter:stable}
 @media(prefers-reduced-motion:reduce){#adminDashboard .admin-layout,#adminDashboard .admin-sidebar,#adminSupportPanel .asp-layout,#adminSupportPanel .asp-profile{transition:none!important}}
 `;document.head.appendChild(s)};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply()})();
 
 import('./admin-support-search-polish-v1.js?v=search-polish-v1').catch(err=>console.warn('Support search polish unavailable:',err));
-import('./admin-support-filter-stability-v1.js?v=filter-stability-v1').catch(err=>console.warn('Support filter stability unavailable:',err));
-import('./admin-support-client-bid-sync-v1.js?v=client-bid-sync-v1').catch(err=>console.warn('Client BID sync unavailable:',err));
 
 let supportEnhancementsLoaded=false;
-const loadSupportEnhancements=()=>{if(supportEnhancementsLoaded)return true;if(!document.getElementById('adminSupportPanel'))return false;supportEnhancementsLoaded=true;Promise.all([import('./admin-customer-panel-v2.js?v=customer-panel-v10-stable'),import('./admin-support-stable-ui-v1.js?v=stable-ui-v1'),import('./admin-support-responsive-v1.js?v=responsive-v2-conversation-tools'),import('./admin-support-customer-workflow-v2.js?v=customer-workflow-v2-personal-first'),import('./admin-support-reference-final-v1.js?v=reference-final-v1'),import('./admin-support-customer-drawer-v2.js?v=customer-drawer-v2-persistent'),import('./admin-support-session-shell-v1.js?v=session-shell-v1')]).catch(err=>{supportEnhancementsLoaded=false;console.warn('Chat Support stable workspace unavailable:',err)});return true};
+const loadSupportEnhancements=()=>{if(supportEnhancementsLoaded)return true;if(!document.getElementById('adminSupportPanel'))return false;supportEnhancementsLoaded=true;Promise.all([
+  import('./admin-support-stable-ui-v1.js?v=stable-ui-v1'),
+  import('./admin-support-responsive-v1.js?v=responsive-v2-conversation-tools'),
+  import('./admin-support-customer-drawer-v3.js?v=customer-drawer-v3-single-owner'),
+  import('./admin-support-session-shell-v2.js?v=session-shell-v2-no-loop')
+]).catch(err=>{supportEnhancementsLoaded=false;console.warn('Chat Support stable workspace unavailable:',err)});return true};
 const ensureSupport=(attempt=0)=>{if(loadSupportEnhancements()||attempt>=12)return;setTimeout(()=>ensureSupport(attempt+1),150)};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>ensureSupport(),{once:true});else ensureSupport();
 document.addEventListener('click',e=>{if(e.target.closest('#adminSupportNav'))ensureSupport()},true);
