@@ -4,12 +4,12 @@ function injectCss(){if($('#bwsSupportSessionShellCssV2'))return;$('#bwsSupportS
 .admin-top-search{position:relative!important}
 .admin-top-search::before,.admin-top-search svg,.admin-top-search .search-icon{display:none!important}
 #topClientSearch{padding-left:12px!important}
-.admin-sidebar .bws-sidebar-admin-account{margin-top:auto!important;margin-bottom:8px!important;padding:10px 11px;border:1px solid #ffffff14;border-radius:12px;background:#ffffff08;color:#fff;display:flex;align-items:center;gap:9px;min-width:0;flex-shrink:0}
-.admin-sidebar .bws-sidebar-admin-account .admin-avatar{width:31px;height:31px;flex:0 0 31px;background:#6b4af3;color:#fff}
-.admin-sidebar .bws-sidebar-admin-account>div:last-child{min-width:0}
-.admin-sidebar .bws-sidebar-admin-account strong{display:block;color:#fff;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.admin-sidebar .bws-sidebar-admin-account small{display:block!important;color:#aaa5c8!important;font-size:8px!important;margin-top:2px}
-.admin-sidebar #adminLogout{margin-top:0!important;flex-shrink:0}
+.admin-sidebar .bws-sidebar-admin-account{order:90!important;margin-top:auto!important;margin-bottom:9px!important;min-height:54px!important;padding:10px 11px!important;border:1px solid #ffffff14!important;border-radius:12px!important;background:#ffffff08!important;color:#fff!important;display:flex!important;align-items:center!important;gap:9px!important;min-width:0!important;flex-shrink:0!important;position:relative!important;z-index:3!important;box-sizing:border-box!important}
+.admin-sidebar .bws-sidebar-admin-account .admin-avatar{width:31px!important;height:31px!important;flex:0 0 31px!important;background:#6b4af3!important;color:#fff!important}
+.admin-sidebar .bws-sidebar-admin-account>div:last-child{min-width:0!important;overflow:hidden!important}
+.admin-sidebar .bws-sidebar-admin-account strong{display:block!important;color:#fff!important;font-size:10px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.admin-sidebar .bws-sidebar-admin-account small{display:block!important;color:#aaa5c8!important;font-size:8px!important;margin-top:2px!important}
+.admin-sidebar #adminLogout{order:91!important;width:100%!important;min-height:38px!important;margin:0!important;flex-shrink:0!important;position:relative!important;z-index:2!important;box-sizing:border-box!important}
 .admin-sidebar .admin-note{margin-top:12px!important}
 `;document.head.appendChild(s)}
 function cleanHeader(){injectCss();const search=$('#topClientSearch');if(search){search.placeholder='Search clients by Budget ID, name, or email…';search.setAttribute('aria-label','Search clients')}const user=$('.admin-user');const sidebar=$('.admin-sidebar');const logout=$('#adminLogout');if(user&&sidebar&&logout){user.classList.add('bws-sidebar-admin-account');if(user.parentElement!==sidebar||user.nextElementSibling!==logout)sidebar.insertBefore(user,logout)}}
