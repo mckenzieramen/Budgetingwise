@@ -15,7 +15,9 @@ function boot(){cleanHeader();setTimeout(cleanHeader,120);setTimeout(cleanHeader
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 document.addEventListener('click',e=>{if(e.target.closest('#adminSupportNav,.admin-nav button,#adminLogout'))setTimeout(cleanHeader,40)},true);
 })();
+import('./admin-premium-dialog-v1.js?v=premium-dialog-v2').catch(error=>console.warn('Premium dialogs unavailable:',error));
 import('./admin-support-drawer-insights-v1.js?v=drawer-insights-v1').catch(error=>console.warn('Support drawer insights unavailable:',error));
 import('./admin-support-drawer-readability-v1.js?v=drawer-readability-v2-visible-icons').catch(error=>console.warn('Support drawer readability unavailable:',error));
 import('./admin-support-nav-premium-v1.js?v=support-nav-premium-v2-frozen').catch(error=>console.warn('Support premium navigation unavailable:',error));
 import('./admin-support-account-match-v1.js?v=account-match-v1').catch(error=>console.warn('Support account matching unavailable:',error));
+import('./admin-support-premium-dialog-bridge-v1.js?v=premium-support-dialog-v1').catch(error=>console.warn('Support premium dialog bridge unavailable:',error));
