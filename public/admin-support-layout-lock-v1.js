@@ -7,8 +7,8 @@ const FEATURE_LOCKS=Object.freeze({
   supportInboxLayout:Object.freeze({locked:true,label:'Chat Support inbox layout',note:'Keep the approved three-column support workspace and current search/filter placement.'}),
   supportSearchIcon:Object.freeze({locked:true,label:'Chat Support search icon',note:'Keep the clean inline SVG search icon.'}),
   customerBidSource:Object.freeze({locked:true,label:'Customer BID source',note:'Display BID only from users/{uid}.budgetId.'}),
-  supportCustomerDrawerStructure:Object.freeze({locked:true,label:'Customer Details structure',note:'Keep one drawer owner and the approved information hierarchy.'}),
-  ticketLifecycle:Object.freeze({locked:true,label:'Ticket lifecycle boundary',note:'One authoritative lifecycle owner; closed tickets stay history-only and new concerns create the next ticket.'}),
+  supportCustomerDrawerStructure:Object.freeze({locked:false,label:'Customer Details structure',note:'Single-owner structure is intended, but keep unlocked until current behavior is fully verified.'}),
+  ticketLifecycle:Object.freeze({locked:false,label:'Ticket lifecycle boundary',note:'Keep unlocked until Ticket 1 → 2 → 3 and recovery/new-concern paths are fully verified.'}),
   adminHeader:Object.freeze({locked:false,label:'Admin header',note:'Verify current state before marking locked.'}),
   customerRecoveryFlow:Object.freeze({locked:false,label:'Customer recovery flow',note:'Keep under verification until full end-to-end testing is complete.'})
 });
