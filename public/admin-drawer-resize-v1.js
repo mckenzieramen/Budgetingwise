@@ -14,7 +14,8 @@
 @media(prefers-reduced-motion:reduce){#adminDashboard .admin-layout,#adminDashboard .admin-sidebar,#adminSupportPanel .asp-layout,#adminSupportPanel .asp-profile{transition:none!important}}
 `;document.head.appendChild(s)};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply()})();
 
-import('./admin-sidebar-smooth-fix-v1.js?v=sidebar-smooth-v1').catch(err=>console.warn('Sidebar smooth fix unavailable:',err));
+import('./admin-support-filter-stability-v1.js?v=filter-stability-v1').catch(err=>console.warn('Support filter stability unavailable:',err));
+import('./admin-support-client-bid-sync-v1.js?v=client-bid-sync-v1').catch(err=>console.warn('Client BID sync unavailable:',err));
 
 let supportEnhancementsLoaded=false;
 const loadSupportEnhancements=()=>{if(supportEnhancementsLoaded)return true;if(!document.getElementById('adminSupportPanel'))return false;supportEnhancementsLoaded=true;Promise.all([import('./admin-customer-panel-v2.js?v=customer-panel-v10-stable'),import('./admin-support-stable-ui-v1.js?v=stable-ui-v1'),import('./admin-support-responsive-v1.js?v=responsive-v2-conversation-tools'),import('./admin-support-customer-workflow-v2.js?v=customer-workflow-v2-personal-first'),import('./admin-support-reference-final-v1.js?v=reference-final-v1'),import('./admin-support-customer-drawer-v2.js?v=customer-drawer-v2-persistent'),import('./admin-support-session-shell-v1.js?v=session-shell-v1')]).catch(err=>{supportEnhancementsLoaded=false;console.warn('Chat Support stable workspace unavailable:',err)});return true};
