@@ -52,38 +52,42 @@ function resetCustomerUi(id){
   const send=q('#bwSupportSend')||q('#bwSupportForm button[type="submit"]');if(send)send.disabled=false
 }
 
-async function startNextTicket(){
+async function startNextTicket(trigger){
   if(busy)return;
   const s=services();if(!s)return;
   busy=true;
-  const button=q('#bwNewTicket'),old=button?.textContent;
+  const button=trigger||q('#bwNewTicket'),old=button?.textContent;
   if(button){button.disabled=true;button.textContent='Opening new ticket…'}
   try{
     const ref=doc(s.db,'supportThreads',s.user.uid),snap=await getDoc(ref),raw=snap.exists()?snap.data():{};
     let t=await ensureIdentity(s.db,s.user.uid,raw);
     if(normalize(t.status)!=='closed'){
-      // A new ticket may only start after the previous ticket is closed.
+      // A new concern must never reuse an active/resolved ticket. Close it first,
+      // then archive it before allocating the next ticket number.
       await setDoc(ref,{status:'closed',customerCanReply:false,closedAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
       const closedSnap=await getDoc(ref);t=closedSnap.exists()?closedSnap.data():{...t,status:'closed'}
     }
     t=await archiveClosed(s.db,s.user.uid,t);
-    // Re-read after archive so another handler cannot make us reuse the same number.
+    // Re-read after archive so a second path cannot increment from stale state.
     const latestSnap=await getDoc(ref),latest=latestSnap.exists()?latestSnap.data():t;
     if(normalize(latest.status)!=='closed'&&!latest.archivedCurrentTicket){resetCustomerUi(latest.currentTicketId||ticketId(s.user.uid,Math.max(1,Number(latest.ticketNumber||1))));return}
     const next=Math.max(1,Number(latest.ticketNumber||1)+1),id=ticketId(s.user.uid,next);
     await setDoc(ref,{ticketNumber:next,currentTicketId:id,archivedCurrentTicket:false,requestType:'new-conversation',concernLabel:'Choose a concern',rating:null,status:'open',customerCanReply:true,customerUnread:false,adminUnread:false,lastSender:'customer',resolutionPrompt:false,closedAt:null,ticketStartedAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
     await addDoc(collection(s.db,'supportThreads',s.user.uid,'messages'),{sender:'customer',text:MARK,system:true,ticketNumber:next,ticketId:id,createdAt:serverTimestamp()});
     resetCustomerUi(id)
-  }catch(e){console.warn('Unable to open a fresh support ticket:',e)}finally{busy=false;if(button){button.disabled=false;button.textContent=old||'Start new ticket'}}
+  }catch(e){console.warn('Unable to open a fresh support ticket:',e)}finally{busy=false;if(button?.isConnected){button.disabled=false;button.textContent=old||'Start new ticket'}}
 }
 
 function installNewTicketGuard(){
   if(document.documentElement.dataset.bwTicketBoundaryV2)return;
   document.documentElement.dataset.bwTicketBoundaryV2='1';
   document.addEventListener('click',e=>{
-    const b=e.target.closest('#bwNewTicket');if(!b)return;
+    const newTicket=e.target.closest('#bwNewTicket');
+    const recoveryMore=e.target.closest('[data-recovery-more="yes"]');
+    const trigger=newTicket||recoveryMore;
+    if(!trigger)return;
     e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
-    startNextTicket()
+    startNextTicket(trigger)
   },true)
 }
 
