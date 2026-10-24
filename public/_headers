@@ -18,6 +18,14 @@
   Cache-Control: no-cache, no-store, must-revalidate
 /admin-support-suite-v1.css
   Cache-Control: no-cache, no-store, must-revalidate
+/admin-drawer-resize-v1.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/admin-support-layout-lock-v1.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/chat-ticket-history-v3.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/support-ticket-boundary-v2.js
+  Cache-Control: no-cache, no-store, must-revalidate
 /boot.js
   Cache-Control: no-cache, no-store, must-revalidate
 /service-worker.js

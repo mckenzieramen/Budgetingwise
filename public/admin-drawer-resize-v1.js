@@ -23,7 +23,8 @@ const loadSupportEnhancements=()=>{if(supportEnhancementsLoaded)return true;if(!
   import('./admin-support-stable-ui-v1.js?v=stable-ui-v1'),
   import('./admin-support-responsive-v1.js?v=responsive-v2-conversation-tools'),
   import('./admin-support-customer-drawer-v3.js?v=customer-drawer-v3-single-owner'),
-  import('./admin-support-session-shell-v2.js?v=session-shell-v2-no-loop')
+  import('./admin-support-session-shell-v2.js?v=session-shell-v2-no-loop'),
+  import('./admin-support-layout-lock-v1.js?v=layout-lock-v1')
 ]).catch(err=>{supportEnhancementsLoaded=false;console.warn('Chat Support stable workspace unavailable:',err)});return true};
 const ensureSupport=(attempt=0)=>{if(loadSupportEnhancements()||attempt>=12)return;setTimeout(()=>ensureSupport(attempt+1),150)};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>ensureSupport(),{once:true});else ensureSupport();
