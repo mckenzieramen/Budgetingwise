@@ -36,3 +36,4 @@ import('./admin-support-ticket-modal-polish-v1.js?v=ticket-modal-v3-verified-flo
 import('./admin-support-premium-dialog-bridge-v1.js?v=premium-support-dialog-v1').catch(error=>console.warn('Support premium dialog bridge unavailable:',error));
 import('./admin-support-ticket-insights-v1.js?v=ticket-insights-v1').catch(error=>console.warn('Support ticket insights unavailable:',error));
 import('./admin-support-composer-premium-v1.js?v=composer-premium-v1').catch(error=>console.warn('Support premium composer unavailable:',error));
+import('./admin-support-workflow-premium-v1.js?v=workflow-premium-v1').catch(error=>console.warn('Support workflow enhancements unavailable:',error));
