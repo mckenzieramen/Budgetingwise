@@ -21,6 +21,7 @@
 @media(prefers-reduced-motion:reduce){#adminDashboard .admin-layout,#adminDashboard .admin-sidebar,#adminSupportPanel .asp-layout,#adminSupportPanel .asp-profile{transition:none!important}}
 `;document.head.appendChild(s)};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply()})();
 
+import('./admin-support-search-polish-v1.js?v=search-polish-v1').catch(err=>console.warn('Support search polish unavailable:',err));
 import('./admin-support-filter-stability-v1.js?v=filter-stability-v1').catch(err=>console.warn('Support filter stability unavailable:',err));
 import('./admin-support-client-bid-sync-v1.js?v=client-bid-sync-v1').catch(err=>console.warn('Client BID sync unavailable:',err));
 
