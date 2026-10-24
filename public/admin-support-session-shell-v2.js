@@ -20,7 +20,7 @@ document.addEventListener('click',e=>{if(e.target.closest('#adminSupportNav,.adm
 import('./admin-premium-dialog-v1.js?v=premium-dialog-v2').catch(error=>console.warn('Premium dialogs unavailable:',error));
 import('./admin-support-drawer-insights-v1.js?v=drawer-insights-v1').catch(error=>console.warn('Support drawer insights unavailable:',error));
 import('./admin-support-drawer-readability-v1.js?v=drawer-readability-v2-visible-icons').catch(error=>console.warn('Support drawer readability unavailable:',error));
-import('./admin-support-nav-premium-v1.js?v=support-nav-premium-v6-category-scroll').catch(error=>console.warn('Support premium navigation unavailable:',error));
+import('./admin-support-nav-premium-v1.js?v=support-nav-premium-v7-hide-linked-email').catch(error=>console.warn('Support premium navigation unavailable:',error));
 import('./admin-support-account-match-v1.js?v=account-match-v5-email-change-trigger').catch(error=>console.warn('Support account matching unavailable:',error));
 import('./admin-support-account-link-sync-v1.js?v=account-link-sync-v1').catch(error=>console.warn('Support account identity sync unavailable:',error));
 import('./admin-support-premium-dialog-bridge-v1.js?v=premium-support-dialog-v1').catch(error=>console.warn('Support premium dialog bridge unavailable:',error));
