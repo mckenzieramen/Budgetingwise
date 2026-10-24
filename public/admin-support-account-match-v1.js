@@ -65,9 +65,18 @@ function apply(threadId,thread,match){
 
   let badge=$('.bws-account-match',drawer);
   if(!badge){badge=document.createElement('div');badge.className='bws-account-match';$('.bws-v3-body',drawer)?.prepend(badge)}
-  badge.innerHTML=`<span class="bws-match-check">✓</span><div><strong>Existing account found</strong><small>Matched by ${match.via}${bid?' · '+bid:''}</small></div>`;
-  const box=$('.bws-account-pullup',drawer),msg=box&&$('[data-pullup-msg]',box);
-  if(msg){msg.textContent=`Account loaded${bid?' · '+bid:''}`;msg.className='bws-pullup-msg success'}
+  badge.innerHTML=`<span class="bws-match-check">✓</span><div class="bws-match-copy"><strong>Existing account found</strong><small>Matched by ${match.via}${bid?' · '+bid:''}</small></div><button type="button" class="bws-match-change" data-change-match>Change account</button>`;
+
+  const box=$('.bws-account-pullup',drawer);
+  if(box)box.classList.add('matched-hidden');
+  $('[data-change-match]',badge)?.addEventListener('click',()=>{
+    const current=$('.bws-account-pullup',drawer);
+    if(!current)return;
+    current.classList.remove('matched-hidden');
+    const input=$('[data-pullup-input]',current);
+    if(input){input.value='';setTimeout(()=>input.focus(),30)}
+    const msg=$('[data-pullup-msg]',current);if(msg){msg.textContent='';msg.className='bws-pullup-msg'}
+  });
 }
 
 function mountPullup(){
@@ -80,6 +89,7 @@ function mountPullup(){
   box.className='bws-account-pullup';
   box.innerHTML=`<div class="bws-pullup-copy"><strong>Pull up existing account</strong><small>Search the registered customer using an exact email address or Budget ID.</small></div><div class="bws-pullup-row"><input type="text" data-pullup-input autocomplete="off" spellcheck="false" placeholder="Email or BID"><button type="button" data-pullup-btn><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg><span>Pull up account</span></button></div><small class="bws-pullup-msg" data-pullup-msg></small>`;
   title?.insertAdjacentElement('afterend',box);
+  if(drawer.dataset.accountUid)box.classList.add('matched-hidden');
   const input=$('[data-pullup-input]',box),button=$('[data-pullup-btn]',box),msg=$('[data-pullup-msg]',box);
   const run=async()=>{
     const value=clean(input.value);
@@ -115,8 +125,12 @@ async function sync(force=false){
 function style(){if($('#bwsAccountMatchCss'))return;const s=document.createElement('style');s.id='bwsAccountMatchCss';s.textContent=`
 #adminSupportPanel .bws-account-match{display:flex;align-items:center;gap:9px;margin:0 0 10px;padding:10px 12px;border:1px solid #ddd6ff;border-radius:11px;background:linear-gradient(135deg,#fbfaff,#f3f0ff)}
 #adminSupportPanel .bws-account-match .bws-match-check{width:24px;height:24px;display:grid;place-items:center;flex:0 0 24px;border-radius:8px;background:#e9e4ff;color:#5639dc;font-size:11px;font-weight:950}
+#adminSupportPanel .bws-account-match .bws-match-copy{min-width:0;flex:1}
 #adminSupportPanel .bws-account-match strong{display:block;font-size:9.5px;color:#3c2bb3}#adminSupportPanel .bws-account-match small{display:block;margin-top:3px;font-size:7.8px;color:#727b90}
+#adminSupportPanel .bws-match-change{flex:0 0 auto;border:1px solid #d9d1ff;border-radius:8px;background:#fff;color:#5a3ed7;padding:7px 8px;font-size:7px;font-weight:850;cursor:pointer}
+#adminSupportPanel .bws-match-change:hover{background:#f5f2ff;border-color:#c9bdff}
 #adminSupportPanel .bws-account-pullup{margin:0 0 10px;padding:10px;border:1px solid #e3e0f3;border-radius:10px;background:linear-gradient(180deg,#fdfcff,#faf9ff)}
+#adminSupportPanel .bws-account-pullup.matched-hidden{display:none!important}
 #adminSupportPanel .bws-pullup-copy strong{display:block;font-size:9px;font-weight:900;color:#292e45}#adminSupportPanel .bws-pullup-copy small{display:block;margin-top:2px;font-size:7px;line-height:1.45;color:#858da0}
 #adminSupportPanel .bws-pullup-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;margin-top:8px}
 #adminSupportPanel .bws-pullup-row input{min-width:0;height:34px;box-sizing:border-box;padding:0 9px;border:1px solid #dddfea;border-radius:8px;background:#fff;color:#2a3047;font-size:8px;outline:none}
