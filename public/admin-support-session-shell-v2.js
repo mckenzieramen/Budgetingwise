@@ -35,3 +35,4 @@ import('./admin-support-account-link-sync-v1.js?v=account-link-sync-v1').catch(e
 import('./admin-support-ticket-modal-polish-v1.js?v=ticket-modal-v3-verified-flow').catch(error=>console.warn('Support ticket modal polish unavailable:',error));
 import('./admin-support-premium-dialog-bridge-v1.js?v=premium-support-dialog-v1').catch(error=>console.warn('Support premium dialog bridge unavailable:',error));
 import('./admin-support-ticket-insights-v1.js?v=ticket-insights-v1').catch(error=>console.warn('Support ticket insights unavailable:',error));
+import('./admin-support-composer-premium-v1.js?v=composer-premium-v1').catch(error=>console.warn('Support premium composer unavailable:',error));
