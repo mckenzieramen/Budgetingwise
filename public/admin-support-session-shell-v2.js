@@ -17,3 +17,4 @@ document.addEventListener('click',e=>{if(e.target.closest('#adminSupportNav,.adm
 })();
 import('./admin-support-drawer-insights-v1.js?v=drawer-insights-v1').catch(error=>console.warn('Support drawer insights unavailable:',error));
 import('./admin-support-drawer-readability-v1.js?v=drawer-readability-v2-visible-icons').catch(error=>console.warn('Support drawer readability unavailable:',error));
+import('./admin-support-nav-premium-v1.js?v=support-nav-premium-v1').catch(error=>console.warn('Support premium navigation unavailable:',error));
