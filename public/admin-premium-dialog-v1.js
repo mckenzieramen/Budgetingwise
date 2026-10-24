@@ -13,36 +13,42 @@ function ensureDialogStyle(){
   const style=document.createElement('style');
   style.id=DIALOG_STYLE_ID;
   style.textContent=`
-  .bw-dialog-backdrop{position:fixed;inset:0;z-index:999999;display:grid;place-items:center;padding:24px;background:rgba(20,18,39,.46);backdrop-filter:blur(10px) saturate(115%);-webkit-backdrop-filter:blur(10px) saturate(115%);opacity:0;animation:bwDialogBackdropIn .2s ease forwards}
-  .bw-dialog-backdrop.bw-closing{animation:bwDialogBackdropOut .34s ease forwards}
-  .bw-dialog{position:relative;width:min(448px,calc(100vw - 32px));box-sizing:border-box;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.995),rgba(251,250,255,.995));border:1px solid rgba(105,76,235,.14);border-radius:24px;padding:26px;box-shadow:0 28px 90px rgba(24,20,54,.27),0 4px 18px rgba(69,48,159,.08);color:#171b31;transform-origin:var(--bw-origin-x,50%) var(--bw-origin-y,50%);will-change:transform,opacity,filter,clip-path;animation:bwDialogSuctionIn .52s cubic-bezier(.16,1.06,.28,1) both}
-  .bw-dialog-backdrop.bw-closing .bw-dialog{animation:bwDialogSuctionOut .36s cubic-bezier(.5,.02,.8,.28) both}
+  .bw-dialog-backdrop{position:fixed;inset:0;z-index:999999;display:grid;place-items:center;padding:24px;background:rgba(20,18,39,.46);backdrop-filter:blur(10px) saturate(115%);-webkit-backdrop-filter:blur(10px) saturate(115%);opacity:0}
+  .bw-dialog-backdrop.bw-ready{animation:bwDialogBackdropIn .30s cubic-bezier(.22,.72,.24,1) forwards}
+  .bw-dialog-backdrop.bw-closing{animation:bwDialogBackdropOut .44s cubic-bezier(.32,.02,.48,1) forwards}
+  .bw-dialog{position:relative;width:min(448px,calc(100vw - 32px));box-sizing:border-box;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.995),rgba(251,250,255,.995));border:1px solid rgba(105,76,235,.14);border-radius:24px;padding:26px;box-shadow:0 28px 90px rgba(24,20,54,.27),0 4px 18px rgba(69,48,159,.08);color:#171b31;transform-origin:var(--bw-origin-x,50%) var(--bw-origin-y,50%);will-change:transform,opacity,filter,clip-path;opacity:0}
+  .bw-dialog-backdrop.bw-ready .bw-dialog{animation:bwDialogSuctionIn .64s cubic-bezier(.18,.86,.24,1) both}
+  .bw-dialog-backdrop.bw-closing .bw-dialog{animation:bwDialogSuctionOut .46s cubic-bezier(.38,.02,.58,.22) both}
   .bw-dialog:before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#7b61ff,#5b3fe6,#9b85ff)}
   .bw-dialog-top{display:flex;align-items:flex-start;gap:14px}.bw-dialog-copy{min-width:0;flex:1}
   .bw-dialog-icon{width:48px;height:48px;flex:0 0 48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#f0edff,#faf9ff);color:#5c42e6;border:1px solid #ded7ff;box-shadow:0 8px 20px rgba(89,64,205,.10),inset 0 1px 0 #fff}
   .bw-dialog-icon.success{background:linear-gradient(145deg,#e8f8ef,#f5fff9);color:#0d8a59;border-color:#cdebdc}.bw-dialog-icon.danger{background:linear-gradient(145deg,#fff0f1,#fff8f8);color:#d53b49;border-color:#ffd4d9}.bw-dialog-icon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .bw-dialog h2{margin:2px 0 7px;font-size:18px;line-height:1.25;letter-spacing:-.025em;font-weight:900;color:#1d2238}.bw-dialog p{margin:0;color:#737c92;font-size:12px;line-height:1.6;white-space:pre-line}
-  .bw-dialog-field{display:grid;gap:7px;margin-top:20px}.bw-dialog-field label{font-size:10px;font-weight:850;color:#4e566d}.bw-dialog-field input{width:100%;box-sizing:border-box;height:43px;border:1px solid #dddfea;border-radius:11px;background:#fff;padding:0 12px;color:#252a40;font:750 12px Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:none;transition:border-color .16s ease,box-shadow .16s ease}.bw-dialog-field input:focus{border-color:#aa9aff;box-shadow:0 0 0 4px rgba(99,70,235,.09)}
-  .bw-dialog-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:23px}.bw-dialog button{min-width:104px;height:40px;border-radius:11px;padding:0 16px;font-weight:850;font-size:11px;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}.bw-dialog button:active{transform:scale(.98)}
-  .bw-dialog-cancel{border:1px solid #e0e2eb;background:#fff;color:#5a6278}.bw-dialog-cancel:hover{background:#f8f9fc}.bw-dialog-primary{border:0;background:linear-gradient(135deg,#6d50f4,#5838df);color:#fff;box-shadow:0 8px 20px rgba(91,67,234,.22)}.bw-dialog-primary:hover{box-shadow:0 11px 26px rgba(91,67,234,.28)}.bw-dialog-danger{border:0;background:linear-gradient(135deg,#e34d59,#c93443);color:#fff;box-shadow:0 8px 20px rgba(207,52,67,.19)}.bw-dialog-danger:hover{box-shadow:0 11px 26px rgba(207,52,67,.25)}
-  @keyframes bwDialogBackdropIn{from{opacity:0}to{opacity:1}}
-  @keyframes bwDialogBackdropOut{from{opacity:1}to{opacity:0}}
+  .bw-dialog-field{display:grid;gap:7px;margin-top:20px}.bw-dialog-field label{font-size:10px;font-weight:850;color:#4e566d}.bw-dialog-field input{width:100%;box-sizing:border-box;height:43px;border:1px solid #dddfea;border-radius:11px;background:#fff;padding:0 12px;color:#252a40;font:750 12px Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:none;transition:border-color .18s ease,box-shadow .18s ease}.bw-dialog-field input:focus{border-color:#aa9aff;box-shadow:0 0 0 4px rgba(99,70,235,.09)}
+  .bw-dialog-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:23px}.bw-dialog button{min-width:104px;height:40px;border-radius:11px;padding:0 16px;font-weight:850;font-size:11px;cursor:pointer;transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s ease,background .18s ease}.bw-dialog button:active{transform:scale(.985)}
+  .bw-dialog-cancel{border:1px solid #e0e2eb;background:#fff;color:#5a6278}.bw-dialog-cancel:hover{background:#f8f9fc}.bw-dialog-primary{border:0;background:linear-gradient(135deg,#6d50f4,#5838df);color:#fff;box-shadow:0 8px 20px rgba(91,67,234,.22)}.bw-dialog-primary:hover{transform:translateY(-1px);box-shadow:0 11px 26px rgba(91,67,234,.28)}.bw-dialog-danger{border:0;background:linear-gradient(135deg,#e34d59,#c93443);color:#fff;box-shadow:0 8px 20px rgba(207,52,67,.19)}.bw-dialog-danger:hover{transform:translateY(-1px);box-shadow:0 11px 26px rgba(207,52,67,.25)}
+  @keyframes bwDialogBackdropIn{0%{opacity:0}45%{opacity:.72}100%{opacity:1}}
+  @keyframes bwDialogBackdropOut{0%{opacity:1}52%{opacity:.72}100%{opacity:0}}
   @keyframes bwDialogSuctionIn{
-    0%{opacity:0;transform:translate(var(--bw-source-x,0),var(--bw-source-y,16px)) scale(.045,.18);filter:blur(11px);clip-path:inset(18% 47% 79% 47% round 26px)}
-    26%{opacity:.58;transform:translate(calc(var(--bw-source-x,0)*.7),calc(var(--bw-source-y,16px)*.7)) scale(.18,.44);filter:blur(7px);clip-path:inset(12% 38% 58% 38% round 22px)}
-    56%{opacity:1;transform:translate(calc(var(--bw-source-x,0)*.16),calc(var(--bw-source-y,16px)*.16)) scale(.82,.94);filter:blur(1.2px);clip-path:inset(3% 8% 8% 8% round 18px)}
-    78%{transform:translate(-1px,1px) scale(1.025,.992);filter:blur(0);clip-path:inset(0 round 24px)}
+    0%{opacity:0;transform:translate(var(--bw-source-x,0),var(--bw-source-y,16px)) scale(.06,.22);filter:blur(8px);clip-path:inset(16% 46% 77% 46% round 28px)}
+    18%{opacity:.32;transform:translate(calc(var(--bw-source-x,0)*.82),calc(var(--bw-source-y,16px)*.82)) scale(.14,.34);filter:blur(6px);clip-path:inset(13% 41% 66% 41% round 26px)}
+    38%{opacity:.72;transform:translate(calc(var(--bw-source-x,0)*.52),calc(var(--bw-source-y,16px)*.52)) scale(.38,.62);filter:blur(3.8px);clip-path:inset(9% 29% 42% 29% round 23px)}
+    60%{opacity:.96;transform:translate(calc(var(--bw-source-x,0)*.18),calc(var(--bw-source-y,16px)*.18)) scale(.84,.94);filter:blur(.9px);clip-path:inset(3% 7% 8% 7% round 20px)}
+    76%{opacity:1;transform:translate(-1px,1px) scale(1.012,.996);filter:blur(0);clip-path:inset(0 round 24px)}
+    88%{transform:translate(.4px,-.4px) scale(.997,1.003)}
     100%{opacity:1;transform:none;filter:blur(0);clip-path:inset(0 round 24px)}
   }
   @keyframes bwDialogSuctionOut{
     0%{opacity:1;transform:none;filter:blur(0);clip-path:inset(0 round 24px)}
-    28%{opacity:1;transform:translate(calc(var(--bw-source-x,0)*.08),calc(var(--bw-source-y,16px)*.08)) scale(.72,.94);filter:blur(.5px);clip-path:inset(4% 13% 8% 13% round 20px)}
-    56%{opacity:.78;transform:translate(calc(var(--bw-source-x,0)*.45),calc(var(--bw-source-y,16px)*.45)) scale(.26,.58);filter:blur(3px);clip-path:inset(10% 34% 48% 34% round 23px)}
-    78%{opacity:.42;transform:translate(calc(var(--bw-source-x,0)*.76),calc(var(--bw-source-y,16px)*.76)) scale(.09,.34);filter:blur(8px);clip-path:inset(16% 44% 69% 44% round 26px)}
-    100%{opacity:0;transform:translate(var(--bw-source-x,0),var(--bw-source-y,16px)) scale(.035,.16);filter:blur(12px);clip-path:inset(20% 48% 80% 48% round 30px)}
+    16%{opacity:1;transform:translate(calc(var(--bw-source-x,0)*.025),calc(var(--bw-source-y,16px)*.025)) scale(.95,.985);filter:blur(.1px);clip-path:inset(1% 3% 2% 3% round 23px)}
+    34%{opacity:.98;transform:translate(calc(var(--bw-source-x,0)*.12),calc(var(--bw-source-y,16px)*.12)) scale(.76,.94);filter:blur(.6px);clip-path:inset(4% 12% 10% 12% round 22px)}
+    54%{opacity:.82;transform:translate(calc(var(--bw-source-x,0)*.38),calc(var(--bw-source-y,16px)*.38)) scale(.43,.72);filter:blur(2.2px);clip-path:inset(8% 27% 35% 27% round 24px)}
+    72%{opacity:.58;transform:translate(calc(var(--bw-source-x,0)*.65),calc(var(--bw-source-y,16px)*.65)) scale(.20,.49);filter:blur(4.8px);clip-path:inset(13% 39% 57% 39% round 26px)}
+    88%{opacity:.28;transform:translate(calc(var(--bw-source-x,0)*.86),calc(var(--bw-source-y,16px)*.86)) scale(.09,.30);filter:blur(7px);clip-path:inset(17% 45% 71% 45% round 28px)}
+    100%{opacity:0;transform:translate(var(--bw-source-x,0),var(--bw-source-y,16px)) scale(.05,.19);filter:blur(9px);clip-path:inset(20% 47% 79% 47% round 30px)}
   }
   @media(max-width:520px){.bw-dialog-backdrop{padding:16px}.bw-dialog{padding:22px;border-radius:20px}.bw-dialog-top{gap:12px}.bw-dialog-icon{width:44px;height:44px;flex-basis:44px}.bw-dialog-actions{flex-direction:column-reverse}.bw-dialog button{width:100%}}
-  @media(prefers-reduced-motion:reduce){.bw-dialog-backdrop,.bw-dialog-backdrop.bw-closing,.bw-dialog,.bw-dialog-backdrop.bw-closing .bw-dialog{animation:none!important;opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}}
+  @media(prefers-reduced-motion:reduce){.bw-dialog-backdrop,.bw-dialog-backdrop.bw-ready,.bw-dialog-backdrop.bw-closing,.bw-dialog,.bw-dialog-backdrop.bw-ready .bw-dialog,.bw-dialog-backdrop.bw-closing .bw-dialog{animation:none!important;opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}}
   `;
   document.head.appendChild(style);
 }
@@ -82,16 +88,19 @@ function baseDialog({title,message,kind='info',confirmText='OK',cancelText='',da
       dialog.style.setProperty('--bw-source-y',`${Math.round(sourceY)}px`);
       dialog.style.setProperty('--bw-origin-x',`${Math.max(0,Math.min(d.width,src.left+src.width/2-d.left))}px`);
       dialog.style.setProperty('--bw-origin-y',`${Math.max(0,Math.min(d.height,src.top+src.height/2-d.top))}px`);
-      inputEl?inputEl.focus():confirmBtn.focus();
+      void dialog.offsetWidth;
+      backdrop.classList.add('bw-ready');
+      setTimeout(()=>inputEl?inputEl.focus():confirmBtn.focus(),180);
     });
     let finished=false;
     const finish=value=>{
       if(finished)return;
       finished=true;
       document.removeEventListener('keydown',onKey);
+      backdrop.classList.remove('bw-ready');
       backdrop.classList.add('bw-closing');
       const done=()=>{backdrop.remove();resolve(value)};
-      if(matchMedia('(prefers-reduced-motion: reduce)').matches)done();else setTimeout(done,370);
+      if(matchMedia('(prefers-reduced-motion: reduce)').matches)done();else setTimeout(done,470);
     };
     const onKey=e=>{if(e.key==='Escape'&&cancelText)finish(input?null:false);if(e.key==='Enter'&&inputEl&&document.activeElement===inputEl)finish(inputEl.value)};
     confirmBtn.addEventListener('click',()=>finish(inputEl?inputEl.value:true));
