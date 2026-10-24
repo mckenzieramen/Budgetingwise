@@ -5,17 +5,27 @@ function install(){
   const s=document.createElement('style');
   s.id='bwsPremiumSupportNavCss';
   s.textContent=`
-/* Premium frozen navigation for the right-side Customer Details drawer. */
-#adminSupportPanel .bws-v3-nav{
+/* Premium frozen Customer Details header + navigation stack. */
+#adminSupportPanel .bws-v3-head{
   position:sticky!important;
   top:0!important;
-  z-index:90!important;
+  z-index:92!important;
+  background:rgba(255,255,255,.985)!important;
+  backdrop-filter:blur(18px) saturate(145%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(145%)!important;
+  border-bottom:1px solid rgba(96,72,190,.08)!important;
+  box-shadow:0 4px 14px rgba(42,32,88,.04)!important;
+}
+#adminSupportPanel .bws-v3-nav{
+  position:sticky!important;
+  top:50px!important;
+  z-index:91!important;
   display:grid!important;
   grid-template-columns:repeat(4,minmax(0,1fr))!important;
   padding:8px 9px 9px!important;
   gap:6px!important;
   margin:0!important;
-  background:rgba(255,255,255,.97)!important;
+  background:rgba(255,255,255,.98)!important;
   backdrop-filter:blur(18px) saturate(145%)!important;
   -webkit-backdrop-filter:blur(18px) saturate(145%)!important;
   border-bottom:1px solid rgba(96,72,190,.10)!important;
@@ -97,7 +107,7 @@ function install(){
 #adminSupportPanel .bws-v3-nav button:hover::before{opacity:.35;animation:bwsPremiumSweep .7s ease both}
 @keyframes bwsPremiumSweep{from{transform:translateX(-70%)}to{transform:translateX(70%)}}
 #adminSupportPanel .bws-v3-nav button>span:not(.bws-premium-semantic-icon){position:relative;z-index:1;max-width:100%!important;overflow:visible!important;text-overflow:clip!important}
-#adminSupportPanel .bws-v3-card{scroll-margin-top:82px!important}
+#adminSupportPanel .bws-v3-card{scroll-margin-top:128px!important}
 @media(max-width:1240px){
   #adminSupportPanel .bws-v3-nav{gap:4px!important;padding:7px 7px 8px!important}
   #adminSupportPanel .bws-v3-nav button{min-height:56px!important;padding:5px 3px 6px!important;font-size:7.8px!important}
