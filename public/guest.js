@@ -1,66 +1,44 @@
-// Guest mode is a local, read-only preview. It never authenticates or accesses Firebase.
-const $ = id => document.getElementById(id);
-const validPages = new Set(['dashboard','transactions','analytics','savings','insights','settings']);
-
-function showPage(name,{history=true}={}){
-  if(!validPages.has(name)) name='dashboard';
-  const next=document.getElementById('page-'+name);
-  if(!next)return;
-  document.querySelectorAll('#dashboardView .page').forEach(page=>page.classList.toggle('hidden',page!==next));
-  document.querySelectorAll('#dashboardView .nav-btn').forEach(btn=>{
-    const active=btn.dataset.page===name;
-    btn.classList.toggle('active',active);
-    if(active)btn.setAttribute('aria-current','page');else btn.removeAttribute('aria-current');
-  });
-  try{sessionStorage.setItem('budgetingwise-last-page',name)}catch(e){}
-  if(history){
-    const url=new URL(location.href);
-    url.hash=name==='dashboard'?'dashboard':name;
-    if(location.hash!==url.hash) historyApi('pushState',{page:name},'',url);
-  }
-  const main=document.querySelector('.premium-main');
-  if(main&&window.scrollY>130)window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
-  document.body.classList.remove('mobile-nav-open');
-  document.querySelector('.premium-sidebar')?.classList.remove('open');
-}
-function historyApi(method,state,title,url){try{window.history[method](state,title,url)}catch(e){}}
+// Guest mode is an isolated local demo. It never authenticates or reads/writes Firebase.
+const $=id=>document.getElementById(id);
+const validPages=new Set(['dashboard','transactions','analytics','savings','insights','settings']);
+const TX_KEY='budgetingwise-guest-demo-transactions-v2',GOAL_KEY='budgetingwise-guest-demo-goals-v2';
+const money=n=>new Intl.NumberFormat('en-PH',{style:'currency',currency:'PHP',maximumFractionDigits:2}).format(Number(n)||0);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const today=new Date(),dateAgo=d=>{const x=new Date(today);x.setDate(x.getDate()-d);return x.toISOString().slice(0,10)};
+const seedTxs=[
+{id:'demo-1',date:dateAgo(2),type:'income',category:'Salary',description:'Monthly salary',amount:42000},
+{id:'demo-2',date:dateAgo(3),type:'expense',category:'Needs',description:'Groceries',amount:3280},
+{id:'demo-3',date:dateAgo(5),type:'expense',category:'Needs',description:'Electricity & internet',amount:2490},
+{id:'demo-4',date:dateAgo(7),type:'savings',category:'Savings',description:'Emergency fund transfer',amount:6000},
+{id:'demo-5',date:dateAgo(9),type:'expense',category:'Wants',description:'Weekend dining',amount:1450},
+{id:'demo-6',date:dateAgo(12),type:'income',category:'Freelance',description:'Freelance project',amount:8500},
+{id:'demo-7',date:dateAgo(14),type:'expense',category:'Needs',description:'Transportation',amount:1720},
+{id:'demo-8',date:dateAgo(17),type:'savings',category:'Savings',description:'Travel fund',amount:2500},
+{id:'demo-9',date:dateAgo(20),type:'expense',category:'Wants',description:'Shopping',amount:2100},
+{id:'demo-10',date:dateAgo(24),type:'expense',category:'Needs',description:'Mobile plan',amount:999}
+];
+const seedGoals=[
+{id:'goal-1',name:'Emergency Fund',target:60000,saved:24500,goalDate:'2027-03-31'},
+{id:'goal-2',name:'Japan Trip',target:45000,saved:12800,goalDate:'2027-06-15'},
+{id:'goal-3',name:'New Laptop',target:70000,saved:31000,goalDate:'2027-08-01'}
+];
+const read=(k,fallback)=>{try{const v=JSON.parse(sessionStorage.getItem(k)||'null');return Array.isArray(v)?v:fallback.map(x=>({...x}))}catch{return fallback.map(x=>({...x}))}};
+const save=(k,v)=>{try{sessionStorage.setItem(k,JSON.stringify(v))}catch{}};
+let txs=read(TX_KEY,seedTxs),goals=read(GOAL_KEY,seedGoals);
+function showPage(name,{history=true}={}){if(!validPages.has(name))name='dashboard';const next=document.getElementById('page-'+name);if(!next)return;document.querySelectorAll('#dashboardView .page').forEach(page=>page.classList.toggle('hidden',page!==next));document.querySelectorAll('#dashboardView .nav-btn').forEach(btn=>{const active=btn.dataset.page===name;btn.classList.toggle('active',active);if(active)btn.setAttribute('aria-current','page');else btn.removeAttribute('aria-current')});try{sessionStorage.setItem('budgetingwise-last-page',name)}catch{}if(history){const url=new URL(location.href);url.hash=name;if(location.hash!==url.hash)historyApi('pushState',{page:name},'',url)}document.body.classList.remove('mobile-nav-open');document.querySelector('.premium-sidebar')?.classList.remove('open')}
+function historyApi(method,state,title,url){try{window.history[method](state,title,url)}catch{}}
 function pageFromLocation(){const hash=(location.hash||'').replace(/^#\/?/,'');return validPages.has(hash)?hash:null}
-
-$('loginView')?.classList.add('hidden');
-$('dashboardView')?.classList.remove('hidden');
-if($('userLabel'))$('userLabel').textContent='Guest Preview';
-if($('topbarUserName'))$('topbarUserName').textContent='Guest User';
-if($('topbarUserMode'))$('topbarUserMode').textContent='Preview Mode';
-if($('welcomeName'))$('welcomeName').textContent='Welcome, Guest';
-if($('settingsBid'))$('settingsBid').textContent='Guest (no account)';
-if($('settingsName'))$('settingsName').textContent='Guest';
-if($('settingsEmail'))$('settingsEmail').textContent='Not required';
-const settingsStatus=document.querySelector('#page-settings .status');if(settingsStatus)settingsStatus.textContent='Guest preview';
-if($('recentList'))$('recentList').innerHTML='<p class="muted">No transactions yet. Guest mode does not access account data.</p>';
-if($('transactionList'))$('transactionList').innerHTML='<p class="muted">No transactions yet. Sign in with an account to access your data.</p>';
-if($('goalGrid'))$('goalGrid').innerHTML='<div class="panel"><p class="muted">No savings goals yet.</p></div>';
-if($('savingsHistory'))$('savingsHistory').innerHTML='<p class="muted">No savings history yet.</p>';
-
-// One delegated navigation handler covers sidebar, shortcuts, settings/theme links and mobile links.
-document.getElementById('dashboardView')?.addEventListener('click',event=>{
-  const link=event.target.closest('[data-page]');
-  if(!link||!validPages.has(link.dataset.page))return;
-  event.preventDefault();
-  showPage(link.dataset.page);
-});
-window.addEventListener('popstate',()=>showPage(pageFromLocation()||'dashboard',{history:false}));
-
-for(const id of ['addExpenseBtn','addExpenseBtn2','addGoalBtn']){
-  const button=$(id);if(button)button.addEventListener('click',()=>alert('Guest mode is a read-only preview. Sign in to access account features.'));
-}
-if($('logoutBtn')){
-  $('logoutBtn').textContent='Exit guest';
-  $('logoutBtn').addEventListener('click',()=>{sessionStorage.removeItem('budgetingGuest');sessionStorage.removeItem('budgetingwise-last-page');location.hash='';location.reload();});
-}
-window.bwWorkspaces?.setAccount('guest');
-window.renderPremiumOverview?.([],[]);
-window.renderBudgetingStudio?.([],[]);
-window.renderWealthCrownInsights?.([],[]);
-window.renderReferenceDashboard?.([],[]);
-let initial='dashboard';try{initial=pageFromLocation()||sessionStorage.getItem('budgetingwise-last-page')||'dashboard'}catch(e){}
-showPage(initial,{history:false});
+function totals(){let income=0,expense=0,savings=0;txs.forEach(t=>{const a=Number(t.amount)||0;if(t.type==='income')income+=a;else if(t.type==='savings')savings+=a;else expense+=a});return{income,expense,savings,balance:income-expense-savings}}
+function renderCore(){const t=totals();if($('incomeTotal'))$('incomeTotal').textContent=money(t.income);if($('expenseTotal'))$('expenseTotal').textContent=money(t.expense);if($('savingsTotal'))$('savingsTotal').textContent=money(t.savings);if($('remainingTotal'))$('remainingTotal').textContent=money(t.balance);if($('recentList'))$('recentList').innerHTML=txs.slice().sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,6).map(x=>`<div class="list-item"><div><strong>${esc(x.description)}</strong><small>${esc(x.category)} · ${esc(x.date)}</small></div><span class="amount ${x.type==='income'?'positive':'negative'}">${x.type==='income'?'+':'−'}${money(x.amount)}</span></div>`).join('');renderTransactions();renderGoals();renderConnected()}
+function renderTransactions(){const n=$('transactionList');if(!n)return;n.innerHTML=`<table class="table premium-tx-table"><thead><tr><th>Date</th><th>Type</th><th>Category</th><th>Description</th><th>Amount</th><th>Demo</th></tr></thead><tbody>${txs.slice().sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(t=>`<tr><td>${esc(t.date)}</td><td><span class="tx-type-badge ${esc(t.type)}">${esc(t.type)}</span></td><td>${esc(t.category)}</td><td>${esc(t.description)}</td><td class="${t.type==='income'?'positive':'negative'}">${t.type==='income'?'+':'−'}${money(t.amount)}</td><td><span class="tx-status-badge">Preview only</span></td></tr>`).join('')}</tbody></table>`;if($('txShowing'))$('txShowing').textContent=`Showing ${txs.length} demo records`;if($('txPaginationLabel'))$('txPaginationLabel').textContent=`${txs.length} demo transactions`;if($('txPageLabel'))$('txPageLabel').textContent='1 / 1';if($('txPrev'))$('txPrev').disabled=true;if($('txNext'))$('txNext').disabled=true}
+function renderGoals(){const n=$('goalGrid');if(!n)return;n.innerHTML=goals.map(g=>{const pct=Math.min(100,Math.round((Number(g.saved)||0)/Math.max(1,Number(g.target)||1)*100));return`<article class="goal-card"><h3>${esc(g.name)}</h3><p class="muted">${money(g.saved)} saved of ${money(g.target)}</p><div class="progress"><b style="width:${pct}%"></b></div><div class="goal-meta"><span>${pct}%</span><span>${esc(g.goalDate)}</span></div></article>`}).join('');if($('goalsCount'))$('goalsCount').textContent=`${goals.length} demo goals`;if($('bwGoalTotalSaved'))$('bwGoalTotalSaved').textContent=money(goals.reduce((n,g)=>n+(Number(g.saved)||0),0));if($('bwGoalTotalCount'))$('bwGoalTotalCount').textContent=String(goals.length);if($('bwGoalCompleted'))$('bwGoalCompleted').textContent=String(goals.filter(g=>(Number(g.saved)||0)>=(Number(g.target)||1)).length);if($('bwGoalProgress'))$('bwGoalProgress').textContent=String(goals.filter(g=>(Number(g.saved)||0)<(Number(g.target)||1)).length)}
+function renderConnected(){window.renderPremiumOverview?.(txs,goals);window.renderBudgetingStudio?.(txs,goals);window.renderWealthCrownInsights?.(txs,goals);window.renderReferenceDashboard?.(txs,goals);const t=totals();if($('analyticsIncome'))$('analyticsIncome').textContent=money(t.income);if($('analyticsExpense'))$('analyticsExpense').textContent=money(t.expense);if($('analyticsSavingsRate'))$('analyticsSavingsRate').textContent=t.income?`${Math.round(t.savings/t.income*100)}%`:'0%';if($('bwForecastValue'))$('bwForecastValue').textContent=money(t.balance);if($('bwInsightSavings'))$('bwInsightSavings').textContent=t.savings?`You have allocated ${money(t.savings)} to savings in this demo.`:'Add savings to see progress.';if($('bwInsightText'))$('bwInsightText').textContent=`Demo cash flow is ${money(t.balance)} after expenses and savings.`}
+function openTransaction(){const modal=$('modal');if(!modal)return;if($('modalTitle'))$('modalTitle').textContent='Add demo transaction';if($('txDate'))$('txDate').value=new Date().toISOString().slice(0,10);modal.classList.remove('hidden')}
+$('loginView')?.classList.add('hidden');$('dashboardView')?.classList.remove('hidden');
+if($('userLabel'))$('userLabel').textContent='Guest Demo';if($('topbarUserName'))$('topbarUserName').textContent='Demo Customer';if($('topbarUserMode'))$('topbarUserMode').textContent='Interactive Preview';if($('welcomeName'))$('welcomeName').textContent='Welcome, Demo Customer';if($('settingsBid'))$('settingsBid').textContent='DEMO-0001';if($('settingsName'))$('settingsName').textContent='Demo Customer';if($('settingsEmail'))$('settingsEmail').textContent='demo@budgetingwise.app';const status=document.querySelector('#page-settings .status');if(status)status.textContent='Guest demo';
+document.getElementById('dashboardView')?.addEventListener('click',event=>{const link=event.target.closest('[data-page]');if(link&&validPages.has(link.dataset.page)){event.preventDefault();showPage(link.dataset.page)}});window.addEventListener('popstate',()=>showPage(pageFromLocation()||'dashboard',{history:false}));
+for(const id of ['addExpenseBtn','addExpenseBtn2'])$(id)?.addEventListener('click',openTransaction);$('addGoalBtn')?.addEventListener('click',()=>alert('Goals are sample data in Guest Demo. Create a customer account to manage personal goals.'));
+$('closeModal')?.addEventListener('click',()=>$('modal')?.classList.add('hidden'));$('bwCancelTransaction')?.addEventListener('click',()=>$('modal')?.classList.add('hidden'));
+$('transactionForm')?.addEventListener('submit',e=>{e.preventDefault();const amount=Number($('txAmount')?.value),description=$('txDescription')?.value.trim(),date=$('txDate')?.value,type=$('txType')?.value,category=$('txCategory')?.value;if(!Number.isFinite(amount)||amount<=0||!description||!date)return;txs.unshift({id:`guest-${Date.now()}`,type,category,description,amount,date});save(TX_KEY,txs);$('modal')?.classList.add('hidden');e.target.reset();renderCore()});
+if($('logoutBtn')){$('logoutBtn').textContent='Exit guest';$('logoutBtn').addEventListener('click',()=>{sessionStorage.removeItem('budgetingGuest');sessionStorage.removeItem('budgetingwise-last-page');sessionStorage.removeItem(TX_KEY);sessionStorage.removeItem(GOAL_KEY);location.hash='';location.reload()})}
+window.bwWorkspaces?.setAccount('guest-demo');renderCore();setTimeout(renderCore,250);setTimeout(renderCore,900);window.addEventListener('budgetingwise:theme-change',()=>setTimeout(renderCore,0));let initial='dashboard';try{initial=pageFromLocation()||sessionStorage.getItem('budgetingwise-last-page')||'dashboard'}catch{}showPage(initial,{history:false});
