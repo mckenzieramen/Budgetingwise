@@ -1,0 +1,33 @@
+(()=>{'use strict';
+const root=()=>document.getElementById('adminSupportPanel');
+const icon=(path)=>`<span class="bws-stable-icon" aria-hidden="true"><svg viewBox="0 0 24 24">${path}</svg></span>`;
+const icons={ticket:'<path d="M5 4.5h14v15H5z"/><path d="M8 8h8M8 11.5h8M8 15h5"/>',plus:'<path d="M12 5v14M5 12h14"/>',check:'<circle cx="12" cy="12" r="8.5"/><path d="m8.8 12 2 2 4.6-4.8"/>'};
+function addCss(){if(document.getElementById('bwsStableSupportCss'))return;const s=document.createElement('style');s.id='bwsStableSupportCss';s.textContent=`
+#adminSupportPanel{--bws-p:#5b36ef;--bws-soft:#f5f2ff;--bws-line:#e7e9f1;--bws-text:#252b43;--bws-muted:#868ea2;background:#f8f9fc!important;color:var(--bws-text)!important}
+#adminSupportPanel .asp-layout,#adminSupportPanel .asp-inbox,#adminSupportPanel .asp-chat,#adminSupportPanel .asp-profile,#adminSupportPanel .asp-profile-card,#adminSupportPanel .asp-list-head,#adminSupportPanel .asp-chat>header,#adminSupportPanel #bwsSupportTabs,#adminSupportPanel #aspForm{background:#fff!important}
+#adminSupportPanel .asp-layout{border-color:var(--bws-line)!important;box-shadow:0 8px 26px rgba(35,42,70,.05)!important}
+#adminSupportPanel .asp-messages{background:linear-gradient(180deg,#fff,#fbfcff)!important}
+#adminSupportPanel .asp-msg.customer p{background:#f5f6f9!important;color:#30364a!important;border:1px solid #eceef3!important}
+#adminSupportPanel .asp-msg.admin p{background:#f0ecff!important;color:#4f35c9!important;border:1px solid #ddd5ff!important;box-shadow:none!important}
+#adminSupportPanel .asp-threads button.active{background:#f4f1ff!important;border-color:#ddd6ff!important;box-shadow:inset 3px 0 var(--bws-p)!important}
+#adminSupportPanel .bws-client-info-v3,#adminSupportPanel .bws-ticket-details,#adminSupportPanel .bws-quick-actions-v3,#adminSupportPanel .bws-email-history-v3,#adminSupportPanel .bws-account-actions{background:#fff!important;border-color:var(--bws-line)!important;box-shadow:none!important}
+#adminSupportPanel .bws-actions-grid button,#adminSupportPanel .bws-quick-grid-v3 button,#adminSupportPanel .bws-profile-nav-v3 button{background:#fff!important;border-color:#e1ddf7!important;color:#5941cf!important;box-shadow:none!important}
+#adminSupportPanel .bws-profile-nav-v3 button.active{background:#f2eeff!important;border-color:#d4ccff!important;color:#553bd5!important}
+#adminSupportPanel .bws-quick-grid-v3 .primary,#adminSupportPanel #bwsNewTicket,#adminSupportPanel .asp-send-btn{background:linear-gradient(135deg,#6949f4,#5838df)!important;color:#fff!important;border:0!important;box-shadow:0 6px 14px rgba(91,54,239,.14)!important}
+#adminSupportPanel .bws-stable-icon{display:inline-grid;width:16px;height:16px;place-items:center;flex:0 0 16px;color:currentColor}#adminSupportPanel .bws-stable-icon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#adminSupportPanel.is-ticket-closed #aspForm,#adminSupportPanel.is-ticket-closed #aspQuick,#adminSupportPanel.is-ticket-closed #bwsSavedReplies{display:none!important}
+#adminSupportPanel.is-ticket-closed #aspSolvedNotice{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:58px!important;background:#f6f8ff!important;color:#52668a!important;border-color:#e2e7f2!important;font-size:8px!important;font-weight:800!important}
+#adminSupportPanel .bws-stable-closed-actions{display:none}#adminSupportPanel.is-ticket-closed .bws-stable-closed-actions{display:flex!important;justify-content:center;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid #eceef3}
+#adminSupportPanel .bws-stable-closed-actions button{height:34px;padding:0 12px;border-radius:9px;border:1px solid #d8d2fb;background:#f8f6ff;color:#5139c7;font-size:7px;font-weight:900;display:flex;align-items:center;gap:5px;cursor:pointer}
+#adminSupportPanel .bws-stable-closed-actions .primary{background:linear-gradient(135deg,#6847f3,#5530e3);color:#fff;border:0}
+#adminSupportPanel .bws-actions-grid button .bws-premium-icon~.bws-premium-icon,#adminSupportPanel .bws-actions-grid button .bws-fd-icon~.bws-fd-icon,#adminSupportPanel .bws-actions-grid button .bws-final-icon~.bws-final-icon{display:none!important}
+`;document.head.appendChild(s)}
+const text=e=>String(e?.textContent||'').trim();
+function closedState(r){const selected=r.querySelector('#aspThreads [data-thread].active .asp-status');const notice=r.querySelector('#aspSolvedNotice');const ctl=[...r.querySelectorAll('.bws-ticket-controls select,.bws-ticket-controls button')].map(text).join(' ');return /closed|solved/i.test(text(selected))||/conversation closed/i.test(text(notice))||/closed|solved/i.test(ctl)}
+function dedupeIcons(r){r.querySelectorAll('.bws-actions-grid button,.bws-quick-grid-v3 button').forEach(b=>{const all=[...b.querySelectorAll('.bws-premium-icon,.bws-fd-icon,.bws-final-icon,.bws-stable-icon')];all.slice(1).forEach(x=>x.remove())})}
+function sync(){const r=root();if(!r||r.classList.contains('hidden'))return;addCss();dedupeIcons(r);const closed=closedState(r);r.classList.toggle('is-ticket-closed',closed);let bar=r.querySelector('.bws-stable-closed-actions');if(!bar){bar=document.createElement('div');bar.className='bws-stable-closed-actions';bar.innerHTML=`<button type="button" data-history>${icon(icons.ticket)}View ticket history</button><button type="button" class="primary" data-new>${icon(icons.plus)}Start new ticket</button>`;const notice=r.querySelector('#aspSolvedNotice'),form=r.querySelector('#aspForm');(form||notice)?.insertAdjacentElement('afterend',bar);bar.querySelector('[data-history]')?.addEventListener('click',()=>r.querySelector('#bwsSupportTabs [data-tab="tickets"]')?.click());bar.querySelector('[data-new]')?.addEventListener('click',()=>document.getElementById('bwsNewTicket')?.click())}if(closed){const notice=r.querySelector('#aspSolvedNotice');if(notice&&!notice.dataset.stableClosed){notice.dataset.stableClosed='1';notice.innerHTML=`${icon(icons.check)}<span><strong>Conversation closed</strong><small style="display:block;margin-top:3px;font-weight:600">This ticket is read-only. Start a new ticket to continue helping this customer.</small></span>`}}}
+let timer=0;const schedule=(delay=80)=>{clearTimeout(timer);timer=setTimeout(sync,delay)};const burst=()=>{[0,120,300,650,1200].forEach(ms=>setTimeout(sync,ms))};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',burst,{once:true});else burst();
+document.addEventListener('click',e=>{if(e.target.closest('#adminSupportNav,#adminSupportPanel'))schedule(100)},true);
+document.addEventListener('change',e=>{if(e.target.closest('#adminSupportPanel'))schedule(100)},true);
+})();
