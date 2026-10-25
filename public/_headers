@@ -30,3 +30,31 @@
   Cache-Control: no-cache, no-store, must-revalidate
 /service-worker.js
   Cache-Control: no-cache, no-store, must-revalidate
+/dashboard-reference-v31.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-financial-plan-v1.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-reference-ui-v2.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-reference-pages-v3.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-reference-data-v3.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-reference-plan-v3.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-reference-ui-v3.css
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-reference-final-fixes-v3.css
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-reference-exact-v4.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-reference-exact-v4.css
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-insights-intelligence-v1.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-salary-profile-v1.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-planning-assistant-v1.js
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-insights-layout-v1.js
+  Cache-Control: no-cache, no-store, must-revalidate
