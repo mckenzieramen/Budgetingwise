@@ -1,0 +1,155 @@
+/* Budgetingwise Reference UI V2 — final seven-tab presentation layer based on the approved customer mockup. */
+#dashboardView{
+  --bw-ref-bg:#f7f8fc;
+  --bw-ref-card:#ffffff;
+  --bw-ref-border:#e5e8f1;
+  --bw-ref-text:#171b31;
+  --bw-ref-muted:#768099;
+  --bw-ref-accent:var(--bw-ui-accent,#6738f5);
+  --bw-ref-shadow:0 8px 26px rgba(31,35,60,.045);
+  background:var(--bw-ref-bg)!important;
+}
+#dashboardView .premium-shell,#dashboardView .premium-main,#dashboardView .premium-content{background:var(--bw-ref-bg)!important}
+#dashboardView .premium-content{padding:26px 30px 42px!important;max-width:none!important}
+#dashboardView .page{max-width:1460px!important;margin:0 auto!important}
+#dashboardView .page.hidden{display:none!important}
+
+/* Desktop reference removes the redundant top toolbar; navigation/profile stay in the sidebar. */
+@media(min-width:761px){#dashboardView .premium-topbar{display:none!important}}
+#dashboardView .premium-sidebar{width:218px!important;min-width:218px!important;flex-basis:218px!important;padding:0 14px 14px!important;background:#fff!important;border-right:1px solid var(--bw-ref-border)!important}
+#dashboardView .sidebar-logo{padding:28px 8px 24px!important}
+#dashboardView .sidebar-logo strong{font-size:10px!important;letter-spacing:.045em!important}
+#dashboardView .sidebar-logo small{font-size:7px!important}
+#dashboardView .sidebar-nav{gap:6px!important}
+#dashboardView .sidebar-nav .nav-btn{min-height:42px!important;padding:0 11px!important;border-radius:10px!important;font-size:9.5px!important;font-weight:760!important}
+#dashboardView .sidebar-nav .nav-btn.active{background:linear-gradient(90deg,color-mix(in srgb,var(--bw-ref-accent) 14%,#fff),color-mix(in srgb,var(--bw-ref-accent) 6%,#fff))!important;color:var(--bw-ref-accent)!important;border-color:color-mix(in srgb,var(--bw-ref-accent) 14%,var(--bw-ref-border))!important;box-shadow:none!important}
+#dashboardView .sidebar-bottom{margin-top:auto!important;border-top:0!important;padding:14px 6px 0!important}
+#dashboardView .sidebar-profile{border:0!important;background:transparent!important;padding:8px 4px!important;margin:0 0 6px!important}
+#dashboardView .sidebar-logout{min-height:36px!important;background:#fff!important;border-color:var(--bw-ref-border)!important}
+
+/* Shared page headers */
+#dashboardView .page>.section-heading{min-height:auto!important;margin:0 0 16px!important;padding:0!important;border:0!important;align-items:flex-start!important}
+#dashboardView .page>.section-heading h2{font-size:24px!important;line-height:1.14!important;letter-spacing:-.045em!important;color:var(--bw-ref-text)!important}
+#dashboardView .page>.section-heading p{margin-top:5px!important;font-size:9px!important;line-height:1.55!important;color:var(--bw-ref-muted)!important}
+#dashboardView .page>.section-heading :is(button,select){min-height:38px!important}
+
+/* Guidance must remain compact and contextual, not a permanent tutorial wall. */
+#dashboardView .bw-page-guide{grid-template-columns:minmax(0,1fr) minmax(250px,.72fr)!important;gap:12px!important;align-items:center!important;margin:0 0 15px!important;padding:11px 12px!important;border-radius:13px!important;background:#fff!important;border:1px solid var(--bw-ref-border)!important;box-shadow:none!important}
+#dashboardView .bw-guide-steps{display:none!important}
+#dashboardView .bw-guide-copy{padding:0!important}
+#dashboardView .bw-guide-copy>span{font-size:6.5px!important;letter-spacing:.1em!important}
+#dashboardView .bw-guide-copy h3{margin:3px 0!important;font-size:11px!important}
+#dashboardView .bw-guide-copy p{font-size:7.5px!important;line-height:1.5!important}
+#dashboardView .bw-guide-next{padding:8px 10px!important;border-radius:10px!important;background:color-mix(in srgb,var(--bw-ref-accent) 4%,#fff)!important}
+#dashboardView .bw-guide-next strong{font-size:8.5px!important}.bw-guide-next p{font-size:6.8px!important;margin:2px 0 6px!important}
+#dashboardView .bw-guide-next button{min-height:29px!important;font-size:7px!important}
+
+/* Universal cards */
+#dashboardView :is(.bw-ref-card,.premium-panel,.tx-summary article,.insight-cards article,.goal-card,.bw-planning-assistant,.bw-income-profile,.bw-financial-snapshot,.bw-intelligence-card,.bw-settings-card,.bw-account-card,.account-panel){background:#fff!important;border:1px solid var(--bw-ref-border)!important;border-radius:14px!important;box-shadow:var(--bw-ref-shadow)!important}
+#dashboardView :is(input,select,textarea){background:#fff!important;border-color:var(--bw-ref-border)!important;border-radius:9px!important;min-height:38px!important;color:var(--bw-ref-text)!important}
+#dashboardView :is(input,select,textarea):focus{border-color:color-mix(in srgb,var(--bw-ref-accent) 48%,var(--bw-ref-border))!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--bw-ref-accent) 10%,transparent)!important}
+#dashboardView :is(.primary,button.primary){background:var(--bw-ref-accent)!important;color:#fff!important;border-radius:9px!important;box-shadow:0 7px 17px color-mix(in srgb,var(--bw-ref-accent) 18%,transparent)!important}
+
+/* Dashboard */
+#page-dashboard.bw-ref-dashboard{padding:0 0 32px!important}
+#page-dashboard .bw-ref-welcome{min-height:auto!important;margin:0 0 14px!important;padding:0!important;border:0!important}
+#page-dashboard .bw-ref-welcome h1{font-size:24px!important;letter-spacing:-.045em!important}
+#page-dashboard .bw-ref-welcome p{font-size:9px!important}
+#page-dashboard .bw-ref-date{min-width:160px!important;padding:8px 11px!important;border-radius:11px!important;background:#fff!important;border:1px solid var(--bw-ref-border)!important;box-shadow:none!important}
+#page-dashboard .bw-ref-metrics{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;margin-bottom:12px!important}
+#page-dashboard .bw-ref-metrics article{min-height:100px!important;padding:14px 76px 14px 14px!important;border-radius:13px!important;background:#fff!important;border-color:var(--bw-ref-border)!important;box-shadow:var(--bw-ref-shadow)!important}
+#page-dashboard .bw-ref-metrics small{font-size:7px!important;text-transform:none!important;letter-spacing:0!important}
+#page-dashboard .bw-ref-metrics strong{font-size:19px!important;margin:4px 0 3px!important}
+#page-dashboard .bw-ref-metrics em{font-size:6.7px!important;font-weight:700!important}
+#page-dashboard .bw-ref-chart-grid{grid-template-columns:minmax(0,1.8fr) minmax(300px,.8fr)!important;gap:11px!important;margin-bottom:11px!important}
+#page-dashboard .bw-ref-bottom-grid{gap:11px!important}
+#page-dashboard .bw-ref-card{padding:15px!important;border-radius:13px!important}
+#page-dashboard .bw-ref-card>header{margin-bottom:10px!important;padding-bottom:0!important;border-bottom:0!important}
+#page-dashboard .bw-ref-card h3{font-size:10.5px!important}
+#page-dashboard .bw-ref-card header p{font-size:7px!important;margin-top:3px!important}
+#page-dashboard .bw-ref-chart-grid .earnings-chart{height:225px!important;min-height:225px!important}
+#page-dashboard .bw-ref-breakdown{min-height:225px!important}
+
+/* Transactions */
+#page-transactions .tx-summary{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;margin-bottom:12px!important}
+#page-transactions .tx-summary article{min-height:100px!important;padding:14px 15px!important}
+#page-transactions .tx-summary strong{font-size:19px!important}
+#page-transactions .transaction-toolbar{grid-template-columns:minmax(240px,1fr) 135px 150px auto!important;gap:7px!important;padding:8px!important;margin-bottom:10px!important;border-radius:12px!important}
+#page-transactions .tx-panel{border-radius:13px!important}
+#page-transactions .tx-panel .premium-panel-head{min-height:50px!important;padding:13px 15px!important}
+#page-transactions table th{font-size:7px!important;padding:10px 12px!important}
+#page-transactions table td{font-size:8.5px!important;padding:11px 12px!important}
+#page-transactions .tx-footer{padding:10px 14px!important}
+
+/* Analytics */
+#page-analytics .insight-cards{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;margin-bottom:11px!important}
+#page-analytics .insight-cards article{min-height:100px!important;padding:14px 15px!important}
+#page-analytics .insight-cards strong{font-size:19px!important}
+#page-analytics .bw-analytics-trend{min-height:300px!important;margin-bottom:11px!important}
+#page-analytics .bw-analytics-bottom{grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr)!important;gap:11px!important}
+#page-analytics .premium-panel-head{min-height:auto!important;padding-bottom:8px!important;margin-bottom:10px!important}
+#page-analytics .bw-authority-month-chart{min-height:200px!important;padding-top:10px!important}
+#page-analytics .bw-authority-month{height:170px!important}
+
+/* Financial Plan */
+#page-plan .bw-financial-plan-intro{display:none!important}
+#page-plan .bw-planning-assistant{padding:16px!important}
+#page-plan .bw-plan-head{margin-bottom:11px!important}
+#page-plan .bw-plan-head h3{font-size:16px!important}
+#page-plan .bw-plan-kpis{grid-template-columns:1.12fr repeat(3,1fr)!important;gap:9px!important}
+#page-plan .bw-plan-kpis article{min-height:104px!important;padding:13px!important;border-radius:12px!important;background:#f7f8fb!important}
+#page-plan .bw-plan-kpis article.bw-safe-card{background:linear-gradient(135deg,color-mix(in srgb,var(--bw-ref-accent) 8%,#fff),#fff)!important}
+#page-plan .bw-plan-layout{grid-template-columns:minmax(300px,.78fr) minmax(0,1.22fr)!important;gap:10px!important}
+#page-plan .bw-plan-setup,#page-plan .bw-plan-bills{background:#f7f8fb!important;border-radius:12px!important;padding:13px!important}
+#page-plan .bw-plan-page-label{margin:14px 1px 7px!important}
+#page-plan .bw-income-profile{padding:16px!important}
+#page-plan .bw-salary-form{background:#f7f8fb!important;padding:10px!important}
+#page-plan .bw-income-summary>div{box-shadow:none!important}
+
+/* Goals */
+#page-savings .goals-banner{padding:14px 16px!important;margin-bottom:11px!important;border-radius:13px!important;background:linear-gradient(110deg,#fff,color-mix(in srgb,var(--bw-ref-accent) 5%,#fff))!important}
+#page-savings .goal-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+#page-savings .goal-card{min-height:155px!important;padding:15px!important}
+#page-savings .goal-card h3{font-size:11px!important}
+#page-savings .bw-goals-bottom{gap:10px!important}
+
+/* AI Insights */
+#page-insights .bw-financial-snapshot{padding:15px!important;margin-bottom:11px!important}
+#page-insights .bw-insight-feed{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;margin-bottom:11px!important}
+#page-insights .bw-insight-feed article{min-height:100px!important;padding:13px!important;border-radius:12px!important}
+#page-insights .bw-intelligence-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important}
+#page-insights .bw-intelligence-card{min-height:245px!important;padding:17px!important}
+#page-insights .bw-health-main{padding:14px 0 11px!important}
+
+/* Settings */
+#page-settings #bwSettingsMount{gap:10px!important}
+#page-settings .bw-settings-tabs{position:static!important;margin-bottom:11px!important}
+#page-settings :is(.bw-theme-gallery-head,.bw-account-hero,.bw-account-card,.account-panel,.bw-settings-card){border-radius:13px!important}
+#page-settings .bw-theme-gallery-head{padding:16px!important}
+#page-settings .bw-theme-strip{gap:9px!important}
+#page-settings .bw-theme-card{min-height:170px!important;border-radius:12px!important}
+
+/* Chart month count is supplied by JS to avoid the old 12-column mismatch. */
+#dashboardView .bw-authority-month-chart{grid-template-columns:repeat(var(--months,1),minmax(38px,1fr))!important}
+
+@media(max-width:1180px){
+ #page-dashboard .bw-ref-metrics,#page-transactions .tx-summary,#page-analytics .insight-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #page-plan .bw-plan-kpis{grid-template-columns:1fr 1fr!important}
+ #page-plan .bw-plan-layout,#page-analytics .bw-analytics-bottom{grid-template-columns:1fr!important}
+}
+@media(max-width:900px){
+ #dashboardView .bw-page-guide{grid-template-columns:1fr!important}
+ #page-dashboard .bw-ref-chart-grid{grid-template-columns:1fr!important}
+ #page-transactions .transaction-toolbar{grid-template-columns:1fr 1fr!important}
+ #page-plan .bw-salary-form{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:760px){
+ #dashboardView .premium-topbar{display:flex!important}
+ #dashboardView .premium-content{padding:14px 12px 28px!important}
+ #dashboardView .page>.section-heading h2{font-size:21px!important}
+ #page-dashboard .bw-ref-metrics,#page-transactions .tx-summary,#page-analytics .insight-cards,#page-savings .goal-grid,#page-insights .bw-insight-feed,#page-insights .bw-intelligence-grid,#page-plan .bw-plan-kpis{grid-template-columns:1fr!important}
+ #page-transactions .transaction-toolbar{grid-template-columns:1fr!important}
+ #page-plan .bw-salary-form,#page-plan .bw-income-summary{grid-template-columns:1fr!important}
+ #page-plan .bw-salary-form button{grid-column:auto!important}
+}
+@media(prefers-reduced-motion:reduce){#dashboardView *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
