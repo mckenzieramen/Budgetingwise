@@ -5,6 +5,7 @@ await import('./dashboard-reference-v31.js?v=dashboard-reference-v41');
 await import('./dashboard-financial-chart-v1.js?v=dashboard-chart-v4');
 await import('./financial-data-authority-v1.js?v=financial-authority-v1');
 await import('./customer-insights-intelligence-v1.js?v=insights-intelligence-v1');
+await import('./customer-salary-profile-v1.js?v=salary-profile-v1');
 await import('./password-gate-v1.js?v=password-gate-v1');
 const activationMode=new URLSearchParams(location.search).get('activate')==='1';
 if(activationMode){
