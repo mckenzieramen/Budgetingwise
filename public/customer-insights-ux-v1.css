@@ -1,0 +1,363 @@
+/* Budgetingwise AI Insights UX/UI V1 — final presentation layer only. */
+#dashboardView #page-insights{
+  --bw-insights-radius-lg:20px;
+  --bw-insights-radius-md:14px;
+  --bw-insights-shadow:0 10px 34px rgba(25,31,52,.055);
+  --bw-insights-shadow-hover:0 14px 38px rgba(25,31,52,.075);
+  max-width:1320px!important;
+  margin:0 auto!important;
+  padding-bottom:44px!important;
+}
+
+/* Page header */
+#dashboardView #page-insights>.section-heading{
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:space-between!important;
+  gap:24px!important;
+  margin:0 0 20px!important;
+  padding:4px 0 18px!important;
+  border-bottom:1px solid var(--bw-ui-border)!important;
+}
+#dashboardView #page-insights>.section-heading h2{
+  margin:0!important;
+  font-size:30px!important;
+  line-height:1.08!important;
+  font-weight:850!important;
+  letter-spacing:-.045em!important;
+}
+#dashboardView #page-insights>.section-heading p{
+  margin:8px 0 0!important;
+  max-width:620px!important;
+  font-size:13px!important;
+  line-height:1.55!important;
+  color:var(--bw-ui-muted)!important;
+}
+#dashboardView #page-insights #bwInsightsRefresh{
+  flex:none!important;
+  min-height:42px!important;
+  padding:0 16px!important;
+  border-radius:11px!important;
+  font-size:12px!important;
+  font-weight:800!important;
+  box-shadow:none!important;
+}
+
+/* Section rhythm */
+#dashboardView #page-insights>:is(.bw-financial-snapshot,.bw-planning-assistant,.bw-insight-feed,.bw-intelligence-grid,.bw-income-profile){
+  margin-bottom:22px!important;
+}
+#dashboardView #page-insights .bw-layout-label{
+  grid-column:1/-1!important;
+  margin:2px 0 2px!important;
+  padding:0 2px!important;
+}
+#dashboardView #page-insights .bw-layout-label span{
+  font-size:11px!important;
+  font-weight:850!important;
+  letter-spacing:.09em!important;
+}
+#dashboardView #page-insights .bw-layout-label small{
+  margin-top:4px!important;
+  font-size:12px!important;
+  line-height:1.4!important;
+}
+
+/* Shared card language */
+#dashboardView #page-insights :is(.bw-financial-snapshot,.bw-planning-assistant,.bw-income-profile,.bw-intelligence-card,.bw-insight-feed article){
+  border:1px solid var(--bw-ui-border)!important;
+  background:var(--bw-ui-surface)!important;
+  box-shadow:var(--bw-insights-shadow)!important;
+}
+#dashboardView #page-insights :is(.bw-financial-snapshot,.bw-planning-assistant,.bw-income-profile){
+  border-radius:var(--bw-insights-radius-lg)!important;
+}
+#dashboardView #page-insights :is(.bw-intelligence-card,.bw-insight-feed article){
+  border-radius:var(--bw-insights-radius-md)!important;
+}
+
+/* Financial snapshot — strongest information hierarchy */
+#dashboardView #page-insights .bw-financial-snapshot{
+  padding:22px!important;
+}
+#dashboardView #page-insights .bw-snapshot-head{
+  align-items:center!important;
+  margin-bottom:16px!important;
+}
+#dashboardView #page-insights .bw-snapshot-head span{
+  font-size:10px!important;
+  letter-spacing:.1em!important;
+}
+#dashboardView #page-insights .bw-snapshot-head h3{
+  margin:5px 0 4px!important;
+  font-size:20px!important;
+  line-height:1.2!important;
+  font-weight:850!important;
+}
+#dashboardView #page-insights .bw-snapshot-head p{
+  font-size:12px!important;
+  line-height:1.5!important;
+}
+#dashboardView #page-insights .bw-snapshot-period{
+  padding:9px 11px!important;
+  border-radius:11px!important;
+}
+#dashboardView #page-insights .bw-snapshot-period small{font-size:9px!important}
+#dashboardView #page-insights .bw-snapshot-period strong{margin-top:3px!important;font-size:11px!important}
+#dashboardView #page-insights .bw-snapshot-grid{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:10px!important;
+}
+#dashboardView #page-insights .bw-snapshot-card{
+  min-height:112px!important;
+  padding:16px!important;
+  border-radius:13px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease!important;
+}
+#dashboardView #page-insights .bw-snapshot-card:hover{
+  transform:translateY(-1px)!important;
+  border-color:color-mix(in srgb,var(--bw-ui-accent) 18%,var(--bw-ui-border))!important;
+}
+#dashboardView #page-insights .bw-snapshot-card small{
+  font-size:9px!important;
+  line-height:1.3!important;
+}
+#dashboardView #page-insights .bw-snapshot-card strong{
+  margin:7px 0 5px!important;
+  font-size:21px!important;
+  line-height:1.05!important;
+}
+#dashboardView #page-insights .bw-snapshot-card span{
+  font-size:10px!important;
+  line-height:1.35!important;
+}
+#dashboardView #page-insights .bw-snapshot-card.balance{
+  background:linear-gradient(135deg,color-mix(in srgb,var(--bw-ui-accent) 8%,var(--bw-ui-surface)),var(--bw-ui-surface))!important;
+  border-color:color-mix(in srgb,var(--bw-ui-accent) 18%,var(--bw-ui-border))!important;
+}
+#dashboardView #page-insights .bw-snapshot-foot{
+  margin-top:12px!important;
+  padding:11px 12px!important;
+  border-radius:12px!important;
+}
+#dashboardView #page-insights .bw-snapshot-foot span{
+  font-size:11px!important;
+  line-height:1.45!important;
+}
+#dashboardView #page-insights .bw-snapshot-foot button{
+  min-height:34px!important;
+  padding:0 11px!important;
+  font-size:10px!important;
+}
+
+/* Planning Assistant — action first, setup second */
+#dashboardView #page-insights .bw-planning-assistant{
+  padding:22px!important;
+}
+#dashboardView #page-insights .bw-plan-head{
+  align-items:center!important;
+  margin-bottom:16px!important;
+}
+#dashboardView #page-insights .bw-plan-head span{font-size:10px!important}
+#dashboardView #page-insights .bw-plan-head h3{
+  margin:5px 0 4px!important;
+  font-size:20px!important;
+  line-height:1.2!important;
+}
+#dashboardView #page-insights .bw-plan-head p{
+  font-size:12px!important;
+  line-height:1.5!important;
+}
+#dashboardView #page-insights .bw-plan-head>b{
+  padding:7px 10px!important;
+  font-size:10px!important;
+}
+#dashboardView #page-insights .bw-plan-kpis{
+  display:grid!important;
+  grid-template-columns:1.25fr repeat(3,minmax(0,1fr))!important;
+  gap:10px!important;
+  margin-bottom:14px!important;
+}
+#dashboardView #page-insights .bw-plan-kpis article{
+  min-height:122px!important;
+  padding:16px!important;
+  border:1px solid var(--bw-ui-border)!important;
+  border-radius:13px!important;
+  background:var(--bw-ui-surface-2)!important;
+}
+#dashboardView #page-insights .bw-plan-kpis article small{
+  font-size:9px!important;
+  letter-spacing:.06em!important;
+}
+#dashboardView #page-insights .bw-plan-kpis article strong{
+  display:block!important;
+  margin:8px 0 6px!important;
+  font-size:20px!important;
+  line-height:1.05!important;
+}
+#dashboardView #page-insights .bw-plan-kpis article p{
+  margin:0!important;
+  font-size:10px!important;
+  line-height:1.45!important;
+}
+#dashboardView #page-insights .bw-safe-card{
+  background:linear-gradient(135deg,color-mix(in srgb,#2ba579 9%,var(--bw-ui-surface)),var(--bw-ui-surface))!important;
+  border-color:color-mix(in srgb,#2ba579 22%,var(--bw-ui-border))!important;
+}
+#dashboardView #page-insights .bw-safe-card strong{font-size:26px!important}
+#dashboardView #page-insights .bw-plan-layout{
+  gap:12px!important;
+}
+#dashboardView #page-insights :is(.bw-plan-setup,.bw-plan-bills){
+  padding:15px!important;
+  border:1px solid var(--bw-ui-border)!important;
+  border-radius:13px!important;
+  background:var(--bw-ui-surface-2)!important;
+}
+#dashboardView #page-insights .bw-plan-section-title strong{font-size:12px!important}
+#dashboardView #page-insights .bw-plan-section-title small{font-size:10px!important;line-height:1.4!important}
+#dashboardView #page-insights .bw-plan-form label>span{
+  font-size:10px!important;
+  margin-bottom:6px!important;
+}
+#dashboardView #page-insights :is(.bw-plan-form input,.bw-plan-form select,.bw-bill-form input,.bw-salary-form input,.bw-salary-form select){
+  min-height:42px!important;
+  border-radius:10px!important;
+  font-size:12px!important;
+}
+#dashboardView #page-insights :is(.bw-plan-form button,.bw-bill-form button,.bw-salary-form button){
+  min-height:42px!important;
+  border-radius:10px!important;
+  font-size:11px!important;
+  font-weight:800!important;
+}
+#dashboardView #page-insights .bw-bill-list{gap:8px!important}
+#dashboardView #page-insights .bw-bill-row{
+  min-height:58px!important;
+  gap:10px!important;
+  padding:9px 10px!important;
+  border-radius:11px!important;
+}
+#dashboardView #page-insights .bw-bill-row>div:nth-child(2)>strong{font-size:11px!important}
+#dashboardView #page-insights .bw-bill-row>div:nth-child(2)>small{font-size:9px!important;line-height:1.35!important}
+#dashboardView #page-insights .bw-bill-row>span{font-size:11px!important}
+#dashboardView #page-insights .bw-bill-row button{min-height:32px!important;font-size:9px!important}
+
+/* Smart insights — readable cards, not cramped snippets */
+#dashboardView #page-insights>.bw-insight-feed{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+#dashboardView #page-insights .bw-insight-feed article{
+  grid-template-columns:42px minmax(0,1fr)!important;
+  min-height:132px!important;
+  padding:17px!important;
+  gap:5px 12px!important;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease!important;
+}
+#dashboardView #page-insights .bw-insight-feed article:hover{
+  transform:translateY(-1px)!important;
+  box-shadow:var(--bw-insights-shadow-hover)!important;
+  border-color:color-mix(in srgb,var(--bw-ui-accent) 18%,var(--bw-ui-border))!important;
+}
+#dashboardView #page-insights .bw-insight-feed article>span{
+  width:42px!important;
+  height:42px!important;
+  border-radius:11px!important;
+  font-size:16px!important;
+}
+#dashboardView #page-insights .bw-insight-feed strong{
+  font-size:12px!important;
+  line-height:1.3!important;
+}
+#dashboardView #page-insights .bw-insight-feed p{
+  margin-top:7px!important;
+  font-size:11px!important;
+  line-height:1.55!important;
+  -webkit-line-clamp:4!important;
+}
+
+/* Outlook */
+#dashboardView #page-insights .bw-intelligence-grid{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:14px!important;
+}
+#dashboardView #page-insights .bw-intelligence-card{
+  min-height:310px!important;
+  padding:22px!important;
+}
+#dashboardView #page-insights .bw-health-head small{font-size:10px!important}
+#dashboardView #page-insights .bw-estimate-pill{font-size:9px!important;padding:6px 9px!important}
+#dashboardView #page-insights .bw-health-copy h3{font-size:18px!important}
+#dashboardView #page-insights .bw-health-copy p{font-size:11px!important;line-height:1.55!important}
+#dashboardView #page-insights .bw-explain-score{font-size:10px!important;margin-top:11px!important}
+#dashboardView #page-insights .bw-health-metrics>div{padding:11px 12px!important}
+#dashboardView #page-insights .bw-health-metrics small{font-size:8px!important}
+#dashboardView #page-insights .bw-health-metrics strong{font-size:12px!important}
+#dashboardView #page-insights #bwForecastValue{font-size:38px!important;margin-top:24px!important}
+#dashboardView #page-insights .bw-intelligence-card:not(.bw-health-card) h3{font-size:13px!important}
+#dashboardView #page-insights #bwForecastDetail{font-size:11px!important;line-height:1.5!important}
+
+/* Salary settings — clearly a lower-priority setup surface */
+#dashboardView #page-insights .bw-profile-setup{
+  padding:18px 20px!important;
+  box-shadow:none!important;
+  background:var(--bw-ui-surface-2)!important;
+}
+#dashboardView #page-insights .bw-profile-setup .bw-income-profile-head{
+  align-items:center!important;
+}
+#dashboardView #page-insights .bw-profile-setup .bw-income-profile-head span{font-size:9px!important}
+#dashboardView #page-insights .bw-profile-setup .bw-income-profile-head h3{font-size:16px!important}
+#dashboardView #page-insights .bw-profile-setup .bw-income-profile-head p{font-size:11px!important;line-height:1.5!important}
+#dashboardView #page-insights .bw-profile-setup .bw-income-profile-head b{font-size:9px!important}
+#dashboardView #page-insights .bw-salary-form label>span{font-size:10px!important}
+#dashboardView #page-insights .bw-salary-status{font-size:9px!important;min-height:16px!important}
+
+/* Accessible interaction states */
+#dashboardView #page-insights :is(button,input,select):focus-visible{
+  outline:3px solid color-mix(in srgb,var(--bw-ui-accent) 24%,transparent)!important;
+  outline-offset:2px!important;
+}
+#dashboardView #page-insights button{
+  transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease!important;
+}
+#dashboardView #page-insights button:active{transform:translateY(1px)!important}
+
+/* Responsive */
+@media(max-width:1180px){
+  #dashboardView #page-insights .bw-snapshot-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  #dashboardView #page-insights .bw-snapshot-card.balance{grid-column:auto!important}
+  #dashboardView #page-insights .bw-plan-kpis{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:900px){
+  #dashboardView #page-insights>.section-heading{align-items:flex-start!important}
+  #dashboardView #page-insights>.bw-insight-feed{grid-template-columns:1fr!important}
+  #dashboardView #page-insights .bw-intelligence-grid{grid-template-columns:1fr!important}
+  #dashboardView #page-insights .bw-intelligence-card{min-height:0!important}
+}
+@media(max-width:720px){
+  #dashboardView #page-insights{padding-bottom:28px!important}
+  #dashboardView #page-insights>.section-heading{flex-direction:column!important;gap:14px!important}
+  #dashboardView #page-insights #bwInsightsRefresh{width:100%!important}
+  #dashboardView #page-insights .bw-snapshot-grid{grid-template-columns:1fr 1fr!important}
+  #dashboardView #page-insights .bw-plan-kpis{grid-template-columns:1fr 1fr!important}
+  #dashboardView #page-insights .bw-snapshot-head,#dashboardView #page-insights .bw-plan-head{align-items:flex-start!important;flex-direction:column!important}
+  #dashboardView #page-insights .bw-snapshot-period{text-align:left!important}
+}
+@media(max-width:540px){
+  #dashboardView #page-insights>.section-heading h2{font-size:26px!important}
+  #dashboardView #page-insights :is(.bw-financial-snapshot,.bw-planning-assistant,.bw-income-profile){padding:16px!important;border-radius:16px!important}
+  #dashboardView #page-insights .bw-snapshot-grid,#dashboardView #page-insights .bw-plan-kpis{grid-template-columns:1fr!important}
+  #dashboardView #page-insights .bw-snapshot-card{min-height:96px!important}
+  #dashboardView #page-insights .bw-snapshot-foot{align-items:flex-start!important;flex-direction:column!important}
+  #dashboardView #page-insights .bw-snapshot-foot button{width:100%!important}
+  #dashboardView #page-insights .bw-insight-feed article{grid-template-columns:38px minmax(0,1fr)!important;padding:15px!important}
+  #dashboardView #page-insights .bw-insight-feed article>span{width:38px!important;height:38px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #dashboardView #page-insights *{scroll-behavior:auto!important;transition:none!important}
+}
