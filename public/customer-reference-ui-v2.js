@@ -4,11 +4,11 @@ import './customer-reference-data-v3.js?v=reference-data-v3';
 import './customer-reference-plan-v3.js?v=reference-plan-v3';
 
 (()=>{'use strict';
-const STYLE_ID='bwCustomerReferenceV3';
-function attachStyle(){let link=document.getElementById(STYLE_ID);if(!link){link=document.createElement('link');link.id=STYLE_ID;link.rel='stylesheet';link.href='./customer-reference-ui-v3.css?v=reference-ui-v3';document.head.appendChild(link);return}document.head.appendChild(link)}
-attachStyle();
-// Legacy customer styles are injected later by boot.js. Re-appending this link after load
+const styles=[['bwCustomerReferenceV3','./customer-reference-ui-v3.css?v=reference-ui-v3'],['bwCustomerReferenceFixesV3','./customer-reference-final-fixes-v3.css?v=reference-fixes-v3']];
+function attachStyles(){for(const [id,href] of styles){let link=document.getElementById(id);if(!link){link=document.createElement('link');link.id=id;link.rel='stylesheet';link.href=href;document.head.appendChild(link)}else document.head.appendChild(link)}}
+attachStyles();
+// Legacy customer styles are injected later by boot.js. Re-appending these links after load/page changes
 // guarantees that the approved reference remains the final visual authority without changing data logic.
-window.addEventListener('load',()=>requestAnimationFrame(attachStyle),{once:true});
-document.getElementById('dashboardView')?.addEventListener('budgetingwise:page-change',()=>{const link=document.getElementById(STYLE_ID);if(link&&link!==document.head.lastElementChild)document.head.appendChild(link)});
+window.addEventListener('load',()=>requestAnimationFrame(attachStyles),{once:true});
+document.getElementById('dashboardView')?.addEventListener('budgetingwise:page-change',attachStyles);
 })();
