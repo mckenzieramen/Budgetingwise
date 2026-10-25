@@ -15,8 +15,15 @@ service cloud.firestore {
       allow delete: if isAdmin();
       allow update: if isAdmin() || (own(uid)
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
-          'mustChangePassword','accountActivated','activatedAt','passwordChangedAt'
-        ]));
+          'mustChangePassword','accountActivated','activatedAt','passwordChangedAt',
+          'salaryAmount','salaryFrequency','salaryUpdatedAt'
+        ])
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['salaryAmount'])
+          || (request.resource.data.salaryAmount is number
+            && request.resource.data.salaryAmount >= 0
+            && request.resource.data.salaryAmount <= 100000000))
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['salaryFrequency'])
+          || request.resource.data.salaryFrequency in ['monthly','semi-monthly','biweekly','weekly']));
       match /transactions/{id} { allow read, write: if own(uid) || isAdmin(); }
       match /goals/{id} { allow read, write: if own(uid) || isAdmin(); }
     }
