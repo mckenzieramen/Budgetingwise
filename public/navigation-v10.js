@@ -1,7 +1,7 @@
 /* Budgetingwise navigation: single reliable route controller for authenticated and guest views. */
 (()=>{'use strict';
-const valid=new Set(['dashboard','transactions','analytics','savings','insights','settings']);
-const labels={dashboard:'Dashboard',transactions:'Transactions',analytics:'Analytics',savings:'Goals',insights:'AI Insights',settings:'Settings'};
+const valid=new Set(['dashboard','transactions','analytics','savings','plan','insights','settings']);
+const labels={dashboard:'Dashboard',transactions:'Transactions',analytics:'Analytics',savings:'Goals',plan:'Financial Plan',insights:'AI Insights',settings:'Settings'};
 const root=document.getElementById('dashboardView');
 if(!root)return;
 const pageFromHash=()=>{const m=location.hash.match(/^#\/([a-z]+)$/);return m&&valid.has(m[1])?m[1]:null};
