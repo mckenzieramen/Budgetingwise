@@ -1,19 +1,39 @@
-/* V41 detailed dashboard reconstruction — premium reference with compact area metric charts. */
+/* V42 — customer dashboard rebuilt to the approved seven-tab reference. */
 (()=>{'use strict';
 const page=document.getElementById('page-dashboard');if(!page)return;
 const I=window.BudgetingwiseIcons;
 const svg=(name)=>I?I.svg(name,'bw-ref-svg-icon'):'';
-const chart={
- balance:{stroke:'#7657e8',fill:'#9a86ef',path:'M2 27 L11 25 L19 26 L28 18 L37 21 L46 13 L55 15 L64 8 L74 10'},
- income:{stroke:'#24a879',fill:'#75cfb1',path:'M2 29 L11 27 L20 23 L29 25 L38 17 L47 19 L56 12 L65 14 L74 6'},
- expense:{stroke:'#e65d79',fill:'#f29aad',path:'M2 12 L11 15 L20 11 L29 18 L38 16 L47 23 L56 20 L65 27 L74 25'},
- savings:{stroke:'#3f91d4',fill:'#8bc1e9',path:'M2 28 L11 26 L20 21 L29 23 L38 16 L47 18 L56 11 L65 13 L74 7'}
-};
-const mini=(kind)=>{const s=chart[kind]||chart.balance,id=`bwArea-${kind}`;return `<span class="bw-metric-mini bw-metric-area ${kind}" aria-hidden="true"><svg viewBox="0 0 76 34" preserveAspectRatio="none"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${s.fill}" stop-opacity=".32"/><stop offset=".72" stop-color="${s.fill}" stop-opacity=".08"/><stop offset="1" stop-color="${s.fill}" stop-opacity="0"/></linearGradient></defs><path class="bw-area-fill" d="${s.path} L74 34 L2 34 Z" fill="url(#${id})"/><path class="bw-area-line" d="${s.path}" stroke="${s.stroke}"/><circle class="bw-area-end" cx="74" cy="${kind==='balance'?10:kind==='income'?6:kind==='expense'?25:7}" fill="${s.stroke}"/></svg></span>`};
+const greeting=()=>{const h=new Date().getHours();return h<12?'Good morning':h<18?'Good afternoon':'Good evening'};
 page.className='page bw-ref-dashboard';
-page.innerHTML=`<section class="bw-ref-welcome"><div><h1>Good afternoon, <span id="welcomeName">Guest</span></h1><p>Here’s your financial overview.</p></div><div class="bw-ref-date"><span class="bw-ref-svg">${svg('calendar')}</span><div><small>Today</small><strong id="bwRefToday"></strong></div></div></section>
-<div class="bw-ref-metrics"><article><span class="bw-ref-metric-icon wallet">${svg('wallet')}</span><div><small>Total Balance</small><strong id="remainingTotal">₱0.00</strong><em>↑ 12% from last month</em></div>${mini('balance')}</article><article><span class="bw-ref-metric-icon income">${svg('income')}</span><div><small>Total Income</small><strong id="incomeTotal">₱0.00</strong><em>↑ 8% from last month</em></div>${mini('income')}</article><article><span class="bw-ref-metric-icon expense">${svg('expense')}</span><div><small>Total Expenses</small><strong id="expenseTotal">₱0.00</strong><em class="negative">↓ 5% from last month</em></div>${mini('expense')}</article><article><span class="bw-ref-metric-icon savings">${svg('savings')}</span><div><small>Total Savings</small><strong id="savingsTotal">₱0.00</strong><em>↑ 15% from last month</em></div>${mini('savings')}</article></div>
-<div class="bw-ref-chart-grid"><section class="bw-ref-card bw-ref-income"><header><div><h3><span class="bw-ref-title-icon">${svg('analytics')}</span>Income vs Expenses</h3><p>Your financial flow for this month</p></div><select id="earningsYear" aria-label="Chart year"></select></header><div id="earningsChart" class="earnings-chart"></div><div class="bw-ref-chart-key"><span><i class="income-dot"></i>Income</span><span><i class="expense-dot"></i>Expenses</span></div></section><section class="bw-ref-card"><header><div><h3><span class="bw-ref-title-icon">${svg('pie')}</span>Expense Breakdown</h3><p>Where your money goes this month</p></div><span class="bw-ref-period">This Month⌄</span></header><div class="bw-ref-breakdown"><div id="expenseDonut" class="expense-donut"><div class="donut-inner"><strong id="donutTotal">₱0</strong><small>Total</small></div></div><div id="categoryLegend" class="category-legend"></div></div></section></div>
-<div class="bw-ref-bottom-grid"><section class="bw-ref-card bw-ref-list"><header><h3><span class="bw-ref-title-icon">${svg('list')}</span>Recent Transactions</h3><button data-page="transactions">View all</button></header><div id="recentList"><p class="muted">No transactions yet.</p></div></section><section class="bw-ref-card bw-ref-goals"><header><h3><span class="bw-ref-title-icon">${svg('goals')}</span>Goals Progress</h3><button data-page="savings">View all</button></header><div id="bwRefGoals"><div class="bw-ref-goal-demo"><span class="goal-icon">${svg('home')}</span><div><strong>Emergency Fund</strong><small>Start a goal to build your safety net</small><div><i style="width:30%"></i></div></div><b>30%</b></div><div class="bw-ref-goal-demo"><span class="goal-icon">${svg('laptop')}</span><div><strong>New Laptop</strong><small>Track progress toward your next purchase</small><div><i style="width:45%"></i></div></div><b>45%</b></div><div class="bw-ref-goal-demo"><span class="goal-icon">${svg('travel')}</span><div><strong>Travel Fund</strong><small>Save consistently for your next trip</small><div><i style="width:40%"></i></div></div><b>40%</b></div></div></section><section class="bw-ref-card bw-ref-ai"><header><h3><span class="bw-ref-title-icon">${svg('insights')}</span>AI Insights</h3><button data-page="insights">View all</button></header><div class="bw-ref-insight good"><span>${svg('positive')}</span><div><strong>Spending trend</strong><p id="bwInsightDashboard">Add transactions to unlock personalized insights.</p></div></div><div class="bw-ref-insight violet"><span>${svg('suggestion')}</span><div><strong>Smart saving tip</strong><p id="bwSavingDashboard">Record income to see your recent cash flow.</p></div></div><div class="bw-ref-insight blue"><span>${svg('progress')}</span><div><strong>Goal progress</strong><p>Your goals and spending trends will appear here.</p></div></div></section></div>`;
-const d=document.getElementById('bwRefToday');if(d)d.textContent=new Intl.DateTimeFormat('en-US',{month:'long',day:'numeric',year:'numeric'}).format(new Date());
+page.innerHTML=`
+<section class="bw-ref-welcome">
+  <div class="bw-ref-welcome-copy"><h1>${greeting()}, <span id="welcomeName">Guest</span>! <span aria-hidden="true">👋</span></h1><p id="bwDashboardSubtitle">Here’s your financial overview.</p></div>
+  <div class="bw-ref-period-pill"><span>${svg('calendar')}</span><strong id="bwRefPeriod"></strong><b>⌄</b></div>
+</section>
+
+<div class="bw-ref-metrics bw-ref-metrics-three">
+  <article class="income"><span class="bw-ref-metric-icon income">${svg('income')}</span><div><small>Total Income</small><strong id="incomeTotal">₱0.00</strong><em id="bwIncomeTrend">No prior-month baseline</em></div></article>
+  <article class="expense"><span class="bw-ref-metric-icon expense">${svg('expense')}</span><div><small>Total Expenses</small><strong id="expenseTotal">₱0.00</strong><em id="bwExpenseTrend">No prior-month baseline</em></div></article>
+  <article class="savings"><span class="bw-ref-metric-icon savings">${svg('savings')}</span><div><small>Total Savings</small><strong id="savingsTotal">₱0.00</strong><em id="bwSavingsTrend">No prior-month baseline</em></div></article>
+</div>
+
+<section class="bw-ref-card bw-ref-balance-card">
+  <header><div><small>Available Balance</small><strong id="remainingTotal">₱0.00</strong><em id="bwBalanceTrend">From recorded income, expenses and savings</em></div><div class="bw-ref-range" aria-label="Balance chart range"><button type="button" class="active">7D</button><button type="button">30D</button><button type="button">3M</button><button type="button">1Y</button></div></header>
+  <div id="balanceTrendChart" class="bw-balance-trend" role="img" aria-label="Available balance trend"><div class="bw-chart-empty">Add transactions to build your balance trend.</div></div>
+</section>
+
+<div class="bw-ref-dashboard-bottom">
+  <section class="bw-ref-card bw-ref-list">
+    <header><div><h3>Recent Transactions</h3><p>Latest activity from your records</p></div><button type="button" data-page="transactions">View all</button></header>
+    <div id="recentList"><p class="muted">No transactions yet.</p></div>
+  </section>
+  <section class="bw-ref-card bw-ref-spending-card">
+    <header><div><h3>Spending by Category</h3><p>Where your money goes this month</p></div></header>
+    <div class="bw-ref-breakdown"><div id="expenseDonut" class="expense-donut"><div class="donut-inner"><strong id="donutTotal">₱0</strong><small>Total Expenses</small></div></div><div id="categoryLegend" class="category-legend"></div></div>
+  </section>
+</div>
+
+<!-- Legacy targets retained for existing chart/data modules without affecting the approved visual layout. -->
+<div class="bw-reference-legacy-targets" aria-hidden="true"><select id="earningsYear"></select><div id="earningsChart"></div><div id="bwRefGoals"></div><p id="bwInsightDashboard"></p><p id="bwSavingDashboard"></p></div>`;
+const p=document.getElementById('bwRefPeriod');if(p)p.textContent=new Intl.DateTimeFormat('en-PH',{month:'long',year:'numeric'}).format(new Date());
 })();
