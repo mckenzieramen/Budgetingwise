@@ -26,6 +26,7 @@ service cloud.firestore {
           || request.resource.data.salaryFrequency in ['monthly','semi-monthly','biweekly','weekly']));
       match /transactions/{id} { allow read, write: if own(uid) || isAdmin(); }
       match /goals/{id} { allow read, write: if own(uid) || isAdmin(); }
+      match /planning/{id} { allow read, write: if own(uid) || isAdmin(); }
     }
 
     match /supportThreads/{uid} {
