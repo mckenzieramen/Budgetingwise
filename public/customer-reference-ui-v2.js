@@ -63,4 +63,6 @@ window.addEventListener('budgetingwise:planning-profile-changed',()=>requestAnim
 document.getElementById('dashboardView')?.addEventListener('budgetingwise:page-change',()=>requestAnimationFrame(()=>{syncAnalyticsYear();cleanGuidance();updatePlanLabels()}));
 
 const link=document.createElement('link');link.rel='stylesheet';link.href='./customer-reference-ui-v2.css?v=reference-ui-v2';document.head.appendChild(link);
+// Re-append after full load so this remains the final customer visual authority even when legacy styles are injected later.
+window.addEventListener('load',()=>document.head.appendChild(link),{once:true});
 })();
