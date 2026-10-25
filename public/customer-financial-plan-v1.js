@@ -1,5 +1,5 @@
 /* Budgetingwise Financial Plan V2 — authoritative home for salary, budget, payday and recurring bills. */
-import './customer-reference-ui-v2.js?v=reference-ui-v4-loader';
+import './customer-reference-ui-v2.js?v=reference-ui-v5-loader';
 (()=>{'use strict';
 const root=document.getElementById('dashboardView');
 const content=root?.querySelector('.premium-content');
