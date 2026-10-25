@@ -1,0 +1,121 @@
+/* Budgetingwise Rich Visuals V1 — interaction polish layered on top of the approved customer reference. */
+#dashboardView{
+  --bw-rich-accent:var(--bw-ui-accent,#6436f1);
+  --bw-rich-green:#249f70;
+  --bw-rich-red:#dd6279;
+  --bw-rich-blue:#438fd4;
+  --bw-rich-shadow:0 14px 38px rgba(27,31,54,.075);
+  --bw-rich-shadow-soft:0 8px 24px rgba(27,31,54,.05);
+}
+
+/* Shared interaction language */
+#dashboardView :is(.premium-panel,.bw-ref-card,.goal-card,.bw-plan-feature,.bw-income-profile,.bw-financial-snapshot,.bw-intelligence-card,.account-panel,.bw-settings-card){
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,background-color .18s ease!important;
+}
+#dashboardView :is(.premium-panel,.bw-ref-card,.goal-card,.bw-plan-feature,.bw-income-profile,.bw-financial-snapshot,.bw-intelligence-card,.account-panel,.bw-settings-card):hover{
+  border-color:color-mix(in srgb,var(--bw-rich-accent) 16%,#e4e7ef)!important;
+  box-shadow:var(--bw-rich-shadow-soft)!important;
+}
+#dashboardView button{transition:transform .14s ease,box-shadow .14s ease,background-color .14s ease,border-color .14s ease,color .14s ease!important}
+#dashboardView button:not(:disabled):active{transform:translateY(1px)!important}
+#dashboardView button:not(:disabled):hover{filter:saturate(1.03)}
+#dashboardView :is(input,select,textarea):focus{position:relative;z-index:1}
+
+/* Section reveal — JS only adds the class; no content is hidden if JS fails. */
+#dashboardView .bw-rich-reveal{opacity:0;transform:translateY(8px)}
+#dashboardView .bw-rich-reveal.bw-rich-visible{opacity:1;transform:none;transition:opacity .3s ease,transform .3s ease}
+
+/* Animated numeric state */
+#dashboardView .bw-number-updating{letter-spacing:-.025em;will-change:contents}
+#dashboardView .bw-number-updated{animation:bwRichNumberPulse .38s ease}
+@keyframes bwRichNumberPulse{0%{transform:translateY(1px);opacity:.65}100%{transform:none;opacity:1}}
+
+/* Dashboard richer depth */
+@media(min-width:1101px){
+  #page-dashboard .bw-ref-metrics-three article{position:relative;isolation:isolate}
+  #page-dashboard .bw-ref-metrics-three article:after{content:"";position:absolute;inset:auto 15px 0;height:2px;border-radius:999px;opacity:.55;background:var(--bw-rich-accent)}
+  #page-dashboard .bw-ref-metrics-three article.income:after{background:var(--bw-rich-green)}
+  #page-dashboard .bw-ref-metrics-three article.expense:after{background:var(--bw-rich-red)}
+  #page-dashboard .bw-ref-metrics-three article.savings:after{background:var(--bw-rich-blue)}
+  #page-dashboard .bw-ref-metrics-three article:hover{transform:translateY(-2px);box-shadow:var(--bw-rich-shadow)!important}
+  #page-dashboard .bw-ref-balance-card:hover{box-shadow:var(--bw-rich-shadow)!important}
+  #page-dashboard .bw-ref-range{padding:3px;border:1px solid #eceef4;border-radius:10px;background:#fafbfe}
+  #page-dashboard .bw-ref-range button{border-color:transparent!important;background:transparent!important}
+  #page-dashboard .bw-ref-range button.active{background:#fff!important;box-shadow:0 4px 11px rgba(44,40,90,.08)!important}
+}
+
+/* Chart interaction */
+#page-dashboard .bw-balance-trend svg circle,#page-analytics svg circle{transition:r .14s ease,filter .14s ease;cursor:crosshair}
+#page-dashboard .bw-balance-trend svg circle:hover,#page-analytics svg circle:hover{r:4.2px;filter:drop-shadow(0 2px 4px rgba(69,48,170,.22))}
+#page-dashboard .bw-balance-trend{border-radius:12px;background:linear-gradient(180deg,color-mix(in srgb,var(--bw-rich-accent) 2.5%,#fff),#fff)}
+#page-analytics .bw-reference-monthly-trend{border-radius:10px;background:linear-gradient(180deg,#fafbff,#fff)}
+
+/* Transactions — more app-like on web */
+@media(min-width:1101px){
+  #page-transactions .bw-reference-filterbar{position:sticky;top:12px;z-index:8;padding:9px 10px!important;border:1px solid #e8eaf1!important;border-radius:12px!important;background:rgba(247,248,252,.92)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #page-transactions tbody tr{transition:background-color .14s ease,box-shadow .14s ease}
+  #page-transactions tbody tr:hover{background:#faf9ff!important;box-shadow:inset 3px 0 0 color-mix(in srgb,var(--bw-rich-accent) 55%,transparent)}
+  #page-transactions tbody tr:focus-within{background:#f8f6ff!important;box-shadow:inset 3px 0 0 var(--bw-rich-accent)}
+}
+#page-transactions .table-wrap[data-bw-scrollable="true"]{position:relative;box-shadow:inset -12px 0 16px -18px rgba(34,38,66,.45)}
+#page-transactions .tx-type-badge{font-weight:800!important;letter-spacing:.01em}
+
+/* Analytics */
+@media(min-width:1101px){
+  #page-analytics .insight-cards article{position:relative;overflow:hidden!important}
+  #page-analytics .insight-cards article:before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:999px;background:var(--bw-rich-accent);opacity:.68}
+  #page-analytics .insight-cards article:nth-child(1):before{background:var(--bw-rich-green)}
+  #page-analytics .insight-cards article:nth-child(2):before{background:var(--bw-rich-red)}
+  #page-analytics .insight-cards article:nth-child(3):before{background:var(--bw-rich-blue)}
+  #page-analytics .insight-cards article:hover{transform:translateY(-2px)}
+}
+#page-analytics .bw-authority-cat{transition:background .14s ease,padding .14s ease,border-radius .14s ease}
+#page-analytics .bw-authority-cat:hover{padding-inline:8px!important;border-radius:8px;background:#faf9ff}
+
+/* Financial Plan */
+#page-plan .bw-plan-kpis article{position:relative}
+#page-plan .bw-safe-card{background:linear-gradient(135deg,#f4fff9,#fff)!important;border-color:#dcefe7!important}
+#page-plan .bw-safe-card:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--bw-rich-green);border-radius:12px 0 0 12px}
+#page-plan .bw-category-budget-track,#page-plan .progress{overflow:hidden;position:relative}
+#page-plan .bw-category-budget-track i,#page-plan .progress b{transition:width .34s ease}
+#page-plan .bw-category-budget-row:hover,#page-plan .bw-upcoming-row:hover{background:#f9f8ff!important;border-color:#e0dafb!important}
+#page-plan .bw-afford-result.approved{box-shadow:inset 3px 0 0 var(--bw-rich-green)}
+#page-plan .bw-afford-result.caution{box-shadow:inset 3px 0 0 #dfa640}
+
+/* Goals */
+@media(min-width:1101px){
+  #page-savings .goal-card{position:relative;overflow:hidden!important}
+  #page-savings .goal-card:after{content:"";position:absolute;inset:auto 0 0;height:3px;background:linear-gradient(90deg,var(--bw-rich-accent),color-mix(in srgb,var(--bw-rich-accent) 25%,#fff));opacity:.7}
+  #page-savings .goal-card:hover{transform:translateY(-3px);box-shadow:var(--bw-rich-shadow)!important}
+}
+#page-savings .goal-card .progress b{transition:width .35s ease}
+
+/* AI Insights */
+#page-insights .bw-insight-feed article{position:relative;overflow:hidden!important}
+#page-insights .bw-insight-feed article:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:color-mix(in srgb,var(--bw-rich-accent) 62%,transparent)}
+#page-insights .bw-insight-feed article.bw-insight-good:before{background:var(--bw-rich-green)}
+#page-insights .bw-insight-feed article.bw-insight-warn:before{background:#dfa640}
+#page-insights .bw-insight-feed article.bw-insight-blue:before{background:var(--bw-rich-blue)}
+#page-insights .bw-recommendation-row{transition:background-color .14s ease,padding .14s ease,border-radius .14s ease}
+#page-insights .bw-recommendation-row:hover{padding-inline:8px!important;border-radius:9px;background:#faf9ff}
+#page-insights .bw-rec-action{opacity:.88}
+#page-insights .bw-recommendation-row:hover .bw-rec-action{opacity:1}
+
+/* Settings */
+@media(min-width:1101px){
+  #page-settings .bw-theme-card{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease!important}
+  #page-settings .bw-theme-card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--bw-rich-accent) 20%,#e5e7ef)!important;box-shadow:0 12px 28px rgba(28,31,50,.07)!important}
+}
+
+/* Tooltips supplied by JS. */
+#dashboardView [data-bw-tip]{position:relative}
+@media(min-width:761px){
+  #dashboardView [data-bw-tip]:hover:after,#dashboardView [data-bw-tip]:focus-visible:after{content:attr(data-bw-tip);position:absolute;z-index:60;left:50%;top:calc(100% + 8px);transform:translateX(-50%);min-width:max-content;max-width:220px;padding:7px 9px;border-radius:8px;background:#171a2d;color:#fff;font-size:10px;line-height:1.35;font-weight:650;box-shadow:0 10px 26px rgba(18,21,40,.18);pointer-events:none;white-space:normal}
+}
+
+/* Respect reduced motion. */
+@media(prefers-reduced-motion:reduce){
+  #dashboardView .bw-rich-reveal,#dashboardView .bw-rich-reveal.bw-rich-visible{opacity:1!important;transform:none!important;transition:none!important}
+  #dashboardView .bw-number-updated{animation:none!important}
+  #dashboardView *{transition-duration:.001ms!important;animation-duration:.001ms!important;animation-iteration-count:1!important}
+}
