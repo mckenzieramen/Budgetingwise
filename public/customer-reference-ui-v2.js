@@ -1,8 +1,9 @@
-/* Budgetingwise Reference UI Loader V4 — approved seven-tab customer experience. */
+/* Budgetingwise Reference UI Loader V5 — approved seven-tab customer experience. */
 import './customer-reference-pages-v3.js?v=reference-pages-v4';
 import './customer-reference-data-v3.js?v=reference-data-v4';
 import './customer-reference-plan-v3.js?v=reference-plan-v4';
 import './customer-reference-exact-v4.js?v=reference-exact-v4';
+import './customer-planning-premium-v2.js?v=planning-premium-v2';
 
 (()=>{'use strict';
 const styles=[
