@@ -1,0 +1,18 @@
+/* Final detail pass for the approved customer reference. */
+#page-insights .bw-layout-label{display:none!important}
+#page-plan .bw-layout-label{display:none!important}
+#dashboardView .bw-trial-banner{margin:0 0 10px!important;padding:9px 11px!important;border:1px solid var(--bw-v3-border)!important;border-radius:10px!important;background:#fff!important;box-shadow:none!important}
+#dashboardView .bw-trial-banner strong{font-size:8px!important}
+#dashboardView .bw-trial-banner p{margin:2px 0 0!important;font-size:6.5px!important;line-height:1.4!important}
+#dashboardView .bw-trial-actions{gap:6px!important}
+#dashboardView .bw-trial-actions button{min-height:30px!important;height:30px!important;padding:0 9px!important;font-size:7px!important}
+#page-settings .bw-account-layout,#page-settings .bw-account-details,#page-settings .bw-account-actions{min-width:0!important}
+#page-settings .bw-account-details strong,#page-settings .bw-account-hero-copy span{overflow-wrap:anywhere!important;white-space:normal!important}
+#page-settings .bw-account-card,#page-settings .bw-account-hero{overflow:hidden!important}
+#page-insights .bw-health-head>*{min-width:0!important}
+#page-insights .bw-estimate-pill{white-space:nowrap!important}
+#page-insights .bw-health-copy,#page-insights .bw-health-copy>*{min-width:0!important}
+#page-insights .bw-health-copy h3,#page-insights .bw-health-copy p{overflow-wrap:anywhere!important}
+#page-plan .bw-income-profile-head>div,#page-plan .bw-plan-head>div{min-width:0!important}
+#page-plan .bw-income-profile-head p,#page-plan .bw-plan-head p{overflow-wrap:anywhere!important}
+@media(max-width:560px){#dashboardView .bw-trial-banner{align-items:flex-start!important;flex-direction:column!important}.bw-trial-actions{width:100%!important}.bw-trial-actions button{flex:1!important}}
