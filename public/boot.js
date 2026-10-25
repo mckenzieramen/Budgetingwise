@@ -10,6 +10,7 @@ await import('./customer-salary-profile-v1.js?v=salary-profile-v1');
 await import('./customer-financial-snapshot-v1.js?v=financial-snapshot-v1');
 await import('./customer-planning-assistant-v1.js?v=planning-assistant-v1');
 await import('./customer-insights-layout-v1.js?v=insights-layout-v2');
+await import('./customer-page-guidance-v1.js?v=page-guidance-v1');
 await import('./password-gate-v1.js?v=password-gate-v1');
 const activationMode=new URLSearchParams(location.search).get('activate')==='1';
 if(activationMode){
