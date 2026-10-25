@@ -1,4 +1,5 @@
 /* Budgetingwise Financial Plan V1 — dedicated home for planning controls and commitments. */
+import './customer-reference-ui-v2.js?v=reference-ui-v2';
 (()=>{'use strict';
 const root=document.getElementById('dashboardView');
 const content=root?.querySelector('.premium-content');
