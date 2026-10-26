@@ -1,4 +1,4 @@
-/* Budgetingwise Reference UI Loader V7 — approved seven-tab customer experience. */
+/* Budgetingwise Reference UI Loader V8 — approved seven-tab customer experience. */
 import './customer-reference-pages-v3.js?v=reference-pages-v4';
 import './customer-reference-data-v3.js?v=reference-data-v4';
 import './customer-reference-plan-v3.js?v=reference-plan-v4';
@@ -13,7 +13,8 @@ const styles=[
  ['bwCustomerReferenceExactV4','./customer-reference-exact-v4.css?v=reference-exact-v4'],
  ['bwCustomerPremiumQaV2','./customer-premium-qa-v2.css?v=premium-qa-v2'],
  ['bwCustomerDesktopPolishV1','./customer-desktop-polish-v1.css?v=desktop-polish-v1'],
- ['bwCustomerRichVisualsV1','./customer-rich-visuals-v1.css?v=rich-visuals-v1']
+ ['bwCustomerRichVisualsV1','./customer-rich-visuals-v1.css?v=rich-visuals-v1'],
+ ['bwCustomerDesktopRedesignV2','./customer-desktop-redesign-v2.css?v=desktop-redesign-v2']
 ];
 function attachStyles(){for(const [id,href] of styles){let link=document.getElementById(id);if(!link){link=document.createElement('link');link.id=id;link.rel='stylesheet';link.href=href;document.head.appendChild(link)}else document.head.appendChild(link)}}
 attachStyles();
