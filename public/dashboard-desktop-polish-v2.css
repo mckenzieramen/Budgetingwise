@@ -1,0 +1,23 @@
+/* Budgetingwise Dashboard desktop polish v2 — readable 100% zoom, premium proportions. */
+@media (min-width:1101px){
+#dashboardView .premium-shell{grid-template-columns:210px minmax(0,1fr)!important}
+#dashboardView .premium-sidebar{width:210px!important;padding:18px 15px!important}
+#dashboardView .sidebar-logo{padding:0 8px!important;margin-bottom:14px!important}
+#dashboardView .sidebar-logo img{width:34px!important;height:34px!important}
+#dashboardView .sidebar-logo strong{font-size:14px!important;letter-spacing:.2px!important}
+#dashboardView .sidebar-nav{gap:5px!important}
+#dashboardView .sidebar-nav .nav-btn{width:180px!important;height:46px!important;padding:0 13px!important;border-radius:12px!important;font-size:12px!important;gap:12px!important}
+#dashboardView .sidebar-nav .nav-btn span{font-size:17px!important;width:24px!important}
+#dashboardView .sidebar-bottom:before{width:180px!important;min-height:118px!important;padding:13px!important;font-size:9px!important;line-height:1.5!important;border-radius:13px!important}
+#page-dashboard.bw-approved-dashboard{padding:14px 16px 15px!important}
+.bw-dashboard-grid{grid-template-columns:minmax(0,1fr) 292px!important;gap:12px!important;height:calc(100vh - 28px)!important}
+.bw-dashboard-center{grid-template-rows:62px 82px minmax(250px,1.12fr) minmax(218px,.92fr)!important;gap:11px!important}
+.bw-greeting h1{font-size:24px!important;letter-spacing:-.65px!important}.bw-greeting p{font-size:11px!important}.bw-date strong{font-size:9px!important}.bw-date small{font-size:8px!important}
+.bw-summary-row{gap:9px!important}.bw-summary{height:82px!important;padding:11px 12px!important;gap:10px!important;border-radius:13px!important}.bw-summary-icon{width:38px!important;height:38px!important;flex-basis:38px!important}.bw-summary small{font-size:8px!important}.bw-summary strong{font-size:16px!important}.bw-summary em{font-size:7.5px!important}
+.bw-chart-grid{grid-template-columns:minmax(0,1.72fr) minmax(285px,.98fr)!important;gap:11px!important}.bw-balance-card,.bw-spending{padding:13px!important}.bw-card h3{font-size:11px!important}.bw-card header p{font-size:8px!important}.bw-card header button{font-size:8px!important}.bw-donut{width:min(126px,43%)!important;margin:8px auto 5px!important}.bw-donut strong{font-size:14px!important}.bw-legend p{font-size:7.5px!important;padding:2px 0!important}
+.bw-bottom-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(190px,.66fr)!important;gap:11px!important}.bw-bottom-grid>.bw-card{padding:12px!important}.bw-transactions p{min-height:45px!important;padding:6px 0!important}.bw-transactions b{font-size:9px!important}.bw-transactions small{font-size:7.5px!important}.bw-transactions strong{font-size:10px!important}.budget-row{margin-top:10px!important}.budget-row p{font-size:9px!important}.budget-row>small{font-size:7.5px!important}.bw-health-ring{width:104px!important;margin:9px auto 6px!important}.bw-health>p{font-size:7.5px!important}
+.bw-right-rail{grid-template-rows:minmax(210px,.92fr) minmax(235px,1.02fr) minmax(135px,.58fr)!important;gap:11px!important}.bw-right-rail>.bw-card{padding:12px!important}.bw-bills #bwDashUpcomingBills p{min-height:50px!important}.bw-bills b{font-size:9px!important}.bw-bills small{font-size:7.5px!important}.bw-bills strong{font-size:9px!important}.bw-afford form{margin-top:10px!important}.bw-afford label{font-size:8.5px!important;margin-bottom:7px!important}.bw-input,.bw-afford select{height:34px!important}.bw-primary{height:36px!important;font-size:11px!important}.bw-goals p{margin:7px 0!important}
+}
+@media (min-width:1101px) and (max-height:820px){
+#page-dashboard.bw-approved-dashboard{padding:10px 12px!important}.bw-dashboard-grid{height:calc(100vh - 20px)!important;gap:9px!important}.bw-dashboard-center{grid-template-rows:54px 72px minmax(224px,1.05fr) minmax(190px,.88fr)!important;gap:9px!important}.bw-greeting h1{font-size:22px!important}.bw-summary{height:72px!important;padding:8px 10px!important}.bw-summary-icon{width:34px!important;height:34px!important;flex-basis:34px!important}.bw-summary strong{font-size:14px!important}.bw-chart-grid,.bw-bottom-grid,.bw-right-rail{gap:9px!important}.bw-balance-card,.bw-spending,.bw-bottom-grid>.bw-card,.bw-right-rail>.bw-card{padding:10px!important}.bw-right-rail{grid-template-rows:minmax(190px,.9fr) minmax(215px,1fr) minmax(118px,.55fr)!important}.bw-donut{width:110px!important}.bw-health-ring{width:92px!important}.bw-transactions p{min-height:41px!important}.bw-bills #bwDashUpcomingBills p{min-height:44px!important}
+}
