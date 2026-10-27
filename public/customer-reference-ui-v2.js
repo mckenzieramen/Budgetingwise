@@ -1,11 +1,11 @@
-/* Budgetingwise Reference UI Loader V17 — exact Dashboard reference is the final Dashboard authority. */
+/* Budgetingwise Reference UI Loader V18 — exact Dashboard reference is the final Dashboard authority. */
 import './customer-reference-pages-v3.js?v=reference-pages-v5';
 import './customer-reference-data-v3.js?v=reference-data-v4';
 import './customer-reference-plan-v3.js?v=reference-plan-v4';
 import './customer-reference-exact-v4.js?v=reference-exact-v4';
 import './customer-planning-premium-v2.js?v=planning-premium-v2';
 import './customer-rich-interactions-v1.js?v=rich-interactions-v1';
-import './customer-dashboard-picture-v1.js?v=dashboard-picture-v2';
+import './customer-dashboard-picture-v1.js?v=dashboard-picture-v3';
 (()=>{'use strict';
 const styles=[
  ['bwCustomerReferenceV3','./customer-reference-ui-v3.css?v=reference-ui-v4'],
