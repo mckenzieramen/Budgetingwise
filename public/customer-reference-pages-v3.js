@@ -1,4 +1,4 @@
-/* Budgetingwise Customer Reference Pages V3 — composition only, preserving existing data IDs and actions. */
+/* Budgetingwise Customer Reference Pages V4 — composition only, preserving existing data IDs and actions. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
 const page=id=>$('page-'+id);
@@ -37,9 +37,10 @@ function insights(){const n=page('insights');if(!n)return;n.innerHTML=`
 <section class="premium-panel bw-reference-recommendations"><div class="premium-panel-head"><div><h3>Recommendations</h3><small>Actions supported by your recorded data</small></div></div><div id="bwRecommendations"><p class="muted">Recommendations will appear as your financial history grows.</p></div></section>`}
 
 function settings(){const n=page('settings');if(!n)return;n.innerHTML=`
-<div class="section-heading"><div><h2>Settings</h2><p class="muted">Manage your account, appearance, and Budgetingwise preferences.</p></div></div>
+<div class="section-heading"><div><h2>Settings</h2><p class="muted">Manage your account and Budgetingwise preferences.</p></div></div>
 <div id="bwSettingsMount"></div>
-<section class="premium-panel account-panel"><div class="premium-panel-head"><div><h3>Account Information</h3><small>Registered customer details</small></div><span class="panel-filter">Read only</span></div><div class="settings"><div><span>Budget ID</span><strong id="settingsBid">—</strong></div><div><span>Name</span><strong id="settingsName">—</strong></div><div><span>Email</span><strong id="settingsEmail">—</strong></div><div><span>Status</span><strong class="status">Authorized</strong></div></div></section>`}
+<section class="premium-panel account-panel"><div class="premium-panel-head"><div><h3>Account Information</h3><small>Registered customer details</small></div><span class="panel-filter">Read only</span></div><div class="settings"><div><span>Budget ID</span><strong id="settingsBid">—</strong></div><div><span>Name</span><strong id="settingsName">—</strong></div><div><span>Email</span><strong id="settingsEmail">—</strong></div><div><span>Status</span><strong class="status">Authorized</strong></div></div></section>
+<section class="premium-panel bw-fixed-experience"><div class="premium-panel-head"><div><h3>Budgetingwise Experience</h3><small>One consistent interface designed for clarity and readability</small></div><span class="panel-filter">Fixed Light</span></div><div class="settings"><div><span>Interface</span><strong>Clean Finance</strong></div><div><span>Accent</span><strong>Budgetingwise Green</strong></div><div><span>Motion</span><strong>System preference</strong></div><div><span>Layout</span><strong>Responsive</strong></div></div></section>`}
 
 transactions();analytics();goals();insights();settings();
 })();
