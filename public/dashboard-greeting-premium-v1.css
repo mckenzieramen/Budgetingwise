@@ -1,0 +1,15 @@
+/* Premium dashboard greeting — compact, clean, high-end fintech */
+@media (min-width:1101px){
+#page-dashboard .bw-greeting{position:relative;display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:62px!important;margin:0 0 14px!important;padding:4px 4px 4px 2px!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}
+#page-dashboard .bw-greeting:before{content:'';position:absolute;left:0;top:9px;width:4px;height:38px;border-radius:999px;background:linear-gradient(180deg,#7657f6,#9b8cff);box-shadow:0 5px 14px rgba(101,68,233,.18)}
+#page-dashboard .bw-greeting>div:first-child{padding-left:16px!important}
+#page-dashboard .bw-greeting h1{margin:0 0 5px!important;color:#151a32!important;font-size:25px!important;line-height:1.08!important;font-weight:800!important;letter-spacing:-.7px!important}
+#page-dashboard .bw-greeting h1 #welcomeName{color:#151a32!important;font-weight:850!important}
+#page-dashboard .bw-greeting h1>span:last-child{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:27px;height:27px;margin-left:4px;border-radius:9px;background:#fff7dc;border:1px solid #f7e6a9;font-size:16px!important;vertical-align:2px;box-shadow:0 4px 12px rgba(171,126,18,.08)}
+#page-dashboard .bw-greeting p{margin:0!important;color:#7d8499!important;font-size:10.5px!important;line-height:1.45!important;font-weight:600!important;letter-spacing:-.05px}
+#page-dashboard .bw-date{display:flex!important;align-items:center!important;gap:9px!important;min-width:auto!important;height:38px!important;padding:0 12px 0 8px!important;border:1px solid #e7e8f2!important;border-radius:12px!important;background:rgba(255,255,255,.92)!important;box-shadow:0 5px 16px rgba(30,35,75,.045)!important}
+#page-dashboard .bw-date>b{display:flex!important;align-items:center!important;justify-content:center!important;width:27px!important;height:27px!important;border-radius:9px!important;background:#f1edff!important;color:#6746e8!important}
+#page-dashboard .bw-date>b svg{width:15px!important;height:15px!important}
+#page-dashboard .bw-date strong{font-size:9.5px!important;font-weight:800!important;color:#30364f!important;white-space:nowrap!important}
+}
+@media(max-width:1100px){#page-dashboard .bw-greeting h1{letter-spacing:-.5px}#page-dashboard .bw-date{border:1px solid #e8eaf2;background:#fff;border-radius:12px}}
