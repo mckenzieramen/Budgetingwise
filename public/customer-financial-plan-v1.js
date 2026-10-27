@@ -1,5 +1,5 @@
 /* Budgetingwise Financial Plan reset — keep the navigation destination, leave page content blank. */
-import './customer-reference-ui-v2.js?v=reference-ui-v14-premium-rebuild';
+import './customer-reference-ui-v2.js?v=reference-ui-v18-exact-dashboard';
 (()=>{'use strict';
 const root=document.getElementById('dashboardView');
 const content=root?.querySelector('.premium-content');
