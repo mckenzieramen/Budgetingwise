@@ -1,0 +1,9 @@
+/* Clean customer header authority — keep only search/profile header, never the trial promo banner. */
+#dashboardView .bw-trial-banner{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important}
+#page-dashboard.bw-approved-dashboard>.bw-app-header{display:flex!important;visibility:visible!important}
+#page-dashboard.bw-approved-dashboard .bw-search{display:flex!important}
+#page-dashboard.bw-approved-dashboard .bw-user-tools{display:flex!important}
+#page-dashboard.bw-approved-dashboard .bw-user-tools>div{display:block!important}
+#page-dashboard.bw-approved-dashboard .bw-user-tools strong{display:block!important;font-weight:700!important;color:#0d1838!important;line-height:1.2!important}
+#page-dashboard.bw-approved-dashboard .bw-user-tools small{display:block!important;color:#63729a!important;line-height:1.25!important}
+@media(max-width:800px){#page-dashboard.bw-approved-dashboard .bw-user-tools>div{display:none!important}}
