@@ -1,28 +1,36 @@
-/* Premium dashboard logos + Recent Transactions visual system. */
-#page-dashboard .bw-premium-icon,#page-dashboard .bw-summary-icon,#page-dashboard .bw-dynamic-icon,#page-dashboard .bw-tx-premium-icon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.78),0 4px 12px rgba(34,46,86,.07)!important}
-#page-dashboard .bw-premium-icon svg,#page-dashboard .bw-summary-icon svg,#page-dashboard .bw-dynamic-icon svg,#page-dashboard .bw-tx-premium-icon svg{stroke-width:1.85!important}
-#page-dashboard .bw-recent #recentList{display:flex!important;flex-direction:column!important;gap:0!important}
-#page-dashboard .bw-recent #recentList p{display:grid!important;grid-template-columns:34px minmax(0,1fr) auto!important;gap:10px!important;align-items:center!important;min-height:52px!important;margin:0!important;padding:8px 4px!important;border-bottom:1px solid #eef1f6!important;background:transparent!important;color:#151b2b!important}
-#page-dashboard .bw-recent #recentList p:last-child{border-bottom:0!important}
-#page-dashboard .bw-recent #recentList p>span{display:block!important;min-width:0!important;color:#151b2b!important}
-/* Transaction description: always premium near-black, regardless of income/expense/category classes. */
-#page-dashboard .bw-recent #recentList p>span>b,
-#page-dashboard .bw-recent #recentList p>span>strong,
+/* Dashboard Recent Transactions — authoritative premium text treatment. */
+#page-dashboard .bw-recent #recentList{display:flex!important;flex-direction:column!important;gap:0!important;margin-top:8px!important}
+/* Actual live rows can be re-rendered without the icon wrapper. Keep the text layout authoritative either way. */
+#page-dashboard .bw-recent #recentList>p{position:relative!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;column-gap:16px!important;align-items:center!important;min-height:65px!important;margin:0!important;padding:10px 2px!important;border-bottom:1px solid #e9edf4!important;background:#fff!important;color:#111827!important}
+#page-dashboard .bw-recent #recentList>p:last-child{border-bottom:0!important}
+#page-dashboard .bw-recent #recentList>p>.bw-tx-premium-icon{display:none!important}
+#page-dashboard .bw-recent #recentList>p>span{display:block!important;min-width:0!important;color:#111827!important}
+/* Force every transaction label to black. This intentionally overrides old income-title / expense-title rules. */
+#page-dashboard .bw-recent #recentList>p>span>b,
+#page-dashboard .bw-recent #recentList>p>span>strong,
+#page-dashboard .bw-recent #recentList>p>span>.income-title,
+#page-dashboard .bw-recent #recentList>p>span>.expense-title,
 #page-dashboard .bw-recent #recentList .income-title,
 #page-dashboard .bw-recent #recentList .expense-title,
-#page-dashboard .bw-recent #recentList [class*="title"]{display:block!important;color:#151b2b!important;font-size:10.5px!important;font-weight:700!important;line-height:1.25!important;letter-spacing:-.08px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-/* Category/date/meta: quiet neutral gray, never semantic red/green. */
-#page-dashboard .bw-recent #recentList p>span>small,
-#page-dashboard .bw-recent #recentList p>span>em,
+#page-dashboard .bw-recent #recentList [class*="title"]{display:block!important;margin:0!important;color:#111827!important;-webkit-text-fill-color:#111827!important;font-family:Manrope,Inter,system-ui,sans-serif!important;font-size:11px!important;font-weight:700!important;line-height:1.3!important;letter-spacing:-.12px!important;text-decoration:none!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+/* Secondary line: category + date only. */
+#page-dashboard .bw-recent #recentList>p>span>small,
+#page-dashboard .bw-recent #recentList>p>span>em,
 #page-dashboard .bw-recent #recentList [class*="meta"],
 #page-dashboard .bw-recent #recentList [class*="category"],
-#page-dashboard .bw-recent #recentList [class*="date"]{display:block!important;margin-top:3px!important;color:#7f8799!important;font-size:7.6px!important;font-weight:500!important;font-style:normal!important;line-height:1.3!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-/* Only the amount gets financial direction color. */
-#page-dashboard .bw-recent #recentList p>strong:last-child,#page-dashboard .bw-recent #recentList p>b:last-child{font-size:10.5px!important;font-weight:750!important;white-space:nowrap!important;letter-spacing:-.08px!important;color:#151b2b!important}
-#page-dashboard .bw-recent #recentList p>strong.plus:last-child,#page-dashboard .bw-recent #recentList .amount-income{color:#14966d!important}
-#page-dashboard .bw-recent #recentList p>strong:not(.plus):last-child,#page-dashboard .bw-recent #recentList .amount-expense{color:#cf5369!important}
-#page-dashboard .bw-tx-premium-icon{width:32px!important;height:32px!important;border-radius:10px!important;display:grid!important;place-items:center!important;flex:0 0 32px!important}
-#page-dashboard .bw-tx-premium-icon svg{width:17px!important;height:17px!important}
-#page-dashboard .bw-tx-premium-icon.income{background:#eafaf4!important;color:#169b70!important}.bw-tx-premium-icon.food{background:#fff3e8!important;color:#e88732!important}.bw-tx-premium-icon.bills{background:#fff0f3!important;color:#df5871!important}.bw-tx-premium-icon.shopping{background:#f1edff!important;color:#704cf0!important}.bw-tx-premium-icon.transport{background:#eaf5ff!important;color:#368ce8!important}.bw-tx-premium-icon.savings{background:#eeeaff!important;color:#6544e9!important}.bw-tx-premium-icon.health{background:#eafaf4!important;color:#24ae7f!important}.bw-tx-premium-icon.other{background:#f1f3f7!important;color:#68758f!important}
-#page-dashboard .bw-premium-icon{border-radius:9px!important;background-clip:padding-box!important}#page-dashboard .bw-dynamic-icon{border-radius:10px!important}
-@media(max-width:800px){#page-dashboard .bw-recent #recentList p{grid-template-columns:36px minmax(0,1fr) auto!important;min-height:56px!important;padding:9px 3px!important}#page-dashboard .bw-recent #recentList p>span>b,#page-dashboard .bw-recent #recentList p>span>strong{font-size:11px!important}.bw-tx-premium-icon{width:34px!important;height:34px!important}}
+#page-dashboard .bw-recent #recentList [class*="date"]{display:block!important;margin-top:4px!important;color:#8992a6!important;-webkit-text-fill-color:#8992a6!important;font-family:Manrope,Inter,system-ui,sans-serif!important;font-size:7.5px!important;font-weight:500!important;font-style:normal!important;line-height:1.3!important;letter-spacing:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+/* Amount is the only semantic color in a row. */
+#page-dashboard .bw-recent #recentList>p>strong:last-child,
+#page-dashboard .bw-recent #recentList>p>b:last-child{justify-self:end!important;color:#c73e5b!important;-webkit-text-fill-color:#c73e5b!important;font-family:Manrope,Inter,system-ui,sans-serif!important;font-size:14px!important;font-weight:800!important;line-height:1!important;letter-spacing:-.25px!important;white-space:nowrap!important}
+#page-dashboard .bw-recent #recentList>p>strong.plus:last-child,
+#page-dashboard .bw-recent #recentList>p>b.plus:last-child,
+#page-dashboard .bw-recent #recentList .amount-income{color:#078b66!important;-webkit-text-fill-color:#078b66!important}
+#page-dashboard .bw-recent #recentList .amount-expense{color:#c73e5b!important;-webkit-text-fill-color:#c73e5b!important}
+/* Header polish to match the cleaner rows. */
+#page-dashboard .bw-recent>header{align-items:center!important;padding-bottom:2px!important}
+#page-dashboard .bw-recent>header h3{color:#172348!important;font-size:11px!important;font-weight:750!important;letter-spacing:-.1px!important}
+#page-dashboard .bw-recent>header button{height:28px!important;padding:0 11px!important;border:1px solid #e1e6f0!important;border-radius:8px!important;background:#fff!important;color:#536181!important;font-size:7.5px!important;font-weight:650!important;box-shadow:0 2px 8px rgba(31,45,82,.035)!important}
+/* Existing dashboard icon containers remain refined, but transaction rows stay text-first. */
+#page-dashboard .bw-premium-icon,#page-dashboard .bw-summary-icon,#page-dashboard .bw-dynamic-icon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.78),0 4px 12px rgba(34,46,86,.07)!important}
+#page-dashboard .bw-premium-icon svg,#page-dashboard .bw-summary-icon svg,#page-dashboard .bw-dynamic-icon svg{stroke-width:1.85!important}
+@media(max-width:800px){#page-dashboard .bw-recent #recentList>p{min-height:62px!important;padding:10px 1px!important}#page-dashboard .bw-recent #recentList>p>span>b,#page-dashboard .bw-recent #recentList>p>span>strong{font-size:11px!important}#page-dashboard .bw-recent #recentList>p>strong:last-child,#page-dashboard .bw-recent #recentList>p>b:last-child{font-size:13px!important}}
