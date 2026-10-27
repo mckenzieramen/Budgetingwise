@@ -1,0 +1,18 @@
+/* Premium compact result treatment for Dashboard affordability checker. */
+#dashboardView .bw-afford{display:flex!important;flex-direction:column!important;overflow:hidden!important}
+#dashboardView .bw-afford form{flex:0 0 auto!important;margin-top:10px!important}
+#dashboardView .bw-afford #bwDashAffordResult{margin-top:8px!important;min-height:0!important;border-radius:10px!important;box-sizing:border-box!important;font-family:Manrope,Inter,sans-serif!important}
+#dashboardView .bw-afford #bwDashAffordResult.approved,#dashboardView .bw-afford #bwDashAffordResult.caution{position:relative!important;padding:9px 10px 9px 34px!important;border:1px solid!important;background:#fff!important;display:block!important;overflow:hidden!important}
+#dashboardView .bw-afford #bwDashAffordResult.approved{border-color:#c9f0df!important;background:#f3fcf8!important}
+#dashboardView .bw-afford #bwDashAffordResult.caution{border-color:#ffd9df!important;background:#fff7f8!important}
+#dashboardView .bw-afford #bwDashAffordResult>span{position:absolute!important;left:10px!important;top:10px!important;width:17px!important;height:17px!important;border-radius:50%!important;display:grid!important;place-items:center!important;font-size:10px!important;font-weight:800!important}
+#dashboardView .bw-afford #bwDashAffordResult.approved>span{background:#dff8ec!important;color:#0f9d68!important}
+#dashboardView .bw-afford #bwDashAffordResult.caution>span{background:#ffe3e8!important;color:#d52f53!important}
+#dashboardView .bw-afford #bwDashAffordResult>strong{display:block!important;margin:0!important;font-size:10px!important;line-height:1.25!important;color:#15234a!important;font-weight:800!important;white-space:normal!important}
+#dashboardView .bw-afford #bwDashAffordResult>p{display:block!important;margin:3px 0 0!important;font-size:7.5px!important;line-height:1.35!important;color:#63729a!important}
+#dashboardView .bw-afford #bwDashAffordResult>div{margin-top:6px!important;padding-top:6px!important;border-top:1px solid rgba(93,111,151,.12)!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:3px 8px!important}
+#dashboardView .bw-afford #bwDashAffordResult>div small{font-size:7px!important;line-height:1.2!important;color:#6e7c9e!important;white-space:normal!important}
+#dashboardView .bw-afford #bwDashAffordResult>div b{font-size:8.5px!important;line-height:1.2!important;color:#15234a!important;text-align:right!important;white-space:nowrap!important}
+#dashboardView .bw-afford #bwDashAffordResult.approved>div b{color:#0f9d68!important}
+#dashboardView .bw-afford #bwDashAffordResult.caution>div b{color:#c92e50!important}
+@media (min-width:1101px) and (max-height:820px){#dashboardView .bw-afford form{margin-top:7px!important}#dashboardView .bw-afford label{margin-bottom:6px!important}#dashboardView .bw-afford #bwDashAffordResult{margin-top:6px!important}#dashboardView .bw-afford #bwDashAffordResult.approved,#dashboardView .bw-afford #bwDashAffordResult.caution{padding-top:7px!important;padding-bottom:7px!important}#dashboardView .bw-afford #bwDashAffordResult>span{top:8px!important}}
