@@ -42,7 +42,7 @@ customerBootstrapPromise=(async()=>{
     ['./dashboard-financial-chart-v1.js?v=dashboard-chart-v4','Dashboard chart'],
     ['./financial-data-authority-v1.js?v=financial-authority-v1','Financial data authority'],
     ['./customer-insights-intelligence-v1.js?v=insights-intelligence-v1','Insights intelligence'],
-    ['./customer-financial-plan-v1.js?v=financial-plan-v10','Financial Plan'],
+    ['./customer-financial-plan-v1.js?v=financial-plan-v12-layout-recovery','Financial Plan'],
     ['./customer-salary-profile-v1.js?v=salary-profile-v1','Salary profile'],
     ['./customer-financial-snapshot-v1.js?v=financial-snapshot-v1','Financial snapshot'],
     ['./customer-planning-assistant-v1.js?v=planning-assistant-v1','Planning assistant'],
@@ -93,5 +93,12 @@ if(activationMode){
 
     safeImport('./premium-tabs-v29.js?v=premium-tabs-v39','Premium tab enhancements');
     safeImport('./premium-icon-fix-v23.js?v=premium-icons-v46','Premium icons');
+
+    // The rebuilt customer layout must remain the final CSS authority after every legacy visual layer.
+    const reassert=()=>window.bwReassertCustomerStyles?.();
+    requestAnimationFrame(reassert);
+    setTimeout(reassert,0);
+    window.addEventListener('load',reassert,{once:true});
+    document.getElementById('dashboardView')?.addEventListener('budgetingwise:page-change',reassert);
   }catch(error){console.warn('Optional visual setup skipped:',error)}
 }
