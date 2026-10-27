@@ -1,0 +1,35 @@
+/* Dashboard Recent Transactions — neutral premium text treatment.
+   Transaction names and metadata stay black/neutral; only amounts retain financial meaning. */
+#page-dashboard .bw-recent .bw-transactions p span b,
+#page-dashboard .bw-recent .bw-transactions p span b.income-title,
+#page-dashboard .bw-recent .bw-transactions p span b.expense-title,
+#page-dashboard .bw-recent #recentList p span b,
+#page-dashboard .bw-recent #recentList .income-title,
+#page-dashboard .bw-recent #recentList .expense-title{
+  color:#172033!important;
+  font-weight:750!important;
+}
+#page-dashboard .bw-recent .bw-transactions p span small,
+#page-dashboard .bw-recent #recentList p span small{
+  color:#8a91a3!important;
+  font-weight:550!important;
+}
+/* Keep amounts semantic and easy to scan. */
+#page-dashboard .bw-recent .bw-transactions p>strong,
+#page-dashboard .bw-recent #recentList p>strong{
+  font-weight:800!important;
+  letter-spacing:-.15px;
+}
+#page-dashboard .bw-recent .bw-transactions p>strong.plus,
+#page-dashboard .bw-recent #recentList p>strong.plus,
+#page-dashboard .bw-recent #recentList .amount-income{
+  color:#14966d!important;
+}
+#page-dashboard .bw-recent .bw-transactions p>strong:not(.plus),
+#page-dashboard .bw-recent #recentList p>strong:not(.plus){
+  color:#cf5369!important;
+}
+#page-dashboard .bw-recent .bw-transactions p,
+#page-dashboard .bw-recent #recentList p{
+  align-items:center!important;
+}
