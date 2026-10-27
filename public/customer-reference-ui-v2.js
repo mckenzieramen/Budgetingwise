@@ -1,4 +1,4 @@
-/* Budgetingwise Reference UI Loader V14 — premium rebuild is the final customer visual authority. */
+/* Budgetingwise Reference UI Loader V15 — unified product shell is final across all customer pages. */
 import './customer-reference-pages-v3.js?v=reference-pages-v5';
 import './customer-reference-data-v3.js?v=reference-data-v4';
 import './customer-reference-plan-v3.js?v=reference-plan-v4';
@@ -16,7 +16,8 @@ const styles=[
  ['bwCustomerPictureDashboardV1','./customer-picture-dashboard-v1.css?v=dashboard-picture-v1'],
  ['bwCustomerLayoutRecoveryV2','./customer-layout-recovery-v2.css?v=layout-recovery-v2'],
  ['bwCustomerUiRecoveryV1','./customer-ui-recovery-v1.css?v=ui-recovery-v2'],
- ['bwCustomerPremiumRebuildV3','./customer-premium-rebuild-v3.css?v=premium-rebuild-v3']
+ ['bwCustomerPremiumRebuildV3','./customer-premium-rebuild-v3.css?v=premium-rebuild-v3'],
+ ['bwCustomerProductShellV1','./customer-product-shell-v1.css?v=product-shell-v1']
 ];
 function attachStyles(){for(const [id,href] of styles){let link=document.getElementById(id);if(!link){link=document.createElement('link');link.id=id;link.rel='stylesheet';link.href=href;document.head.appendChild(link)}else document.head.appendChild(link)}}
 attachStyles();
