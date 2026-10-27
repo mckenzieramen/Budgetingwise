@@ -1,0 +1,101 @@
+/* Budgetingwise Product Shell V1 — cohesive application-wide visual system. */
+#dashboardView{--app-bg:#f5f7fb;--card:#fff;--line:#e5eaf1;--ink:#162038;--muted:#748096;--green:#0aa66b;--green-soft:#e9f8f2;--blue:#3b82f6;--red:#e94f64;--amber:#e8a31b;font-family:Manrope,system-ui,sans-serif!important;background:var(--app-bg)!important;color:var(--ink)!important}
+#dashboardView .premium-content{padding:32px 36px 64px!important}
+#dashboardView .page{max-width:1360px!important;margin:0 auto!important}
+#dashboardView .page>.section-heading{margin-bottom:24px!important;align-items:center!important}
+#dashboardView .page>.section-heading h2{font-size:30px!important;letter-spacing:-.04em!important;font-weight:800!important}
+#dashboardView .page>.section-heading p{font-size:13px!important;margin-top:7px!important}
+#dashboardView :is(.premium-panel,.goal-card,.bw-settings-card,.account-panel,.bw-intelligence-card,.bw-income-profile,.bw-plan-feature){border:1px solid var(--line)!important;border-radius:16px!important;background:#fff!important;box-shadow:0 8px 28px rgba(26,39,64,.045)!important}
+#dashboardView .premium-panel-head{padding:18px 20px!important;border-bottom:1px solid #edf1f5!important}
+#dashboardView .premium-panel-head h3{font-size:14px!important;font-weight:800!important}
+#dashboardView .premium-panel-head small{font-size:10px!important;color:var(--muted)!important}
+#dashboardView :is(input,select,textarea){min-height:44px!important;padding:0 13px!important;border-radius:10px!important}
+#dashboardView button.primary{min-height:42px!important;padding:0 18px!important}
+
+/* Transactions — real product workspace */
+#page-transactions .bw-reference-filterbar{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;margin-bottom:14px!important;padding:8px!important;background:#fff!important;border:1px solid var(--line)!important;border-radius:14px!important;box-shadow:0 5px 18px rgba(26,39,64,.035)!important}
+#page-transactions .tx-tabs{display:flex!important;gap:4px!important;padding:3px!important;background:#f4f6f9!important;border-radius:10px!important}
+#page-transactions .tx-tab{min-height:34px!important;padding:0 15px!important;border:0!important;border-radius:8px!important;background:transparent!important;color:#6e788c!important;font-size:11px!important;font-weight:700!important}
+#page-transactions .tx-tab.active{background:#fff!important;color:#07895a!important;box-shadow:0 2px 7px rgba(30,45,70,.08)!important}
+#page-transactions .transaction-toolbar{display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important;justify-content:flex-end!important}
+#page-transactions .transaction-toolbar :is(select,.tx-search){height:38px!important;min-height:38px!important}
+#page-transactions .tx-search{display:flex!important;align-items:center!important;gap:7px!important;min-width:220px!important;padding:0 10px!important;border:1px solid var(--line)!important;border-radius:9px!important;background:#fff!important}
+#page-transactions .tx-search input{border:0!important;min-height:34px!important;padding:0!important}
+#page-transactions .tx-panel{overflow:hidden!important}
+#page-transactions .table-wrap{min-height:430px!important;overflow:auto!important}
+#page-transactions table{width:100%!important;border-collapse:collapse!important}
+#page-transactions :is(th,td){padding:15px 18px!important;border-bottom:1px solid #edf1f5!important;font-size:11px!important;text-align:left!important}
+#page-transactions th{background:#fafbfc!important;color:#7b879a!important;font-size:9px!important;text-transform:uppercase!important;letter-spacing:.05em!important}
+#page-transactions .tx-footer{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:13px 18px!important;border-top:1px solid var(--line)!important;font-size:10px!important;color:var(--muted)!important}
+
+/* Analytics */
+#page-analytics .bw-reference-analytics-kpis{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;margin-bottom:16px!important}
+#page-analytics .bw-reference-analytics-kpis article{min-height:118px!important;padding:20px!important;border:1px solid var(--line)!important;border-radius:15px!important;background:#fff!important;box-shadow:0 7px 24px rgba(26,39,64,.04)!important}
+#page-analytics .bw-reference-analytics-kpis span{font-size:10px!important;color:var(--muted)!important}
+#page-analytics .bw-reference-analytics-kpis strong{display:block!important;margin:10px 0 5px!important;font-size:25px!important;letter-spacing:-.03em!important}
+#page-analytics .bw-reference-analytics-kpis small{font-size:9px!important;color:#8b96a8!important}
+#page-analytics .bw-reference-analytics-grid{display:grid!important;gap:16px!important;margin-bottom:16px!important}
+#page-analytics .bw-reference-analytics-top{grid-template-columns:minmax(0,1.45fr) minmax(300px,.72fr)!important}
+#page-analytics .bw-reference-analytics-bottom{grid-template-columns:1fr 1fr!important}
+#page-analytics .bw-reference-analytics-grid>.premium-panel{min-height:330px!important}
+#page-analytics :is(.earnings-chart,.bw-reference-monthly-trend){min-height:235px!important;padding:18px!important}
+#page-analytics .bw-reference-analytics-donut{min-height:260px!important;padding:22px!important;display:grid!important;place-items:center!important}
+
+/* Financial Plan */
+#page-plan #bwPlanOverviewMount{display:block!important}
+#page-plan .bw-plan-kpis{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;margin-bottom:16px!important}
+#page-plan .bw-plan-kpis>*{min-height:112px!important;padding:18px!important;border-radius:15px!important;background:#fff!important;border:1px solid var(--line)!important;box-shadow:0 7px 24px rgba(26,39,64,.04)!important}
+#page-plan .bw-income-profile{margin:0 0 16px!important;padding:20px!important}
+#page-plan .bw-income-profile form{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;align-items:end!important}
+#page-plan .bw-plan-layout{display:grid!important;grid-template-columns:minmax(300px,.8fr) minmax(0,1.2fr)!important;gap:16px!important;align-items:start!important}
+#page-plan .bw-planning-premium-grid{display:grid!important;grid-template-columns:1.1fr .9fr!important;gap:16px!important;margin-top:16px!important}
+#page-plan :is(.bw-plan-feature,.bw-category-budget-card,.bw-upcoming-bills-card,.bw-affordability-card){padding:20px!important}
+
+/* Goals */
+#page-savings .goal-tabs{display:inline-flex!important;gap:4px!important;margin:0 0 18px!important;padding:4px!important;border-radius:11px!important;background:#edf1f5!important}
+#page-savings .goal-tab{min-height:36px!important;padding:0 17px!important;border:0!important;border-radius:8px!important;background:transparent!important;color:#707b8f!important;font-size:11px!important;font-weight:750!important}
+#page-savings .goal-tab.active{background:#fff!important;color:#07895a!important;box-shadow:0 2px 8px rgba(30,45,70,.08)!important}
+#page-savings .goal-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}
+#page-savings .goal-card{min-height:210px!important;padding:21px!important}
+
+/* AI Insights */
+#page-insights .bw-insight-feed{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;margin-bottom:16px!important}
+#page-insights .bw-insight-feed article{min-height:135px!important;padding:17px!important;border:1px solid var(--line)!important;border-radius:14px!important;background:#fff!important;box-shadow:0 6px 20px rgba(26,39,64,.04)!important}
+#page-insights .bw-insight-feed article>span{display:block!important;margin-bottom:12px!important;color:var(--green)!important}
+#page-insights .bw-insight-feed strong{font-size:11px!important}
+#page-insights .bw-insight-feed p{font-size:10px!important;line-height:1.55!important}
+#page-insights .bw-intelligence-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px!important;margin-bottom:16px!important}
+#page-insights .bw-intelligence-card{min-height:280px!important;padding:22px!important}
+#page-insights .bw-reference-recommendations{min-height:190px!important}
+
+/* Settings — remove obsolete theme presentation, keep a useful account page */
+#page-settings{max-width:1120px!important}
+#page-settings #bwSettingsMount:empty{display:none!important}
+#page-settings .account-panel{margin-bottom:16px!important}
+#page-settings .settings{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:0!important;padding:0 20px 18px!important}
+#page-settings .settings>div{padding:17px 0!important;border-bottom:1px solid #edf1f5!important}
+#page-settings .settings>div:nth-child(odd){padding-right:22px!important}
+#page-settings .settings>div:nth-child(even){padding-left:22px!important;border-left:1px solid #edf1f5!important}
+#page-settings .settings span{display:block!important;margin-bottom:6px!important;font-size:9px!important;color:var(--muted)!important}
+#page-settings .settings strong{font-size:12px!important}
+#page-settings .bw-fixed-experience{display:none!important}
+
+@media(max-width:1100px){
+ #dashboardView .premium-content{padding:24px 22px 50px!important}
+ #page-analytics .bw-reference-analytics-kpis,#page-plan .bw-plan-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #page-insights .bw-insight-feed{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #page-plan .bw-plan-layout,#page-plan .bw-planning-premium-grid{grid-template-columns:1fr!important}
+}
+@media(max-width:760px){
+ #dashboardView .premium-content{padding:18px 14px 38px!important}
+ #dashboardView .page>.section-heading{align-items:flex-start!important;gap:14px!important}
+ #dashboardView .page>.section-heading h2{font-size:24px!important}
+ #page-transactions .bw-reference-filterbar{display:grid!important;gap:10px!important}
+ #page-transactions .tx-tabs{overflow-x:auto!important}
+ #page-transactions .transaction-toolbar{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}
+ #page-transactions .tx-search{grid-column:1/-1!important;min-width:0!important}
+ #page-analytics .bw-reference-analytics-kpis,#page-plan .bw-plan-kpis,#page-insights .bw-insight-feed,#page-insights .bw-intelligence-grid,#page-savings .goal-grid,#page-analytics .bw-reference-analytics-top,#page-analytics .bw-reference-analytics-bottom{grid-template-columns:1fr!important}
+ #page-plan .bw-income-profile form{grid-template-columns:1fr!important}
+ #page-settings .settings{grid-template-columns:1fr!important}
+ #page-settings .settings>div{padding:15px 0!important;border-left:0!important}
+}
