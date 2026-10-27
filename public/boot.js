@@ -42,7 +42,7 @@ customerBootstrapPromise=(async()=>{
     ['./dashboard-financial-chart-v1.js?v=dashboard-chart-v4','Dashboard chart'],
     ['./financial-data-authority-v1.js?v=financial-authority-v1','Financial data authority'],
     ['./customer-insights-intelligence-v1.js?v=insights-intelligence-v1','Insights intelligence'],
-    ['./customer-financial-plan-v1.js?v=financial-plan-v9','Financial Plan'],
+    ['./customer-financial-plan-v1.js?v=financial-plan-v10','Financial Plan'],
     ['./customer-salary-profile-v1.js?v=salary-profile-v1','Salary profile'],
     ['./customer-financial-snapshot-v1.js?v=financial-snapshot-v1','Financial snapshot'],
     ['./customer-planning-assistant-v1.js?v=planning-assistant-v1','Planning assistant'],
