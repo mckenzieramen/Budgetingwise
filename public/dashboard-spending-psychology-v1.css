@@ -1,0 +1,30 @@
+/* Dashboard transaction color psychology — calm, semantic, premium. */
+#page-dashboard .bw-recent .bw-transactions p{position:relative!important;padding:8px 9px 8px 12px!important;border-bottom:1px solid #edf1f5!important;border-radius:8px!important;transition:background .18s ease!important}
+#page-dashboard .bw-recent .bw-transactions p:hover{background:#f8fafc!important}
+#page-dashboard .bw-recent .bw-transactions b{color:#17233f!important;font-weight:700!important}
+#page-dashboard .bw-recent .bw-transactions small{color:#7a87a3!important}
+#page-dashboard .bw-recent .bw-transactions strong{color:#52617e!important;font-weight:800!important}
+#page-dashboard .bw-recent .bw-transactions strong.plus{color:#0b9f72!important}
+/* Spending is intentionally calm: category names stay neutral, while amounts use category-aware accents. */
+#page-dashboard .bw-recent .bw-transactions p:has(small:nth-child(1)){color:inherit}
+#page-dashboard .bw-recent .bw-transactions p:has(small){border-left:3px solid transparent!important}
+#page-dashboard .bw-recent .bw-transactions p:has(small:not(:empty)){background:#fff!important}
+#page-dashboard .bw-recent .bw-transactions p:has(small){box-shadow:none!important}
+#page-dashboard .bw-recent .bw-transactions p:has(small){margin-bottom:1px!important}
+#page-dashboard .bw-recent .bw-transactions p:has(small){--tx-accent:#94a3b8}
+#page-dashboard .bw-recent .bw-transactions p:has(small){border-left-color:var(--tx-accent)!important}
+#page-dashboard .bw-recent .bw-transactions p:has(small){padding-left:10px!important}
+#page-dashboard .bw-recent .bw-transactions p:has(small){color:#17233f!important}
+/* Amount classes supplied by the dashboard keep income green. Non-income amounts are softened from alarm-red to controlled spending tones. */
+#page-dashboard .bw-recent .bw-transactions strong:not(.plus){color:#b65b54!important}
+#page-dashboard .bw-recent .bw-transactions p:nth-child(2) strong:not(.plus){color:#d07a36!important}
+#page-dashboard .bw-recent .bw-transactions p:nth-child(3) strong:not(.plus){color:#4f78a8!important}
+#page-dashboard .bw-recent .bw-transactions p:nth-child(4) strong:not(.plus){color:#6b63b5!important}
+#page-dashboard .bw-recent .bw-transactions p:nth-child(5) strong:not(.plus){color:#b76b54!important}
+#page-dashboard .bw-recent .bw-transactions p:nth-child(2){--tx-accent:#f0b35e}
+#page-dashboard .bw-recent .bw-transactions p:nth-child(3){--tx-accent:#75a4d4}
+#page-dashboard .bw-recent .bw-transactions p:nth-child(4){--tx-accent:#9188d5}
+#page-dashboard .bw-recent .bw-transactions p:nth-child(5){--tx-accent:#d89a7e}
+#page-dashboard .bw-recent .bw-transactions p:has(strong.plus){--tx-accent:#52c99d;background:#fbfefc!important}
+#page-dashboard .bw-recent .bw-transactions p:has(strong.plus) b{color:#167d61!important}
+@media(max-width:900px){#page-dashboard .bw-recent .bw-transactions p{padding:10px 8px 10px 11px!important}}
