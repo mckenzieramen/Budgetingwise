@@ -1,0 +1,20 @@
+/* Premium dashboard logos + Recent Transactions visual system. */
+#page-dashboard .bw-premium-icon,#page-dashboard .bw-summary-icon,#page-dashboard .bw-dynamic-icon,#page-dashboard .bw-tx-premium-icon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.78),0 4px 12px rgba(34,46,86,.07)!important}
+#page-dashboard .bw-premium-icon svg,#page-dashboard .bw-summary-icon svg,#page-dashboard .bw-dynamic-icon svg,#page-dashboard .bw-tx-premium-icon svg{stroke-width:1.85!important}
+#page-dashboard .bw-recent #recentList{display:flex!important;flex-direction:column!important;gap:0!important}
+#page-dashboard .bw-recent #recentList p{display:grid!important;grid-template-columns:34px minmax(0,1fr) auto!important;gap:10px!important;align-items:center!important;min-height:52px!important;margin:0!important;padding:8px 4px!important;border-bottom:1px solid #eef1f6!important;background:transparent!important}
+#page-dashboard .bw-recent #recentList p:last-child{border-bottom:0!important}
+#page-dashboard .bw-recent #recentList p>span{min-width:0!important}
+#page-dashboard .bw-recent #recentList p>span>b{display:block!important;color:#172033!important;font-size:10px!important;font-weight:750!important;line-height:1.25!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#page-dashboard .bw-recent #recentList p>span>small{display:block!important;margin-top:3px!important;color:#8a91a3!important;font-size:7.5px!important;font-weight:550!important;line-height:1.25!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#page-dashboard .bw-recent #recentList p>strong{font-size:10.5px!important;font-weight:800!important;white-space:nowrap!important;letter-spacing:-.1px!important}
+#page-dashboard .bw-tx-premium-icon{width:32px!important;height:32px!important;border-radius:10px!important;display:grid!important;place-items:center!important;flex:0 0 32px!important}
+#page-dashboard .bw-tx-premium-icon svg{width:17px!important;height:17px!important}
+#page-dashboard .bw-tx-premium-icon.income{background:#eafaf4!important;color:#169b70!important}.bw-tx-premium-icon.food{background:#fff3e8!important;color:#e88732!important}.bw-tx-premium-icon.bills{background:#fff0f3!important;color:#df5871!important}.bw-tx-premium-icon.shopping{background:#f1edff!important;color:#704cf0!important}.bw-tx-premium-icon.transport{background:#eaf5ff!important;color:#368ce8!important}.bw-tx-premium-icon.savings{background:#eeeaff!important;color:#6544e9!important}.bw-tx-premium-icon.health{background:#eafaf4!important;color:#24ae7f!important}.bw-tx-premium-icon.other{background:#f1f3f7!important;color:#68758f!important}
+/* Keep labels neutral; color is reserved for money direction. */
+#page-dashboard .bw-recent #recentList .income-title,#page-dashboard .bw-recent #recentList .expense-title{color:#172033!important}
+#page-dashboard .bw-recent #recentList p>strong.plus,#page-dashboard .bw-recent #recentList .amount-income{color:#14966d!important}
+#page-dashboard .bw-recent #recentList p>strong:not(.plus){color:#cf5369!important}
+/* More refined section/category logo containers. */
+#page-dashboard .bw-premium-icon{border-radius:9px!important;background-clip:padding-box!important}#page-dashboard .bw-dynamic-icon{border-radius:10px!important}
+@media(max-width:800px){#page-dashboard .bw-recent #recentList p{grid-template-columns:36px minmax(0,1fr) auto!important;min-height:56px!important;padding:9px 3px!important}.bw-tx-premium-icon{width:34px!important;height:34px!important}}
