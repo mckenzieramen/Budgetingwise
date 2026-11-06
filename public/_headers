@@ -58,3 +58,8 @@
   Cache-Control: no-cache, no-store, must-revalidate
 /customer-insights-layout-v1.js
   Cache-Control: no-cache, no-store, must-revalidate
+
+/dashboard-desktop-polish-v2.css
+  Cache-Control: no-cache, no-store, must-revalidate
+/customer-dashboard-picture-v1.js
+  Cache-Control: no-cache, no-store, must-revalidate
