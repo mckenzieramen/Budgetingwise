@@ -10,8 +10,8 @@
 #dashboardView .sidebar-nav .nav-btn.active{background:#eee9ff!important;color:#623cec!important}
 #dashboardView .sidebar-bottom:before{width:188px!important;min-height:130px!important;font-size:11px!important;padding:18px!important;background:linear-gradient(135deg,#f7f5ff,#fff)!important;line-height:1.6!important}
 #dashboardView .premium-main,#dashboardView .premium-content{height:auto!important;min-height:100vh!important;overflow:visible!important;background:#f5f6fa!important;padding:0!important}
-#dashboardView #page-dashboard.bw-approved-dashboard{height:auto!important;min-height:100vh!important;overflow:visible!important;padding:32px!important;background:#f5f6fa!important;max-width:1800px!important;margin:auto!important}
-#page-dashboard.bw-approved-dashboard .bw-dashboard-grid{height:auto!important;grid-template-columns:minmax(0,1fr) 300px!important;gap:24px!important;align-items:start!important}
+#dashboardView #page-dashboard.bw-approved-dashboard{height:auto!important;min-height:100vh!important;overflow:visible!important;padding:32px!important;background:#f5f6fa!important;max-width:none!important;margin:0!important}
+#page-dashboard.bw-approved-dashboard .bw-dashboard-grid{height:auto!important;grid-template-columns:minmax(0,1fr) clamp(300px,23%,400px)!important;gap:24px!important;align-items:start!important}
 #page-dashboard.bw-approved-dashboard .bw-dashboard-center{display:grid!important;grid-template-rows:auto auto auto auto!important;gap:24px!important;min-width:0!important}
 #page-dashboard.bw-approved-dashboard .bw-greeting{min-height:72px!important;height:auto!important;gap:16px!important}
 #page-dashboard.bw-approved-dashboard .bw-greeting h1{font-size:28px!important;line-height:1.25!important;letter-spacing:-1px!important}
@@ -108,11 +108,36 @@
 #page-dashboard.bw-approved-dashboard .bw-summary{padding:20px 16px!important;gap:12px!important}
 #page-dashboard.bw-approved-dashboard .bw-summary strong{font-size:23px!important}
 #page-dashboard.bw-approved-dashboard .bw-chart-grid{grid-template-columns:minmax(0,1.4fr) minmax(330px,1fr)!important}
-#page-dashboard.bw-approved-dashboard .bw-spending{display:block!important;height:350px!important}
+#page-dashboard.bw-approved-dashboard .bw-spending{display:block!important;height:clamp(350px,32vh,440px)!important}
 #page-dashboard.bw-approved-dashboard .bw-donut{width:140px!important;height:140px!important;margin:14px auto!important}
 #page-dashboard.bw-approved-dashboard .bw-legend p{padding:6px 0!important;font-size:11px!important}
-#page-dashboard.bw-approved-dashboard .bw-bottom-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)!important}
-#page-dashboard.bw-approved-dashboard .bw-health{grid-column:1/-1!important}
+#page-dashboard.bw-approved-dashboard .bw-bottom-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(220px,.7fr)!important}
+#page-dashboard.bw-approved-dashboard .bw-health{grid-column:auto!important}
+}
+/* Wide desktop: fill the available canvas with readable, balanced sections. */
+@media(min-width:1600px){
+#dashboardView .premium-shell{width:100%!important;max-width:none!important}
+#dashboardView #page-dashboard.bw-approved-dashboard{padding:32px 36px!important;width:100%!important}
+#page-dashboard.bw-approved-dashboard .bw-dashboard-grid{gap:24px!important}
+#page-dashboard.bw-approved-dashboard .bw-balance-card{height:clamp(350px,32vh,440px)!important}
+#page-dashboard.bw-approved-dashboard .bw-line-chart{height:calc(100% - 76px)!important}
+#page-dashboard.bw-approved-dashboard .bw-summary:not(.balance){min-height:112px!important;padding:20px!important}
+#page-dashboard.bw-approved-dashboard .bw-summary:not(.balance) strong{font-size:26px!important}
+#page-dashboard.bw-approved-dashboard .bw-summary:not(.balance) small{font-size:12px!important}
+#page-dashboard.bw-approved-dashboard .bw-summary:not(.balance) em{font-size:11px!important}
+#page-dashboard.bw-approved-dashboard .bw-card h3{font-size:16px!important}
+#page-dashboard.bw-approved-dashboard .bw-card header p,#page-dashboard.bw-approved-dashboard .bw-card header button{font-size:12px!important}
+#page-dashboard.bw-approved-dashboard .bw-legend p{font-size:13px!important;padding:9px 0!important}
+#page-dashboard.bw-approved-dashboard .bw-donut{width:160px!important;height:160px!important}
+#page-dashboard.bw-approved-dashboard .bw-bottom-grid>.bw-card{min-height:300px!important}
+#page-dashboard.bw-approved-dashboard .bw-health-ring{width:130px!important;margin:22px auto!important}
+#page-dashboard.bw-approved-dashboard .bw-health>p{font-size:12px!important}
+#page-dashboard.bw-approved-dashboard .bw-right-rail>.bw-card{padding:24px!important}
+#page-dashboard.bw-approved-dashboard .bw-bills header h3{font-size:14px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-bill-row strong,#page-dashboard.bw-approved-dashboard .bw-dash-bill-row>b{font-size:14px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-bill-row small{font-size:12px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-row strong{font-size:14px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-row small{font-size:12px!important}
 }
 /* Keep goal titles, amounts and progress separated on smaller screens too. */
 @media(max-width:1100px){
