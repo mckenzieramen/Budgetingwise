@@ -1,23 +1,96 @@
-/* Budgetingwise Dashboard desktop polish v2 — readable 100% zoom, premium proportions. */
-@media (min-width:1101px){
-#dashboardView .premium-shell{grid-template-columns:210px minmax(0,1fr)!important}
-#dashboardView .premium-sidebar{width:210px!important;padding:18px 15px!important}
-#dashboardView .sidebar-logo{padding:0 8px!important;margin-bottom:14px!important}
+/* Customer dashboard: readable typography and natural document flow. */
+@media(min-width:1101px){
+#dashboardView .premium-shell{grid-template-columns:224px minmax(0,1fr)!important;height:auto!important;min-height:100vh!important;overflow:visible!important;background:#f5f6fa!important}
+#dashboardView .premium-sidebar{position:sticky!important;top:0!important;width:224px!important;height:100vh!important;padding:28px 18px!important;border-radius:0!important;background:#fff!important}
+#dashboardView .sidebar-logo{height:48px!important;margin-bottom:34px!important;gap:10px!important;flex-direction:row!important}
+#dashboardView .sidebar-logo strong{font-size:13px!important;letter-spacing:.02em!important}
 #dashboardView .sidebar-logo img{width:34px!important;height:34px!important}
-#dashboardView .sidebar-logo strong{font-size:14px!important;letter-spacing:.2px!important}
-#dashboardView .sidebar-nav{gap:5px!important}
-#dashboardView .sidebar-nav .nav-btn{width:180px!important;height:46px!important;padding:0 13px!important;border-radius:12px!important;font-size:12px!important;gap:12px!important}
-#dashboardView .sidebar-nav .nav-btn span{font-size:17px!important;width:24px!important}
-#dashboardView .sidebar-bottom:before{width:180px!important;min-height:118px!important;padding:13px!important;font-size:9px!important;line-height:1.5!important;border-radius:13px!important}
-#page-dashboard.bw-approved-dashboard{padding:14px 16px 15px!important}
-.bw-dashboard-grid{grid-template-columns:minmax(0,1fr) 292px!important;gap:12px!important;height:calc(100vh - 28px)!important}
-.bw-dashboard-center{grid-template-rows:62px 82px minmax(250px,1.12fr) minmax(218px,.92fr)!important;gap:11px!important}
-.bw-greeting h1{font-size:24px!important;letter-spacing:-.65px!important}.bw-greeting p{font-size:11px!important}.bw-date strong{font-size:9px!important}.bw-date small{font-size:8px!important}
-.bw-summary-row{gap:9px!important}.bw-summary{height:82px!important;padding:11px 12px!important;gap:10px!important;border-radius:13px!important}.bw-summary-icon{width:38px!important;height:38px!important;flex-basis:38px!important}.bw-summary small{font-size:8px!important}.bw-summary strong{font-size:16px!important}.bw-summary em{font-size:7.5px!important}
-.bw-chart-grid{grid-template-columns:minmax(0,1.72fr) minmax(285px,.98fr)!important;gap:11px!important}.bw-balance-card,.bw-spending{padding:13px!important}.bw-card h3{font-size:11px!important}.bw-card header p{font-size:8px!important}.bw-card header button{font-size:8px!important}.bw-donut{width:min(126px,43%)!important;margin:8px auto 5px!important}.bw-donut strong{font-size:14px!important}.bw-legend p{font-size:7.5px!important;padding:2px 0!important}
-.bw-bottom-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(190px,.66fr)!important;gap:11px!important}.bw-bottom-grid>.bw-card{padding:12px!important}.bw-transactions p{min-height:45px!important;padding:6px 0!important}.bw-transactions b{font-size:9px!important}.bw-transactions small{font-size:7.5px!important}.bw-transactions strong{font-size:10px!important}.budget-row{margin-top:10px!important}.budget-row p{font-size:9px!important}.budget-row>small{font-size:7.5px!important}.bw-health-ring{width:104px!important;margin:9px auto 6px!important}.bw-health>p{font-size:7.5px!important}
-.bw-right-rail{grid-template-rows:minmax(210px,.92fr) minmax(235px,1.02fr) minmax(135px,.58fr)!important;gap:11px!important}.bw-right-rail>.bw-card{padding:12px!important}.bw-bills #bwDashUpcomingBills p{min-height:50px!important}.bw-bills b{font-size:9px!important}.bw-bills small{font-size:7.5px!important}.bw-bills strong{font-size:9px!important}.bw-afford form{margin-top:10px!important}.bw-afford label{font-size:8.5px!important;margin-bottom:7px!important}.bw-input,.bw-afford select{height:34px!important}.bw-primary{height:36px!important;font-size:11px!important}.bw-goals p{margin:7px 0!important}
+#dashboardView .sidebar-nav{gap:8px!important}
+#dashboardView .sidebar-nav .nav-btn{width:188px!important;min-height:48px!important;font-size:13px!important;padding:0 14px!important;box-shadow:none!important;border-radius:12px!important}
+#dashboardView .sidebar-nav .nav-btn.active{background:#eee9ff!important;color:#623cec!important}
+#dashboardView .sidebar-bottom:before{width:188px!important;min-height:130px!important;font-size:11px!important;padding:18px!important;background:linear-gradient(135deg,#f7f5ff,#fff)!important;line-height:1.6!important}
+#dashboardView .premium-main,#dashboardView .premium-content{height:auto!important;min-height:100vh!important;overflow:visible!important;background:#f5f6fa!important;padding:0!important}
+#dashboardView #page-dashboard.bw-approved-dashboard{height:auto!important;min-height:100vh!important;overflow:visible!important;padding:32px!important;background:#f5f6fa!important;max-width:1800px!important;margin:auto!important}
+#page-dashboard.bw-approved-dashboard .bw-dashboard-grid{height:auto!important;grid-template-columns:minmax(0,1fr) 300px!important;gap:24px!important;align-items:start!important}
+#page-dashboard.bw-approved-dashboard .bw-dashboard-center{display:grid!important;grid-template-rows:auto auto auto auto!important;gap:24px!important;min-width:0!important}
+#page-dashboard.bw-approved-dashboard .bw-greeting{min-height:72px!important;height:auto!important;gap:16px!important}
+#page-dashboard.bw-approved-dashboard .bw-greeting h1{font-size:28px!important;line-height:1.25!important;letter-spacing:-1px!important}
+#page-dashboard.bw-approved-dashboard .bw-greeting p{font-size:13px!important;line-height:1.6!important;margin-top:7px!important;color:#758099!important}
+#page-dashboard.bw-approved-dashboard .bw-date{padding:10px 12px!important;border-radius:12px!important;flex-shrink:0!important}
+#page-dashboard.bw-approved-dashboard .bw-date strong{font-size:11px!important}
+#page-dashboard.bw-approved-dashboard .bw-summary-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}
+#page-dashboard.bw-approved-dashboard .bw-summary{height:auto!important;min-height:120px!important;padding:22px!important;gap:16px!important;border-radius:18px!important;border:1px solid #e7e9f1!important;box-shadow:0 4px 16px #20254804!important}
+#page-dashboard.bw-approved-dashboard .bw-summary-icon{width:44px!important;height:44px!important;flex-basis:44px!important;border-radius:13px!important;box-shadow:none!important}
+#page-dashboard.bw-approved-dashboard .bw-summary small{font-size:12px!important;font-weight:600!important}
+#page-dashboard.bw-approved-dashboard .bw-summary strong{font-size:26px!important;letter-spacing:-.8px!important;line-height:1.3!important;margin:6px 0!important;font-variant-numeric:tabular-nums!important}
+#page-dashboard.bw-approved-dashboard .bw-summary em{font-size:10px!important;white-space:normal!important;line-height:1.5!important}
+#page-dashboard.bw-approved-dashboard .bw-card{border:1px solid #e7e9f1!important;border-radius:18px!important;box-shadow:0 4px 20px #20254804!important;background:#fff!important;overflow:hidden!important}
+#page-dashboard.bw-approved-dashboard .bw-card h3{font-size:14px!important;line-height:1.5!important;font-weight:800!important;display:flex!important;align-items:center!important;gap:8px!important}
+#page-dashboard.bw-approved-dashboard .bw-card header p{font-size:11px!important;line-height:1.6!important;margin-top:6px!important}
+#page-dashboard.bw-approved-dashboard .bw-card header button{font-size:10px!important;padding:8px 10px!important;white-space:nowrap!important;border-radius:8px!important}
+#page-dashboard.bw-approved-dashboard .bw-premium-icon{width:30px!important;height:30px!important;flex-shrink:0!important;border-radius:9px!important;box-shadow:none!important}
+#page-dashboard.bw-approved-dashboard .bw-chart-grid{grid-template-columns:minmax(0,1fr)!important;gap:24px!important}
+#page-dashboard.bw-approved-dashboard .bw-balance-card{height:350px!important;padding:24px!important}
+#page-dashboard.bw-approved-dashboard .bw-line-chart{height:250px!important;margin-top:20px!important;grid-template-columns:48px 1fr!important}
+#page-dashboard.bw-approved-dashboard .bw-y,#page-dashboard.bw-approved-dashboard .bw-x{font-size:10px!important}
+#page-dashboard.bw-approved-dashboard .bw-range button{min-width:36px!important;height:30px!important;padding:0!important;font-size:10px!important}
+#page-dashboard.bw-approved-dashboard .bw-spending{display:grid!important;grid-template-columns:180px minmax(0,1fr)!important;gap:20px!important;align-items:center!important;padding:24px!important;height:auto!important;min-height:260px!important}
+#page-dashboard.bw-approved-dashboard .bw-spending header{grid-column:1/-1!important}
+#page-dashboard.bw-approved-dashboard .bw-donut{width:160px!important;height:160px!important;margin:0 auto!important}
+#page-dashboard.bw-approved-dashboard .bw-donut strong{font-size:20px!important}
+#page-dashboard.bw-approved-dashboard .bw-donut small{font-size:8px!important}
+#page-dashboard.bw-approved-dashboard .bw-legend p{font-size:12px!important;padding:12px 0!important;gap:10px!important;align-items:center!important}
+#page-dashboard.bw-approved-dashboard .bw-legend small{font-size:10px!important;margin-left:6px!important;color:#8490a7!important}
+#page-dashboard.bw-approved-dashboard .bw-bottom-grid{grid-template-columns:1fr!important;gap:24px!important}
+#page-dashboard.bw-approved-dashboard .bw-bottom-grid>.bw-card{height:auto!important;min-height:220px!important;padding:24px!important}
+#page-dashboard.bw-approved-dashboard .bw-transactions{max-height:320px!important;margin-top:16px!important}
+#page-dashboard.bw-approved-dashboard #recentList p{min-height:64px!important;padding:14px 0!important;gap:16px!important}
+#page-dashboard.bw-approved-dashboard #recentList b{font-size:13px!important;color:#29344e!important}
+#page-dashboard.bw-approved-dashboard #recentList small{font-size:11px!important;margin-top:5px!important}
+#page-dashboard.bw-approved-dashboard #recentList strong{font-size:14px!important;white-space:nowrap!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-budget-row{padding:14px!important;margin-top:4px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-budget-row strong{font-size:13px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-budget-row small,#page-dashboard.bw-approved-dashboard .bw-dash-budget-row>b{font-size:11px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-budget-track{height:6px!important;margin-top:9px!important}
+#page-dashboard.bw-approved-dashboard .bw-health-ring{width:120px!important;margin:20px auto!important}
+#page-dashboard.bw-approved-dashboard .bw-health>p{font-size:12px!important;line-height:1.7!important;max-width:320px!important;margin:10px auto!important}
+#page-dashboard.bw-approved-dashboard .bw-right-rail{height:auto!important;display:flex!important;flex-direction:column!important;gap:24px!important;padding-top:96px!important}
+#page-dashboard.bw-approved-dashboard .bw-right-rail>.bw-card{width:100%!important;height:auto!important;min-height:0!important;padding:22px!important}
+#page-dashboard.bw-approved-dashboard .bw-right-rail header{flex-wrap:wrap!important;gap:10px!important}
+#page-dashboard.bw-approved-dashboard #bwDashUpcomingBills{margin-top:18px!important;gap:10px!important;max-height:340px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-bill-row{min-height:68px!important;padding:10px!important;gap:10px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-bill-row strong,#page-dashboard.bw-approved-dashboard .bw-dash-bill-row>b{font-size:12px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-bill-row small{font-size:10px!important;margin-top:5px!important}
+#page-dashboard.bw-approved-dashboard .bw-afford form{margin-top:22px!important}
+#page-dashboard.bw-approved-dashboard .bw-afford label{font-size:12px!important;margin-bottom:18px!important;line-height:1.6!important}
+#page-dashboard.bw-approved-dashboard .bw-input,#page-dashboard.bw-approved-dashboard .bw-afford select{height:44px!important;margin-top:7px!important;border-radius:10px!important}
+#page-dashboard.bw-approved-dashboard .bw-input input{font-size:14px!important;height:100%!important;min-width:0!important}
+#page-dashboard.bw-approved-dashboard .bw-primary{height:44px!important;font-size:12px!important;border-radius:10px!important;box-shadow:0 4px 12px #6338f51a!important}
+#page-dashboard.bw-approved-dashboard #bwDashAffordResult p{font-size:11px!important;line-height:1.7!important;margin-top:14px!important}
+#page-dashboard.bw-approved-dashboard #bwDashActiveGoals{margin-top:16px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-row{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:12px!important;align-items:center!important;padding:16px 0!important;border-bottom:1px solid #edf0f6!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-row strong{display:block!important;font-size:13px!important;line-height:1.5!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-row small{display:block!important;font-size:11px!important;color:#7b859a!important;margin-top:5px!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-row>b{font-size:12px!important;color:#6540df!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-track{display:block!important;height:6px!important;background:#efedf8!important;border-radius:8px!important;margin-top:12px!important;overflow:hidden!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-track i{display:block!important;height:100%!important;background:#7755e8!important;border-radius:8px!important}
+#page-dashboard.bw-approved-dashboard button:focus-visible,#dashboardView .nav-btn:focus-visible{outline:3px solid #b4a2fc!important;outline-offset:3px!important}
 }
-@media (min-width:1101px) and (max-height:820px){
-#page-dashboard.bw-approved-dashboard{padding:10px 12px!important}.bw-dashboard-grid{height:calc(100vh - 20px)!important;gap:9px!important}.bw-dashboard-center{grid-template-rows:54px 72px minmax(224px,1.05fr) minmax(190px,.88fr)!important;gap:9px!important}.bw-greeting h1{font-size:22px!important}.bw-summary{height:72px!important;padding:8px 10px!important}.bw-summary-icon{width:34px!important;height:34px!important;flex-basis:34px!important}.bw-summary strong{font-size:14px!important}.bw-chart-grid,.bw-bottom-grid,.bw-right-rail{gap:9px!important}.bw-balance-card,.bw-spending,.bw-bottom-grid>.bw-card,.bw-right-rail>.bw-card{padding:10px!important}.bw-right-rail{grid-template-rows:minmax(190px,.9fr) minmax(215px,1fr) minmax(118px,.55fr)!important}.bw-donut{width:110px!important}.bw-health-ring{width:92px!important}.bw-transactions p{min-height:41px!important}.bw-bills #bwDashUpcomingBills p{min-height:44px!important}
+@media(min-width:1600px){
+#page-dashboard.bw-approved-dashboard .bw-summary-row{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+#page-dashboard.bw-approved-dashboard .bw-summary{padding:20px 16px!important;gap:12px!important}
+#page-dashboard.bw-approved-dashboard .bw-summary strong{font-size:23px!important}
+#page-dashboard.bw-approved-dashboard .bw-chart-grid{grid-template-columns:minmax(0,1.4fr) minmax(330px,1fr)!important}
+#page-dashboard.bw-approved-dashboard .bw-spending{display:block!important;height:350px!important}
+#page-dashboard.bw-approved-dashboard .bw-donut{width:140px!important;height:140px!important;margin:14px auto!important}
+#page-dashboard.bw-approved-dashboard .bw-legend p{padding:6px 0!important;font-size:11px!important}
+#page-dashboard.bw-approved-dashboard .bw-bottom-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)!important}
+#page-dashboard.bw-approved-dashboard .bw-health{grid-column:1/-1!important}
+}
+/* Keep goal titles, amounts and progress separated on smaller screens too. */
+@media(max-width:1100px){
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-row{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:12px!important;padding:12px 0!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-row strong,#page-dashboard.bw-approved-dashboard .bw-dash-goal-row small{display:block!important;line-height:1.6!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-track{height:6px!important;background:#efedf8!important;border-radius:8px!important;margin-top:8px!important;overflow:hidden!important}
+#page-dashboard.bw-approved-dashboard .bw-dash-goal-track i{display:block!important;height:100%!important;background:#7755e8!important}
 }
