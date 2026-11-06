@@ -146,3 +146,8 @@
 #page-dashboard.bw-approved-dashboard .bw-dash-goal-track{height:6px!important;background:#efedf8!important;border-radius:8px!important;margin-top:8px!important;overflow:hidden!important}
 #page-dashboard.bw-approved-dashboard .bw-dash-goal-track i{display:block!important;height:100%!important;background:#7755e8!important}
 }
+
+/* Financial health graph follows the same computed score as its numeric label. */
+#page-dashboard.bw-approved-dashboard .bw-health-ring{position:relative!important;background:conic-gradient(var(--health-color,#2bb58a) calc(var(--score,0) * 1%),#e9edf3 0)!important;border-radius:50%!important;isolation:isolate!important}
+#page-dashboard.bw-approved-dashboard .bw-health-ring:before,#page-dashboard.bw-approved-dashboard .bw-health-ring:after{content:none!important}
+#page-dashboard.bw-approved-dashboard .bw-health-ring>div{position:relative!important;z-index:1!important;width:79%!important;aspect-ratio:1!important;background:#fff!important;border-radius:50%!important}
