@@ -32,6 +32,56 @@ window.bwAnimateMetric = (node, target, format = money) => {
   };
   state.frame = requestAnimationFrame(tick);
 };
+const chartMarkup = new WeakMap();
+window.bwSetChartMarkup = (node, markup) => {
+  if (chartMarkup.get(node) === markup) return false;
+  chartMarkup.set(node, markup);
+  node.innerHTML = markup;
+  return true;
+};
+
+const ringStates = new WeakMap();
+window.bwAnimateRing = (node, segments, track, property) => {
+  if (!node) return;
+  const key = JSON.stringify([segments, track, property]);
+  const previous = ringStates.get(node);
+  if (previous?.key === key) return;
+  if (previous) cancelAnimationFrame(previous.frame);
+  const state = {key, coverage:previous?.coverage ?? 0};
+  ringStates.set(node, state);
+  const paint = coverage => {
+    state.coverage = coverage;
+    if (property) {
+      node.style.setProperty(property, String(coverage));
+      return;
+    }
+    let offset = 0;
+    const stops = segments.map(([color, size]) => {
+      const end = Math.min(100, offset + size * coverage / 100);
+      const stop = `${color} ${offset}% ${end}%`;
+      offset = end;
+      return stop;
+    });
+    stops.push(`${track} ${offset}% 100%`);
+    node.style.background = `conic-gradient(${stops.join(',')})`;
+  };
+  const target = property ? segments : segments.length ? 100 : 0;
+  const from = property ? state.coverage : 0;
+  if (!target || !node.getClientRects().length || reducedMotion.matches) {
+    paint(target);
+    return;
+  }
+  paint(from);
+  let start;
+  const tick = now => {
+    start ??= now;
+    const progress = Math.min(1,(now-start)/950);
+    paint(from+(target-from)*(1-(1-progress)**3));
+    if(progress<1) state.frame=requestAnimationFrame(tick);
+  };
+  state.frame=requestAnimationFrame(tick);
+};
+
 window.bwAnimateBars = (root, selector, vertical = true) => {
   if (!root?.getClientRects().length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   for (const bar of root.querySelectorAll(selector)) {
