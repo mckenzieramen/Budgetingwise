@@ -100,10 +100,6 @@
 #page-dashboard.bw-approved-dashboard .bw-legend small{font-size:8px!important;margin-left:5px!important}
 #page-dashboard.bw-approved-dashboard .bw-bottom-grid{display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)!important;gap:18px!important}
 #page-dashboard.bw-approved-dashboard .bw-bottom-grid>.bw-card{height:auto!important;min-height:250px!important;padding:18px!important}
-#page-dashboard.bw-approved-dashboard .bw-transactions{margin-top:10px!important;max-height:265px!important;overflow:auto!important}
-#page-dashboard.bw-approved-dashboard #recentList p{min-height:58px!important;padding:10px 0!important;gap:10px!important}
-#page-dashboard.bw-approved-dashboard #recentList b,#page-dashboard.bw-approved-dashboard #recentList strong{font-size:12px!important}
-#page-dashboard.bw-approved-dashboard #recentList small{font-size:10px!important;margin-top:4px!important}
 #page-dashboard.bw-approved-dashboard .bw-dash-budget-row{padding:11px!important;margin-top:4px!important;background:transparent!important;border:0!important}
 #page-dashboard.bw-approved-dashboard .bw-dash-budget-row strong{font-size:12px!important}
 #page-dashboard.bw-approved-dashboard .bw-dash-budget-row small,#page-dashboard.bw-approved-dashboard .bw-dash-budget-row>b{font-size:10px!important}
@@ -164,12 +160,7 @@
 #page-dashboard.bw-approved-dashboard .bw-greeting h1 #welcomeName{color:#172b20!important}
 #page-dashboard.bw-approved-dashboard .bw-greeting h1>span:last-child{background:transparent!important;border:0!important;box-shadow:none!important}
 #page-dashboard.bw-approved-dashboard .bw-date>b{background:#eef4e9!important;color:#005338!important}
-#page-dashboard.bw-approved-dashboard .bw-recent #recentList>p{background:transparent!important;border-color:#e6e9df!important}
-#page-dashboard.bw-approved-dashboard .bw-recent #recentList>p>span>b,
-#page-dashboard.bw-approved-dashboard .bw-recent #recentList>p>span>strong{color:#233b2a!important;-webkit-text-fill-color:#233b2a!important;font-size:12px!important}
 #page-dashboard.bw-approved-dashboard .bw-dash-budget-row.good .bw-dash-budget-track i{background:#27834e!important}
-#page-dashboard.bw-approved-dashboard .bw-transactions{scrollbar-color:#adc6aa transparent!important}
-#page-dashboard.bw-approved-dashboard .bw-transactions::-webkit-scrollbar-thumb{background:#adc6aa!important}
 #dashboardView .sidebar-nav .nav-btn span{filter:grayscale(1)!important}
 #dashboardView .sidebar-nav .nav-btn.active span{filter:grayscale(1) brightness(0) invert(1)!important}
 @media(min-width:1101px){
