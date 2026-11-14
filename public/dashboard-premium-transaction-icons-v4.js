@@ -11,7 +11,7 @@ function enhance() {
     const glyph = document.createElement('i');
     glyph.className = 'bw-tx-premium-icon';
     glyph.setAttribute('aria-hidden', 'true');
-    glyph.innerHTML = category && window.bwCategoryIcon ? window.bwCategoryIcon(category) : svg(kind(row));
+    glyph.innerHTML = category && window.bwCategoryIcon ? window.bwCategoryIcon(category,row.dataset.categoryIcon) : svg(kind(row));
     row.prepend(glyph);
   });
 }

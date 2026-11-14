@@ -22,3 +22,17 @@
 .bw-category-icon[data-tone="7"]{background:#eef1f5!important;color:#526077!important}
 .tx-cat .bw-tx-category-icon{display:inline-flex;margin-inline-end:6px;vertical-align:middle}
 .tx-cat .bw-tx-category-icon svg{width:15px;height:15px}
+
+#modal #bwCustomCategory[hidden]{display:none!important}
+#modal #bwCustomCategory{margin:14px 0 0;padding:14px;border:1px solid #dce6df;border-radius:14px;background:#f7faf7;color:#23372d;min-width:0}
+#modal #bwCustomCategory legend{padding:0 6px;font-size:13px;font-weight:700}
+#modal #bwCustomCategory label{font-size:12px!important;margin-bottom:4px}
+#modal #bwCustomCategoryName{width:100%;margin-bottom:12px}
+#modal .bw-category-icon-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(61px,1fr));gap:6px}
+#modal .bw-category-icon-options button{display:grid;justify-items:center;align-content:center;gap:4px;min-height:52px;border:1px solid #dce6df;border-radius:8px;background:#fff;color:#315344;font-size:10px}
+#modal .bw-category-icon-options button[aria-pressed=true]{border-color:#347561;background:#e6f2ec;color:#154b39;box-shadow:0 0 0 1px #347561}
+#modal .bw-category-icon-options svg{width:17px;height:17px;display:block}
+
+#modal label[hidden]:has(#txCategory){display:none!important}
+#modal #bwTransactionCategoryPicker,#modal #bwCustomCategory{grid-column:1/-1}
+#modal #bwTransactionCategoryPicker::before{content:"Category";display:block;margin-bottom:8px;color:#23372d;font-size:12px;font-weight:700}
