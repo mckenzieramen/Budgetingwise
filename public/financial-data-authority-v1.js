@@ -1,7 +1,8 @@
 /* Budgetingwise financial data authority V1 — one calculation source for all customer summaries and charts. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
-const money=n=>new Intl.NumberFormat('en-PH',{style:'currency',currency:'PHP',maximumFractionDigits:2}).format(Number(n)||0);
+const currency = new Intl.NumberFormat('en-PH', {style:'currency', currency:'PHP', maximumFractionDigits:2});
+const money = n => currency.format(Number(n)||0);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const budgetGroup=category=>{if(window.bwBudgetGroup)return window.bwBudgetGroup(category);const c=String(category||'');if(['Needs','Food & Dining','Transportation','Bills','Health','Education','Rent','Groceries','Utilities','Mobile Plan'].includes(c))return'Needs';if(['Wants','Shopping','Entertainment','Dining & Leisure','Travel','Others'].includes(c))return'Wants';if(c==='Savings'||/Fund$/.test(c)||c==='Investment')return'Savings';return'Other'};
 const validDate=t=>{const d=new Date(String(t?.date||'')+'T12:00:00');return Number.isFinite(d.getTime())?d:null};
@@ -9,7 +10,72 @@ function normalize(rows){return (Array.isArray(rows)?rows:[]).map(t=>({...t,amou
 function summarize(rows){const out={income:0,expense:0,savings:0,balance:0,count:rows.length,needs:0,wants:0,otherExpense:0};for(const t of rows){if(t.type==='income')out.income+=t.amount;else if(t.type==='savings')out.savings+=t.amount;else{out.expense+=t.amount;const g=budgetGroup(t.category);if(g==='Needs')out.needs+=t.amount;else if(g==='Wants')out.wants+=t.amount;else out.otherExpense+=t.amount}}out.balance=out.income-out.expense-out.savings;out.savingsRate=out.income?out.savings/out.income*100:0;return out}
 function setText(id,value){const n=$(id);if(n)n.textContent=value}
 function monthSeries(rows,year){const now=new Date(),limit=year===now.getFullYear()?now.getMonth():11,labels=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return Array.from({length:limit+1},(_,m)=>{const part=rows.filter(t=>{const d=validDate(t);return d&&d.getFullYear()===year&&d.getMonth()===m});return{label:labels[m],...summarize(part)}})}
-function renderSummary(rows){const s=summarize(rows);setText('incomeTotal',money(s.income));setText('expenseTotal',money(s.expense));setText('savingsTotal',money(s.savings));setText('remainingTotal',money(s.balance));setText('txIncome',money(s.income));setText('txExpense',money(s.expense));setText('txNet',money(s.balance));setText('txCount',String(s.count));setText('analyticsIncome',money(s.income));setText('analyticsExpense',money(s.expense));setText('analyticsSavingsRate',`${Math.round(s.savingsRate)}%`);const max=Math.max(s.needs,s.wants,s.savings,1);if($('needsBar'))$('needsBar').style.width=`${s.needs/max*100}%`;if($('wantsBar'))$('wantsBar').style.width=`${s.wants/max*100}%`;if($('savingsBar'))$('savingsBar').style.width=`${s.savings/max*100}%`;return s}
+const dashboardTotals = {
+  incomeTotal: 'income',
+  expenseTotal: 'expense',
+  savingsTotal: 'savings',
+  remainingTotal: 'balance'
+};
+const dashboard = $('page-dashboard');
+const dashboardView = $('dashboardView');
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let latestTotals;
+let animatedTotals;
+let animationFrame;
+let wasVisible = false;
+
+function syncDashboardTotals() {
+  const visible = dashboard && dashboardView &&
+    !dashboard.classList.contains('hidden') && !dashboardView.classList.contains('hidden');
+  if (!visible) {
+    cancelAnimationFrame(animationFrame);
+    wasVisible = false;
+    animatedTotals = undefined;
+    return;
+  }
+  if (!latestTotals) return;
+  if (wasVisible && dashboardTotalsMatch(animatedTotals, latestTotals)) return;
+
+  wasVisible = true;
+  const targets = latestTotals;
+  animatedTotals = targets;
+  cancelAnimationFrame(animationFrame);
+
+  const fields = Object.entries(dashboardTotals).map(([id, key]) => [$(id), targets[key]])
+    .filter(([node]) => node);
+  const paint = progress => {
+    for (const [node, value] of fields) {
+      const amount = Math.round(value * progress * 100) / 100;
+      node.textContent = money(amount || 0);
+    }
+  };
+  if (reducedMotion.matches || fields.every(([, value]) => value === 0)) {
+    paint(1);
+    return;
+  }
+
+  paint(0);
+  let start;
+  function tick(now) {
+    start ??= now;
+    const progress = Math.min((now - start) / 950, 1);
+    paint(1 - (1 - progress) ** 3);
+    if (progress < 1) animationFrame = requestAnimationFrame(tick);
+  }
+  animationFrame = requestAnimationFrame(tick);
+}
+
+function dashboardTotalsMatch(previous, next) {
+  return previous && Object.values(dashboardTotals).every(key => previous[key] === next[key]);
+}
+
+if (dashboard && dashboardView) {
+  const visibility = new MutationObserver(syncDashboardTotals);
+  for (const node of [dashboard, dashboardView]) {
+    visibility.observe(node, {attributes:true, attributeFilter:['class']});
+  }
+}
+function renderSummary(rows){const s=summarize(rows);latestTotals=s;syncDashboardTotals();setText('txIncome',money(s.income));setText('txExpense',money(s.expense));setText('txNet',money(s.balance));setText('txCount',String(s.count));setText('analyticsIncome',money(s.income));setText('analyticsExpense',money(s.expense));setText('analyticsSavingsRate',`${Math.round(s.savingsRate)}%`);const max=Math.max(s.needs,s.wants,s.savings,1);if($('needsBar'))$('needsBar').style.width=`${s.needs/max*100}%`;if($('wantsBar'))$('wantsBar').style.width=`${s.wants/max*100}%`;if($('savingsBar'))$('savingsBar').style.width=`${s.savings/max*100}%`;return s}
 function renderCategories(rows){const target=$('analyticsCategories');if(!target)return;const map=new Map();for(const t of rows){if(t.type!=='expense')continue;const key=String(t.category||'Others').trim()||'Others';map.set(key,(map.get(key)||0)+t.amount)}const entries=[...map].sort((a,b)=>b[1]-a[1]);const total=entries.reduce((n,x)=>n+x[1],0);target.innerHTML=entries.length?`<div class="bw-authority-categories">${entries.map(([name,value])=>`<div class="bw-authority-cat"><div><strong>${esc(name)}</strong><small>${total?Math.round(value/total*100):0}% of expenses</small></div><span>${money(value)}</span><i><b style="width:${total?value/total*100:0}%"></b></i></div>`).join('')}</div>`:'<p class="muted">No expense data yet.</p>'}
 function renderAnalyticsChart(rows){const target=$('analyticsChart');if(!target)return;const now=new Date(),year=now.getFullYear(),months=monthSeries(rows,year),max=Math.max(1,...months.flatMap(m=>[m.income,m.expense]));target.innerHTML=`<div class="bw-authority-month-chart" role="img" aria-label="Monthly income and expenses for ${year}">${months.map(m=>`<div class="bw-authority-month" title="${m.label} ${year}: Income ${money(m.income)}, Expenses ${money(m.expense)}"><div class="bw-authority-bars"><i class="income" style="height:${m.income?Math.max(6,m.income/max*100):1}%"></i><i class="expense" style="height:${m.expense?Math.max(6,m.expense/max*100):1}%"></i></div><small>${m.label}</small></div>`).join('')}</div>`}
 function renderInsights(summary){const scoreBase=summary.income?55+Math.min(25,summary.savingsRate*.7)+(summary.balance>=0?12:-12)-(summary.expense>summary.income?10:0):null;const score=scoreBase===null?null:Math.max(0,Math.min(100,Math.round(scoreBase)));if($('bwHealthScore'))setText('bwHealthScore',score===null?'—':String(score));if($('bwHealthLabel'))setText('bwHealthLabel',score===null?'Add income to calculate':score>=80?'Strong financial position':score>=65?'Healthy with room to grow':'Needs attention');if($('bwHealthDetail'))setText('bwHealthDetail','Calculated from the same income, expense, savings and balance data shown across this workspace.');if($('bwForecastValue'))setText('bwForecastValue',money(summary.balance));if($('bwForecastDetail'))setText('bwForecastDetail','Current available balance after recorded expenses and savings.');if($('bwInsightSavings'))setText('bwInsightSavings',summary.income?`Savings rate is ${Math.round(summary.savingsRate)}% (${money(summary.savings)} saved from ${money(summary.income)} income).`:'Add income and savings to calculate your savings rate.');if($('bwInsightText'))setText('bwInsightText',`Recorded cash flow: ${money(summary.income)} income − ${money(summary.expense)} expenses − ${money(summary.savings)} savings = ${money(summary.balance)} available balance.`)}
