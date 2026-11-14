@@ -1,5 +1,5 @@
 /* Budgetingwise Financial Plan reset — keep the navigation destination, leave page content blank. */
-import './customer-reference-ui-v2.js?v=reference-ui-balance-v19';
+import './customer-reference-ui-v2.js?v=reference-ui-balance-v20';
 (()=>{'use strict';
 const root=document.getElementById('dashboardView');
 const content=root?.querySelector('.premium-content');

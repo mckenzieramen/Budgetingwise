@@ -42,15 +42,23 @@ function renderBalanceRange(){
   const span=max-min||1;
   const x=index=>index*width/(points.length-1);
   const y=value=>height-8-(height-16)*(value-min)/span;
-  const path=points.map((point,index)=>`${index?'L':'M'}${x(index).toFixed(2)} ${y(point.balance).toFixed(2)}`).join(' ');
+  const path=points.reduce((line,point,index)=>{
+    const endX=x(index),endY=y(point.balance);
+    if(!index)return `M0 ${endY}`;
+    const startY=y(points[index-1].balance);
+    const midpoint=(x(index-1)+endX)/2;
+    return `${line} C${midpoint} ${startY} ${midpoint} ${endY} ${endX} ${endY}`;
+  },'');
   const axis=Array.from({length:5},(_,index)=>compact.format(max-(max-min)*index/4));
   const labels=[0,1,2,3,4].map(index=>dateLabel.format(points[Math.round(index*(points.length-1)/4)].date));
   box.innerHTML=`<div class="bw-balance-layout"><div class="bw-balance-values">${axis.map(label=>`<span>${label}</span>`).join('')}</div><div class="bw-balance-plot" tabindex="0" role="group" aria-label="Daily closing balance. Use left and right arrows to inspect."><svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="bwBalanceInteractiveFill" x2="0" y2="1"><stop stop-color="#137458" stop-opacity=".24"/><stop offset="100%" stop-color="#137458" stop-opacity=".035"/></linearGradient></defs><g class="bw-balance-series"><path fill="url(#bwBalanceInteractiveFill)" d="${path} L${width} ${height} L0 ${height} Z"/><path fill="none" stroke="#006448" stroke-width="2" vector-effect="non-scaling-stroke" d="${path}"/></g></svg><span class="bw-balance-guide" hidden></span><span class="bw-balance-dot" hidden></span><output class="bw-balance-tooltip" aria-live="off" hidden></output></div><div class="bw-balance-labels">${labels.map(label=>`<span>${label}</span>`).join('')}</div></div>`;
   const plot=box.querySelector('.bw-balance-plot'),series=plot.querySelector('.bw-balance-series');
   const guide=plot.querySelector('.bw-balance-guide'),dot=plot.querySelector('.bw-balance-dot'),tooltip=plot.querySelector('output');
-  let index=points.length-1,pending;
+  let index=points.length-1,pending,displayedIndex;
   function show(at,announce=false){
     index=Math.min(points.length-1,Math.max(0,at));
+    if(index===displayedIndex&&!announce)return;
+    displayedIndex=index;
     const point=points[index],position=x(index)/width*100;
     for(const node of [guide,dot,tooltip])node.hidden=false;
     guide.style.left=dot.style.left=position+'%';
@@ -61,14 +69,19 @@ function renderBalanceRange(){
   }
   function hide(){
     cancelAnimationFrame(pending);
+    displayedIndex=undefined;
     for(const node of [guide,dot,tooltip])node.hidden=true;
   }
-  plot.addEventListener('pointermove',event=>{
+  function inspectPointer(event){
     const bounds=plot.getBoundingClientRect();
+    if(!bounds.width)return;
     const at=Math.round((event.clientX-bounds.left)/bounds.width*(points.length-1));
     cancelAnimationFrame(pending);
     pending=requestAnimationFrame(()=>show(at));
-  });
+  }
+  plot.addEventListener('pointerdown',inspectPointer);
+  plot.addEventListener('pointermove',inspectPointer);
+  plot.addEventListener('pointercancel',hide);
   plot.addEventListener('pointerleave',hide);
   plot.addEventListener('blur',hide);
   plot.addEventListener('focus',()=>show(index,true));
@@ -106,7 +119,7 @@ balanceStyle.textContent=`
 .bw-balance-values,.bw-balance-labels{display:flex;justify-content:space-between;font-size:10px}
 .bw-balance-values{flex-direction:column;text-align:right;padding:3px 0}
 .bw-balance-labels{grid-column:2}
-.bw-balance-plot{position:relative;height:clamp(160px,22vw,220px);border-left:1px solid #dbe5dc;border-bottom:1px solid #dbe5dc;background:repeating-linear-gradient(to bottom,transparent 0,transparent calc(25% - 1px),#e9eee8 calc(25% - 1px),#e9eee8 25%)}
+.bw-balance-plot{position:relative;touch-action:pan-y;height:clamp(160px,22vw,220px);border-left:1px solid #dbe5dc;border-bottom:1px solid #dbe5dc;background:repeating-linear-gradient(to bottom,transparent 0,transparent calc(25% - 1px),#e9eee8 calc(25% - 1px),#e9eee8 25%)}
 #page-dashboard .bw-balance-plot svg{width:100%;height:100%!important;display:block}
 .bw-balance-guide,.bw-balance-dot,.bw-balance-tooltip{position:absolute;pointer-events:none}
 .bw-balance-plot [hidden]{display:none!important}
