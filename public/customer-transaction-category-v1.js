@@ -40,7 +40,6 @@ function render(preferred, chosenIcon) {
     const custom = document.createElement('fieldset');
     custom.id = 'bwCustomCategory';
     custom.innerHTML = `<legend>Custom category</legend><label for="bwCustomCategoryName">Category name</label><input id="bwCustomCategoryName" type="text" maxlength="60" placeholder="e.g. Pet care"><div class="bw-category-icon-options" role="group" aria-label="Choose an icon">${customIcons.map(([value,label])=>`<button type="button" data-icon="${value}" aria-pressed="false">${icon(value)}<span>${label}</span></button>`).join('')}</div>`;
-    picker.after(custom);
     custom.querySelector('input').addEventListener('input', event => event.target.setCustomValidity(''));
     custom.addEventListener('click', event => {
       const button = event.target.closest('[data-icon]');
@@ -48,7 +47,7 @@ function render(preferred, chosenIcon) {
     });
     const nativeField = select.closest('label');
     nativeField.hidden = true;
-    nativeField.after(picker);
+    nativeField.after(picker, custom);
     select.hidden = true;
     picker.addEventListener('click', event => {
       const button = event.target.closest('[data-bw-category]');
@@ -65,12 +64,14 @@ function render(preferred, chosenIcon) {
     items.push([preferred, iconFor(preferred)]);
   }
 
-  const otherIndex = items.findIndex(([name]) => /^Other/.test(name));
-  items.splice(otherIndex < 0 ? items.length : otherIndex + 1, 0, ['Custom category', 'spark', customKey]);
+  const otherIndex = items.findIndex(([name]) => ['Others', 'Other Income', 'Other Savings'].includes(name));
+  const otherName = items[otherIndex][0];
+  items[otherIndex] = [otherName, 'dots', customKey];
   select.replaceChildren(...items.map(([name,,value=name]) => new Option(name, value)));
-  select.value = hasCustomIcon ? customKey : items.some(([name]) => name === current) ? current : items[0][0];
+  const isCustom = hasCustomIcon || current === otherName;
+  select.value = isCustom ? customKey : items.some(([name]) => name === current) ? current : items[0][0];
   const customName = document.getElementById('bwCustomCategoryName');
-  customName.value = hasCustomIcon ? preferred : '';
+  customName.value = preferred && isCustom ? preferred : '';
   customName.setCustomValidity('');
   setCustomIcon(hasCustomIcon ? chosenIcon : 'spark');
   picker.firstElementChild.replaceChildren(...items.map(([name, glyph, value=name], index) => {
